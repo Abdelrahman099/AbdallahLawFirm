@@ -122,7 +122,11 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
         if (invitation) reveal(invitation, { opacity: 0, y: 28 });
 
         const showFocusedContent = (event: FocusEvent) => {
-          if (!(event.target instanceof Node)) return;
+          if (
+            !(event.target instanceof Element) ||
+            !event.target.matches(":focus-visible")
+          )
+            return;
           for (const { element, animation } of entrances) {
             if (element.contains(event.target)) animation.progress(1);
           }

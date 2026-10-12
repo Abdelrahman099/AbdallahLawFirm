@@ -1,5 +1,9 @@
 import { useState } from "react";
-import { headerThemes, useHeaderTheme } from "./useHeaderTheme";
+import {
+  headerStorageKey,
+  headerThemes,
+  useHeaderTheme,
+} from "./useHeaderTheme";
 export function HeaderOptions() {
   const selected = useHeaderTheme(),
     [notice, setNotice] = useState("");
@@ -17,7 +21,7 @@ export function HeaderOptions() {
             className="border border-border p-6 text-right aria-pressed:border-primary aria-pressed:bg-secondary"
             onClick={() => {
               try {
-                localStorage.setItem("shehri-header", t.id);
+                localStorage.setItem(headerStorageKey, t.id);
                 window.dispatchEvent(new Event("header-selection"));
                 setNotice("تم تطبيق " + t.name);
               } catch {

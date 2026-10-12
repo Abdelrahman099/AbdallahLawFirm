@@ -10,10 +10,21 @@ import {
   useState,
 } from "react";
 import { waitForHomeReady } from "./homeReadiness";
+import { releaseIntroStartupCover } from "./introStartupGate";
 
 export function Preloader() {
   const location = useLocation();
-  return location.pathname === "/" ? <HomeIntro key={location.key} /> : null;
+  const [restore, setRestore] = useState(0);
+  useEffect(() => {
+    const replay = (event: PageTransitionEvent) => {
+      if (event.persisted) setRestore((value) => value + 1);
+    };
+    window.addEventListener("pageshow", replay);
+    return () => window.removeEventListener("pageshow", replay);
+  }, []);
+  return location.pathname === "/" ? (
+    <HomeIntro key={`${location.key}-${restore}`} />
+  ) : null;
 }
 
 function HomeIntro() {
@@ -71,7 +82,7 @@ function IntroOverlay({
       element.inert = true;
     });
     document.body.classList.add("intro-open");
-    document.documentElement.classList.remove("intro-booting");
+    releaseIntroStartupCover();
     closeButton.current?.focus({ preventScroll: true });
     return () => {
       background.forEach((element) => {

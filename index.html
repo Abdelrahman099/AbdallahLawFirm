@@ -53,7 +53,7 @@
     <script>
       if (location.pathname === "/") {
         document.documentElement.classList.add("intro-booting");
-        setTimeout(function () {
+        window.shehriIntroBootTimer = setTimeout(function () {
           if (document.documentElement.classList.contains("intro-booting")) {
             document.documentElement.classList.remove("intro-booting");
             document.documentElement.classList.add("intro-load-failed");

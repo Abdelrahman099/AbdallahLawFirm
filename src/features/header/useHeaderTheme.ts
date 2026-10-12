@@ -3,12 +3,12 @@ export const headerThemes = [
   {
     id: "strip",
     name: "شريط أخضر + هيدر عاجي",
-    note: "الشكل الرئيسي المعتمد: لون البراند في الأعلى، ومساحة واضحة للتنقّل.",
+    note: "بديل للمقارنة: لون البراند في الأعلى، ومساحة فاتحة للتنقّل.",
   },
   {
     id: "forest",
     name: "هيدر أخضر بالكامل",
-    note: "حضور أقوى للبراند، مع الشعار العكسي وزر عاجي.",
+    note: "الشكل الرئيسي المعتمد: هيدر أخضر وشريط أخضر غامق، مع الشعار الفاتح وزر عاجي.",
   },
   {
     id: "minimal",
@@ -17,14 +17,17 @@ export const headerThemes = [
   },
 ] as const;
 export type HeaderTheme = (typeof headerThemes)[number]["id"];
-export const defaultHeaderTheme: HeaderTheme = "strip";
+export const defaultHeaderTheme: HeaderTheme = "forest";
+export const headerStorageKey = "shehri-header-approved-v2";
 export function useHeaderTheme() {
   const [theme, setTheme] = useState<HeaderTheme>(defaultHeaderTheme);
   useEffect(() => {
     const update = () => {
       try {
-        const id = localStorage.getItem("shehri-header");
-        setTheme(headerThemes.find((t) => t.id === id)?.id || defaultHeaderTheme);
+        const id = localStorage.getItem(headerStorageKey);
+        setTheme(
+          headerThemes.find((t) => t.id === id)?.id || defaultHeaderTheme,
+        );
       } catch {
         /* Default theme remains visible. */
       }

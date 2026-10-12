@@ -148,6 +148,7 @@ const fs = require("node:fs");
         path: "output/qa/home-motion/mobile-section-boundary.png",
       });
     }
+    await page.keyboard.press("Tab");
     await page.locator(".home-reading-feature").focus();
     assert.equal(
       await page

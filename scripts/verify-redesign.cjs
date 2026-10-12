@@ -222,7 +222,7 @@ const fs = require("node:fs");
       reducedMotion: "reduce",
     });
     await themed.addInitScript(
-      (value) => localStorage.setItem("shehri-header", value),
+      (value) => localStorage.setItem("shehri-header-approved-v2", value),
       theme,
     );
     const themedPage = await themed.newPage();

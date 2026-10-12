@@ -81,6 +81,7 @@ const fs = require("node:fs");
     );
     await page.keyboard.press("Escape");
     await intro.waitFor({ state: "hidden" });
+    await page.waitForFunction(() => !document.querySelector("main").inert);
     await page.locator(".home-office-story a").click();
     await page.waitForURL("**/about");
     await page.locator(".home-page").waitFor({ state: "hidden" });

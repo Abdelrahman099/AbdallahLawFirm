@@ -27,7 +27,7 @@ const fs = require("node:fs");
             "shehri-slider-presentation",
             JSON.stringify(value),
           );
-          localStorage.setItem("shehri-header", "forest");
+          localStorage.setItem("shehri-header-approved-v2", "forest");
         },
         { layout, overlay },
       );
