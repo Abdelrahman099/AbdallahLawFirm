@@ -148,4 +148,22 @@ const fs = require("node:fs");
     JSON.stringify(
       {
         firstPaint: "boot cover before JS; root hidden",
-        refresh: "replay
+        refresh: "replays",
+        navigation: "return and same-home link replay",
+        slowHero: "waits for decode",
+        keyboard: "Tab + Escape + restored focus",
+        reducedMotion: "static short intro",
+        noJavaScript: "content visible",
+        runtimeErrors: errors,
+      },
+      null,
+      2,
+    ),
+  );
+  console.log(
+    "Preloader first paint, refresh, return home, repeat home, slow image, keyboard, reduced motion, no-JS and Axe passed.",
+  );
+})().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

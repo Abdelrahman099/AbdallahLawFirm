@@ -3,7 +3,7 @@ export const headerThemes = [
   {
     id: "strip",
     name: "شريط أخضر + هيدر عاجي",
-    note: "التوزيع المقترح: لون البراند في الأعلى، ومساحة واضحة للتنقّل.",
+    note: "الشكل الرئيسي المعتمد: لون البراند في الأعلى، ومساحة واضحة للتنقّل.",
   },
   {
     id: "forest",
@@ -17,13 +17,14 @@ export const headerThemes = [
   },
 ] as const;
 export type HeaderTheme = (typeof headerThemes)[number]["id"];
+export const defaultHeaderTheme: HeaderTheme = "strip";
 export function useHeaderTheme() {
-  const [theme, setTheme] = useState<HeaderTheme>("strip");
+  const [theme, setTheme] = useState<HeaderTheme>(defaultHeaderTheme);
   useEffect(() => {
     const update = () => {
       try {
         const id = localStorage.getItem("shehri-header");
-        setTheme(headerThemes.find((t) => t.id === id)?.id || "strip");
+        setTheme(headerThemes.find((t) => t.id === id)?.id || defaultHeaderTheme);
       } catch {
         /* Default theme remains visible. */
       }
