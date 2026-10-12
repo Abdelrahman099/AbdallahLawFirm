@@ -1,0 +1,25 @@
+.slider-comparison-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  padding-block: 28px;
+}
+.slider-comparison-controls > div:first-child,
+.slider-comparison-controls > p {
+  width: 100%;
+}
+.slider-comparison-controls h2 {
+  font-size: clamp(22px, 3vw, 32px);
+}
+.slider-comparison-controls p {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.slider-comparison-controls [role="radiogroup"] {
+  flex-wrap: wrap;
+}
+.slider-comparison-stage .practice-slider {
+  padding-top: 0;
+}

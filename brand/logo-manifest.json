@@ -1,0 +1,284 @@
+{
+  "concept": "الاتزان الواضح",
+  "assets": [
+    {
+      "name": "horizontal-primary",
+      "layout": "horizontal",
+      "layoutTitle": "أفقي كامل",
+      "palette": "primary",
+      "paletteTitle": "أخضر وبرونزي",
+      "background": "#F7F3EB",
+      "width": 860,
+      "height": 230,
+      "svg": "logos/horizontal-primary.svg",
+      "png": "logos/horizontal-primary.png"
+    },
+    {
+      "name": "stacked-primary",
+      "layout": "stacked",
+      "layoutTitle": "رأسي كامل",
+      "palette": "primary",
+      "paletteTitle": "أخضر وبرونزي",
+      "background": "#F7F3EB",
+      "width": 620,
+      "height": 460,
+      "svg": "logos/stacked-primary.svg",
+      "png": "logos/stacked-primary.png"
+    },
+    {
+      "name": "mark-primary",
+      "layout": "mark",
+      "layoutTitle": "رمز مستقل",
+      "palette": "primary",
+      "paletteTitle": "أخضر وبرونزي",
+      "background": "#F7F3EB",
+      "width": 240,
+      "height": 220,
+      "svg": "logos/mark-primary.svg",
+      "png": "logos/mark-primary.png"
+    },
+    {
+      "name": "compact-primary",
+      "layout": "compact",
+      "layoutTitle": "أفقي مختصر",
+      "palette": "primary",
+      "paletteTitle": "أخضر وبرونزي",
+      "background": "#F7F3EB",
+      "width": 760,
+      "height": 200,
+      "svg": "logos/compact-primary.svg",
+      "png": "logos/compact-primary.png"
+    },
+    {
+      "name": "horizontal-reverse",
+      "layout": "horizontal",
+      "layoutTitle": "أفقي كامل",
+      "palette": "reverse",
+      "paletteTitle": "عاجي وبرونزي",
+      "background": "#143E31",
+      "width": 860,
+      "height": 230,
+      "svg": "logos/horizontal-reverse.svg",
+      "png": "logos/horizontal-reverse.png"
+    },
+    {
+      "name": "stacked-reverse",
+      "layout": "stacked",
+      "layoutTitle": "رأسي كامل",
+      "palette": "reverse",
+      "paletteTitle": "عاجي وبرونزي",
+      "background": "#143E31",
+      "width": 620,
+      "height": 460,
+      "svg": "logos/stacked-reverse.svg",
+      "png": "logos/stacked-reverse.png"
+    },
+    {
+      "name": "mark-reverse",
+      "layout": "mark",
+      "layoutTitle": "رمز مستقل",
+      "palette": "reverse",
+      "paletteTitle": "عاجي وبرونزي",
+      "background": "#143E31",
+      "width": 240,
+      "height": 220,
+      "svg": "logos/mark-reverse.svg",
+      "png": "logos/mark-reverse.png"
+    },
+    {
+      "name": "compact-reverse",
+      "layout": "compact",
+      "layoutTitle": "أفقي مختصر",
+      "palette": "reverse",
+      "paletteTitle": "عاجي وبرونزي",
+      "background": "#143E31",
+      "width": 760,
+      "height": 200,
+      "svg": "logos/compact-reverse.svg",
+      "png": "logos/compact-reverse.png"
+    },
+    {
+      "name": "horizontal-black",
+      "layout": "horizontal",
+      "layoutTitle": "أفقي كامل",
+      "palette": "black",
+      "paletteTitle": "أسود أحادي",
+      "background": "#FFFFFF",
+      "width": 860,
+      "height": 230,
+      "svg": "logos/horizontal-black.svg",
+      "png": "logos/horizontal-black.png"
+    },
+    {
+      "name": "stacked-black",
+      "layout": "stacked",
+      "layoutTitle": "رأسي كامل",
+      "palette": "black",
+      "paletteTitle": "أسود أحادي",
+      "background": "#FFFFFF",
+      "width": 620,
+      "height": 460,
+      "svg": "logos/stacked-black.svg",
+      "png": "logos/stacked-black.png"
+    },
+    {
+      "name": "mark-black",
+      "layout": "mark",
+      "layoutTitle": "رمز مستقل",
+      "palette": "black",
+      "paletteTitle": "أسود أحادي",
+      "background": "#FFFFFF",
+      "width": 240,
+      "height": 220,
+      "svg": "logos/mark-black.svg",
+      "png": "logos/mark-black.png"
+    },
+    {
+      "name": "compact-black",
+      "layout": "compact",
+      "layoutTitle": "أفقي مختصر",
+      "palette": "black",
+      "paletteTitle": "أسود أحادي",
+      "background": "#FFFFFF",
+      "width": 760,
+      "height": 200,
+      "svg": "logos/compact-black.svg",
+      "png": "logos/compact-black.png"
+    },
+    {
+      "name": "horizontal-white",
+      "layout": "horizontal",
+      "layoutTitle": "أفقي كامل",
+      "palette": "white",
+      "paletteTitle": "أبيض أحادي",
+      "background": "#171D1A",
+      "width": 860,
+      "height": 230,
+      "svg": "logos/horizontal-white.svg",
+      "png": "logos/horizontal-white.png"
+    },
+    {
+      "name": "stacked-white",
+      "layout": "stacked",
+      "layoutTitle": "رأسي كامل",
+      "palette": "white",
+      "paletteTitle": "أبيض أحادي",
+      "background": "#171D1A",
+      "width": 620,
+      "height": 460,
+      "svg": "logos/stacked-white.svg",
+      "png": "logos/stacked-white.png"
+    },
+    {
+      "name": "mark-white",
+      "layout": "mark",
+      "layoutTitle": "رمز مستقل",
+      "palette": "white",
+      "paletteTitle": "أبيض أحادي",
+      "background": "#171D1A",
+      "width": 240,
+      "height": 220,
+      "svg": "logos/mark-white.svg",
+      "png": "logos/mark-white.png"
+    },
+    {
+      "name": "compact-white",
+      "layout": "compact",
+      "layoutTitle": "أفقي مختصر",
+      "palette": "white",
+      "paletteTitle": "أبيض أحادي",
+      "background": "#171D1A",
+      "width": 760,
+      "height": 200,
+      "svg": "logos/compact-white.svg",
+      "png": "logos/compact-white.png"
+    },
+    {
+      "name": "horizontal-green",
+      "layout": "horizontal",
+      "layoutTitle": "أفقي كامل",
+      "palette": "green",
+      "paletteTitle": "أخضر أحادي",
+      "background": "#F7F3EB",
+      "width": 860,
+      "height": 230,
+      "svg": "logos/horizontal-green.svg",
+      "png": "logos/horizontal-green.png"
+    },
+    {
+      "name": "stacked-green",
+      "layout": "stacked",
+      "layoutTitle": "رأسي كامل",
+      "palette": "green",
+      "paletteTitle": "أخضر أحادي",
+      "background": "#F7F3EB",
+      "width": 620,
+      "height": 460,
+      "svg": "logos/stacked-green.svg",
+      "png": "logos/stacked-green.png"
+    },
+    {
+      "name": "mark-green",
+      "layout": "mark",
+      "layoutTitle": "رمز مستقل",
+      "palette": "green",
+      "paletteTitle": "أخضر أحادي",
+      "background": "#F7F3EB",
+      "width": 240,
+      "height": 220,
+      "svg": "logos/mark-green.svg",
+      "png": "logos/mark-green.png"
+    },
+    {
+      "name": "compact-green",
+      "layout": "compact",
+      "layoutTitle": "أفقي مختصر",
+      "palette": "green",
+      "paletteTitle": "أخضر أحادي",
+      "background": "#F7F3EB",
+      "width": 760,
+      "height": 200,
+      "svg": "logos/compact-green.svg",
+      "png": "logos/compact-green.png"
+    }
+  ],
+  "allVectorTextOutlined": true,
+  "fonts": "IBM Plex Sans Arabic Medium / Regular",
+  "palette": [
+    {
+      "id": "primary",
+      "title": "أخضر وبرونزي",
+      "main": "#143E31",
+      "accent": "#B48753",
+      "bg": "#F7F3EB"
+    },
+    {
+      "id": "reverse",
+      "title": "عاجي وبرونزي",
+      "main": "#F7F3EB",
+      "accent": "#B48753",
+      "bg": "#143E31"
+    },
+    {
+      "id": "black",
+      "title": "أسود أحادي",
+      "main": "#171D1A",
+      "accent": "#171D1A",
+      "bg": "#FFFFFF"
+    },
+    {
+      "id": "white",
+      "title": "أبيض أحادي",
+      "main": "#FFFFFF",
+      "accent": "#FFFFFF",
+      "bg": "#171D1A"
+    },
+    {
+      "id": "green",
+      "title": "أخضر أحادي",
+      "main": "#143E31",
+      "accent": "#143E31",
+      "bg": "#F7F3EB"
+    }
+  ]
+}

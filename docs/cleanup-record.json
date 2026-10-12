@@ -1,0 +1,15 @@
+{
+  "removed": [
+    "output",
+    "New folder",
+    "brand-book.pdf"
+  ],
+  "preserved": [
+    "approved v3 logo and 20 variants",
+    "fonts and license",
+    "editable application templates",
+    "original market research",
+    "client source extraction"
+  ],
+  "originalDocumentsUntouched": true
+}

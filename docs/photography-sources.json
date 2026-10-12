@@ -1,0 +1,12 @@
+{
+  "license": "https://unsplash.com/license",
+  "usage": "Actual stock photography for illustrative service context. People and rooms are not the law office or its employees. Jeddah photographs depict the city, not the office address.",
+  "photos": [
+    { "file": "jeddah-city", "image": "photo-1658844239513-6c358c94b9c2", "author": "shahad hassan", "source": "https://unsplash.com/photos/a-city-skyline-with-palm-trees-qqkSNacI-3M" },
+    { "file": "practice-property", "image": "photo-1649225562055-c0f59b1074e9", "author": "Yasser Mutwakil", "source": "https://unsplash.com/photos/a-tall-building-with-lots-of-balconies-on-it-PdN1qX9BvlQ" },
+    { "file": "practice-contracts", "image": "photo-1603796846097-bee99e4a601f", "author": "Romain Dancre", "source": "https://unsplash.com/photos/person-in-orange-long-sleeve-shirt-writing-on-white-paper-doplSDELX7E" },
+    { "file": "practice-business", "image": "photo-1768101715599-ac4b5190b2cb", "author": "Enes Gundogdu", "source": "https://unsplash.com/photos/modern-skyscrapers-against-a-cloudy-sky-Z8U7yuJOD7s" },
+    { "file": "practice-meeting", "image": "photo-1431540015161-0bf868a2d407", "author": "Benjamin Child", "source": "https://unsplash.com/photos/GWe0dlVD9e0" },
+    { "file": "practice-books", "image": "photo-1505664194779-8beaceb93744", "author": "Giammarco Boscaro", "source": "https://unsplash.com/photos/zeH-ljawHtg" }
+  ]
+}

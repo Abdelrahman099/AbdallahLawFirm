@@ -1,0 +1,92 @@
+[
+  {
+    "id": "01",
+    "title": "كارت التعريف — الوجه",
+    "image": "applications/application-01.png",
+    "source": "applications/application-01.html"
+  },
+  {
+    "id": "02",
+    "title": "كارت التعريف — الظهر",
+    "image": "applications/application-02.png",
+    "source": "applications/application-02.html"
+  },
+  {
+    "id": "03",
+    "title": "ورق المراسلات",
+    "image": "applications/application-03.png",
+    "source": "applications/application-03.html"
+  },
+  {
+    "id": "04",
+    "title": "غلاف التقرير",
+    "image": "applications/application-04.png",
+    "source": "applications/application-04.html"
+  },
+  {
+    "id": "05",
+    "title": "حافظة المستندات",
+    "image": "applications/application-05.png",
+    "source": "applications/application-05.html"
+  },
+  {
+    "id": "06",
+    "title": "ظرف المراسلات",
+    "image": "applications/application-06.png",
+    "source": "applications/application-06.html"
+  },
+  {
+    "id": "07",
+    "title": "نموذج فاتورة — التصميم",
+    "image": "applications/application-07.png",
+    "source": "applications/application-07.html"
+  },
+  {
+    "id": "08",
+    "title": "توقيع البريد",
+    "image": "applications/application-08.png",
+    "source": "applications/application-08.html"
+  },
+  {
+    "id": "09",
+    "title": "منشور تعريفي",
+    "image": "applications/application-09.png",
+    "source": "applications/application-09.html"
+  },
+  {
+    "id": "10",
+    "title": "صورة الحساب",
+    "image": "applications/application-10.png",
+    "source": "applications/application-10.html"
+  },
+  {
+    "id": "11",
+    "title": "لوحة المكتب",
+    "image": "applications/application-11.png",
+    "source": "applications/application-11.html"
+  },
+  {
+    "id": "12",
+    "title": "غلاف عرض تقديمي",
+    "image": "applications/application-12.png",
+    "source": "applications/application-12.html"
+  },
+  {
+    "id": "13",
+    "title": "مطوية الخدمات",
+    "image": "applications/application-13.png",
+    "source": "applications/application-13.html"
+  },
+  {
+    "id": "14",
+    "title": "الموقع — الكمبيوتر",
+    "image": "applications/application-14.png",
+    "source": "applications/application-14.html"
+  },
+  {
+    "id": "15",
+    "title": "الموقع — الموبايل",
+    "image": "applications/application-15.png",
+    "source": "applications/application-15.html"
+  }
+]

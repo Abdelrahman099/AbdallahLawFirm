@@ -1,0 +1,32 @@
+export const serviceSlides = [
+  {
+    label: "الشركات والاستثمار",
+    title: "لأعمالك رؤية.",
+    accent: "ولقراراتك سند.",
+    description: "تأسيس الشركات والمشورة القانونية لأعمالك.",
+    image: "/images/brand-company-v2.webp",
+    alt: "نموذج شركة ومستندات تأسيس، مشهد تصوري بألوان المكتب",
+    cta: "استكشف تأسيس الشركات",
+    link: "/services/company-formation",
+  },
+  {
+    label: "العقود والاتفاقيات",
+    title: "كل بند له أثر.",
+    accent: "نعتني بالتفاصيل.",
+    description: "صياغة ومراجعة اتفاقياتك قبل التوقيع.",
+    image: "/images/brand-contracts-v2.webp",
+    alt: "عقد داخل ملف قانوني وقلم للمراجعة",
+    cta: "استكشف خدمة العقود",
+    link: "/services/contracts",
+  },
+  {
+    label: "التقاضي والتمثيل القانوني",
+    title: "نفهم موقفك.",
+    accent: "ونرتّب خطوتك.",
+    description: "دراسة موضوعك وتمثيلك أمام الجهات المختصة.",
+    image: "/images/brand-litigation-v2.webp",
+    alt: "قاعة قضائية تصورية بألوان الهوية",
+    cta: "استكشف التقاضي والمنازعات",
+    link: "/services/litigation",
+  },
+] as const;

@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      .startup-preloader {
+        display: none;
+      }
+      .intro-booting .startup-preloader,
+      .preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        background: #0b241b;
+        color: #f7f3eb;
+        display: grid;
+        place-items: center;
+      }
+      .intro-booting .startup-preloader {
+        z-index: 101;
+      }
+      .startup-brand {
+        text-align: center;
+        font:
+          20px Tahoma,
+          sans-serif;
+      }
+      .startup-brand svg {
+        display: block;
+        width: 100px;
+        height: 92px;
+        margin: 0 auto 12px;
+      }
+      .intro-booting {
+        background: #0b241b;
+      }
+      .intro-booting #root {
+        visibility: hidden;
+      }
+      .intro-booting body {
+        overflow: hidden;
+      }
+      .intro-load-failed .preloader {
+        display: none !important;
+      }
+      @media print {
+        .startup-preloader,
+        .preloader {
+          display: none !important;
+        }
+      }
+    </style>
+    <script>
+      if (location.pathname === "/") {
+        document.documentElement.classList.add("intro-booting");
+        setTimeout(function () {
+          if (document.documentElement.classList.contains("intro-booting")) {
+            document.documentElement.classList.remove("intro-booting");
+            document.documentElement.classList.add("intro-load-failed");
+          }
+        }, 10000);
+      }
+    </script>
+    <noscript
+      ><style>
+        .preloader {
+          display: none !important;
+        }
+      </style></noscript
+    >
+    <style>
+      @layer theme, base, components, utilities;
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#143E31" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta
+      name="description"
+      content="مكتب عبد الله الشهري للمحاماة والاستشارات القانونية في جدة. خدمات للشركات والمستثمرين والأفراد، وطلب استشارة بخطوات واضحة."
+    />
+    <link rel="icon" type="image/svg+xml" href="/brand/mark-primary.svg" />
+    <link
+      rel="preload"
+      href="/fonts/IBMPlexSansArabic-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <title>عبد الله الشهري للمحاماة والاستشارات القانونية | جدة</title>
+  </head>
+  <body>
+    <div class="startup-preloader" aria-hidden="true">
+      <div class="startup-brand">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 240 220"
+          aria-hidden="true"
+        >
+          <g
+            fill="none"
+            stroke="#F7F3EB"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M43 80C76 80 92 78 106 71Q120 64 134 71C148 78 164 80 197 80"
+              stroke-width="7"
+            />
+            <path
+              d="M60 81L26 132 M60 81L94 132 M180 81L146 132 M180 81L214 132"
+              stroke-width="3.6"
+            />
+          </g>
+          <g fill="#F7F3EB">
+            <path d="M116 65Q120 60 124 65L126 180H114Z" />
+            <path d="M99 179H141L150 188H90Z" />
+            <path
+              fill-rule="evenodd"
+              d="M21 131H99C91 158 29 158 21 131Z M32 137H88C78 150 42 150 32 137Z M141 131H219C211 158 149 158 141 131Z M152 137H208C198 150 162 150 152 137Z"
+            />
+          </g>
+          <g fill="#B48753">
+            <path
+              d="M120 24L126 30L120 36L114 30Z M107 38L113 44L107 50L101 44Z M133 38L139 44L133 50L127 44Z"
+            />
+          </g>
+        </svg>
+        عبد الله الشهري
+      </div>
+    </div>
+    <div id="root"></div>
+    <noscript>يرجى تفعيل JavaScript لطلب الاستشارة.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

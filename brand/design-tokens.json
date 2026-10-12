@@ -1,0 +1,32 @@
+{
+  "color": {
+    "forest": "#143E31",
+    "deepForest": "#0B241B",
+    "ivory": "#F7F3EB",
+    "bronze": "#B48753",
+    "ink": "#171D1A",
+    "muted": "#5D6761",
+    "white": "#FFFFFF",
+    "bronzeText": "#886239"
+  },
+  "font": {
+    "family": "IBM Plex Sans Arabic",
+    "body": 18,
+    "heading": 48,
+    "sectionHeading": 32,
+    "caption": 14,
+    "bodyLineHeight": 1.8
+  },
+  "spacing": [
+    4,
+    8,
+    12,
+    16,
+    24,
+    32,
+    48,
+    64,
+    96
+  ],
+  "radius": 4
+}

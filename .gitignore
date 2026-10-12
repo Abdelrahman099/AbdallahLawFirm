@@ -1,0 +1,8 @@
+node_modules/
+dist/
+tmp/
+output/qa/
+.env
+.env.*
+!.env.example
+*.log

@@ -1,0 +1,348 @@
+@layer components {
+  .practice-slider {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 128px;
+    background: var(--deep);
+    color: var(--ivory);
+    isolation: isolate;
+    touch-action: pan-y;
+  }
+  .practice-slider-grid {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+  }
+  .practice-slider-copy {
+    position: relative;
+    z-index: 2;
+    width: min(580px, calc(50% - 70px));
+    margin-inline-start: max(56px, calc((100vw - 1320px) / 2));
+    padding-block: clamp(40px, 6svh, 85px);
+  }
+  .service-slide-label {
+    font-size: 12px;
+    color: #dbe4d8;
+    margin-bottom: 17px;
+  }
+  .practice-slider .hero-display {
+    font-size: clamp(42px, 4.7vw, 76px);
+    line-height: 1.45;
+    letter-spacing: -1.8px;
+  }
+  .practice-slider .hero-display em {
+    color: var(--hero-accent);
+    font-style: normal;
+  }
+  .service-slide-description {
+    font-size: 17px;
+    color: #e0e7dc;
+    line-height: 2;
+    margin-top: 24px;
+    max-width: 500px;
+    min-height: 0;
+  }
+  .practice-slider-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 22px;
+  }
+  .practice-slider .text-link {
+    color: var(--ivory);
+  }
+  .practice-slider-visual {
+    position: absolute;
+    inset: 0;
+    inset-inline-start: auto;
+    width: 50%;
+    overflow: hidden;
+    background: var(--deep);
+    touch-action: pan-y;
+    z-index: -1;
+  }
+  .service-slide-photo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    inset: 0;
+  }
+  .service-slide-image-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      270deg,
+      var(--deep),
+      rgb(11 36 27 / 12%) 30%,
+      transparent 65%
+    );
+    pointer-events: none;
+  }
+  .practice-slider-bottom {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    gap: 35px;
+    align-items: center;
+    padding-bottom: 30px;
+  }
+  .service-slide-tabs {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    flex: 1;
+  }
+  .service-slide-tabs button {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    padding: 25px 20px;
+    color: #dbe4d8;
+    text-align: start;
+    font-size: 12px;
+    border-bottom: 2px solid #ffffff40;
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+  .service-slide-tabs button:hover {
+    background: #ffffff0d;
+    color: #fff;
+  }
+  .service-slide-tabs button:first-child {
+    padding-inline-start: 0;
+  }
+  .service-slide-tabs button[aria-pressed="true"] {
+    color: #fff;
+    border-color: var(--hero-accent);
+    font-weight: 500;
+  }
+  .service-slide-tabs button > span:first-child {
+    font-size: 10px;
+  }
+  .slide-progress {
+    position: absolute;
+    bottom: -2px;
+    inset-inline-start: 0;
+    height: 2px;
+    background: var(--hero-accent);
+    width: 0;
+  }
+  .slide-progress.running {
+    animation: slide-progress 6.5s linear forwards;
+  }
+  .service-slide-controls {
+    display: flex;
+    gap: 9px;
+  }
+  .service-slide-controls button {
+    display: grid;
+    place-items: center;
+    min-width: 104px;
+    height: 44px;
+    border: 0;
+    border-bottom: 1px solid #ffffff55;
+    font-size: 12px;
+    color: var(--ivory);
+    transition: background 0.2s;
+  }
+  .service-slide-controls button:hover {
+    background: #ffffff18;
+  }
+  .practice-slider button:focus-visible,
+  .practice-slider a:focus-visible {
+    outline-color: var(--ivory);
+    box-shadow: 0 0 0 5px var(--forest);
+  }
+  @keyframes slide-progress {
+    to {
+      width: 100%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slide-autoplay-control {
+      display: none;
+    }
+  }
+  @media (max-width: 1023px) {
+    .practice-slider {
+      padding-top: var(--mobile-header-height);
+    }
+    .practice-slider-copy {
+      width: calc(50% - 48px);
+      margin-inline-start: 32px;
+    }
+    .practice-slider .hero-display {
+      font-size: clamp(44px, 6vw, 64px);
+    }
+    .service-slide-description {
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 700px) {
+    .practice-slider {
+      padding-top: var(--mobile-header-height);
+    }
+    .practice-slider-grid {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .practice-slider-visual {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: clamp(260px, 70vw, 420px);
+      flex-shrink: 0;
+      order: -1;
+      z-index: 0;
+    }
+    .service-slide-photo {
+      object-fit: cover;
+      object-position: center 20%;
+    }
+    .service-slide-image-shade {
+      background: linear-gradient(0deg, var(--deep), transparent 12%);
+    }
+    .practice-slider-copy {
+      width: calc(100% - 48px);
+      margin-inline-start: 24px;
+      padding-block: 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .practice-slider .hero-display {
+      font-size: clamp(30px, 8vw, 42px);
+      letter-spacing: -0.5px;
+      line-height: 1.4;
+    }
+    .service-slide-description {
+      min-height: 0;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    .practice-slider-actions {
+      margin-top: 20px;
+      gap: 16px;
+    }
+    .practice-slider-actions > a {
+      font-size: 12px;
+    }
+    .practice-slider-actions > a:first-child {
+      height: 46px;
+      padding-inline: 18px;
+      gap: 20px;
+    }
+    .service-slide-label {
+      margin-bottom: 10px;
+      font-size: 11px;
+      color: var(--hero-accent);
+    }
+    .practice-slider-bottom {
+      flex-direction: row;
+      gap: 20px;
+      padding-bottom: calc(18px + env(safe-area-inset-bottom));
+    }
+    .service-slide-tabs {
+      width: 100%;
+    }
+    .service-slide-tabs button {
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 8px;
+      font-size: 12px;
+    }
+    .service-slide-tabs button > span:first-child {
+      font-size: 12px;
+    }
+    .service-slide-tabs button > span:last-of-type {
+      display: none;
+    }
+    .service-slide-tabs button:first-child {
+      padding-inline-start: 8px;
+    }
+    .slide-autoplay-control {
+      display: none;
+    }
+    .service-slide-controls {
+      display: none;
+    }
+  }
+}
+
+@layer components {
+  .slider-layout-immersive {
+    --image-wash: rgb(11 36 27 / 22%);
+    --copy-shade: rgb(11 36 27 / 90%);
+  }
+  .slider-layout-immersive .practice-slider-visual {
+    width: 100%;
+  }
+  .slider-layout-immersive .service-slide-photo {
+    object-position: center 15%;
+  }
+  .slider-layout-immersive .service-slide-image-shade {
+    background:
+      linear-gradient(270deg, var(--copy-shade), transparent 88%),
+      linear-gradient(0deg, rgb(11 36 27 / 85%), transparent 45%),
+      var(--image-wash);
+  }
+  .slider-overlay-soft {
+    --image-wash: rgb(11 36 27 / 8%);
+    --copy-shade: rgb(11 36 27 / 86%);
+  }
+  .slider-overlay-balanced {
+    --image-wash: rgb(11 36 27 / 22%);
+    --copy-shade: rgb(11 36 27 / 90%);
+  }
+  .slider-overlay-deep {
+    --image-wash: rgb(11 36 27 / 40%);
+    --copy-shade: rgb(11 36 27 / 95%);
+  }
+  .slider-overlay-ink {
+    --image-wash: rgb(11 36 27 / 58%);
+    --copy-shade: rgb(11 36 27 / 98%);
+  }
+  @media (max-width: 700px) {
+    .slider-layout-immersive .practice-slider-visual {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+    }
+    .slider-layout-immersive .service-slide-photo {
+      object-position: center 20%;
+    }
+    .slider-layout-immersive .service-slide-image-shade {
+      background:
+        linear-gradient(
+          0deg,
+          var(--copy-shade),
+          rgb(11 36 27 / 88%) 32%,
+          transparent 78%
+        ),
+        var(--image-wash);
+    }
+    .slider-layout-immersive .practice-slider-grid {
+      justify-content: flex-end;
+    }
+    .slider-layout-immersive .practice-slider-copy {
+      flex: 0;
+      padding-top: 240px;
+      padding-bottom: 26px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .text-link:after {
+      transition: none;
+    }
+  }
+}

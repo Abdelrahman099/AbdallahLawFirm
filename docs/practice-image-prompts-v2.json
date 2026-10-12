@@ -1,0 +1,74 @@
+{
+  "tool": "image_gen built-in",
+  "purpose": "Eight distinct practice images and three article illustrations",
+  "briefs": [
+    {
+      "id": "company",
+      "arabic": "شركة جديدة: نموذج هندسي صغير لمقر شركة من حجر عاجي، بجانبه وثيقة تأسيس داخل غلاف أخضر على طاولة اجتماعات، خلفية نافذة مكتب ضبابية",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A physical ivory architectural model of a contemporary corporate headquarters, company charter papers in a forest green portfolio, bronze binder, on a walnut boardroom table. Corporate formation and structured new business. Three-quarter eye-level close view, window bokeh."
+    },
+    {
+      "id": "investment",
+      "arabic": "الاستثمار الأجنبي: كرة أرضية برونزية وميناء تجاري سعودي في الخلفية",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A refined bronze physical world globe beside a forest green investment folio on an ivory stone ledge, distant softly blurred modern Saudi commercial port with container cranes across the window. Cross-border investment. Eye-level composition, globe as clear central subject. No labels on globe."
+    },
+    {
+      "id": "contracts",
+      "arabic": "العقود: مستند مفتوح وقلم توقيع، منظور علوي عاجي ومميز",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: Overhead close-up of one carefully opened agreement on ivory paper, forest green document corner holder, fine bronze fountain pen poised diagonally beside the signature area, cropped warm walnut edge. Contract review and signing. Minimal mostly ivory background, visible tactile paper. Only indistinct unrecognizable faint lines, no readable text."
+    },
+    {
+      "id": "litigation",
+      "arabic": "التقاضي: قاعة قضائية تصورية خالية بباب أخضر وخشب داكن",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: An empty contemporary judicial hearing chamber, symmetrical walnut judicial bench, forest green wall panels, ivory stone floor, subtle bronze fittings, side daylight. Strong institutional perspective, quiet credible legal atmosphere. Conceptual room, not any identifiable real court. No people, flags, emblems, seals, gavels or scales."
+    },
+    {
+      "id": "arbitration",
+      "arabic": "التحكيم: طاولة مستديرة وملفان متقابلان، تمثيل الحوار بين طرفين",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A round ivory stone mediation table with two different forest green folios on opposite sides, two facing ivory upholstered chairs, central bronze pen tray. View from a slightly elevated angle, quiet contemporary room, round-table negotiation and arbitration. Distinct spatial composition, no people."
+    },
+    {
+      "id": "labor",
+      "arabic": "القضايا العمالية: حقيبة عمل وعقد وبطاقة موظف بلا بيانات",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A premium dark forest green work briefcase beside an ivory employment agreement and an anonymous plain employee access card on a walnut desk, modern workspace blurred behind. Employment relationship and labor law, close cropped side view with briefcase dominant. Card has no face, logo or readable information."
+    },
+    {
+      "id": "property",
+      "arabic": "العقارات: نموذج منزل عاجي ومفتاح برونزي ومخطط عقاري",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A finely crafted ivory scale model of a contemporary Saudi house beside a bronze house key and architectural plan with unlettered geometric lines, all on a forest green suede tabletop. Real estate law, clear unmistakable house and key. Low three-quarter perspective, natural daylight, no readable text."
+    },
+    {
+      "id": "family",
+      "arabic": "الأحوال الشخصية والتركات: صندوق أرشيف عائلي ومفتاح قديم ومستندات محفوظة",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A warm walnut family document archive box, open just enough to reveal neatly stored ivory envelopes separated by forest green dividers, a single antique bronze key resting beside an estate folio. Family affairs, inheritance and preserving family records. Intimate side view, gentle light, no people or personal data."
+    },
+    {
+      "id": "article-prepare",
+      "arabic": "التحضير للاستشارة: دفتر أسئلة وثلاث فواصل، منظور قريب",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A close oblique view of an ivory pocket notebook opened to a sparse list of indistinct short gray marks and three bronze bookmark tabs, one forest green pencil, no other documents. Preparing questions before a legal consultation. Ivory linen desk surface, forest green upholstered chair blurred behind. Notebook is the central subject, no readable text."
+    },
+    {
+      "id": "article-business",
+      "arabic": "مشورة الأعمال: مخطط قرارات ملموس من مكعبات هندسية وصورة مشروع",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: An elegant physical decision-planning arrangement: three small ivory architectural blocks and one bronze connecting bar on a forest green felt presentation mat, small blank project portfolio at the edge. A business considering its next step, professional strategic planning. Top-down graphic yet photographic composition, crisp natural shadow, no words or letters."
+    },
+    {
+      "id": "article-organize",
+      "arabic": "ترتيب المستندات: أدراج تصنيف عاجية وملفات خضراء، منظر رأسي",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique editorial website image for an Arabic premium Saudi law-office brand. Create a single square photograph, NOT a collage or graphic. Palette forest green #143E31, deep green #0B241B, warm ivory #F7F3EB, restrained bronze #B48753 and natural walnut. Photographic realism, tactile materials, composed restrained premium editorial lighting, no excessive gold. Main subject must fit centrally within the middle 65% so a wide website crop and a mobile crop retain the recognizable subject. Each scene is conceptual. No people, readable text, logos, brand marks, watermarks, UI, decorative floating icons. Scene: A stack of three ivory document sorting trays with distinct forest green index folders, aligned paper edges, bronze clips, one empty tray. Organizing legal records before consultation. Front three-quarter view against a softly lit pale stone wall, no scattered notebooks, no readable text."
+    }
+  ],
+  "files": [
+    ["company", "exec-a88aa590-9f9f-476d-8217-76b5b09d4180.png"],
+    ["investment", "exec-077462bb-f9ba-452b-bee8-e54380ed5093.png"],
+    ["contracts", "exec-fa971a89-5d13-4694-ba16-590d065524a4.png"],
+    ["litigation", "exec-4ac776b6-69d4-41bb-9bfc-7ad376b98c69.png"],
+    ["arbitration", "exec-3e2b24be-7cd5-454d-a3d9-4a732585e2a0.png"],
+    ["labor", "exec-1782e0ee-bc58-4cc5-ad27-d9d645214cf9.png"],
+    ["property", "exec-a644e16d-40b8-4358-8f08-252b73a9ec53.png"],
+    ["family", "exec-60e485b4-9435-4640-b3d2-b63f804dcf2c.png"],
+    ["article-prepare", "exec-ac23b71c-35ba-44e3-83fc-7ab82f7dad21.png"],
+    ["article-business", "exec-788c7cb9-3d7a-42e7-8148-c957b4e28025.png"],
+    ["article-organize", "exec-f7ba78dd-85ab-4370-ad27-396f9173a114.png"]
+  ]
+}

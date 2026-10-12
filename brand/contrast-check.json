@@ -1,0 +1,38 @@
+[
+  {
+    "name": "forest/ivory",
+    "ratio": 10.76,
+    "normalTextAA": true,
+    "usage": "Text permitted"
+  },
+  {
+    "name": "ink/ivory",
+    "ratio": 15.46,
+    "normalTextAA": true,
+    "usage": "Text permitted"
+  },
+  {
+    "name": "muted/ivory",
+    "ratio": 5.3,
+    "normalTextAA": true,
+    "usage": "Text permitted"
+  },
+  {
+    "name": "ivory/deep",
+    "ratio": 14.8,
+    "normalTextAA": true,
+    "usage": "Text permitted"
+  },
+  {
+    "name": "ink/bronze",
+    "ratio": 5.32,
+    "normalTextAA": true,
+    "usage": "Text permitted"
+  },
+  {
+    "name": "bronze/ivory",
+    "ratio": 2.91,
+    "normalTextAA": false,
+    "usage": "Decorative accent only"
+  }
+]

@@ -1,0 +1,62 @@
+@layer components {
+  body.menu-open,
+  body.intro-open {
+    overflow: hidden;
+  }
+  .preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--deep);
+    z-index: 100;
+    color: var(--ivory);
+    display: grid;
+    place-items: center;
+  }
+  .intro-skip {
+    position: absolute;
+    bottom: 35px;
+    left: 40px;
+    background: transparent;
+    color: #c4cfbf;
+    border: 0;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 12px;
+    padding: 12px;
+  }
+  .intro-skip:focus-visible {
+    outline-color: var(--ivory);
+    box-shadow: none;
+  }
+  .intro-skip-light {
+    color: #143e31;
+  }
+  .intro-skip-light:focus-visible {
+    outline-color: #143e31;
+  }
+  @keyframes line-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  @media (max-width: 760px) {
+    .intro-skip {
+      left: 20px;
+      bottom: 25px;
+    }
+  }
+  @media print {
+    .site-header,
+    .site-footer,
+    .mobile-consult,
+    .preloader,
+    .button,
+    .skip-link {
+      display: none;
+    }
+  }
+}

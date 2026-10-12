@@ -1,0 +1,308 @@
+@layer components {
+  .service-row {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+    transition:
+      padding 0.3s,
+      background 0.3s;
+  }
+  .service-row:first-child {
+    border-top: 1px solid var(--line);
+  }
+  .service-row:hover {
+    padding-inline: 14px;
+    background: #eaece260;
+  }
+  .service-number {
+    font-size: 12px;
+    color: var(--muted);
+    min-width: 24px;
+    align-self: flex-start;
+    padding-top: 8px;
+  }
+  .service-icon {
+    width: 49px;
+    height: 49px;
+    border: 1px solid #cbd4c6;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+  .service-row h3 {
+    font-size: 24px;
+  }
+  .service-row p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+  .service-row:hover .row-arrow {
+    background: var(--forest);
+    color: var(--ivory);
+  }
+  .directory-controls {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  .search-label input {
+    max-width: 260px;
+    min-height: 46px;
+    border: 1px solid var(--line);
+    background: transparent;
+    padding: 10px 17px;
+    font-size: 14px;
+    color: var(--forest);
+  }
+  .result-count {
+    font-size: 12px;
+    color: var(--muted);
+    margin-block: 18px;
+  }
+  .service-directory {
+    padding-bottom: 85px;
+  }
+  .service-directory .service-row {
+    padding-block: 28px;
+  }
+  .service-directory .service-row h3 {
+    font-size: 28px;
+  }
+  .empty-state {
+    padding: 65px 25px;
+    background: #edefe5;
+    text-align: center;
+  }
+  .empty-state h2 {
+    font-size: 27px;
+  }
+  .empty-state p {
+    color: var(--muted);
+    margin-block: 20px;
+  }
+  .service-hero {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 80px;
+    align-items: center;
+    padding-block: 45px 65px;
+    border-bottom: 1px solid var(--line);
+  }
+  .service-hero .button {
+    margin-top: 28px;
+  }
+  .service-hero-art {
+    background: #e8ebdd;
+    height: 245px;
+    display: grid;
+    place-items: center;
+    position: relative;
+  }
+  .service-hero-art > svg {
+    width: 100px;
+    height: 100px;
+    stroke-width: 0.7;
+  }
+  .service-hero-art > span {
+    position: absolute;
+    bottom: 0;
+    left: 22px;
+    font:
+      80px Georgia,
+      serif;
+    color: var(--muted);
+  }
+  .service-content {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 100px;
+    padding-top: 70px;
+    align-items: start;
+  }
+  .service-content .prose > div {
+    margin-bottom: 45px;
+  }
+  .check-list {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+  }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border-bottom: 1px solid var(--line);
+    padding-block: 16px;
+    font-size: 16px;
+    color: var(--muted);
+  }
+  .check-list svg {
+    margin-top: 6px;
+    flex-shrink: 0;
+    color: var(--forest);
+  }
+  .prepare-card {
+    background: #eceee3;
+    padding: 32px;
+    position: sticky;
+    top: 24px;
+  }
+  .prepare-card h2 {
+    font-size: 28px;
+    line-height: 1.6;
+  }
+  .prepare-card ul {
+    padding-right: 20px;
+    margin-block: 22px;
+    color: var(--muted);
+    font-size: 15px;
+  }
+  .prepare-card li {
+    margin-block: 14px;
+  }
+  .prepare-card > p:not(.eyebrow) {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 22px;
+  }
+  .prepare-card .button {
+    width: 100%;
+  }
+  .service-note {
+    padding: 20px;
+    border-right: 2px solid var(--bronze);
+    background: #edefe5;
+    margin-top: 25px;
+    font-size: 13px !important;
+    color: var(--muted);
+  }
+  .service-note p {
+    font-size: 13px !important;
+    margin: 0 !important;
+  }
+  @media (max-width: 1200px) {
+    .about-detail,
+    .service-content,
+    .article-body {
+      gap: 60px;
+    }
+  }
+  @media (max-width: 1000px) {
+    .service-row {
+      gap: 16px;
+    }
+    .service-row h3 {
+      font-size: 21px;
+    }
+    .service-icon {
+      width: 42px;
+      height: 42px;
+    }
+    .service-number {
+      display: none;
+    }
+    .service-row p {
+      font-size: 12px;
+    }
+  }
+  @media (max-width: 760px) {
+    .service-row {
+      padding-block: 20px;
+      gap: 17px;
+    }
+    .service-row h3 {
+      font-size: 23px;
+    }
+    .service-row p {
+      font-size: 13px;
+    }
+    .service-icon {
+      width: 45px;
+      height: 45px;
+    }
+    .directory-controls {
+      display: block;
+      margin-top: 27px;
+    }
+    .search-label {
+      display: block;
+      margin-top: 18px;
+    }
+    .search-label input {
+      width: 100%;
+      max-width: none;
+    }
+    .result-count {
+      font-size: 11px;
+    }
+    .service-directory {
+      padding-bottom: 55px;
+    }
+    .service-directory .service-row {
+      padding-block: 22px;
+    }
+    .service-directory .service-row h3 {
+      font-size: 24px;
+    }
+    .service-hero {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      padding-block: 30px 40px;
+    }
+    .service-hero h1 {
+      font-size: 43px;
+    }
+    .service-hero-art {
+      height: 150px;
+    }
+    .service-hero-art > svg {
+      height: 75px;
+      width: 75px;
+    }
+    .service-hero-art > span {
+      font-size: 60px;
+    }
+    .service-content {
+      grid-template-columns: 1fr;
+      gap: 25px;
+      padding-top: 37px;
+    }
+    .service-content .prose > div {
+      margin-bottom: 35px;
+    }
+    .service-content .prose h2 {
+      font-size: 26px;
+    }
+    .check-list li {
+      font-size: 15px;
+      gap: 10px;
+    }
+    .prepare-card {
+      position: static;
+      padding: 27px;
+    }
+    .prepare-card h2 {
+      font-size: 27px;
+    }
+  }
+  @media (max-width: 370px) {
+    .service-row {
+      gap: 12px;
+    }
+    .service-row h3 {
+      font-size: 21px;
+    }
+    .service-row p {
+      font-size: 12px;
+    }
+    .service-icon {
+      width: 37px;
+      height: 37px;
+    }
+  }
+}

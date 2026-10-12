@@ -1,0 +1,207 @@
+@layer components {
+  .court-art {
+    height: 460px;
+    background: radial-gradient(
+      ellipse at 50% 22%,
+      #315647 0%,
+      #143e31 42%,
+      #0b241b 95%
+    );
+    position: relative;
+    overflow: hidden;
+    border-radius: 180px 180px 3px 3px;
+    border: 1px solid #52736233;
+    isolation: isolate;
+  }
+  .court-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(#f7f3eb06 1px, transparent 1px),
+      linear-gradient(90deg, #f7f3eb06 1px, transparent 1px);
+    background-size: 40px 40px;
+    mask-image: linear-gradient(black, transparent);
+  }
+  .court-arch {
+    position: absolute;
+    width: 68%;
+    height: 92%;
+    border: 1px solid #b4875360;
+    inset: 38px 16% auto;
+    border-radius: 160px 160px 0 0;
+  }
+  .arch-inner {
+    position: absolute;
+    inset: 17px;
+    border: 1px solid #b4875340;
+    border-radius: 150px 150px 0 0;
+  }
+  .arch-inner-two {
+    inset: 36px;
+    border-color: #b4875328;
+    border-radius: 135px 135px 0 0;
+  }
+  .court-columns {
+    position: absolute;
+    inset: 180px 12% 44px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .court-columns i {
+    width: 18px;
+    background: linear-gradient(90deg, #f7f3eb09, #f7f3eb03 35%, #0000000d);
+    border-inline: 1px solid #b4875330;
+    border-radius: 4px 4px 0 0;
+    position: relative;
+  }
+  .court-columns i:before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: -3px;
+    right: -3px;
+    height: 5px;
+    background: #b487533a;
+  }
+  .court-columns i:after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: -5px;
+    right: -5px;
+    height: 6px;
+    background: #b487533a;
+  }
+  .court-emblem {
+    position: absolute;
+    inset: 110px 0 auto;
+    display: grid;
+    place-items: center;
+  }
+  .court-emblem img {
+    width: 155px;
+    filter: drop-shadow(0 8px 10px #00000020);
+  }
+  .court-floor {
+    position: absolute;
+    bottom: 15px;
+    left: -5%;
+    right: -5%;
+    height: 40px;
+    border-top: 1px solid #b4875350;
+    transform: perspective(130px) rotateX(25deg);
+  }
+  .court-floor i {
+    position: absolute;
+    border-top: 1px solid #b4875330;
+    left: 0;
+    right: 0;
+    top: 10px;
+  }
+  .court-floor i:nth-child(2) {
+    top: 22px;
+  }
+  .court-floor i:nth-child(3) {
+    top: 35px;
+  }
+  .court-coordinate {
+    position: absolute;
+    bottom: 65px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 10px;
+    color: #d5c2a7;
+    letter-spacing: 0.3px;
+  }
+  .court-corner {
+    position: absolute;
+    right: 26px;
+    bottom: 25px;
+    font-size: 10px;
+    color: #c4cfbf;
+    line-height: 1.5;
+  }
+  .court-corner b {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .court-art-small {
+    height: 260px;
+    border-radius: 120px 120px 2px 2px;
+  }
+  .court-art-small .court-emblem {
+    top: 65px;
+  }
+  .court-art-small .court-emblem img {
+    width: 95px;
+  }
+  .court-art-small .court-arch {
+    top: 20px;
+  }
+  .court-art-small .court-columns {
+    top: 110px;
+  }
+  .court-art-small .court-coordinate {
+    bottom: 40px;
+  }
+  @media (min-width: 1600px) {
+    .court-art {
+      height: 510px;
+    }
+  }
+  @media (max-width: 1200px) {
+    .court-art {
+      height: 430px;
+    }
+  }
+  @media (max-width: 1000px) {
+    .court-art {
+      height: 400px;
+    }
+  }
+  @media (max-width: 760px) {
+    .court-art {
+      height: 345px;
+      border-radius: 160px 160px 2px 2px;
+      max-width: 480px;
+      margin-inline: auto;
+    }
+    .court-emblem {
+      top: 83px;
+    }
+    .court-emblem img {
+      width: 128px;
+    }
+    .court-columns {
+      top: 155px;
+    }
+    .court-arch {
+      top: 28px;
+    }
+    .court-coordinate {
+      bottom: 64px;
+    }
+    .article-aside .court-art {
+      height: 260px;
+    }
+    .article-aside .court-emblem {
+      top: 65px;
+    }
+    .article-aside .court-emblem img {
+      width: 100px;
+    }
+    .article-aside .court-columns {
+      top: 110px;
+    }
+    .article-aside .court-coordinate {
+      bottom: 40px;
+    }
+  }
+  @media print {
+    .court-art {
+      print-color-adjust: exact;
+    }
+  }
+}

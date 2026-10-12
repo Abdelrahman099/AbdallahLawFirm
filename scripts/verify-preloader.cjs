@@ -1,0 +1,151 @@
+const { chromium } = require("playwright");
+const { default: AxeBuilder } = require("@axe-core/playwright");
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+
+(async () => {
+  fs.mkdirSync("output/qa/preloader", { recursive: true });
+  const browser = await chromium.launch({
+    executablePath:
+      "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
+  });
+  const base = process.env.TEST_URL || "http://127.0.0.1:4173";
+  const errors = [];
+  for (const width of [390, 1440]) {
+    const context = await browser.newContext({
+      viewport: { width, height: 900 },
+      reducedMotion: "no-preference",
+    });
+    await context.addInitScript(() =>
+      sessionStorage.setItem("shehri-intro-v2", "1"),
+    );
+    const page = await context.newPage();
+    page.setDefaultTimeout(15000);
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.route(/\/assets\/index-[^/]+\.js/, async (route) => {
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await route.continue();
+    });
+    const navigation = page.goto(base);
+    await page.locator(".startup-preloader").waitFor({ state: "visible" });
+    assert.equal(
+      await page
+        .locator("#root")
+        .evaluate((e) => getComputedStyle(e).visibility),
+      "hidden",
+      "page cannot flash before the JavaScript bundle",
+    );
+    await page.screenshot({
+      path: `output/qa/preloader/first-paint-${width}.png`,
+    });
+    await navigation;
+    const intro = page.getByRole("dialog", { name: "افتتاحية المكتب" });
+    await intro.waitFor();
+    assert.equal(
+      await page
+        .locator(".startup-preloader")
+        .evaluate((e) => getComputedStyle(e).display),
+      "none",
+      "boot screen hands over to animation",
+    );
+    assert(await page.locator("main").evaluate((e) => e.inert));
+    assert.equal(await page.locator(".balance-onyx").count(), 1);
+    await page.waitForTimeout(2200);
+    await page.screenshot({
+      path: `output/qa/preloader/animated-${width}.png`,
+    });
+    await intro.waitFor({ state: "hidden" });
+    assert(!(await page.locator("main").evaluate((e) => e.inert)));
+    assert(
+      await page
+        .locator("main h1")
+        .evaluate((e) => e === document.activeElement),
+    );
+    await page.unroute(/\/assets\/index-[^/]+\.js/);
+    await page.reload();
+    await intro.waitFor();
+    await page.keyboard.press("Tab");
+    assert(
+      await intro
+        .getByRole("button", { name: "تخطي الافتتاحية" })
+        .evaluate((e) => e === document.activeElement),
+    );
+    assert.deepEqual(
+      (
+        await new AxeBuilder({ page })
+          .include(".preloader")
+          .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+          .analyze()
+      ).violations,
+      [],
+    );
+    await page.keyboard.press("Escape");
+    await intro.waitFor({ state: "hidden" });
+    await page.locator(".home-office-story a").click();
+    await page.waitForURL("**/about");
+    await page.locator(".home-page").waitFor({ state: "hidden" });
+    assert.equal(await page.locator(".preloader").count(), 0);
+    await page
+      .locator(".site-header")
+      .getByRole("link", { name: "الرئيسية", exact: true })
+      .click();
+    await page.waitForURL(base + "/");
+    await intro.waitFor();
+    await intro.getByRole("button", { name: "تخطي الافتتاحية" }).click();
+    await intro.waitFor({ state: "hidden" });
+    await page
+      .locator(".site-header")
+      .getByRole("link", { name: "الرئيسية", exact: true })
+      .click();
+    await intro.waitFor();
+    await page.goBack();
+    await intro.waitFor();
+    await page.keyboard.press("Escape");
+    await intro.waitFor({ state: "hidden" });
+    assert(!(await page.locator("main").evaluate((e) => e.inert)));
+    await context.close();
+  }
+  const slow = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+  });
+  const page = await slow.newPage();
+  page.setDefaultTimeout(15000);
+  await page.route("**/images/brand-company-v2*.webp", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 4500));
+    await route.continue();
+  });
+  await page.goto(base, { waitUntil: "domcontentloaded" });
+  await page.locator(".preloader").waitFor();
+  await page.waitForTimeout(3300);
+  assert(
+    await page.locator(".preloader").isVisible(),
+    "loader stays while hero photo is still loading",
+  );
+  await page.locator(".preloader").waitFor({ state: "hidden" });
+  assert(
+    await page
+      .locator(".home-page img")
+      .first()
+      .evaluate((e) => e.complete && e.naturalWidth > 0),
+  );
+  await slow.close();
+  const reduced = await browser.newContext({ reducedMotion: "reduce" });
+  const reducedPage = await reduced.newPage();
+  await reducedPage.goto(base);
+  await reducedPage.locator(".preloader").waitFor({ state: "hidden" });
+  assert(!(await reducedPage.locator("main").evaluate((e) => e.inert)));
+  await reduced.close();
+  const staticContext = await browser.newContext({ javaScriptEnabled: false });
+  const staticPage = await staticContext.newPage();
+  await staticPage.goto(base);
+  assert(await staticPage.locator("main h1").isVisible());
+  assert(!(await staticPage.locator(".preloader").isVisible()));
+  await staticContext.close();
+  await browser.close();
+  assert.deepEqual(errors, []);
+  fs.writeFileSync(
+    "output/qa/preloader/result.json",
+    JSON.stringify(
+      {
+        firstPaint: "boot cover before JS; root hidden",
+        refresh: "replay

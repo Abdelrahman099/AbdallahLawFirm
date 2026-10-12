@@ -1,0 +1,83 @@
+{
+  "checked_date": "2026-10-11",
+  "source": "Verisign RDAP",
+  "meaning": "404 means no registration record at lookup time, not a purchase guarantee",
+  "domains": [
+    {
+      "domain": "ashehrilaw.com",
+      "status": 200,
+      "registered": true,
+      "events": [
+        {
+          "eventAction": "registration",
+          "eventDate": "2026-02-03T10:52:32Z"
+        },
+        {
+          "eventAction": "expiration",
+          "eventDate": "2027-02-03T10:52:32Z"
+        },
+        {
+          "eventAction": "last changed",
+          "eventDate": "2026-02-18T15:50:13Z"
+        },
+        {
+          "eventAction": "last update of RDAP database",
+          "eventDate": "2026-10-11T11:15:50Z"
+        }
+      ]
+    },
+    {
+      "domain": "aalshehrilaw.com",
+      "status": 404,
+      "registered": false
+    },
+    {
+      "domain": "abdullahalshehri.com",
+      "status": 200,
+      "registered": true,
+      "events": [
+        {
+          "eventAction": "registration",
+          "eventDate": "2026-04-06T14:52:39Z"
+        },
+        {
+          "eventAction": "expiration",
+          "eventDate": "2027-04-06T14:52:39Z"
+        },
+        {
+          "eventAction": "last changed",
+          "eventDate": "2026-08-29T12:19:42Z"
+        },
+        {
+          "eventAction": "last update of RDAP database",
+          "eventDate": "2026-10-11T11:15:50Z"
+        }
+      ]
+    },
+    {
+      "domain": "abdullahshehrilaw.com",
+      "status": 404,
+      "registered": false
+    },
+    {
+      "domain": "alshehrilegal.com",
+      "status": 404,
+      "registered": false
+    },
+    {
+      "domain": "abdullahalshehrilaw.com",
+      "status": 404,
+      "registered": false
+    },
+    {
+      "domain": "abdullahshehri.com",
+      "status": 404,
+      "registered": false
+    },
+    {
+      "domain": "aashehrilaw.com",
+      "status": 404,
+      "registered": false
+    }
+  ]
+}
