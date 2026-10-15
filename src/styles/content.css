@@ -94,24 +94,7 @@
     color: var(--muted);
   }
   .office-location {
-    background: #eaede2;
-    display: flex;
-    align-items: center;
-    gap: 25px;
-    padding: 32px;
     margin-bottom: 80px;
-  }
-  .office-location h2 {
-    font-size: 23px;
-  }
-  .office-location p {
-    font-size: 15px;
-    color: var(--muted);
-    margin-top: 9px;
-  }
-  .office-location .text-link {
-    margin-right: auto;
-    flex-shrink: 0;
   }
   .breadcrumbs {
     display: flex;
@@ -187,65 +170,6 @@
     color: var(--muted);
     display: block;
     margin-top: 9px;
-  }
-  .map-placeholder {
-    background: #e7eadb;
-    position: relative;
-    min-height: 450px;
-    overflow: hidden;
-    border: 1px solid var(--line);
-  }
-  .map-streets {
-    position: absolute;
-    inset: -100px;
-    background:
-      repeating-linear-gradient(
-        20deg,
-        transparent 0 58px,
-        #e9ddc7 59px 66px,
-        transparent 67px 110px
-      ),
-      repeating-linear-gradient(
-        110deg,
-        transparent 0 85px,
-        #d6dcc9 86px 90px,
-        transparent 91px 155px
-      );
-    opacity: 0.8;
-    transform: rotate(-5deg);
-  }
-  .map-pin {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 13px;
-  }
-  .map-pin span {
-    white-space: nowrap;
-    font-size: 13px;
-    background: var(--ivory);
-    padding: 8px 16px;
-    border: 1px solid var(--line);
-  }
-  .map-caption {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    left: 20px;
-    background: var(--ivory);
-    padding: 22px;
-  }
-  .map-caption h3 {
-    font-size: 22px;
-  }
-  .map-caption p {
-    font-size: 12px;
-    color: var(--muted);
-    margin-top: 8px;
   }
   .insights-page {
     padding-block: 60px 100px;
@@ -369,24 +293,7 @@
       font-size: 15px;
     }
     .office-location {
-      align-items: flex-start;
-      padding: 25px;
-      flex-wrap: wrap;
-      gap: 16px;
       margin-bottom: 55px;
-    }
-    .office-location > div {
-      flex: 1;
-    }
-    .office-location h2 {
-      font-size: 23px;
-    }
-    .office-location p {
-      font-size: 14px;
-    }
-    .office-location .text-link {
-      margin-right: 45px;
-      font-size: 13px;
     }
     .breadcrumbs {
       font-size: 10px;
@@ -411,18 +318,6 @@
     }
     .address-block p {
       font-size: 16px;
-    }
-    .map-placeholder {
-      min-height: 340px;
-    }
-    .map-caption {
-      padding: 18px;
-      bottom: 16px;
-      left: 16px;
-      right: 16px;
-    }
-    .map-pin {
-      top: 28%;
     }
     .insights-page {
       padding-block: 35px 55px;

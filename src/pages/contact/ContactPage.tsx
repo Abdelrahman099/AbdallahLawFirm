@@ -1,4 +1,5 @@
 import { Arrow, ConsultationBand, PageIntro } from "@/components/Brand";
+import { OfficeMap, officeMapLink } from "@/components/shared/OfficeMap";
 import { office, whatsappUrl } from "@/data/site";
 import { Clock3, Mail, MapPin, Phone } from "lucide-react";
 
@@ -75,28 +76,20 @@ export function Contact() {
             </a>
           )}
         </div>
-        <div className="map-placeholder" data-reveal>
-          <div className="map-streets" />
-          <div className="map-pin">
-            <MapPin size={40} strokeWidth={1.3} />
-            <span>جدة · حي البغدادية</span>
+        <OfficeMap>
+          <h3>برج المستقبل</h3>
+          <p>جدة · حي البغدادية · مقابل المحكمة العمالية</p>
+          <div className="office-map-links">
+            <a
+              className="text-link"
+              href={officeMapLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              افتح في خرائط Google <Arrow />
+            </a>
           </div>
-          <div className="map-caption">
-            <h3>برج المستقبل</h3>
-            {office.mapUrl ? (
-              <a
-                className="text-link"
-                href={office.mapUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                افتح الخريطة <Arrow />
-              </a>
-            ) : (
-              <p>رابط الخريطة التفصيلي يُضاف قريبًا</p>
-            )}
-          </div>
-        </div>
+        </OfficeMap>
       </section>
       <ConsultationBand />
     </>

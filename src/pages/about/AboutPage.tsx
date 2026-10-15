@@ -4,6 +4,7 @@ import {
   PageIntro,
   SectionIntro,
 } from "@/components/Brand";
+import { OfficeMap, officeMapLink } from "@/components/shared/OfficeMap";
 import { office } from "@/data/site";
 import { MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -61,15 +62,25 @@ export function About() {
           ))}
         </div>
       </section>
-      <section className="site-container office-location" data-reveal>
-        <MapPin size={32} strokeWidth={1.2} />
-        <div>
+      <section className="site-container office-location">
+        <OfficeMap>
+          <MapPin size={28} strokeWidth={1.3} />
           <h2>مقر المكتب</h2>
           <p>{office.address}</p>
-        </div>
-        <Link className="text-link" to="/contact">
-          الوصول والتواصل <Arrow />
-        </Link>
+          <div className="office-map-links">
+            <a
+              className="text-link"
+              href={officeMapLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              افتح في خرائط Google <Arrow />
+            </a>
+            <Link className="text-link" to="/contact">
+              الوصول والتواصل <Arrow />
+            </Link>
+          </div>
+        </OfficeMap>
       </section>
       <ConsultationBand />
     </>
