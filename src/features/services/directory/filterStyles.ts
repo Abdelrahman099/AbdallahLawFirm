@@ -29,7 +29,7 @@ export const filterStyles = [
 ] as const;
 
 export type FilterStyle = (typeof filterStyles)[number]["id"];
-export const defaultFilterStyle: FilterStyle = "classic";
+export const defaultFilterStyle: FilterStyle = "cards";
 const storageKey = "shehri-services-filter";
 
 export const isFilterStyle = (value: unknown): value is FilterStyle =>
