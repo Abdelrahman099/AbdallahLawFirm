@@ -3,19 +3,27 @@ import { PracticeCardGrid } from "@/features/services/PracticeCardGrid";
 import { services } from "@/data/site";
 import { useRef } from "react";
 import { useDirectoryParams } from "@/features/services/useDirectoryParams";
-import { X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { serviceGroups } from "@/data/serviceGroups";
-import { BrandImage } from "@/components/brand/BrandImage";
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@/features/services/ServiceFilters";
+import { matchesQuery } from "@/features/services/serviceSearch";
+import type { Service } from "@/data/services";
+
+const audiences = [
+  { id: "all", title: "الجميع" },
+  { id: "business", title: "الشركات والمستثمرون" },
+  { id: "individual", title: "الأفراد" },
+];
+
+const forAudience = (service: Service, audience: string) =>
+  audience === "all" ||
+  service.audience === audience ||
+  service.audience === "both";
 
 export function Services() {
   const { params, initialParams, setParams } = useDirectoryParams();
-  const filter = ["business", "individual"].includes(
+  const audience = ["business", "individual"].includes(
     initialParams.get("audience") || "",
   )
     ? initialParams.get("audience")!
@@ -25,24 +33,27 @@ export function Services() {
     (item) => item.id === initialParams.get("group"),
   );
   const search = useRef<HTMLInputElement>(null);
-  const setFilter = (value: string) => {
+  const update = (key: string, value: string) => {
     const next = new URLSearchParams(params);
-    if (value === "all") next.delete("audience");
-    else next.set("audience", value);
+    if (value && value !== "all") next.set(key, value);
+    else next.delete(key);
     setParams(next, { replace: true });
   };
-  const setQuery = (value: string) => {
-    const next = new URLSearchParams(params);
-    if (value) next.set("q", value);
-    else next.delete("q");
-    setParams(next, { replace: true });
-  };
+  const inGroup = (service: Service, id = group?.id) =>
+    !id || serviceGroups.find((g) => g.id === id)!.slugs.includes(service.slug);
   const items = services.filter(
-    (s) =>
-      (filter === "all" || s.audience === filter || s.audience === "both") &&
-      (!group || group.slugs.includes(s.slug)) &&
-      (s.title + s.short).includes(query.trim()),
+    (s) => forAudience(s, audience) && inGroup(s) && matchesQuery(s, query),
   );
+  const groupCount = (id?: string) =>
+    services.filter(
+      (s) =>
+        forAudience(s, audience) && inGroup(s, id) && matchesQuery(s, query),
+    ).length;
+  const audienceCount = (id: string) =>
+    services.filter(
+      (s) => forAudience(s, id) && inGroup(s) && matchesQuery(s, query),
+    ).length;
+  const filtered = Boolean(group || audience !== "all" || query);
   return (
     <>
       <section className="site-container practice-directory-heading">
@@ -60,88 +71,112 @@ export function Services() {
         </p>
       </section>
       <section className="site-container service-directory">
-        <nav className="directory-group-nav" aria-label="مجالات الخدمات">
-          {serviceGroups.map((item) => (
-            <Button
-              key={item.id}
-              variant={group?.id === item.id ? "default" : "outline"}
-              className="directory-group-choice"
-              aria-pressed={group?.id === item.id}
-              onClick={() => {
-                const next = new URLSearchParams(params);
-                if (group?.id === item.id) next.delete("group");
-                else next.set("group", item.id);
-                next.delete("audience");
-                next.delete("q");
-                setParams(next, { replace: true });
-              }}
-            >
-              <BrandImage asset={item.image} sizes="80px" alt="" />
-              <span>{item.title}</span>
-            </Button>
-          ))}
-        </nav>
-        <div className="directory-controls">
-          <ToggleGroup
-            value={filter}
-            onValueChange={setFilter}
-            aria-label="تصفية حسب نوع العميل"
-          >
-            {[
-              ["all", "جميع الخدمات"],
-              ["business", "الشركات والمستثمرون"],
-              ["individual", "الأفراد"],
-            ].map(([v, t]) => (
-              <ToggleGroupItem value={v} key={v}>
-                {t}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
-          <div className="practice-search">
+        <div className="service-filter" role="search">
+          <div className="service-filter-search">
+            <Search aria-hidden="true" />
             <label htmlFor="service-search" className="sr-only">
               ابحث عن خدمة
             </label>
             <Input
               id="service-search"
               ref={search}
-              className="h-12 rounded-xs bg-card"
               type="search"
-              placeholder="ابحث عن خدمة…"
+              placeholder="ابحث عن خدمة، مثل: عقد أو تركة…"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(e) => update("q", e.target.value)}
             />
             {query ? (
-              <Button
-                variant="outline"
-                size="icon"
-                className="size-12"
+              <button
+                type="button"
                 aria-label="مسح البحث"
                 onClick={() => {
-                  setQuery("");
+                  update("q", "");
                   search.current?.focus();
                 }}
               >
                 <X />
-              </Button>
+              </button>
             ) : null}
           </div>
+          <div className="service-filter-row">
+            <span className="service-filter-label" id="filter-group">
+              المجال
+            </span>
+            <div
+              className="service-filter-chips"
+              role="group"
+              aria-labelledby="filter-group"
+            >
+              {[{ id: "all", title: "كل المجالات" }, ...serviceGroups].map(
+                (item) => {
+                  const active = (group?.id ?? "all") === item.id;
+                  return (
+                    <button
+                      type="button"
+                      key={item.id}
+                      className="service-chip"
+                      aria-pressed={active}
+                      onClick={() => update("group", item.id)}
+                    >
+                      {item.title}
+                      <span>
+                        {groupCount(item.id === "all" ? undefined : item.id)}
+                      </span>
+                    </button>
+                  );
+                },
+              )}
+            </div>
+          </div>
+          <div className="service-filter-row">
+            <span className="service-filter-label" id="filter-audience">
+              الخدمة لـ
+            </span>
+            <div
+              className="service-filter-chips"
+              role="group"
+              aria-labelledby="filter-audience"
+            >
+              {audiences.map((item) => (
+                <button
+                  type="button"
+                  key={item.id}
+                  className="service-chip"
+                  aria-pressed={audience === item.id}
+                  onClick={() => update("audience", item.id)}
+                >
+                  {item.title}
+                  <span>{audienceCount(item.id)}</span>
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
-        <p className="result-count" aria-live="polite">
-          {group ? `${group.title} · ` : ""}
-          {items.length} خدمات متاحة
-        </p>
+        <div className="service-filter-summary">
+          <p className="result-count" aria-live="polite">
+            {items.length} من {services.length} خدمة
+          </p>
+          {filtered ? (
+            <button
+              type="button"
+              className="service-filter-reset"
+              onClick={() => setParams({}, { replace: true })}
+            >
+              <X aria-hidden="true" />
+              مسح الفلاتر
+            </button>
+          ) : null}
+        </div>
         {items.length ? (
           <PracticeCardGrid items={items} />
         ) : (
           <div className="empty-state">
-            <h2>لم نجد خدمة بهذا الاسم.</h2>
+            <h2>لم نجد خدمة مطابقة.</h2>
             <p>جرّب كلمة أخرى، أو اشرح احتياجك عند طلب الاستشارة.</p>
             <Button
               variant="outline"
               className="h-12"
-              onClick={() => {
-                setParams({});
-              }}
+              onClick={() => setParams({}, { replace: true })}
             >
               عرض كل الخدمات
             </Button>

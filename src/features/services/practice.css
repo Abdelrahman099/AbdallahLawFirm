@@ -254,44 +254,174 @@
 .practice-card:hover .practice-card-link {
   text-decoration-thickness: 2px;
 }
-.directory-group-nav {
+.service-filter {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ivory) 60%, #fff);
+}
+.service-filter-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.service-filter-search > svg {
+  position: absolute;
+  inset-inline-start: 16px;
+  width: 20px;
+  height: 20px;
+  color: var(--muted);
+  pointer-events: none;
+}
+.service-filter-search input {
+  height: 54px;
+  padding-inline: 48px;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 15px;
+}
+.service-filter-search input::-webkit-search-cancel-button {
+  display: none;
+}
+.service-filter-search button {
+  position: absolute;
+  inset-inline-end: 6px;
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  color: var(--muted);
+  cursor: pointer;
+}
+.service-filter-search button:hover {
+  color: var(--forest);
+}
+.service-filter-search button svg {
+  width: 18px;
+  height: 18px;
+}
+.service-filter-row {
+  display: flex;
+  align-items: center;
   gap: 16px;
-  margin-bottom: 32px;
 }
-.directory-group-choice {
-  height: auto;
-  min-height: 100px;
-  justify-content: flex-start;
-  padding: 0;
-  overflow: hidden;
-  border-radius: 0;
-  white-space: normal;
-  text-align: right;
-  gap: 20px;
-  font-size: 17px;
-  font-weight: 600;
-}
-.directory-group-choice img {
-  width: 90px;
-  height: 100px;
-  object-fit: cover;
+.service-filter-label {
   flex-shrink: 0;
+  width: 64px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
 }
-.directory-group-choice span {
-  padding: 12px 0 12px 16px;
+.service-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-width: 0;
+}
+.service-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 42px;
+  padding-inline: 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--forest);
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.service-chip:hover {
+  border-color: var(--forest);
+}
+.service-chip span {
+  min-width: 24px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--ivory);
+  font-size: 12px;
+  text-align: center;
+}
+.service-chip[aria-pressed="true"] {
+  border-color: var(--forest);
+  background: var(--forest);
+  color: var(--ivory);
+}
+.service-chip[aria-pressed="true"] span {
+  background: #ffffff26;
+}
+.service-chip:focus-visible,
+.service-filter-reset:focus-visible,
+.service-filter-search button:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 3px;
+}
+.service-filter-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-block: 18px;
+}
+.service-filter-summary .result-count {
+  margin: 0;
+}
+.service-filter-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  font-size: 13px;
+  color: var(--bronze-text);
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  cursor: pointer;
+}
+.service-filter-reset svg {
+  width: 15px;
+  height: 15px;
 }
 @media (max-width: 760px) {
-  .directory-group-nav {
-    grid-template-columns: 1fr;
-    gap: 12px;
+  .service-filter {
+    gap: 14px;
+    padding: 0;
+    border: 0;
+    background: none;
   }
-  .directory-group-choice {
-    min-height: 76px;
+  .service-filter-search input {
+    height: 50px;
+    font-size: 14px;
   }
-  .directory-group-choice img {
-    height: 76px;
-    width: 82px;
+  .service-filter-row {
+    display: block;
+  }
+  .service-filter-label {
+    display: block;
+    width: auto;
+    margin-bottom: 8px;
+    font-size: 12px;
+  }
+  .service-filter-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin-inline: calc((100% - 100vw) / 2);
+    padding-inline: calc((100vw - 100%) / 2);
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .service-filter-chips::-webkit-scrollbar {
+    display: none;
+  }
+  .service-chip {
+    flex-shrink: 0;
+    min-height: 44px;
+    font-size: 13px;
   }
 }
