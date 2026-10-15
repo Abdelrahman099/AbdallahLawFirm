@@ -27,7 +27,7 @@
   }
   .founder-placeholder {
     border: 1px solid var(--line);
-    background: linear-gradient(145deg, #eceee4, #f7f3eb);
+    background: var(--card);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -83,7 +83,7 @@
   .values-grid span {
     font-family: Georgia, serif;
     font-size: 28px;
-    color: #886239;
+    color: var(--bronze-text);
   }
   .values-grid h3 {
     margin-block: 13px;
@@ -202,7 +202,7 @@
       repeating-linear-gradient(
         20deg,
         transparent 0 58px,
-        #f7f3eb 59px 66px,
+        #e9ddc7 59px 66px,
         transparent 67px 110px
       ),
       repeating-linear-gradient(
@@ -293,7 +293,7 @@
     font:
       120px Georgia,
       serif;
-    color: #886239;
+    color: var(--bronze-text);
     opacity: 0.6;
   }
   .not-found h1 {

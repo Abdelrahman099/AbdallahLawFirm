@@ -120,18 +120,6 @@ export function ServiceHeroSlider({
             </button>
           ))}
         </div>
-        <div className="service-slide-controls">
-          <button
-            className="slide-autoplay-control"
-            aria-label={
-              slider.playing ? "إيقاف العرض التلقائي" : "تشغيل العرض التلقائي"
-            }
-            aria-pressed={slider.playing}
-            onClick={() => slider.setPlaying(!slider.playing)}
-          >
-            {slider.playing ? "إيقاف العرض" : "تشغيل العرض"}
-          </button>
-        </div>
         <span className="sr-only" aria-live={slider.running ? "off" : "polite"}>
           {slide.label}، الشريحة {slider.index + 1} من 3
         </span>

@@ -8,10 +8,10 @@ export function Logo({
   return (
     <img
       className="brand-logo"
-      src={`/brand/${compact ? "compact" : "horizontal"}-${inverse ? "reverse" : "primary"}.svg`}
+      src={`/brand/v4/${compact ? "compact" : "horizontal"}-${inverse ? "beige" : "primary"}.svg`}
       alt="عبد الله الشهري للمحاماة والاستشارات القانونية"
-      width={compact ? 760 : 860}
-      height={compact ? 200 : 230}
+      width={760}
+      height={200}
     />
   );
 }

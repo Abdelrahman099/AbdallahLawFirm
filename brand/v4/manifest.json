@@ -1,0 +1,182 @@
+{
+  "version": "4",
+  "date": "2026-10-15",
+  "source": "Client emblem and quill; built-in image restoration, outlined SVG conversion, existing Arabic lettering",
+  "assets": [
+    {
+      "layout": "mark",
+      "palette": "primary",
+      "color": "#143E31",
+      "svg": "logos/mark-primary.svg",
+      "png": "logos/mark-primary.png"
+    },
+    {
+      "layout": "mark",
+      "palette": "beige",
+      "color": "#E9DDC7",
+      "svg": "logos/mark-beige.svg",
+      "png": "logos/mark-beige.png"
+    },
+    {
+      "layout": "mark",
+      "palette": "black",
+      "color": "#101715",
+      "svg": "logos/mark-black.svg",
+      "png": "logos/mark-black.png"
+    },
+    {
+      "layout": "mark",
+      "palette": "white",
+      "color": "#FFFFFF",
+      "svg": "logos/mark-white.svg",
+      "png": "logos/mark-white.png"
+    },
+    {
+      "layout": "mark",
+      "palette": "bronze",
+      "color": "#B48753",
+      "svg": "logos/mark-bronze.svg",
+      "png": "logos/mark-bronze.png"
+    },
+    {
+      "layout": "quill",
+      "palette": "primary",
+      "color": "#143E31",
+      "svg": "logos/quill-primary.svg",
+      "png": "logos/quill-primary.png"
+    },
+    {
+      "layout": "quill",
+      "palette": "beige",
+      "color": "#E9DDC7",
+      "svg": "logos/quill-beige.svg",
+      "png": "logos/quill-beige.png"
+    },
+    {
+      "layout": "quill",
+      "palette": "black",
+      "color": "#101715",
+      "svg": "logos/quill-black.svg",
+      "png": "logos/quill-black.png"
+    },
+    {
+      "layout": "quill",
+      "palette": "white",
+      "color": "#FFFFFF",
+      "svg": "logos/quill-white.svg",
+      "png": "logos/quill-white.png"
+    },
+    {
+      "layout": "quill",
+      "palette": "bronze",
+      "color": "#B48753",
+      "svg": "logos/quill-bronze.svg",
+      "png": "logos/quill-bronze.png"
+    },
+    {
+      "layout": "horizontal",
+      "palette": "primary",
+      "color": "#143E31",
+      "svg": "logos/horizontal-primary.svg",
+      "png": "logos/horizontal-primary.png"
+    },
+    {
+      "layout": "horizontal",
+      "palette": "beige",
+      "color": "#E9DDC7",
+      "svg": "logos/horizontal-beige.svg",
+      "png": "logos/horizontal-beige.png"
+    },
+    {
+      "layout": "horizontal",
+      "palette": "black",
+      "color": "#101715",
+      "svg": "logos/horizontal-black.svg",
+      "png": "logos/horizontal-black.png"
+    },
+    {
+      "layout": "horizontal",
+      "palette": "white",
+      "color": "#FFFFFF",
+      "svg": "logos/horizontal-white.svg",
+      "png": "logos/horizontal-white.png"
+    },
+    {
+      "layout": "horizontal",
+      "palette": "bronze",
+      "color": "#B48753",
+      "svg": "logos/horizontal-bronze.svg",
+      "png": "logos/horizontal-bronze.png"
+    },
+    {
+      "layout": "compact",
+      "palette": "primary",
+      "color": "#143E31",
+      "svg": "logos/compact-primary.svg",
+      "png": "logos/compact-primary.png"
+    },
+    {
+      "layout": "compact",
+      "palette": "beige",
+      "color": "#E9DDC7",
+      "svg": "logos/compact-beige.svg",
+      "png": "logos/compact-beige.png"
+    },
+    {
+      "layout": "compact",
+      "palette": "black",
+      "color": "#101715",
+      "svg": "logos/compact-black.svg",
+      "png": "logos/compact-black.png"
+    },
+    {
+      "layout": "compact",
+      "palette": "white",
+      "color": "#FFFFFF",
+      "svg": "logos/compact-white.svg",
+      "png": "logos/compact-white.png"
+    },
+    {
+      "layout": "compact",
+      "palette": "bronze",
+      "color": "#B48753",
+      "svg": "logos/compact-bronze.svg",
+      "png": "logos/compact-bronze.png"
+    },
+    {
+      "layout": "stacked",
+      "palette": "primary",
+      "color": "#143E31",
+      "svg": "logos/stacked-primary.svg",
+      "png": "logos/stacked-primary.png"
+    },
+    {
+      "layout": "stacked",
+      "palette": "beige",
+      "color": "#E9DDC7",
+      "svg": "logos/stacked-beige.svg",
+      "png": "logos/stacked-beige.png"
+    },
+    {
+      "layout": "stacked",
+      "palette": "black",
+      "color": "#101715",
+      "svg": "logos/stacked-black.svg",
+      "png": "logos/stacked-black.png"
+    },
+    {
+      "layout": "stacked",
+      "palette": "white",
+      "color": "#FFFFFF",
+      "svg": "logos/stacked-white.svg",
+      "png": "logos/stacked-white.png"
+    },
+    {
+      "layout": "stacked",
+      "palette": "bronze",
+      "color": "#B48753",
+      "svg": "logos/stacked-bronze.svg",
+      "png": "logos/stacked-bronze.png"
+    }
+  ]
+}

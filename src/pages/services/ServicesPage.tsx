@@ -6,6 +6,8 @@ import { useDirectoryParams } from "@/features/services/useDirectoryParams";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { serviceGroups } from "@/data/serviceGroups";
+import { BrandImage } from "@/components/brand/BrandImage";
 import {
   ToggleGroup,
   ToggleGroupItem,
@@ -19,6 +21,9 @@ export function Services() {
     ? initialParams.get("audience")!
     : "all";
   const query = initialParams.get("q") || "";
+  const group = serviceGroups.find(
+    (item) => item.id === initialParams.get("group"),
+  );
   const search = useRef<HTMLInputElement>(null);
   const setFilter = (value: string) => {
     const next = new URLSearchParams(params);
@@ -35,6 +40,7 @@ export function Services() {
   const items = services.filter(
     (s) =>
       (filter === "all" || s.audience === filter || s.audience === "both") &&
+      (!group || group.slugs.includes(s.slug)) &&
       (s.title + s.short).includes(query.trim()),
   );
   return (
@@ -54,6 +60,27 @@ export function Services() {
         </p>
       </section>
       <section className="site-container service-directory">
+        <nav className="directory-group-nav" aria-label="مجالات الخدمات">
+          {serviceGroups.map((item) => (
+            <Button
+              key={item.id}
+              variant={group?.id === item.id ? "default" : "outline"}
+              className="directory-group-choice"
+              aria-pressed={group?.id === item.id}
+              onClick={() => {
+                const next = new URLSearchParams(params);
+                if (group?.id === item.id) next.delete("group");
+                else next.set("group", item.id);
+                next.delete("audience");
+                next.delete("q");
+                setParams(next, { replace: true });
+              }}
+            >
+              <BrandImage asset={item.image} sizes="80px" alt="" />
+              <span>{item.title}</span>
+            </Button>
+          ))}
+        </nav>
         <div className="directory-controls">
           <ToggleGroup
             value={filter}
@@ -100,6 +127,7 @@ export function Services() {
           </div>
         </div>
         <p className="result-count" aria-live="polite">
+          {group ? `${group.title} · ` : ""}
           {items.length} خدمات متاحة
         </p>
         {items.length ? (

@@ -1,4 +1,4 @@
-import { PracticeExplorer } from "./PracticeExplorer";
+import { ServiceGroupGrid } from "@/features/services/ServiceGroupGrid";
 import { Link } from "react-router-dom";
 export function PracticeAreasSection() {
   return (
@@ -9,14 +9,14 @@ export function PracticeAreasSection() {
       <div className="home-section-heading">
         <div>
           <p className="eyebrow">مجالات العمل</p>
-          <h2 id="practice-heading">ما موضوع استشارتك؟</h2>
-          <p>ابدأ بالمجال الأقرب لاحتياجك، وتعرّف على ما يشمله.</p>
+          <h2 id="practice-heading">خدماتنا القانونية</h2>
+          <p>ثلاثة مجالات تجمع خدمات المكتب للشركات والأفراد.</p>
         </div>
         <Link className="text-link" to="/services">
           دليل الخدمات
         </Link>
       </div>
-      <PracticeExplorer />
+      <ServiceGroupGrid />
     </section>
   );
 }

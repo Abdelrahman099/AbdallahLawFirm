@@ -1,0 +1,17 @@
+{
+  "tool": "built-in image_gen",
+  "date": "2026-10-15",
+  "outputs": [
+    {
+      "asset": "sources/emblem-restored.png",
+      "references": ["sources/client-emblem.jpeg", "sources/client-quill.jpeg"],
+      "prompt": "Precise restoration of the low resolution law firm emblem. Preserve the open diamond outline, matching justice scales at both corners, open book across the bottom and the supplied long three-ribbon quill in the center. Forest green #143E31 on genuinely transparent background. Optical symmetry, crisp smooth edges, professional geometry and clearance. No text, extra symbols, gradients, shadows, mockups, metallic effects or background. A single isolated complete emblem."
+    },
+    {
+      "asset": "sources/quill-restored.png",
+      "references": ["sources/client-quill.jpeg"],
+      "prompt": "Precise restoration, not a redesign, of the supplied standalone quill. Preserve the three flowing elongated ribbons, negative spaces, tapered tips and overall silhouette. Flat solid forest green #143E31, crisp smooth professional logo edges and genuinely transparent background. No text, frame, shadows, gradients, metallic effects or extra objects."
+    }
+  ],
+  "production": "The restored silhouettes were converted to outlined SVG paths, recolored into five identity variants and exported as transparent PNGs. Arabic lettering reuses existing outlined artwork with increased size and weight."
+}

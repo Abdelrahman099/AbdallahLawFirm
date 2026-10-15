@@ -1,5 +1,4 @@
 import { Logo } from "@/components/brand/Logo";
-import { CTA } from "@/components/shared/ConsultationCTA";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -17,6 +16,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { services } from "@/data/services";
+import { serviceGroups } from "@/data/serviceGroups";
+import { office } from "@/config/office";
 import { MapPin, Menu, X } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { NavLink } from "react-router-dom";
@@ -87,12 +88,23 @@ export function MobileNavigation({
               <AccordionTrigger>الخدمات القانونية</AccordionTrigger>
               <AccordionContent>
                 <div className="mobile-services-links">
-                  {services.map((service) => (
-                    <SheetClose asChild key={service.slug}>
-                      <NavLink to={`/services/${service.slug}`}>
-                        <span>{service.title}</span>
-                      </NavLink>
-                    </SheetClose>
+                  {serviceGroups.map((group) => (
+                    <div className="mobile-service-group" key={group.id}>
+                      <h3>{group.title}</h3>
+                      {group.slugs.map((slug) => (
+                        <SheetClose asChild key={slug}>
+                          <NavLink to={`/services/${slug}`}>
+                            <span>
+                              {
+                                services.find(
+                                  (service) => service.slug === slug,
+                                )!.title
+                              }
+                            </span>
+                          </NavLink>
+                        </SheetClose>
+                      ))}
+                    </div>
                   ))}
                   <SheetClose asChild>
                     <NavLink to="/services" className="mobile-services-all">
@@ -117,9 +129,9 @@ export function MobileNavigation({
           </div>
         </nav>
         <div className="mobile-navigation-action">
-          <SheetClose asChild>
-            <CTA />
-          </SheetClose>
+          <a className="text-link" href={`mailto:${office.email}`} dir="ltr">
+            {office.email}
+          </a>
           <p>
             <MapPin aria-hidden="true" />
             بالمكتب أو عن بُعد · الاستشارة الأولى مجانية

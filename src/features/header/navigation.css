@@ -63,7 +63,7 @@
 }
 .services-menu-body {
   display: grid;
-  grid-template-columns: 0.85fr 1fr 1fr;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 28px;
 }
 .services-menu-photo {
@@ -96,8 +96,9 @@
   line-height: 1.65;
 }
 .services-menu-group h3 {
-  font-size: 12px;
-  color: var(--muted);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--forest);
   padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
@@ -152,7 +153,16 @@
 .mobile-navigation-title {
   font-size: 29px;
   line-height: 1.4;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--forest);
+}
+.mobile-service-group {
+  margin-block: 16px 24px;
+}
+.mobile-service-group h3 {
+  font-size: 16px;
+  font-weight: 600;
+  padding-block: 12px;
   color: var(--forest);
 }
 .mobile-navigation-photo {

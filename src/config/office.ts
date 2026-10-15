@@ -8,7 +8,9 @@ export const office = {
   address:
     "جدة، حي البغدادية، شارع الأمانة، مقابل المحكمة العمالية، برج المستقبل",
   phone: String(env.VITE_PHONE || "").replace(/[^\d+]/g, ""),
-  email: String(env.VITE_EMAIL || ""),
+  email: String(env.VITE_EMAIL || "at.sh.14360@gmail.com"),
+  introduction:
+    "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية، تأسس عام 2015. يقدم خدماته للشركات والمستثمرين والأفراد في التأسيس والعقود والتقاضي، من فهم الموضوع إلى تحديد الخطوة القانونية المناسبة.",
   mapUrl: /^https:\/\//.test(env.VITE_MAP_URL || "")
     ? String(env.VITE_MAP_URL)
     : "",

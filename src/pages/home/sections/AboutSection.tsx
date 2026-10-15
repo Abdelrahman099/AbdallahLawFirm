@@ -18,7 +18,7 @@ export function AboutSection() {
         <div className="home-office-story">
           <div>
             <p>
-              مكتب عبد الله الشهري للمشورة والتمثيل القانوني. نفهم موضوعك، ونوضح
+              مكتب عبد الله الشهري للمحاماة والاستشارات القانونية. نفهم موضوعك، ونوضح
               نطاق الخدمة قبل الاتفاق على العمل.
             </p>
             <dl className="home-office-facts">

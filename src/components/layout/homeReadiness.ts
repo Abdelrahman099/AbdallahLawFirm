@@ -18,10 +18,14 @@ export function waitForHomeReady(signal: AbortSignal) {
       if (!home) return;
       decoding = true;
       const image = home.querySelector("img");
-      const photo = image
-        ? image.decode().catch(() => undefined)
-        : Promise.resolve();
-      void Promise.all([document.fonts.ready, photo]).then(finish);
+      const images = [
+        ...document.querySelectorAll<HTMLImageElement>(".site-header img"),
+        ...(image ? [image] : []),
+      ];
+      const visuals = images.map((asset) =>
+        asset.decode().catch(() => undefined),
+      );
+      void Promise.all([document.fonts.ready, ...visuals]).then(finish);
     }
     signal.addEventListener("abort", finish, { once: true });
     if (signal.aborted) {

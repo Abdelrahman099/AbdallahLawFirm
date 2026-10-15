@@ -8,7 +8,7 @@ export function ProcessSection() {
       aria-labelledby="journey-heading"
     >
       <div className="home-journey-heading">
-        <p className="eyebrow">حجز الاستشارة</p>
+        <p className="eyebrow">طريقة العمل</p>
         <h2 id="journey-heading">ماذا يحدث بعد طلبك؟</h2>
       </div>
       <div className="home-journey-image">
@@ -27,8 +27,8 @@ export function ProcessSection() {
             </div>
           ))}
         </div>
-        <Link to="/consultation" className="text-link">
-          ابدأ طلب الاستشارة
+        <Link to="/approach" className="text-link">
+          كيف نعمل معك
         </Link>
       </div>
     </section>

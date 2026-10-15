@@ -1,0 +1,170 @@
+.firm-hero {
+  background: var(--ivory);
+  padding-block: 64px 80px;
+  border-bottom: 1px solid var(--line);
+}
+.firm-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(36px, 6vw, 100px);
+}
+.firm-hero-copy {
+  min-width: 0;
+  padding-block: 20px;
+}
+.firm-hero-kicker {
+  font-size: 17px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.firm-hero h2#office-heading {
+  font-weight: 600;
+  font-size: clamp(44px, 4.7vw, 68px);
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+.firm-hero-descriptor {
+  font-size: clamp(18px, 1.9vw, 26px);
+  font-weight: 600;
+  margin-top: 0;
+}
+.firm-hero-about {
+  border-top: 1px solid var(--bronze);
+  padding-top: 26px;
+  margin-top: 34px;
+}
+.firm-hero-about h2 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.firm-hero-about .hero-description {
+  max-width: 520px;
+  font-size: 16px;
+  line-height: 2;
+  color: var(--muted);
+}
+.firm-hero-about .text-link {
+  font-size: 14px;
+  margin-top: 14px;
+}
+.firm-hero-services {
+  margin-top: 24px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.firm-hero-visual {
+  margin: 0;
+  aspect-ratio: 1;
+  overflow: hidden;
+  background: var(--deep);
+  position: relative;
+  isolation: isolate;
+  touch-action: pan-y;
+}
+.firm-hero-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.firm-slider-stage,
+.firm-slide {
+  position: absolute;
+  inset: 0;
+}
+.firm-slider-caption {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 28px 24px 16px;
+  background: linear-gradient(transparent, #0b241bf5);
+  color: var(--ivory);
+}
+.firm-slider-caption > span {
+  font-size: 14px;
+  font-weight: 500;
+}
+.firm-slider-controls {
+  display: flex;
+  flex-shrink: 0;
+}
+.firm-slider-controls button {
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  color: inherit;
+}
+.firm-slider-controls button span {
+  display: block;
+  width: 7px;
+  height: 7px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.firm-slider-controls button[aria-pressed="true"] span {
+  background: currentColor;
+  transform: scale(1.3);
+}
+.firm-slider-controls button:hover {
+  background: color-mix(in srgb, var(--ivory) 10%, transparent);
+}
+.firm-slider-controls button:focus-visible {
+  outline: 2px solid var(--ivory);
+  outline-offset: -4px;
+}
+@media (max-width: 370px) {
+  .firm-slider-caption {
+    padding-inline: 16px;
+  }
+  .firm-slider-caption > span {
+    font-size: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .firm-hero {
+    padding-block: 32px 48px;
+  }
+  .firm-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .firm-hero-copy {
+    padding: 0;
+  }
+  .firm-hero-kicker {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .firm-hero h2#office-heading {
+    font-size: clamp(33px, 9.1vw, 48px);
+  }
+  .firm-hero-descriptor {
+    font-size: clamp(15px, 4.5vw, 20px);
+  }
+  .firm-hero-about {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+  .firm-hero-about .hero-description {
+    font-size: 15px;
+    line-height: 1.95;
+  }
+  .firm-hero-services {
+    margin-top: 12px;
+  }
+  .firm-hero-visual {
+    aspect-ratio: 1.15;
+  }
+}

@@ -6,7 +6,6 @@ import { Link, NavLink, useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { useHeaderTheme } from "@/features/header/useHeaderTheme";
 import { useHeaderScroll } from "@/features/header/useHeaderScroll";
-import { useHeroChoice, defaultHeroId } from "@/features/hero/selection";
 import { navigation } from "@/features/header/navigation";
 import { ServicesDropdown } from "@/features/header/ServicesDropdown";
 import { MobileNavigation } from "@/features/header/MobileNavigation";
@@ -14,8 +13,6 @@ export function Header() {
   const theme = useHeaderTheme();
   const [open, setOpen] = useState(false);
   const location = useLocation();
-  const heroId = useHeroChoice();
-  const overlay = location.pathname === "/" && heroId === defaultHeroId;
   const reduced = useReducedMotion();
   const { scrolled, hidden } = useHeaderScroll(location.pathname);
   useEffect(() => {
@@ -26,14 +23,8 @@ export function Header() {
       initial={false}
       animate={{ boxShadow: scrolled ? "0 8px 30px #0b241b0d" : "0 0 0 #0000" }}
       transition={{ duration: reduced ? 0 : 0.3 }}
-      className={`site-header premium-header header-theme-${theme} ${overlay ? "header-overlay" : ""} ${scrolled ? "header-scrolled" : ""} ${hidden ? "header-mobile-hidden" : ""} ${open ? "header-menu-open" : ""}`}
+      className={`site-header premium-header header-theme-${theme} ${scrolled ? "header-scrolled" : ""} ${hidden ? "header-mobile-hidden" : ""} ${open ? "header-menu-open" : ""}`}
     >
-      <div className="header-topbar">
-        <div className="header-topline site-container">
-          <span>مكتب المحامي عبد الله الشهري</span>
-          <span>جدة · المملكة العربية السعودية</span>
-        </div>
-      </div>
       <div className="site-container header-main">
         <Link to="/" aria-label="الرئيسية" className="header-identity">
           <span className="hidden lg:block">

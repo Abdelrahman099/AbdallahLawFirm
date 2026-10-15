@@ -8,7 +8,7 @@ export const headerThemes = [
   {
     id: "forest",
     name: "هيدر أخضر بالكامل",
-    note: "الشكل الرئيسي المعتمد: هيدر أخضر وشريط أخضر غامق، مع الشعار الفاتح وزر عاجي.",
+    note: "الشكل الرئيسي: هيدر أخضر بلا شريط علوي، مع الشعار وزر الاستشارة بالبيج.",
   },
   {
     id: "minimal",
@@ -18,7 +18,7 @@ export const headerThemes = [
 ] as const;
 export type HeaderTheme = (typeof headerThemes)[number]["id"];
 export const defaultHeaderTheme: HeaderTheme = "forest";
-export const headerStorageKey = "shehri-header-approved-v2";
+export const headerStorageKey = "shehri-header-approved-v3";
 export function useHeaderTheme() {
   const [theme, setTheme] = useState<HeaderTheme>(defaultHeaderTheme);
   useEffect(() => {

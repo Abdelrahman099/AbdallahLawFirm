@@ -4,6 +4,8 @@ declare global {
   }
 }
 
+export const homeIntroReplayEvent = "shehri-home-intro-replay";
+
 export function releaseIntroStartupCover() {
   clearTimeout(window.shehriIntroBootTimer);
   document.documentElement.classList.remove(
@@ -45,7 +47,13 @@ export function installIntroStartupGate() {
       )
         return;
       const url = new URL(link.href, location.href);
-      if (url.origin === location.origin && url.pathname === "/") show();
+      if (url.origin === location.origin && url.pathname === "/") {
+        show();
+        // A same-page link may keep the current route mounted.
+        if (location.pathname === "/") {
+          window.dispatchEvent(new Event(homeIntroReplayEvent));
+        }
+      }
     },
     { capture: true },
   );

@@ -17,8 +17,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(#f7f3eb06 1px, transparent 1px),
-      linear-gradient(90deg, #f7f3eb06 1px, transparent 1px);
+      linear-gradient(#e9ddc706 1px, transparent 1px),
+      linear-gradient(90deg, #e9ddc706 1px, transparent 1px);
     background-size: 40px 40px;
     mask-image: linear-gradient(black, transparent);
   }
@@ -50,7 +50,7 @@
   }
   .court-columns i {
     width: 18px;
-    background: linear-gradient(90deg, #f7f3eb09, #f7f3eb03 35%, #0000000d);
+    background: linear-gradient(90deg, #e9ddc709, #e9ddc703 35%, #0000000d);
     border-inline: 1px solid #b4875330;
     border-radius: 4px 4px 0 0;
     position: relative;

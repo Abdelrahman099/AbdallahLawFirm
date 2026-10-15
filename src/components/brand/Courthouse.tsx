@@ -16,7 +16,7 @@ export function Courthouse({ small = false }: { small?: boolean }) {
         <i />
       </div>
       <div className="court-emblem">
-        <img src="/brand/mark-reverse.svg" alt="" width="240" height="220" />
+        <img src="/brand/v4/mark-beige.svg" alt="" width="240" height="204" />
       </div>
       <div className="court-floor">
         <i />

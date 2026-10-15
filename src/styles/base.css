@@ -19,16 +19,8 @@
   }
   :root {
     font-family: Plex, Tahoma, sans-serif;
-    color: #143e31;
-    background: #f7f3eb;
-    --forest: #143e31;
-    --deep: #0b241b;
-    --ivory: #f7f3eb;
-    --bronze: #b48753;
-    --ink: #171d1a;
-    --muted: #5d6761;
-    --line: #d9ddd3;
-    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    color: var(--foreground);
+    background: var(--background);
     font-synthesis: none;
   }
   * {
@@ -82,7 +74,7 @@
   h1,
   h2,
   h3 {
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.35;
   }
   h1 {

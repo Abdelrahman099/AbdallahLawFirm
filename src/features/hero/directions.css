@@ -15,11 +15,11 @@
   }
   .hero-display em {
     font-style: normal;
-    color: #886239;
+    color: var(--bronze-text);
   }
   .direction-eyebrow {
     font-size: 12px;
-    color: #5d6761;
+    color: var(--muted);
     margin-bottom: 25px;
     display: flex;
     align-items: center;
@@ -40,7 +40,7 @@
   }
   .direction-note {
     font-size: 11px;
-    color: #5d6761;
+    color: var(--muted);
     margin-top: 23px;
   }
   .direction-photo {
@@ -57,7 +57,7 @@
   .direction-cinematic {
     height: 690px;
     background: #0b241b;
-    color: #f7f3eb;
+    color: #e9ddc7;
     isolation: isolate;
     overflow: hidden;
   }
@@ -99,7 +99,7 @@
     color: #e1e5da;
   }
   .direction-cinematic .text-link {
-    color: #f7f3eb;
+    color: #e9ddc7;
   }
   .cinematic-bottom {
     position: absolute;
@@ -108,7 +108,7 @@
     right: 0;
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #f7f3eb55;
+    border-top: 1px solid #e9ddc755;
     padding-top: 17px;
     font-size: 11px;
     color: #e1e5da;
@@ -151,7 +151,7 @@
   .model-fallback svg {
     width: 210px;
     height: 210px;
-    color: #886239;
+    color: var(--bronze-text);
   }
   .model-fallback.is-hidden {
     opacity: 0;
@@ -174,7 +174,7 @@
     font:
       10px Georgia,
       serif;
-    color: #5d6761;
+    color: var(--muted);
   }
   .object-footer {
     position: absolute;
@@ -182,7 +182,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 10px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .direction-baseline {
     display: flex;
@@ -191,7 +191,7 @@
     margin-top: 35px;
     padding-block: 22px;
     font-size: 11px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .direction-editorial {
     padding-block: 35px 60px;
@@ -224,7 +224,7 @@
     justify-content: space-between;
     font-size: 10px;
     margin-top: 14px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .direction-panorama {
     padding-block: 50px 55px;
@@ -246,7 +246,7 @@
   .panorama-title p {
     font-size: 12px;
     margin-bottom: 18px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .direction-panorama figure {
     height: 360px;
@@ -288,7 +288,7 @@
     height: 48%;
     left: 0;
     bottom: 0;
-    border: 12px solid #f7f3eb;
+    border: 12px solid #e9ddc7;
   }
   .offset-label {
     position: absolute;
@@ -318,7 +318,7 @@
   }
   .direction-statement {
     background: #143e31;
-    color: #f7f3eb;
+    color: #e9ddc7;
     padding-block: 36px 50px;
   }
   .statement-top {
@@ -327,7 +327,7 @@
     font-size: 11px;
     color: #d9dfd3;
     padding-bottom: 25px;
-    border-bottom: 1px solid #f7f3eb44;
+    border-bottom: 1px solid #e9ddc744;
   }
   .direction-statement .hero-display {
     font-size: clamp(66px, 8vw, 114px);
@@ -338,7 +338,7 @@
     color: #d5b487;
   }
   .statement-bottom {
-    border-top: 1px solid #f7f3eb44;
+    border-top: 1px solid #e9ddc744;
     padding-top: 26px;
     display: flex;
     align-items: center;
@@ -388,7 +388,7 @@
   }
   .orbit-tag {
     font-size: 12px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .orbit-content {
     display: grid;
@@ -417,7 +417,7 @@
     font:
       10px Georgia,
       serif;
-    color: #5d6761;
+    color: var(--muted);
   }
   .orbit-bottom {
     display: flex;
@@ -425,7 +425,7 @@
     border-top: 1px solid #ccd4c7;
     padding-top: 22px;
     font-size: 11px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .direction-practice {
     padding-block: 55px;
@@ -449,7 +449,7 @@
   .practice-bottom > span {
     align-self: center;
     font-size: 12px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .practice-bottom a {
     display: flex;
@@ -462,7 +462,7 @@
   }
   .practice-bottom small {
     font-size: 10px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .practice-bottom a:hover {
     background: #e9ecdf;

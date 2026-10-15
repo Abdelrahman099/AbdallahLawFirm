@@ -1,0 +1,15 @@
+{
+  "responsiveWidths": [
+    320,
+    390,
+    768,
+    1024,
+    1440
+  ],
+  "servicePages": 14,
+  "slider": "manual dots and keyboard verified",
+  "serviceGroups": 3,
+  "officialEmail": true,
+  "accessibility": "zero WCAG AA violations",
+  "runtimeErrors": []
+}

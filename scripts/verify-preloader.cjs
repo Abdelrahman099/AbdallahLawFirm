@@ -61,6 +61,11 @@ const fs = require("node:fs");
         .locator("main h1")
         .evaluate((e) => e === document.activeElement),
     );
+    assert(await page.locator(".site-header.header-theme-forest").isVisible());
+    if (width === 1440)
+      await page.screenshot({
+        path: "output/qa/preloader/approved-green-header.png",
+      });
     await page.unroute(/\/assets\/index-[^/]+\.js/);
     await page.reload();
     await intro.waitFor();
@@ -82,36 +87,56 @@ const fs = require("node:fs");
     await page.keyboard.press("Escape");
     await intro.waitFor({ state: "hidden" });
     await page.waitForFunction(() => !document.querySelector("main").inert);
-    await page.locator(".home-office-story a").click();
+    await page.locator(".firm-hero-about a").click();
     await page.waitForURL("**/about");
     await page.locator(".home-page").waitFor({ state: "hidden" });
     assert.equal(await page.locator(".preloader").count(), 0);
-    await page
-      .locator(".site-header")
-      .getByRole("link", { name: "الرئيسية", exact: true })
-      .click();
+    await page.locator(".header-identity").click();
     await page.waitForURL(base + "/");
     await intro.waitFor();
     await intro.getByRole("button", { name: "تخطي الافتتاحية" }).click();
     await intro.waitFor({ state: "hidden" });
-    await page
-      .locator(".site-header")
-      .getByRole("link", { name: "الرئيسية", exact: true })
-      .click();
+    await page.locator(".header-identity").click();
     await intro.waitFor();
     await page.goBack();
+    await page.waitForURL("**/about");
+    await page.locator(".home-page").waitFor({ state: "hidden" });
+    assert.equal(await page.locator(".preloader").count(), 0);
+    await page.goForward();
     await intro.waitFor();
     await page.keyboard.press("Escape");
     await intro.waitFor({ state: "hidden" });
     assert(!(await page.locator("main").evaluate((e) => e.inert)));
     await context.close();
   }
+  const navigationContext = await browser.newContext();
+  const navigationPage = await navigationContext.newPage();
+  navigationPage.setDefaultTimeout(15000);
+  await navigationPage.goto(base + "/about");
+  await navigationPage.route(/\/assets\/HomePage-[^/]+\.js/, async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    await route.continue();
+  });
+  await navigationPage.locator(".header-identity").click();
+  await navigationPage
+    .locator(".startup-preloader")
+    .waitFor({ state: "visible" });
+  assert.equal(
+    await navigationPage
+      .locator("#root")
+      .evaluate((e) => getComputedStyle(e).visibility),
+    "hidden",
+    "return home is covered while its route chunk loads",
+  );
+  await navigationPage.locator(".preloader").waitFor({ state: "visible" });
+  await navigationPage.locator(".preloader").waitFor({ state: "hidden" });
+  await navigationContext.close();
   const slow = await browser.newContext({
     viewport: { width: 390, height: 844 },
   });
   const page = await slow.newPage();
   page.setDefaultTimeout(15000);
-  await page.route("**/images/brand-company-v2*.webp", async (route) => {
+  await page.route("**/images/brand-justice-v1*.webp", async (route) => {
     await new Promise((resolve) => setTimeout(resolve, 4500));
     await route.continue();
   });

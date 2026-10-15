@@ -9,7 +9,7 @@ export function FolioIntro() {
       transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
     >
       <div className="intro-folio-content">
-        <img src="/brand/mark-primary.svg" alt="" />
+        <img src="/brand/v4/mark-primary.svg" alt="" />
         <BrandCaption />
         <span>المسألة · الخيارات · الخطوة التالية</span>
       </div>

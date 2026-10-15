@@ -50,6 +50,7 @@ for (const route of [...routes, "/design-lab", "/404"]) {
       },
       ...(office.siteUrl ? { url: office.siteUrl } : {}),
       ...(office.phone ? { telephone: office.phone } : {}),
+      ...(office.email ? { email: office.email } : {}),
     };
     html = html.replace(
       "</head>",

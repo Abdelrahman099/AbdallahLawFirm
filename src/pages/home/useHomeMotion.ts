@@ -31,6 +31,27 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
             ".home-section-heading > div, .home-journey-heading, .home-faq-grid > div:first-child",
           )
           .forEach((element) => reveal(element, { opacity: 0, y: 30 }));
+        page
+          .querySelectorAll<HTMLElement>(".service-group-card")
+          .forEach((element) =>
+            reveal(element, { opacity: 0, y: 28, duration: 0.65 }),
+          );
+        const heroImage = page.querySelector<HTMLElement>(".firm-slider-stage");
+        if (heroImage)
+          gsap.fromTo(
+            heroImage,
+            { scale: 1.08 },
+            {
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+              trigger: ".opening-hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: 0.7,
+              },
+            },
+          );
 
         const office = page.querySelector<HTMLElement>(".home-office-heading");
         if (office) {

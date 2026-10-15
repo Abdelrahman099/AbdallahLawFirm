@@ -1,11 +1,9 @@
-import { CTA, Logo } from "@/components/Brand";
-import { office, services } from "@/data/site";
-import { Link, useLocation } from "react-router-dom";
-import { useConsultationBarVisibility } from "./useConsultationBarVisibility";
+import { Logo } from "@/components/Brand";
+import { office } from "@/data/site";
+import { serviceGroups } from "@/data/serviceGroups";
+import { Link } from "react-router-dom";
 
 export function Footer() {
-  const location = useLocation();
-  const showConsultation = useConsultationBarVisibility(location.pathname);
   return (
     <>
       <footer className="site-footer">
@@ -15,8 +13,8 @@ export function Footer() {
               <Logo inverse />
             </Link>
             <p>
-              مشورة وتمثيل قانوني للشركات والمستثمرين والأفراد. نبدأ بفهم
-              احتياجك، ونتعامل معه بوضوح وعناية.
+              مكتب عبد الله الشهري للمحاماة والاستشارات القانونية. خدمات قانونية
+              للشركات والمستثمرين والأفراد.
             </p>
             <span>جدة · المملكة العربية السعودية</span>
           </div>
@@ -27,13 +25,12 @@ export function Footer() {
             <Link to="/services">الخدمات القانونية</Link>
             <Link to="/insights">إرشادات قبل الاستشارة</Link>
             <Link to="/faq">الأسئلة الشائعة</Link>
-            <Link to="/consultation">احجز استشارة</Link>
           </div>
           <div>
             <h2>مجالات العمل</h2>
-            {services.slice(0, 4).map((s) => (
-              <Link key={s.slug} to={"/services/" + s.slug}>
-                {s.title}
+            {serviceGroups.map((group) => (
+              <Link key={group.id} to={`/services?group=${group.id}`}>
+                {group.title}
               </Link>
             ))}
           </div>
@@ -71,12 +68,6 @@ export function Footer() {
           </div>
         </div>
       </footer>
-      {location.pathname !== "/consultation" && showConsultation && (
-        <div className="mobile-consult">
-          <span>ابدأ بخطوة واضحة</span>
-          <CTA />
-        </div>
-      )}
     </>
   );
 }

@@ -37,7 +37,7 @@ export function SealIntro() {
           />
         </svg>
         <motion.img
-          src="/brand/mark-reverse.svg"
+          src="/brand/v4/mark-beige.svg"
           alt=""
           initial={{ scale: 2.4, rotate: -25, opacity: 0 }}
           animate={{ scale: [2.4, 0.88, 1], rotate: [-25, 4, 0], opacity: 1 }}

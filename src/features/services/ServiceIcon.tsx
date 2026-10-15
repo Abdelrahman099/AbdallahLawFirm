@@ -20,5 +20,5 @@ const icons = {
 };
 export function ServiceIcon({ name }: { name: string }) {
   const Icon = icons[name as keyof typeof icons] || Scale;
-  return <Icon size={28} strokeWidth={1.2} aria-hidden="true" />;
+  return <Icon size={28} strokeWidth={2} aria-hidden="true" />;
 }

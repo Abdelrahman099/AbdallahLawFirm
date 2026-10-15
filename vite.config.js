@@ -34,5 +34,5 @@ export default defineConfig({
   resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
   optimizeDeps: { entries: ["index.html"] },
   build: { sourcemap: false },
-  server: { port: 5173, strictPort: true },
+  server: { port: 5000, strictPort: true },
 });

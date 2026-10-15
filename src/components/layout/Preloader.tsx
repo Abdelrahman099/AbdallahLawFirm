@@ -10,17 +10,25 @@ import {
   useState,
 } from "react";
 import { waitForHomeReady } from "./homeReadiness";
-import { releaseIntroStartupCover } from "./introStartupGate";
+import {
+  homeIntroReplayEvent,
+  releaseIntroStartupCover,
+} from "./introStartupGate";
 
 export function Preloader() {
   const location = useLocation();
   const [restore, setRestore] = useState(0);
   useEffect(() => {
+    const requestReplay = () => setRestore((value) => value + 1);
     const replay = (event: PageTransitionEvent) => {
-      if (event.persisted) setRestore((value) => value + 1);
+      if (event.persisted) requestReplay();
     };
     window.addEventListener("pageshow", replay);
-    return () => window.removeEventListener("pageshow", replay);
+    window.addEventListener(homeIntroReplayEvent, requestReplay);
+    return () => {
+      window.removeEventListener("pageshow", replay);
+      window.removeEventListener(homeIntroReplayEvent, requestReplay);
+    };
   }, []);
   return location.pathname === "/" ? (
     <HomeIntro key={`${location.key}-${restore}`} />

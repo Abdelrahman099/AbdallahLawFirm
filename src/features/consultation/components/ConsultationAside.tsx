@@ -3,7 +3,7 @@ import { CalendarDays, LockKeyhole } from "lucide-react";
 export function ConsultationAside() {
   return (
     <aside className="space-y-6 bg-muted p-7 lg:sticky lg:top-6">
-      <img src="/brand/mark-primary.svg" alt="" width="72" height="66" />
+      <img src="/brand/v4/mark-primary.svg" alt="" width="72" height="61" />
       <p className="text-xs text-muted-foreground">خطوة أولى، بوضوح</p>
       <h2 className="text-[29px] leading-relaxed">
         الموضوع يهمك.

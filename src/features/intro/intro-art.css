@@ -8,12 +8,12 @@
     position: relative;
     overflow: hidden;
     background: #0b241b;
-    color: #f7f3eb;
+    color: #e9ddc7;
     text-align: center;
   }
   .intro-artwork-points,
   .intro-artwork-folio {
-    background: #f7f3eb;
+    background: #e9ddc7;
     color: #143e31;
   }
   .intro-artwork-type {
@@ -80,7 +80,7 @@
   }
   .intro-type-curtains i {
     display: block;
-    background: #f7f3eb;
+    background: #e9ddc7;
     transform-origin: left;
   }
   .intro-points i {
@@ -98,7 +98,7 @@
   }
   .intro-manifesto {
     font-size: 12px;
-    color: #5d6761;
+    color: var(--muted);
     margin-top: 28px;
     word-spacing: 9px;
   }
@@ -128,7 +128,7 @@
   .intro-folio-content span {
     font-size: 10px;
     margin-top: 8px;
-    color: #5d6761;
+    color: var(--muted);
   }
   .folio-leaf {
     position: absolute;
@@ -139,7 +139,7 @@
     backface-visibility: hidden;
     display: grid;
     place-items: center;
-    color: #f7f3eb;
+    color: #e9ddc7;
     z-index: 2;
     border: 1px solid #b4875333;
   }

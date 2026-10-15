@@ -8,5 +8,13 @@
   "masterSymbol": "logos/mark-primary.svg",
   "scope": "الشعار v3 ونسخه اللونية المعروضة؛ المرجع لتطبيقات الهوية التالية",
   "previousApplicationsUpdated": true,
-  "guideUpdated": "2026-10-12"
+  "guideUpdated": "2026-10-12",
+  "currentApplicationRevision": {
+    "version": "v4",
+    "status": "client-requested-refinement",
+    "requestedOn": "2026-10-15",
+    "masterLogo": "v4/logos/horizontal-primary.svg",
+    "masterSymbol": "v4/logos/mark-primary.svg",
+    "guide": "v4/identity-guide.pdf"
+  }
 }

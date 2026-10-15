@@ -2,12 +2,13 @@
   "color": {
     "forest": "#143E31",
     "deepForest": "#0B241B",
-    "ivory": "#F7F3EB",
+    "ivory": "#E9DDC7",
     "bronze": "#B48753",
     "ink": "#171D1A",
-    "muted": "#5D6761",
+    "muted": "#526058",
     "white": "#FFFFFF",
-    "bronzeText": "#886239"
+    "bronzeText": "#765431",
+    "beige": "#E9DDC7"
   },
   "font": {
     "family": "IBM Plex Sans Arabic",

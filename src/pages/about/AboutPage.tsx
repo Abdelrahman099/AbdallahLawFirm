@@ -1,6 +1,5 @@
 import {
   Arrow,
-  CTA,
   ConsultationBand,
   PageIntro,
   SectionIntro,
@@ -19,7 +18,7 @@ export function About() {
       />
       <section className="site-container about-detail">
         <div className="founder-placeholder" data-reveal>
-          <img src="/brand/mark-primary.svg" alt="" width="240" height="220" />
+          <img src="/brand/v4/mark-primary.svg" alt="" width="240" height="204" />
           <h2>{office.name}</h2>
           <p>المحامي المؤسس</p>
           <span className="placeholder-label">
@@ -44,7 +43,6 @@ export function About() {
             نسترشد بأمانة المشورة، وموضوعية التعامل، وأخلاق مهنة المحاماة،
             والاهتمام بسرية معلومات العملاء.
           </p>
-          <CTA />
         </div>
       </section>
       <section className="section site-container">

@@ -87,7 +87,6 @@ export function ServiceDetail() {
             ))}
           </ul>
           <p>ملخص عام يكفي للبداية؛ لا ترسل معلومات حساسة أو مستندات هنا.</p>
-          <CTA to={"/consultation?service=" + service.slug} />
         </aside>
       </section>
       {related.length > 0 && (
