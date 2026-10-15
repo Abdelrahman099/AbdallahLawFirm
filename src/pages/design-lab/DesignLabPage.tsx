@@ -18,6 +18,7 @@ import { HeroPreviewContext } from "@/features/hero/HeroCopy";
 import "@/features/hero/directions.css";
 import { HeaderOptions } from "@/features/header/HeaderOptions";
 import { HeroPresentationLab } from "@/features/hero/slider/HeroPresentationLab";
+import { ServicesFilterLab } from "@/features/services/directory/ServicesFilterLab";
 import { useClientReady } from "@/lib/useClientReady";
 
 export default function DesignLabPage() {
@@ -28,7 +29,7 @@ export default function DesignLabPage() {
   const queryTab = ready ? params.get("tab") : null;
   const selectedTab =
     tabOverride ||
-    (["slider", "intro", "header"].includes(queryTab || "")
+    (["slider", "intro", "header", "filters"].includes(queryTab || "")
       ? queryTab!
       : "heroes");
   const Hero = hero.component;
@@ -87,6 +88,9 @@ export default function DesignLabPage() {
             </TabsTrigger>
             <TabsTrigger value="header" className="px-6">
               Header · 3
+            </TabsTrigger>
+            <TabsTrigger value="filters" className="px-6">
+              فلتر الخدمات · 5
             </TabsTrigger>
           </TabsList>
         </div>
@@ -188,6 +192,9 @@ export default function DesignLabPage() {
         </TabsContent>
         <TabsContent value="header">
           <HeaderOptions />
+        </TabsContent>
+        <TabsContent value="filters" className="pb-12">
+          <ServicesFilterLab />
         </TabsContent>
       </Tabs>
       <Sheet open={open} onOpenChange={setOpen}>
