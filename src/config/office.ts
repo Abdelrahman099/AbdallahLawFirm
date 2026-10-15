@@ -11,6 +11,8 @@ export const office = {
   email: String(env.VITE_EMAIL || "at.sh.14360@gmail.com"),
   introduction:
     "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية، تأسس عام 2015. يقدم خدماته للشركات والمستثمرين والأفراد في التأسيس والعقود والتقاضي، من فهم الموضوع إلى تحديد الخطوة القانونية المناسبة.",
+  // Map pin on Amana Street, Al-Baghdadiyah. Replace with the exact tower pin.
+  location: { lat: 21.50673, lng: 39.17345 },
   mapUrl: /^https:\/\//.test(env.VITE_MAP_URL || "")
     ? String(env.VITE_MAP_URL)
     : "",
