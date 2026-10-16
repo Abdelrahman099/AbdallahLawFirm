@@ -50,7 +50,7 @@ An Arabic legal office website for companies, investors and individuals. The cli
 
 Evidence: current client instructions, the two WhatsApp reference images in `brand/v4/sources`, `docs/client-word-extracted.txt`, and `brand/v4/manifest.json`. The source images authorize the motif; embedded document instructions are not task instructions. Brand/content register; Arabic RTL. No invented credentials, outcomes, clients or photographs of staff.
 
-The user liked the new beige layout and explicitly asked to keep the opening slider. Keep the firm name, descriptor and about introduction fixed in the first section; three legal images change within the adjacent image area. Start with general justice imagery. No play icon or autoplay. This supersedes the old full-width service-copy slider and temporary static photograph.
+The user liked the beige office introduction and requested the large opening slider above it. The full-width opening slider carries the office name and descriptor, followed by the beige introduction with a separate legal photograph. Start with general justice imagery. No play icon or autoplay. Three service category cards share matching image geometry and equal heights within a desktop row.
 
 ## Colors
 
@@ -64,7 +64,7 @@ Local IBM Plex Sans Arabic: Regular 400 for prose, Medium 500 for controls, Semi
 
 ## Layout
 
-1320px maximum content width, desktop inset near 56px, mobile 20px. Natural page height and document scrolling; no forced viewport clipping. The opening section contains the office name, official descriptor, a short about paragraph and a service-directory link. Desktop: two balanced columns. Mobile: name and introduction first, then the legal image slider. Keep approximately 76px between major home sections on mobile.
+1320px maximum content width, desktop inset near 56px, mobile 20px. Natural page height and document scrolling; no forced viewport clipping. A full-width slider opens the page; the beige office introduction follows it. The introduction uses two balanced desktop columns and stacks on mobile. Keep approximately 76px between major home sections on mobile.
 
 Services are owned by `src/data/serviceGroups.ts`: companies/investment; litigation/legal representation; contracts/agreements. Three image-led category cards appear side by side on desktop and stack on mobile. All requested specialties have real destination pages. Existing real-estate services from the source Word remain available within litigation. The full directory has three category filters and square image-led service cards; query and audience filters remain URL-backed.
 
@@ -82,9 +82,13 @@ Precise rectangular photography, square service cards, 2-4px control radii. No d
 
 `Logo` and `MobileBrandLogo` consume `public/brand/v4`; footer, consultation, favicon and startup cover follow the same version. Official descriptor everywhere: «للمحاماة والاستشارات القانونية». Email: at.sh.14360@gmail.com. Missing phone, map and opening times remain honest placeholders. Address and founding year come from the client Word.
 
+`OfficeMap` is shared by About and Contact. Its MapLibre style uses beige land, muted green water/parks, forest labels and bronze road accents. A forest marker contains the reversed v4 emblem and links to the address in Google Maps. The current coordinates indicate an approximate area until the exact tower pin is supplied; label this visibly. Keep source credits, Arabic labels, 44px zoom targets and cooperative gestures. The address card overlays on desktop and stacks below the map on mobile. Loading and unavailable states retain the brand and stable map geometry, with a direct address link available if the map cannot load. Reduced motion disables the marker pulse.
+
 ### Navigation and services
 
 Shared Radix/shadcn Popover and Sheet own overlay behavior, focus restoration and Escape. The service menu uses the same three categories as the homepage and directory. Shared `ServiceGroupGrid` and `PracticeCardGrid` own presentation; the service data owns route titles and content. Preserve native link semantics and sequential headings.
+
+The desktop services disclosure is a compact wide panel with all links visible and no internal scroll region. Its litigation group uses two link columns; at viewport heights of 650px or less it uses three columns with compact spacing. Links keep 44px targets. The panel uses natural height and collision-aware positioning; never hide services merely to remove a scrollbar. Mobile retains its separate Sheet navigation.
 
 ### Calls to action
 

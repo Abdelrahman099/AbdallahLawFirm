@@ -5,6 +5,7 @@ import {
 } from "@/components/ui/popover";
 import { services } from "@/data/services";
 import { serviceGroups } from "@/data/serviceGroups";
+import { ServiceIcon } from "@/features/services/ServiceIcon";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -27,16 +28,13 @@ export function ServicesDropdown() {
       </PopoverTrigger>
       <PopoverContent
         className="services-popover"
-        sideOffset={24}
-        collisionPadding={24}
+        sideOffset={12}
+        collisionPadding={16}
         aria-label="خدمات المكتب"
         dir="rtl"
       >
         <div className="services-menu-heading">
-          <div>
-            <span>الخدمات القانونية</span>
-            <h2>ابدأ من موضوعك.</h2>
-          </div>
+          <h2>الخدمات القانونية</h2>
           <Link to="/services" onClick={() => setOpen(false)}>
             استعرض كل الخدمات
           </Link>
@@ -47,21 +45,38 @@ export function ServicesDropdown() {
               key={group.title}
               aria-label={group.title}
               className="services-menu-group"
+              data-group={group.id}
             >
-              <h3>{group.title}</h3>
-              {group.slugs
-                .map((slug) =>
-                  services.find((service) => service.slug === slug)!,
-                )
-                .map((service) => (
-                  <Link
-                    key={service.slug}
-                    to={`/services/${service.slug}`}
-                    onClick={() => setOpen(false)}
-                  >
-                    <span>{service.title}</span>
-                  </Link>
-                ))}
+              <h3>
+                <ServiceIcon name={group.icon} />
+                <Link
+                  to={`/services?group=${group.id}`}
+                  onClick={() => setOpen(false)}
+                >
+                  {group.title}
+                </Link>
+              </h3>
+              <ul className="services-menu-links">
+                {group.slugs
+                  .map((slug) =>
+                    services.find((service) => service.slug === slug)!,
+                  )
+                  .map((service) => (
+                    <li key={service.slug}>
+                      <Link
+                        to={`/services/${service.slug}`}
+                        aria-current={
+                          location.pathname === `/services/${service.slug}`
+                            ? "page"
+                            : undefined
+                        }
+                        onClick={() => setOpen(false)}
+                      >
+                        <span>{service.title}</span>
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
             </nav>
           ))}
         </div>

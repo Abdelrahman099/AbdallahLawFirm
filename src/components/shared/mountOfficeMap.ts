@@ -11,9 +11,14 @@ function ensureRtlText() {
     });
 }
 
-function officeMarker(name: string) {
-  const el = document.createElement("div");
+function officeMarker(name: string, href: string) {
+  const el = document.createElement("a");
   el.className = "office-map-marker";
+  el.href = href;
+  el.target = "_blank";
+  el.rel = "noreferrer";
+  el.setAttribute("role", "link");
+  el.setAttribute("aria-label", `افتح عنوان ${name} في خرائط Google`);
   el.innerHTML = `
     <span class="office-map-pulse" aria-hidden="true"></span>
     <span class="office-map-pin">
@@ -26,7 +31,15 @@ function officeMarker(name: string) {
 
 export function mountOfficeMap(
   container: HTMLElement,
-  options: { lng: number; lat: number; name: string; insetRight?: number },
+  options: {
+    lng: number;
+    lat: number;
+    name: string;
+    href: string;
+    insetRight?: number;
+    onReady: () => void;
+    onUnavailable: () => void;
+  },
 ) {
   ensureRtlText();
   const center: [number, number] = [options.lng, options.lat];
@@ -52,6 +65,11 @@ export function mountOfficeMap(
       "NavigationControl.ZoomOut": "تصغير",
     },
   });
+  let loaded = false;
+  map.on("error", (event) => {
+    if (!loaded && "sourceId" in event && event.sourceId === "omt")
+      options.onUnavailable();
+  });
   map.touchZoomRotate.disableRotation();
   // Keep the pin clear of the address card that overlays the map.
   if (options.insetRight)
@@ -65,13 +83,15 @@ export function mountOfficeMap(
     "bottom-left",
   );
   // Credits stay one tap away instead of covering the map on load.
-  map.once("load", () =>
+  map.once("load", () => {
+    loaded = true;
     container
       .querySelector(".maplibregl-compact-show")
-      ?.classList.remove("maplibregl-compact-show"),
-  );
+      ?.classList.remove("maplibregl-compact-show");
+    options.onReady();
+  });
   new maplibregl.Marker({
-    element: officeMarker(options.name),
+    element: officeMarker(options.name, options.href),
     anchor: "bottom",
   })
     .setLngLat(center)

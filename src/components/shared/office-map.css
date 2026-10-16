@@ -17,6 +17,32 @@
   .office-map-canvas {
     filter: none;
   }
+  .office-map-status {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+    text-align: center;
+    color: var(--forest);
+    background: var(--ivory);
+  }
+  .office-map-status p {
+    font-size: 14px;
+  }
+  .office-map-approximate {
+    position: absolute;
+    top: 12px;
+    inset-inline-start: 12px;
+    padding: 5px 9px;
+    background: var(--ivory);
+    color: var(--muted);
+    font-size: 12px;
+    pointer-events: none;
+  }
   .office-map-card {
     position: absolute;
     bottom: 24px;
@@ -53,8 +79,9 @@
       flex-direction: column;
     }
     .office-map-frame {
-      position: static;
-      height: 300px;
+      position: relative;
+      flex: none;
+      height: 340px;
     }
     .office-map-card {
       position: static;
@@ -71,17 +98,15 @@
     .office-map-card p {
       font-size: 14px;
     }
-    .office-map-frame {
-      height: 340px;
-    }
   }
 }
 
 /* Outside the layer: MapLibre ships unlayered CSS that would win otherwise. */
-.office-map-gl {
+.office-map .office-map-gl {
   width: 100%;
   height: 100%;
   background: #ede3cf;
+  font-family: Plex, Tahoma, sans-serif;
 }
 .office-map-gl .maplibregl-canvas:focus-visible {
   outline: 2px solid var(--forest);
@@ -93,7 +118,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  pointer-events: none;
+  pointer-events: auto;
+  color: var(--forest);
+  text-decoration: none;
+  cursor: pointer;
+}
+.office-map-marker:focus-visible .office-map-pin {
+  outline: 3px solid var(--forest);
+  outline-offset: 5px;
+}
+.office-map-marker:hover .office-map-label {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 .office-map-pin {
   position: relative;
@@ -160,8 +196,8 @@
   box-shadow: 0 0 0 1px var(--line);
 }
 .office-map .maplibregl-ctrl-group button {
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
 }
 .office-map .maplibregl-ctrl-group button + button {
   border-top-color: var(--line);

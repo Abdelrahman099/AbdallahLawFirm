@@ -3,7 +3,6 @@ import { office } from "@/config/office";
 import "./office-map.css";
 
 const place = "برج المستقبل، شارع الأمانة، حي البغدادية، جدة";
-const embedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(place)}&z=16&hl=ar&output=embed`;
 export const officeMapLink =
   office.mapUrl ||
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
@@ -30,10 +29,20 @@ export function OfficeMap({ children }: { children?: ReactNode }) {
     }
     let cleanup: (() => void) | undefined;
     let cancelled = false;
+    let timeout: ReturnType<typeof setTimeout> | undefined;
+    const fallback = () => {
+      if (cancelled) return;
+      cancelled = true;
+      clearTimeout(timeout);
+      cleanup?.();
+      cleanup = undefined;
+      setState("fallback");
+    };
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting) return;
         observer.disconnect();
+        timeout = setTimeout(fallback, 15000);
         import("./mountOfficeMap")
           .then(({ mountOfficeMap }) => {
             if (cancelled) return;
@@ -43,17 +52,24 @@ export function OfficeMap({ children }: { children?: ReactNode }) {
             cleanup = mountOfficeMap(el, {
               ...office.location,
               name: "مكتب عبد الله الشهري",
+              href: officeMapLink,
+              onUnavailable: fallback,
               insetRight: overlay ? card.current!.offsetWidth + 24 : 0,
+              onReady: () => {
+                if (cancelled) return;
+                clearTimeout(timeout);
+                setState("ready");
+              },
             });
-            setState("ready");
           })
-          .catch(() => setState("fallback"));
+          .catch(fallback);
       },
       { rootMargin: "300px" },
     );
     observer.observe(el);
     return () => {
       cancelled = true;
+      clearTimeout(timeout);
       observer.disconnect();
       cleanup?.();
     };
@@ -61,23 +77,42 @@ export function OfficeMap({ children }: { children?: ReactNode }) {
 
   return (
     <div className="office-map" data-map-state={state} data-reveal>
-      {state === "fallback" ? (
-        <iframe
-          className="office-map-frame"
-          src={embedUrl}
-          title="موقع المكتب على خرائط Google"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
-      ) : (
-        <div
-          className="office-map-frame office-map-canvas"
-          role="region"
-          aria-label="خريطة موقع المكتب"
-        >
-          <div ref={canvas} className="office-map-gl" />
-        </div>
-      )}
+      <div
+        className="office-map-frame office-map-canvas"
+        role="region"
+        aria-label="خريطة موقع المكتب"
+        aria-busy={state === "idle"}
+      >
+        {state !== "fallback" && <div ref={canvas} className="office-map-gl" />}
+        {state !== "ready" && (
+          <div className="office-map-status">
+            <img
+              src="/brand/v4/mark-primary.svg"
+              alt=""
+              width="80"
+              height="68"
+            />
+            <p role="status">
+              {state === "idle"
+                ? "جارٍ تحميل الخريطة"
+                : "الخريطة غير متاحة حاليًا"}
+            </p>
+            {state === "fallback" && (
+              <a
+                href={officeMapLink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-link"
+              >
+                افتح العنوان في خرائط Google
+              </a>
+            )}
+          </div>
+        )}
+        {state === "ready" && (
+          <span className="office-map-approximate">موقع تقريبي</span>
+        )}
+      </div>
       {children && (
         <div ref={card} className="office-map-card">
           {children}
