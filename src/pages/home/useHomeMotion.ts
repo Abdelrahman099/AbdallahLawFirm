@@ -28,7 +28,7 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
         };
         page
           .querySelectorAll<HTMLElement>(
-            ".home-section-heading > div, .home-journey-heading, .home-faq-grid > div:first-child",
+            ".home-section-heading > div, .home-faq-grid > div:first-child",
           )
           .forEach((element) => reveal(element, { opacity: 0, y: 30 }));
         page
@@ -45,7 +45,7 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
               scale: 1,
               ease: "none",
               scrollTrigger: {
-              trigger: ".opening-hero",
+                trigger: ".opening-hero",
                 start: "top top",
                 end: "bottom top",
                 scrub: 0.7,
@@ -112,36 +112,10 @@ export function useHomeMotion(root: RefObject<HTMLDivElement | null>) {
           );
         }
         page
-          .querySelectorAll<HTMLElement>(
-            ".home-office-story > div, .home-journey-step",
-          )
+          .querySelectorAll<HTMLElement>(".home-office-story > div")
           .forEach((element) => {
             reveal(element, { opacity: 0, y: 24, duration: 0.6 });
           });
-        const steps = page.querySelector<HTMLElement>(".home-journey-steps");
-        const line = page.querySelector<HTMLElement>(".home-journey-line");
-        if (steps && line)
-          gsap.from(line, {
-            scaleY: 0,
-            transformOrigin: "top",
-            ease: "none",
-            scrollTrigger: {
-              trigger: steps,
-              start: "top 75%",
-              end: "bottom 65%",
-              scrub: 0.25,
-            },
-          });
-        page
-          .querySelectorAll<HTMLElement>(".home-reading-grid a")
-          .forEach((element) => {
-            reveal(element, { y: 40, opacity: 0, duration: 0.7 });
-          });
-        const invitation = page.querySelector<HTMLElement>(
-          ".consultation-invitation-copy",
-        );
-        if (invitation) reveal(invitation, { opacity: 0, y: 28 });
-
         const showFocusedContent = (event: FocusEvent) => {
           if (
             !(event.target instanceof Element) ||

@@ -100,13 +100,13 @@ The third category is now «العقود والتوثيق» and contains exactly
 
 ### Calls to action
 
-One booking action in the header and one contextual closing invitation on the homepage. No sticky mobile booking bar, no hero booking repetition, no footer booking repetition. The process section links to the approach page. Detailed service pages have one contextual booking action in addition to the header; remove duplicate sidebar actions. The consultation form still requires its existing receiving endpoint; adding email does not activate form delivery.
+The homepage contains the hero, practice areas, office introduction and FAQ. The client removed the preparation articles, post-request process section and closing consultation banner in full. Remove their home-only styles and motion hooks rather than hiding them with CSS. Keep the header booking action available. No sticky mobile booking bar or footer booking repetition. Detailed service pages have one contextual booking action in addition to the header. The consultation form still requires its existing receiving endpoint; adding email does not activate form delivery.
 
 The preferred consultation date remains a native browser/OS date input: a preference, not confirmed availability. This revision does not change the existing consultation receiving or date behavior.
 
 ### Motion
 
-`LegalImageSlider` owns Motion opacity crossfades and manual dot, swipe and arrow-key selection. No autoplay or play control. GSAP owns the stable photo-stage scale on scroll and scoped home section entrances, journey line and preparation guides. Motion and GSAP do not animate the same node/property. Default SSR content remains visible without JavaScript; reduced-motion preferences disable movement and keep controls/content usable.
+`LegalImageSlider` owns Motion opacity crossfades and manual dot, swipe and arrow-key selection. No autoplay or play control. GSAP owns the stable photo-stage scale on scroll and the remaining service, office and FAQ entrances. Motion and GSAP do not animate the same node/property. Default SSR content remains visible without JavaScript; reduced-motion preferences disable movement and keep controls/content usable.
 
 The selected balance/sword intro still replays on home entry and refresh. It is an illustrative justice animation, not a replacement logo. An inline v4 brand cover precedes bundle loading; the page stays covered until the intro is mounted and primary assets are ready. Preserve skip, keyboard behavior, bounded recovery and inert background until exit completes.
 
@@ -115,7 +115,7 @@ The selected balance/sword intro still replays on home entry and refresh. It is 
 - Use the full mark for office identification and the quill as a supporting device.
 - Use forest on beige, beige on forest; never stretch, shadow or bevel the logo.
 - Keep all service links and category filters usable with keyboard and touch.
-- Keep the header and closing consultation action purposeful, without repeated booking blocks.
+- Keep booking actions purposeful, without repeated booking blocks on the homepage.
 - Do not let old design-lab preferences override the current approved page structure or v4 identity.
 - Do not invent results, licensing claims, phone numbers or service-delivery confirmations.
 
