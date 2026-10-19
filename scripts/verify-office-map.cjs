@@ -102,7 +102,7 @@ const { chromium } = require("playwright");
     );
     assert(
       await page
-        .getByRole("heading", { name: "برج المستقبل", exact: true })
+        .getByRole("heading", { name: "مقر المكتب في جدة", exact: true })
         .isVisible(),
     );
     await page

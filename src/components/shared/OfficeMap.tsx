@@ -2,10 +2,9 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { office } from "@/config/office";
 import "./office-map.css";
 
-const place = "برج المستقبل، شارع الأمانة، حي البغدادية، جدة";
 export const officeMapLink =
   office.mapUrl ||
-  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.address)}`;
 
 function supportsWebGL() {
   try {

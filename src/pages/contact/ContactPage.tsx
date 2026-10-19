@@ -77,8 +77,8 @@ export function Contact() {
           )}
         </div>
         <OfficeMap>
-          <h3>برج المستقبل</h3>
-          <p>جدة · حي البغدادية · مقابل المحكمة العمالية</p>
+          <h3>مقر المكتب في جدة</h3>
+          <p>{office.address}</p>
           <div className="office-map-links">
             <a
               className="text-link"

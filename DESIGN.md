@@ -84,6 +84,8 @@ Precise rectangular photography, square service cards, 2-4px control radii. No d
 
 `OfficeMap` is shared by Home, About and Contact. Its MapLibre style uses beige land, muted green water/parks, forest labels and bronze road accents. A forest marker contains the reversed v4 emblem and links to the office's Google Maps place. The client supplied the exact place on 2026-10-19: latitude 21.5076429, longitude 39.1754851, CID 619038489399812617. Use the place coordinates, not the camera coordinates in the URL. Keep source credits, Arabic labels, 44px zoom targets and cooperative gestures. The address card overlays on About/Contact desktop and stacks below the map on mobile. Home places the address underneath the map at every size, beside the form on desktop and after it on mobile. Loading and unavailable states retain the brand and stable map geometry, with a direct address link available if the map cannot load. Reduced motion disables the marker pulse.
 
+The address text is also sourced from that Google Maps listing: 8345 Isa Al-Adawi Street, Al-Baghdadiyah Al-Gharbiyah, Jeddah 22231, Saudi Arabia. All pages, map cards, footer, FAQ and structured data use `office.address`; do not retain the older Amana Street / Future Tower wording.
+
 ### Navigation and services
 
 Shared Radix/shadcn Popover and Sheet own overlay behavior, focus restoration and Escape. The service menu uses the same three categories as the homepage and directory. Shared `ServiceGroupGrid` and `PracticeCardGrid` own presentation; the service data owns route titles and content. Preserve native link semantics and sequential headings.

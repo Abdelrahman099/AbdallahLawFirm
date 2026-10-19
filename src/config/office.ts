@@ -6,7 +6,7 @@ export const office = {
   founded: "2015",
   city: "جدة",
   address:
-    "جدة، حي البغدادية، شارع الأمانة، مقابل المحكمة العمالية، برج المستقبل",
+    "8345 شارع عيسى العدوي، حي البغدادية الغربية، جدة 22231، المملكة العربية السعودية",
   phone: String(env.VITE_PHONE || "").replace(/[^\d+]/g, ""),
   email: String(env.VITE_EMAIL || "at.sh.14360@gmail.com"),
   introduction:
