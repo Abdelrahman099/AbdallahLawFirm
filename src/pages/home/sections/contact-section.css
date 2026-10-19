@@ -1,0 +1,134 @@
+.home-contact {
+  padding-block: 100px;
+  border-top: 1px solid var(--line);
+  background: var(--ivory);
+  scroll-margin-top: 120px;
+}
+.home-contact-heading {
+  margin-bottom: 40px;
+}
+.home-contact-heading h2 {
+  font-size: clamp(36px, 4vw, 58px);
+  line-height: 1.5;
+  margin: 12px 0;
+}
+.home-contact-heading > p:last-child {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+.home-contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+.home-contact-form {
+  min-width: 0;
+  padding: 32px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+.home-contact-form-heading {
+  margin-bottom: 28px;
+  font-size: 27px;
+  line-height: 1.6;
+  scroll-margin-top: 130px;
+}
+.home-contact-form-heading:focus-visible {
+  outline: 2px solid var(--forest);
+  outline-offset: 6px;
+}
+.home-contact-preferences {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.home-contact-preferences fieldset {
+  min-width: 0;
+}
+.home-contact-location {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.home-contact-location > .office-map {
+  min-height: 380px;
+  flex: 1;
+}
+.home-contact-address {
+  background: var(--forest);
+  color: var(--ivory);
+  padding: 28px;
+}
+.home-contact-address > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.home-contact-address h3 {
+  font-size: 21px;
+  font-weight: 600;
+}
+.home-contact-address address {
+  font-style: normal;
+  font-size: 14px;
+  line-height: 2;
+  margin-top: 12px;
+  max-width: 38ch;
+}
+.home-contact-email {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: fit-content;
+  min-height: 44px;
+  margin-block: 8px 16px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+.home-contact-email:hover span {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.home-contact-form .request-review h2 {
+  font-size: 23px;
+}
+@media (max-width: 1000px) {
+  .home-contact-form {
+    padding: 24px;
+  }
+  .home-contact-preferences {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+@media (max-width: 760px) {
+  .home-contact {
+    padding-block: 76px;
+  }
+  .home-contact-heading {
+    margin-bottom: 28px;
+  }
+  .home-contact-heading > p:last-child {
+    font-size: 14px;
+  }
+  .home-contact-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .home-contact-form {
+    padding: 24px 20px;
+  }
+  .home-contact-form-heading {
+    font-size: 25px;
+    margin-bottom: 24px;
+  }
+  .home-contact-location > .office-map {
+    min-height: 0;
+    flex: none;
+  }
+  .home-contact-address {
+    padding: 24px;
+  }
+}

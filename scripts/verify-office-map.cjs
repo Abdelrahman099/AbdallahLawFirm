@@ -32,14 +32,14 @@ const { chromium } = require("playwright");
       assert.equal(await pin.getAttribute("role"), "link");
       assert.match(
         await pin.getAttribute("href"),
-        /^https:\/\/www.google.com\/maps\//,
+        /^https:\/\/www.google.com\/maps\?cid=619038489399812617$/,
       );
       assert.equal(await pin.getAttribute("target"), "_blank");
       assert.equal(
         await pin.locator("img").getAttribute("src"),
         "/brand/v4/mark-beige.svg",
       );
-      assert(await map.getByText("موقع تقريبي", { exact: true }).isVisible());
+      assert(await map.getByText("موقع المكتب", { exact: true }).isVisible());
       await pin.focus();
       assert(await pin.evaluate((el) => el === document.activeElement));
       const geometry = await map.evaluate((el) => {

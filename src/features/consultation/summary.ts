@@ -11,12 +11,19 @@ export function consultationSummary(values: ConsultationValues) {
     `طلب استشارة — ${office.name}`,
     `الاسم: ${values.name}`,
     `الجوال: ${normalizePhone(values.phone)}`,
+    ...(values.email ? [`البريد الإلكتروني: ${values.email}`] : []),
     `الخدمة: ${serviceTitle(values.service)}`,
     `صفة العميل: ${values.audience === "business" ? "شركة / مستثمر" : "فرد"}`,
     `الطريقة المفضلة: ${values.method === "remote" ? "عن بُعد" : "بالمكتب"}`,
     ...(values.date ? [`تاريخ مفضّل: ${values.date}`] : []),
+    ...(values.summary ? [`ملخص الموضوع: ${values.summary}`] : []),
     "الموعد يُؤكد بعد التواصل مع المكتب.",
   ].join("\n");
+}
+export function consultationEmailUrl(values: ConsultationValues) {
+  if (!office.email) return "";
+  const subject = encodeURIComponent(`طلب استشارة — ${office.name}`);
+  return `mailto:${office.email}?subject=${subject}&body=${encodeURIComponent(consultationSummary(values))}`;
 }
 export function downloadSummary(values: ConsultationValues) {
   const url = URL.createObjectURL(

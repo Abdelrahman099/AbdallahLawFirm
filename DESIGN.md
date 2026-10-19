@@ -82,7 +82,7 @@ Precise rectangular photography, square service cards, 2-4px control radii. No d
 
 `Logo` and `MobileBrandLogo` consume `public/brand/v4`; footer, consultation, favicon and startup cover follow the same version. Official descriptor everywhere: «للمحاماة والاستشارات القانونية». Email: at.sh.14360@gmail.com. Missing phone, map and opening times remain honest placeholders. Address and founding year come from the client Word.
 
-`OfficeMap` is shared by About and Contact. Its MapLibre style uses beige land, muted green water/parks, forest labels and bronze road accents. A forest marker contains the reversed v4 emblem and links to the address in Google Maps. The current coordinates indicate an approximate area until the exact tower pin is supplied; label this visibly. Keep source credits, Arabic labels, 44px zoom targets and cooperative gestures. The address card overlays on desktop and stacks below the map on mobile. Loading and unavailable states retain the brand and stable map geometry, with a direct address link available if the map cannot load. Reduced motion disables the marker pulse.
+`OfficeMap` is shared by Home, About and Contact. Its MapLibre style uses beige land, muted green water/parks, forest labels and bronze road accents. A forest marker contains the reversed v4 emblem and links to the office's Google Maps place. The client supplied the exact place on 2026-10-19: latitude 21.5076429, longitude 39.1754851, CID 619038489399812617. Use the place coordinates, not the camera coordinates in the URL. Keep source credits, Arabic labels, 44px zoom targets and cooperative gestures. The address card overlays on About/Contact desktop and stacks below the map on mobile. Home places the address underneath the map at every size, beside the form on desktop and after it on mobile. Loading and unavailable states retain the brand and stable map geometry, with a direct address link available if the map cannot load. Reduced motion disables the marker pulse.
 
 ### Navigation and services
 
@@ -100,7 +100,9 @@ The third category is now «العقود والتوثيق» and contains exactly
 
 ### Calls to action
 
-The homepage contains the hero, practice areas, office introduction and FAQ. The client removed the preparation articles, post-request process section and closing consultation banner in full. Remove their home-only styles and motion hooks rather than hiding them with CSS. Keep the header booking action available. No sticky mobile booking bar or footer booking repetition. Detailed service pages have one contextual booking action in addition to the header. The consultation form still requires its existing receiving endpoint; adding email does not activate form delivery.
+The homepage contains the hero, practice areas, office introduction, FAQ and a functional contact section with the map and a compact consultation form. The client removed the preparation articles, post-request process section and generic closing consultation banner in full; these remain removed. Keep the header booking action available. No sticky mobile booking bar or footer booking repetition. Detailed service pages have one contextual booking action in addition to the header.
+
+`QuickConsultationForm` reuses the existing consultation schema, hook, review, transport and business Field owner. Audience and consultation method remain visible choices. Data remains editable before delivery. The receiving endpoint is not configured: review offers an encoded email draft addressed to the official office email. Opening a mail client is never reported as delivery or a confirmed booking. The existing API path still requires an acknowledged request ID before showing success. Email, WhatsApp, copied and downloaded summaries share one serializer that includes the client's optional email and topic.
 
 The preferred consultation date remains a native browser/OS date input: a preference, not confirmed availability. This revision does not change the existing consultation receiving or date behavior.
 
@@ -121,4 +123,4 @@ The selected balance/sword intro still replays on home entry and refresh. It is 
 
 ## Known Gaps
 
-The service-card reference screenshot was not included with the logo attachments. The three-category interpretation follows the written instruction and remains reviewable. Official phone, detailed map link, working hours and form receiving endpoint are still missing. The new email is used consistently across the site and identity files. Website changes are local until deployment is requested.
+The service-card reference screenshot was not included with the logo attachments. The three-category interpretation follows the written instruction and remains reviewable. Official phone, working hours and form receiving endpoint are still missing. The email and supplied exact map location are used consistently across the site. Production updates use the existing GitHub-to-Vercel deployment.

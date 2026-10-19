@@ -110,7 +110,7 @@ export function OfficeMap({ children }: { children?: ReactNode }) {
           </div>
         )}
         {state === "ready" && (
-          <span className="office-map-approximate">موقع تقريبي</span>
+          <span className="office-map-approximate">موقع المكتب</span>
         )}
       </div>
       {children && (

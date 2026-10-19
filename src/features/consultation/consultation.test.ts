@@ -6,6 +6,8 @@ import {
   validPreferredDate,
 } from "./schema";
 import { postConsultation } from "./api";
+import { consultationEmailUrl, consultationSummary } from "./summary";
+import { office } from "@/config/office";
 
 const valid = {
   ...defaultValues,
@@ -15,6 +17,25 @@ const valid = {
   consent: true,
 };
 afterEach(() => vi.unstubAllGlobals());
+describe("email draft fallback", () => {
+  it("encodes the office address and complete reviewed request without sending it", () => {
+    const request = {
+      ...valid,
+      email: "client@example.com",
+      summary: "عقد شركة & توثيق؟\nالسطر الثاني",
+    };
+    const draft = new URL(consultationEmailUrl(request));
+    expect(draft.protocol).toBe("mailto:");
+    expect(draft.pathname).toBe(office.email);
+    expect(draft.searchParams.get("body")).toBe(consultationSummary(request));
+    expect(draft.searchParams.get("body")).toContain("+966501234567");
+    expect(draft.searchParams.get("body")).toContain(request.summary);
+    expect(draft.searchParams.get("body")).toContain(request.email);
+    expect(draft.searchParams.get("subject")).toBe(
+      `طلب استشارة — ${office.name}`,
+    );
+  });
+});
 describe("consultation validation", () => {
   it("accepts Arabic digits and normalizes the phone for delivery", () => {
     expect(consultationSchema.safeParse(valid).success).toBe(true);

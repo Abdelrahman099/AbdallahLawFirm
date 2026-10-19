@@ -1,5 +1,16 @@
 import type { ReactNode } from "react";
 import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
+
+export function FieldGroup({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <div className={cn("flex flex-col gap-5", className)}>{children}</div>;
+}
 
 export function Field({
   id,
@@ -15,7 +26,7 @@ export function Field({
   children: ReactNode;
 }) {
   return (
-    <div className="space-y-2">
+    <div className="flex flex-col gap-2" data-invalid={!!error || undefined}>
       <Label htmlFor={id} className="text-sm font-medium leading-6">
         {label}
         {required ? (
