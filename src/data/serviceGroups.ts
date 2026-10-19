@@ -38,10 +38,15 @@ export const serviceGroups: ServiceGroup[] = [
   },
   {
     id: "agreements",
-    title: "العقود والاتفاقيات",
-    summary: "صياغة ومراجعة العقود وتوضيح الالتزامات.",
+    title: "العقود والتوثيق",
+    summary: "العقود، وتوثيق الوكالات، والإفراغ والخدمات العقارية.",
     image: "contractReview",
     icon: "file",
-    slugs: ["contracts", "company-contracts", "general-contracts"],
+    slugs: [
+      "commercial-contracts",
+      "general-contracts",
+      "powers-of-attorney",
+      "property-conveyancing",
+    ],
   },
 ];

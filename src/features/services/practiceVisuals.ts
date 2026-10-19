@@ -37,6 +37,9 @@ const visuals: Record<string, PracticeVisual> = {
   estates: brandVisual("family"),
   "company-contracts": brandVisual("contracts"),
   "general-contracts": brandVisual("contractReview"),
+  "commercial-contracts": brandVisual("contracts"),
+  "powers-of-attorney": brandVisual("preparation"),
+  "property-conveyancing": brandVisual("property"),
 };
 export const getPracticeVisual = (slug: string): PracticeVisual =>
   visuals[slug] || photos.contracts;

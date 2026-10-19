@@ -66,7 +66,7 @@ Local IBM Plex Sans Arabic: Regular 400 for prose, Medium 500 for controls, Semi
 
 1320px maximum content width, desktop inset near 56px, mobile 20px. Natural page height and document scrolling; no forced viewport clipping. A full-width slider opens the page; the beige office introduction follows it. The introduction uses two balanced desktop columns and stacks on mobile. Keep approximately 76px between major home sections on mobile.
 
-Services are owned by `src/data/serviceGroups.ts`: companies/investment; litigation/legal representation; contracts/agreements. Three image-led category cards appear side by side on desktop and stack on mobile. All requested specialties have real destination pages. Existing real-estate services from the source Word remain available within litigation. The full directory has three category filters and square image-led service cards; query and audience filters remain URL-backed.
+Services are owned by `src/data/serviceGroups.ts`: companies/investment; litigation/legal representation; contracts/notarization. Three image-led category cards appear side by side on desktop and stack on mobile. All requested specialties have real destination pages. Existing real-estate services from the source Word remain available within litigation. The full directory has three category filters and square image-led service cards; query and audience filters remain URL-backed.
 
 ## Elevation & Depth
 
@@ -88,7 +88,15 @@ Precise rectangular photography, square service cards, 2-4px control radii. No d
 
 Shared Radix/shadcn Popover and Sheet own overlay behavior, focus restoration and Escape. The service menu uses the same three categories as the homepage and directory. Shared `ServiceGroupGrid` and `PracticeCardGrid` own presentation; the service data owns route titles and content. Preserve native link semantics and sequential headings.
 
-The desktop services disclosure is a compact wide panel with all links visible and no internal scroll region. Its litigation group uses two link columns; at viewport heights of 650px or less it uses three columns with compact spacing. Links keep 44px targets. The panel uses natural height and collision-aware positioning; never hide services merely to remove a scrollbar. Mobile retains its separate Sheet navigation.
+The desktop services disclosure is a compact wide panel with all links visible and no internal scroll region. Its litigation group uses two link columns; at viewport heights of 650px or less it uses three columns with compact spacing. The contracts/notarization group uses two columns on those short viewports as well. Links keep 44px targets. The panel uses natural height and collision-aware positioning; never hide services merely to remove a scrollbar. Mobile retains its separate Sheet navigation.
+
+### Hero identity concepts — 2026-10-19
+
+The client requested five evolutions of the current photo-left/green-copy-right hero, plus five distinct creative concepts, with the approved emblem on the physical right. `src/features/hero/identity` owns these ten proposals and their shared lockup, service data, image crossfade, navigation and message components. The first family uses a signature, side spine, bronze frame, large emblem and service chapters. The second uses an editorial beige cover, three photographic service portals, a pointer-responsive dossier, a panoramic photo with signature band, and a live service index. The emblem's geometry and colors remain unchanged.
+
+The comparison lives at `/design-lab?tab=identity&concept=<id>`, supports URL-backed choices and a 390px container preview, and adapts to actual narrow viewports. Choosing “جرّبه على الرئيسية” saves only a browser-local preview through the existing hero selection owner. The existing public default remains `cinematic` until a design is chosen for everyone. GSAP owns entrance wrappers; Motion owns image/message transitions, dossier pointer depth and panorama scroll movement on different nodes. All essential content is visible without JavaScript, and reduced motion removes movement. Click and keyboard controls remain available for interactions inspired by [React Bits Tilted Card](https://reactbits.dev/components/tilted-card) and [Flowing Menu](https://reactbits.dev/components/flowing-menu). Identity placement is informed by the [JCP case study](https://www.jamesgood.co.uk/work/jcp-solicitors).
+
+The third category is now «العقود والتوثيق» and contains exactly «العقود التجارية»، «العقود العامة»، «توثيق الوكالات»، «الإفراغ والخدمات العقارية». Its stable group ID remains `agreements` to preserve existing links. New service routes have their own content and imagery mappings; older service URLs remain valid. The canonical group data drives home cards, desktop/mobile navigation, directory filters and new hero previews.
 
 ### Calls to action
 

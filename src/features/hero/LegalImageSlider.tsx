@@ -5,7 +5,7 @@ import { BrandImage, type BrandImageName } from "@/components/brand/BrandImage";
 const slides: { asset: BrandImageName; label: string }[] = [
   { asset: "justice", label: "التقاضي والتمثيل القانوني" },
   { asset: "company", label: "الشركات والاستثمار" },
-  { asset: "contractReview", label: "العقود والاتفاقيات" },
+  { asset: "contractReview", label: "العقود والتوثيق" },
 ];
 
 export function LegalImageSlider({ children }: { children?: ReactNode }) {

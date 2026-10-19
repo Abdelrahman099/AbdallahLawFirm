@@ -20,6 +20,7 @@ import { HeaderOptions } from "@/features/header/HeaderOptions";
 import { HeroPresentationLab } from "@/features/hero/slider/HeroPresentationLab";
 import { ServicesFilterLab } from "@/features/services/directory/ServicesFilterLab";
 import { useClientReady } from "@/lib/useClientReady";
+import { IdentityHeroLab } from "@/features/hero/identity/IdentityHeroLab";
 
 export default function DesignLabPage() {
   const [params, setParams] = useSearchParams();
@@ -29,9 +30,11 @@ export default function DesignLabPage() {
   const queryTab = ready ? params.get("tab") : null;
   const selectedTab =
     tabOverride ||
-    (["slider", "intro", "header", "filters"].includes(queryTab || "")
+    (["identity", "heroes", "slider", "intro", "header", "filters"].includes(
+      queryTab || "",
+    )
       ? queryTab!
-      : "heroes");
+      : "identity");
   const Hero = hero.component;
   const [intro, setIntro] = useState(getIntro("balance-onyx")),
     [open, setOpen] = useState(false),
@@ -62,11 +65,11 @@ export default function DesignLabPage() {
           مساحة مقارنة التصميم
         </p>
         <h1 className="text-3xl md:text-5xl" tabIndex={-1}>
-          ١٠ اتجاهات للـHero. ١٠ مشاهد للاتزان.
+          معرض تصميمات المكتب.
         </h1>
         <p className="mt-4 max-w-2xl text-sm text-muted-foreground">
-          اختر اتجاهًا لتشاهد حجمه وتفاعله الحقيقي. الاتجاهات ١ و٦ و٩ تحتوي على
-          Three.js. الصور المعمارية تصورية، وليست صورًا للمكتب.
+          قارن التكوينات بالحجم الحقيقي على اللابتوب والموبايل، وجرّب التفاعل
+          قبل اختيار التصميم.
         </p>
       </div>
       <Tabs
@@ -77,6 +80,9 @@ export default function DesignLabPage() {
       >
         <div className="site-container">
           <TabsList className="mb-5 h-auto min-h-12 max-w-full flex-wrap bg-secondary p-1">
+            <TabsTrigger value="identity" className="px-6">
+              الشعار والهيرو · ١٠ جديدة
+            </TabsTrigger>
             <TabsTrigger value="slider" className="px-6">
               مقارنة السلايدر · 2
             </TabsTrigger>
@@ -94,6 +100,9 @@ export default function DesignLabPage() {
             </TabsTrigger>
           </TabsList>
         </div>
+        <TabsContent value="identity">
+          <IdentityHeroLab />
+        </TabsContent>
         <TabsContent value="slider">
           <HeroPresentationLab />
         </TabsContent>

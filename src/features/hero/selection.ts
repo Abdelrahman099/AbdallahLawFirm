@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { isIdentityConcept } from "./identity/concepts";
 export const defaultHeroId = "cinematic";
 export const heroIds = [
   "scroll-3d",
@@ -18,7 +19,11 @@ export function useHeroChoice() {
     const update = () => {
       try {
         const saved = localStorage.getItem("shehri-hero");
-        setId(heroIds.some((id) => id === saved) ? saved! : defaultHeroId);
+        setId(
+          heroIds.some((id) => id === saved) || isIdentityConcept(saved)
+            ? saved!
+            : defaultHeroId,
+        );
       } catch {
         /* The default remains usable without storage. */
       }

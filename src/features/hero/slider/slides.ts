@@ -10,14 +10,14 @@ export const serviceSlides = [
     link: "/services/company-formation",
   },
   {
-    label: "العقود والاتفاقيات",
+    label: "العقود والتوثيق",
     title: "كل بند له أثر.",
     accent: "نعتني بالتفاصيل.",
-    description: "صياغة ومراجعة اتفاقياتك قبل التوقيع.",
+    description: "عقود واضحة، وتوثيق يعتني بتفاصيل تعاملاتك.",
     image: "/images/brand-contracts-v2.webp",
     alt: "عقد داخل ملف قانوني وقلم للمراجعة",
     cta: "استكشف خدمة العقود",
-    link: "/services/contracts",
+    link: "/services?group=agreements",
   },
   {
     label: "التقاضي والتمثيل القانوني",

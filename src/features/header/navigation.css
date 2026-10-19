@@ -139,7 +139,7 @@
     padding-bottom: 6px;
   }
   .services-menu-body {
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1.35fr;
     gap: 16px;
   }
   .services-menu-group + .services-menu-group {
@@ -147,6 +147,10 @@
   }
   .services-menu-group[data-group="litigation"] .services-menu-links {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 8px;
+  }
+  .services-menu-group[data-group="agreements"] .services-menu-links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 8px;
   }
   .services-menu-links {

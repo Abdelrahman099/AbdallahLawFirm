@@ -65,6 +65,12 @@ export function useServiceDirectory(source: FilterSource) {
     ? values.audience
     : "all";
   const group = serviceGroups.find((item) => item.id === values.group);
+  const orderedServices = group
+    ? group.slugs.flatMap((slug) => {
+        const service = services.find((item) => item.slug === slug);
+        return service ? [service] : [];
+      })
+    : services;
   const query = values.q;
   const inGroup = (service: Service, id = group?.id) =>
     !id || serviceGroups.find((g) => g.id === id)!.slugs.includes(service.slug);
@@ -81,7 +87,7 @@ export function useServiceDirectory(source: FilterSource) {
     group,
     query,
     total: services.length,
-    items: services.filter(
+    items: orderedServices.filter(
       (s) => forAudience(s, audience) && inGroup(s) && matchesQuery(s, query),
     ),
     groupCount: (id: string) => count(id === "all" ? undefined : id, audience),

@@ -38,7 +38,7 @@ const { default: AxeBuilder } = require("@axe-core/playwright");
       const panel = page.locator(".services-popover");
       await panel.waitFor();
       assert.equal(await panel.locator(".services-menu-group").count(), 3);
-      assert.equal(await panel.locator(".services-menu-links a").count(), 15);
+      assert.equal(await panel.locator(".services-menu-links a").count(), 16);
       const geometry = await panel.evaluate((element) => {
         const rect = element.getBoundingClientRect();
         const links = [...element.querySelectorAll("a")].map((link) => {
@@ -92,6 +92,9 @@ const { default: AxeBuilder } = require("@axe-core/playwright");
       }
       await page.keyboard.press("Escape");
       await panel.waitFor({ state: "hidden" });
+      await page.waitForFunction(() =>
+        document.activeElement?.matches(".desktop-services-trigger"),
+      );
       assert(
         await trigger.evaluate((element) => element === document.activeElement),
       );
