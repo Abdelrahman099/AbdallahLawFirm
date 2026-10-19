@@ -38,6 +38,7 @@ export function IdentityHero({
         stagger: 0.09,
         duration: 0.7,
         ease: "power3.out",
+        clearProps: "opacity,transform",
       });
     },
     { scope: host, dependencies: [concept.id, reduced], revertOnUpdate: true },
