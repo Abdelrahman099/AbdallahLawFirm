@@ -11,12 +11,12 @@ type Choreography = {
 
 export const logoChoreography: Record<LogoIntroId, Choreography> = {
   "logo-balance": {
-    angles: [-18, 14, -11, 8, -5, 2],
+    angles: [-18, 16, -14, 13, -11, 9],
     contact: 2.1,
-    lock: 0.2,
-    quillStart: 1.32,
-    quillFrom: -380,
-    captionAt: 2.4,
+    lock: 0.055,
+    quillStart: 1.68,
+    quillFrom: -620,
+    captionAt: 2.6,
   },
   "logo-ink": {
     angles: [12, -15, 11, -8, 4, -2],

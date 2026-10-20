@@ -34,7 +34,10 @@ export function LogoIntro({
             height="850"
           />
         )}
-        <LogoEmblem still={Boolean(staticScene)} />
+        <LogoEmblem
+          still={Boolean(staticScene)}
+          strike={variant === "logo-balance"}
+        />
       </div>
       <motion.div
         className="logo-caption"

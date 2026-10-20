@@ -118,6 +118,8 @@ The selected balance intro now uses the approved v4 emblem. Its frame/scales set
 
 Geometry comes from the approved SVG source. The quill's outer contour and its negative-space contour must remain one even-odd path: drawing them separately fills the cutout and incorrectly makes the quill look like a flame. After contact, the animation hands off to the original complete compound path, unchanged; static previews and reduced motion also use that original path directly. GSAP owns the SVG sequence; Motion owns the caption on separate elements. Gallery thumbnails are static, full-size previews replay on demand, and older explorations mount only when their archive is opened. Gallery selection applies only to the current browser.
 
+The primary «ريشة الاتزان» uses a sword-like vertical quill strike. A temporary warm gold point (`#E8BF55`, motion accent only) sits at the original quill-tip anchor, source coordinates 486,716. The quill accelerates into that point over 420ms; contact locks both pans in 55ms. One small gold impact ring/glow then fades, and a single 680ms highlight sweeps across a clip of the original emblem. The highlight starts after the balance has locked. All effects disappear before the final hold, leaving the approved mark unchanged; static and reduced-motion views omit them entirely. Other four choreography choices retain their existing movements.
+
 ## Do's and Don'ts
 
 - Use the full mark for office identification and the quill as a supporting device.

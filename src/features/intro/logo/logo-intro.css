@@ -35,6 +35,17 @@
   .logo-rest {
     opacity: 1;
   }
+  .logo-balance {
+    --logo-impact: #e8bf55;
+  }
+  .logo-quill-trail,
+  .logo-impact-point,
+  .logo-impact-ring,
+  .logo-impact-glow,
+  .logo-shine {
+    opacity: 0;
+    pointer-events: none;
+  }
   .logo-echo {
     position: absolute;
     inset: 0;

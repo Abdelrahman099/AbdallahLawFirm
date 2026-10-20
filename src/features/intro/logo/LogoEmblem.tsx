@@ -1,7 +1,14 @@
 import { useId } from "react";
 import { logoGeometry as shape } from "./geometry";
+import { LogoStrikeDefs, LogoStrikeEffects } from "./LogoStrikeEffects";
 
-export function LogoEmblem({ still = false }: { still?: boolean }) {
+export function LogoEmblem({
+  still = false,
+  strike = false,
+}: {
+  still?: boolean;
+  strike?: boolean;
+}) {
   const id = useId().replace(/:/g, "");
   const left = `${id}-left-pan`;
   const right = `${id}-right-pan`;
@@ -35,6 +42,7 @@ export function LogoEmblem({ still = false }: { still?: boolean }) {
             <rect x="-20" y="-30" width="1200" height="1050" fill="white" />
             <path d={`${leftRegion} ${rightRegion}`} fill="black" />
           </mask>
+          {strike && <LogoStrikeDefs id={id} />}
         </defs>
       )}
       {!still && (
@@ -64,6 +72,11 @@ export function LogoEmblem({ still = false }: { still?: boolean }) {
           <g className="logo-book">
             <path d={shape.book} />
           </g>
+          {strike && (
+            <g className="logo-quill-trail">
+              <path d={shape.quill} />
+            </g>
+          )}
           <g className="logo-quill">
             <path d={shape.quill} />
           </g>
@@ -79,6 +92,7 @@ export function LogoEmblem({ still = false }: { still?: boolean }) {
       <g className="logo-rest" transform={shape.transform} fillRule="evenodd">
         <path d={shape.outline} />
       </g>
+      {!still && strike && <LogoStrikeEffects id={id} />}
     </svg>
   );
 }

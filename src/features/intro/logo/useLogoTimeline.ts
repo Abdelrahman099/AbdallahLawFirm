@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import type { LogoIntroId } from "./variants";
 import { logoChoreography } from "./choreography";
+import { addStrikeTimeline } from "./addStrikeTimeline";
 
 gsap.registerPlugin(useGSAP);
 
@@ -150,7 +151,12 @@ export function useLogoTimeline(variant: LogoIntroId, still: boolean) {
             {
               attr: { transform: "translate(0 0)" },
               duration: profile.contact - profile.quillStart,
-              ease: variant === "logo-seal" ? "power3.in" : "power2.inOut",
+              ease:
+                variant === "logo-balance"
+                  ? "power4.in"
+                  : variant === "logo-seal"
+                    ? "power3.in"
+                    : "power2.inOut",
             },
             profile.quillStart,
           );
@@ -196,6 +202,13 @@ export function useLogoTimeline(variant: LogoIntroId, still: boolean) {
           profile.contact,
         );
       }
+      if (variant === "logo-balance")
+        addStrikeTimeline(
+          timeline,
+          profile.contact,
+          profile.quillStart,
+          profile.quillFrom,
+        );
       timeline
         .set(host, { attr: { "data-logo-phase": "contact" } }, profile.contact)
         .to(

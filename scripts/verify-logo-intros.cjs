@@ -7,13 +7,15 @@ const source = fs.readFileSync("brand/v4/logos/mark-primary.svg", "utf8");
 const outline = source.match(/<path[^>]*\sd="([^"]+)"/)[1];
 const transform = source.match(/<g transform="([^"]+)"/)[1];
 const base = process.env.TEST_URL || "http://127.0.0.1:4173";
-const ids = [
+const allIds = [
   "logo-balance",
   "logo-ink",
   "logo-assembly",
   "logo-book",
   "logo-seal",
 ];
+const ids = process.env.INTRO_ID ? [process.env.INTRO_ID] : allIds;
+assert(ids.every((id) => allIds.includes(id)));
 const output = "output/playwright/quill-balance";
 fs.mkdirSync(output, { recursive: true });
 
@@ -92,10 +94,33 @@ function positions(scene) {
           false,
           "the original internal quill cutout must remain open",
         );
+        if (id === "logo-balance") {
+          assert.equal(
+            await scene
+              .locator(".logo-impact-point")
+              .evaluate((el) => getComputedStyle(el).fill),
+            "rgb(232, 191, 85)",
+          );
+          assert.equal(
+            await scene
+              .locator(".logo-shine")
+              .evaluate((el) => getComputedStyle(el).opacity),
+            "0",
+          );
+          assert.equal(
+            await scene
+              .locator(".logo-impact-glow")
+              .evaluate((el) => getComputedStyle(el).opacity),
+            "0",
+          );
+        }
         await page.waitForFunction(
           (id) =>
-            document.querySelector(`[role="dialog"] [data-logo-intro="${id}"]`)
-              ?.dataset.logoPhase === "contact",
+            ["contact", "settled"].includes(
+              document.querySelector(
+                `[role="dialog"] [data-logo-intro="${id}"]`,
+              )?.dataset.logoPhase,
+            ),
           id,
         );
         assert.match(
@@ -103,6 +128,40 @@ function positions(scene) {
           /translate\(0 0\)/,
           "the quill lands before the balance locks",
         );
+        if (id === "logo-balance") {
+          const alignment = await scene.evaluate((el) => {
+            const tip = new DOMPoint(486, 716).matrixTransform(
+              el.querySelector(".logo-quill").getScreenCTM(),
+            );
+            const point = new DOMPoint(486, 716).matrixTransform(
+              el.querySelector(".logo-impact-point").getScreenCTM(),
+            );
+            return Math.hypot(tip.x - point.x, tip.y - point.y);
+          });
+          assert(alignment < 1, "the quill strikes the visible gold target");
+          await page.screenshot({
+            path: `${output}/${id}-${width}-impact.png`,
+          });
+          await page.waitForFunction(() => {
+            const scene = document.querySelector(
+              '[role="dialog"] [data-logo-intro="logo-balance"]',
+            );
+            const shine = scene.querySelector(".logo-shine");
+            const x = Number(
+              scene
+                .querySelector(".logo-shine-sweep")
+                .getAttribute("transform")
+                .match(/translate\(([-\d.]+)/)?.[1],
+            );
+            return (
+              scene.dataset.logoPhase === "settled" &&
+              getComputedStyle(shine).opacity === "1" &&
+              x > 300 &&
+              x < 800
+            );
+          });
+          await page.screenshot({ path: `${output}/${id}-${width}-shine.png` });
+        }
         await page.waitForFunction((id) => {
           const scene = document.querySelector(
             `[role="dialog"] [data-logo-intro="${id}"]`,
@@ -133,6 +192,20 @@ function positions(scene) {
             .evaluate((el) => getComputedStyle(el).opacity),
           "0",
         );
+        if (id === "logo-balance") {
+          assert.equal(
+            await scene
+              .locator(".logo-shine")
+              .evaluate((el) => getComputedStyle(el).opacity),
+            "0",
+          );
+          assert.equal(
+            await scene
+              .locator(".logo-impact-point")
+              .evaluate((el) => getComputedStyle(el).opacity),
+            "0",
+          );
+        }
         assert.equal(
           await scene
             .locator(".logo-rest path")
