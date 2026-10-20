@@ -4,6 +4,7 @@ import { LogoEmblem } from "./LogoEmblem";
 import { useLogoTimeline } from "./useLogoTimeline";
 import { logoIntroVariants, type LogoIntroId } from "./variants";
 import "./logo-intro.css";
+import { logoChoreography } from "./choreography";
 
 export function LogoIntro({
   variant,
@@ -21,6 +22,7 @@ export function LogoIntro({
       ref={root}
       className={`logo-scene ${variant}${light ? " logo-scene-light" : ""}`}
       data-logo-intro={variant}
+      data-logo-phase="rest"
     >
       <div className="logo-stage">
         {variant === "logo-seal" && (
@@ -32,14 +34,14 @@ export function LogoIntro({
             height="850"
           />
         )}
-        <LogoEmblem />
+        <LogoEmblem still={Boolean(staticScene)} />
       </div>
       <motion.div
         className="logo-caption"
         initial={staticScene ? false : { opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
-          delay: staticScene ? 0 : 1.85,
+          delay: staticScene ? 0 : logoChoreography[variant].captionAt,
           duration: staticScene ? 0 : 0.4,
         }}
       >
@@ -50,7 +52,7 @@ export function LogoIntro({
           initial={staticScene ? false : { scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{
-            delay: staticScene ? 0 : 2,
+            delay: staticScene ? 0 : logoChoreography[variant].captionAt + 0.1,
             duration: staticScene ? 0 : 0.4,
           }}
         />

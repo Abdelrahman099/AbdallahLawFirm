@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import type { LogoIntroId } from "./variants";
+import { logoChoreography } from "./choreography";
 
 gsap.registerPlugin(useGSAP);
 
@@ -14,142 +15,219 @@ export function useLogoTimeline(variant: LogoIntroId, still: boolean) {
         window.matchMedia("(prefers-reduced-motion: reduce)").matches
       )
         return;
+      const host = root.current;
+      if (!host) return;
+      const profile = logoChoreography[variant];
+      const settled = profile.contact + profile.lock;
       const timeline = gsap.timeline();
-      if (variant === "logo-balance") {
-        gsap.set(".logo-rig", { attr: { transform: "rotate(-9 575 475)" } });
-        gsap.set(".logo-quill", { y: -420, opacity: 0 });
+      const angleAt = (angle: number) => `rotate(${angle} 575 475)`;
+      const leftAt = (angle: number) => `rotate(${-angle} 110 475)`;
+      const rightAt = (angle: number) => `rotate(${-angle} 1040 475)`;
+      gsap.set(host, { attr: { "data-logo-phase": "swing" } });
+      gsap.set(".logo-rest", { opacity: 0 });
+      gsap.set(".logo-moving", { opacity: 1 });
+      gsap.set(".logo-rig", {
+        attr: { transform: angleAt(profile.angles[0]) },
+      });
+      gsap.set(".logo-pan-left", {
+        attr: { transform: leftAt(profile.angles[0]) },
+      });
+      gsap.set(".logo-pan-right", {
+        attr: { transform: rightAt(profile.angles[0]) },
+      });
+      gsap.set(".logo-quill", {
+        opacity: 0,
+        attr: { transform: `translate(0 ${profile.quillFrom})` },
+      });
+
+      const segment = profile.contact / (profile.angles.length - 1);
+      profile.angles.slice(1).forEach((angle, index) => {
+        const at = index * segment;
         timeline
-          .from(".logo-stage", { opacity: 0, duration: 0.25 })
           .to(
             ".logo-rig",
             {
-              attr: { transform: "rotate(6 575 475)" },
-              duration: 0.5,
+              attr: { transform: angleAt(angle) },
+              duration: segment,
               ease: "sine.inOut",
             },
-            0.12,
+            at,
           )
           .to(
-            ".logo-rig",
+            ".logo-pan-left",
             {
-              attr: { transform: "rotate(-4 575 475)" },
-              duration: 0.5,
+              attr: { transform: leftAt(angle) },
+              duration: segment,
               ease: "sine.inOut",
             },
-            0.62,
+            at,
           )
           .to(
-            ".logo-quill",
-            { y: 0, opacity: 1, duration: 0.72, ease: "power3.inOut" },
-            0.72,
-          )
-          .to(
-            ".logo-rig",
+            ".logo-pan-right",
             {
-              attr: { transform: "rotate(1.3 575 475)" },
-              duration: 0.24,
-              ease: "power2.out",
+              attr: { transform: rightAt(angle) },
+              duration: segment,
+              ease: "sine.inOut",
             },
-            1.42,
-          )
-          .to(
-            ".logo-rig",
-            {
-              attr: { transform: "rotate(0 575 475)" },
-              duration: 0.44,
-              ease: "sine.out",
-            },
-            1.66,
+            at,
           );
-      } else if (variant === "logo-ink") {
-        const paths =
-          root.current?.querySelectorAll<SVGPathElement>(".logo-emblem path");
-        paths?.forEach((path) => {
-          const length = path.getTotalLength();
-          gsap.set(path, {
-            fillOpacity: 0,
+      });
+
+      if (variant === "logo-ink") {
+        const frame = host.querySelector<SVGPathElement>(".logo-part-frame");
+        if (frame) {
+          const length = frame.getTotalLength();
+          gsap.set(frame, {
+            fillOpacity: 0.18,
             stroke: "currentColor",
-            strokeWidth: 2,
+            strokeWidth: 3,
             strokeDasharray: length,
             strokeDashoffset: length,
           });
-        });
-        timeline
-          .to(".logo-emblem path", {
-            strokeDashoffset: 0,
-            duration: 1.3,
-            stagger: 0.08,
-            ease: "power1.inOut",
-          })
-          .to(
-            ".logo-emblem path",
-            { fillOpacity: 1, strokeOpacity: 0, duration: 0.45 },
-            1.45,
-          );
-      } else if (variant === "logo-assembly") {
+          timeline
+            .to(
+              frame,
+              { strokeDashoffset: 0, duration: 1, ease: "power1.inOut" },
+              0,
+            )
+            .to(frame, { fillOpacity: 1, strokeOpacity: 0, duration: 0.35 }, 1);
+        }
+      }
+      if (variant === "logo-assembly") {
         timeline
           .from(
-            ".logo-part-frame",
-            { x: 120, opacity: 0, duration: 0.9, ease: "power3.out" },
-            0.1,
-          )
-          .from(
-            ".logo-part-foot",
-            { y: 110, opacity: 0, duration: 0.8, ease: "power3.out" },
-            0.2,
-          )
-          .from(
-            ".logo-book",
-            { x: -150, opacity: 0, duration: 0.85, ease: "power3.out" },
-            0.35,
-          )
-          .from(
-            ".logo-quill",
-            { y: -180, opacity: 0, duration: 0.9, ease: "power3.out" },
-            0.65,
-          );
-      } else if (variant === "logo-book") {
-        timeline
-          .from(
-            ".logo-book",
+            ".logo-pan-entry-left",
             {
-              scaleX: 0,
-              svgOrigin: "575 760",
-              duration: 0.8,
-              ease: "power2.inOut",
+              attr: { transform: "translate(-140 0)" },
+              opacity: 0,
+              duration: 0.65,
+              ease: "power2.out",
             },
             0,
           )
           .from(
-            ".logo-rig",
+            ".logo-pan-entry-right",
             {
-              scaleY: 0.12,
+              attr: { transform: "translate(140 0)" },
               opacity: 0,
-              svgOrigin: "575 760",
-              duration: 0.95,
-              ease: "power3.out",
+              duration: 0.65,
+              ease: "power2.out",
             },
-            0.5,
-          )
-          .from(
+            0.12,
+          );
+        gsap.set(".logo-quill", {
+          attr: { transform: "translate(95 -400) rotate(-18 575 475)" },
+        });
+        timeline
+          .to(
             ".logo-quill",
-            { y: 180, opacity: 0, duration: 0.8, ease: "power2.out" },
-            1.05,
+            {
+              opacity: 1,
+              attr: { transform: "translate(-20 -125) rotate(6 575 475)" },
+              duration: 0.62,
+              ease: "power2.inOut",
+            },
+            profile.quillStart,
+          )
+          .to(
+            ".logo-quill",
+            {
+              attr: { transform: "translate(0 0) rotate(0 575 475)" },
+              duration: profile.contact - profile.quillStart - 0.62,
+              ease: "power2.in",
+            },
+            profile.quillStart + 0.62,
           );
       } else {
         timeline
-          .from(
-            ".logo-stage",
-            { scale: 1.18, opacity: 0, duration: 0.65, ease: "power3.out" },
-            0.1,
+          .to(
+            ".logo-quill",
+            { opacity: 1, duration: 0.18 },
+            profile.quillStart - 0.18,
           )
-          .fromTo(
-            ".logo-echo",
-            { scale: 1, opacity: 0.32 },
-            { scale: 1.42, opacity: 0, duration: 0.7, ease: "power2.out" },
-            0.65,
+          .to(
+            ".logo-quill",
+            {
+              attr: { transform: "translate(0 0)" },
+              duration: profile.contact - profile.quillStart,
+              ease: variant === "logo-seal" ? "power3.in" : "power2.inOut",
+            },
+            profile.quillStart,
           );
       }
+      if (variant === "logo-book") {
+        timeline.fromTo(
+          ".logo-book",
+          {
+            attr: {
+              transform:
+                "translate(575 760) scale(0.05 1) translate(-575 -760)",
+            },
+          },
+          {
+            attr: {
+              transform: "translate(575 760) scale(1 1) translate(-575 -760)",
+            },
+            duration: 0.6,
+            ease: "power2.out",
+          },
+          0,
+        );
+      }
+      if (variant === "logo-book" || variant === "logo-seal") {
+        timeline
+          .fromTo(
+            ".logo-lock-line",
+            { opacity: 0, strokeDasharray: 130, strokeDashoffset: 130 },
+            { opacity: 1, strokeDashoffset: 0, duration: 0.16 },
+            profile.contact,
+          )
+          .to(
+            ".logo-lock-line",
+            { opacity: 0, duration: profile.lock },
+            profile.contact + 0.08,
+          );
+      }
+      if (variant === "logo-seal") {
+        timeline.fromTo(
+          ".logo-echo",
+          { scale: 1, opacity: 0.28 },
+          { scale: 1.35, opacity: 0, duration: 0.48, ease: "power2.out" },
+          profile.contact,
+        );
+      }
+      timeline
+        .set(host, { attr: { "data-logo-phase": "contact" } }, profile.contact)
+        .to(
+          ".logo-rig",
+          {
+            attr: { transform: angleAt(0) },
+            duration: profile.lock,
+            ease: "power2.out",
+          },
+          profile.contact,
+        )
+        .to(
+          ".logo-pan-left",
+          {
+            attr: { transform: leftAt(0) },
+            duration: profile.lock,
+            ease: "power2.out",
+          },
+          profile.contact,
+        )
+        .to(
+          ".logo-pan-right",
+          {
+            attr: { transform: rightAt(0) },
+            duration: profile.lock,
+            ease: "power2.out",
+          },
+          profile.contact,
+        )
+        .set(".logo-moving", { opacity: 0 }, settled)
+        .set(".logo-rest", { opacity: 1 }, settled)
+        .set(host, { attr: { "data-logo-phase": "settled" } }, settled);
     },
     { scope: root, dependencies: [variant, still], revertOnUpdate: true },
   );

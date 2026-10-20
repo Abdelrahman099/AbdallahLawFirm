@@ -9,9 +9,9 @@ if (!transform || !parts || parts.length !== 5) {
 
 export const logoGeometry = {
   transform,
+  outline: outline!,
   frame: parts[0],
-  quill: parts[1],
-  detail: parts[2],
+  quill: `${parts[1]} ${parts[2]}`,
   book: parts[3],
   foot: parts[4],
 };

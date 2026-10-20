@@ -28,6 +28,13 @@
     height: 100%;
     overflow: visible;
   }
+  .logo-moving,
+  .logo-lock-line {
+    opacity: 0;
+  }
+  .logo-rest {
+    opacity: 1;
+  }
   .logo-echo {
     position: absolute;
     inset: 0;
