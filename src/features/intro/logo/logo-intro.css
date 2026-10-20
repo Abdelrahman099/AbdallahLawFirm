@@ -1,0 +1,108 @@
+@layer components {
+  .logo-scene {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 26px;
+    padding: 28px;
+    background: var(--deep);
+    color: var(--ivory);
+    text-align: center;
+  }
+  .logo-scene-light {
+    background: var(--ivory);
+    color: var(--forest);
+  }
+  .logo-stage {
+    position: relative;
+    flex: none;
+    width: min(280px, 63vw, 39svh);
+    aspect-ratio: 1000 / 850;
+  }
+  .logo-emblem {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .logo-echo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .logo-caption {
+    position: relative;
+  }
+  .logo-caption .intro-caption h2 {
+    font-size: clamp(27px, 3.8vw, 38px);
+    font-weight: 600;
+  }
+  .logo-caption-rule {
+    display: block;
+    width: 42px;
+    height: 1px;
+    margin: 24px auto 0;
+    background: var(--bronze);
+  }
+  .logo-seal {
+    background: var(--forest);
+  }
+  .logo-seal .logo-stage {
+    width: min(250px, 58vw, 36svh);
+  }
+  .logo-book .logo-stage {
+    width: min(300px, 65vw, 40svh);
+  }
+  @media (min-width: 760px) and (min-height: 551px) {
+    .logo-ink {
+      flex-direction: row-reverse;
+      gap: 72px;
+    }
+    .logo-ink .logo-caption {
+      text-align: start;
+    }
+    .logo-ink .logo-caption-rule {
+      margin-inline: 0;
+    }
+  }
+  .intro-preview-tile .logo-scene {
+    gap: 10px;
+    padding: 24px;
+    flex-direction: column;
+  }
+  .intro-preview-tile .logo-stage {
+    width: 150px;
+  }
+  .intro-preview-tile .logo-caption {
+    text-align: center;
+  }
+  .intro-preview-tile .logo-caption .intro-caption h2 {
+    font-size: 23px;
+  }
+  .intro-preview-tile .logo-caption .intro-caption p {
+    font-size: 10px;
+  }
+  .intro-preview-tile .logo-caption-rule {
+    margin: 14px auto 0;
+    width: 30px;
+  }
+  @media (max-height: 550px) {
+    .logo-scene {
+      flex-direction: row;
+      gap: 25px;
+      padding: 20px;
+    }
+    .logo-scene .logo-stage {
+      width: min(200px, 36vw, 55svh);
+    }
+    .logo-caption .intro-caption h2 {
+      font-size: 25px;
+    }
+  }
+}

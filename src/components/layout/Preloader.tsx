@@ -37,7 +37,7 @@ export function Preloader() {
 
 function HomeIntro() {
   const reduced = useReducedMotion();
-  const [variant, setVariant] = useState(getIntro("balance-onyx"));
+  const [variant, setVariant] = useState(getIntro(null));
   const [visible, setVisible] = useState(true);
   const close = useCallback(() => setVisible(false), []);
   useLayoutEffect(() => {

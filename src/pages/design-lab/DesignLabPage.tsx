@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Play, Check, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,9 @@ import {
   SheetDescription,
   SheetClose,
 } from "@/components/ui/sheet";
-import { introVariants, getIntro } from "@/features/intro/variants";
+import { getIntro } from "@/features/intro/variants";
 import { IntroArtwork } from "@/features/intro/IntroArtwork";
+import { IntroGallery } from "@/features/intro/IntroGallery";
 import { heroDirections, getHero } from "@/features/hero/registry";
 import { HeroPreviewContext } from "@/features/hero/HeroCopy";
 import "@/features/hero/directions.css";
@@ -36,7 +37,8 @@ export default function DesignLabPage() {
       ? queryTab!
       : "identity");
   const Hero = hero.component;
-  const [intro, setIntro] = useState(getIntro("balance-onyx")),
+  const introTrigger = useRef<HTMLButtonElement | null>(null);
+  const [intro, setIntro] = useState(getIntro(null)),
     [open, setOpen] = useState(false),
     [run, setRun] = useState(0),
     [notice, setNotice] = useState("");
@@ -53,7 +55,9 @@ export default function DesignLabPage() {
     try {
       localStorage.setItem("shehri-intro", intro.id);
       sessionStorage.removeItem("shehri-intro-v2");
-      setNotice("تم اختيار «" + intro.name + "» للافتتاحية التالية.");
+      setNotice(
+        "تم اختيار «" + intro.name + "» للافتتاحية التالية في هذا المتصفح.",
+      );
     } catch {
       setNotice("تعذّر حفظ الاختيار في المتصفح.");
     }
@@ -90,7 +94,7 @@ export default function DesignLabPage() {
               Hero Sections · 10
             </TabsTrigger>
             <TabsTrigger value="intro" className="px-6">
-              Preloaders · 15
+              بريلودر الشعار · ٥
             </TabsTrigger>
             <TabsTrigger value="header" className="px-6">
               Header · 3
@@ -164,40 +168,15 @@ export default function DesignLabPage() {
           </p>
         </TabsContent>
         <TabsContent value="intro" className="site-container pb-12">
-          <p className="mb-6 text-sm text-muted-foreground">
-            ١٠ افتتاحيات جديدة: ميزان مختل، نزول سيف العدالة، ثم اتزان الكفتين.
-            يليها ٥ افتتاحيات سابقة للمقارنة.
-          </p>
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {introVariants.map((v, i) => (
-              <article key={v.id} className="border border-border">
-                <div className="intro-preview-tile h-[290px]">
-                  <IntroArtwork variant={v.id} />
-                </div>
-                <div className="p-5">
-                  <span className="text-xs text-muted-foreground">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h2 className="mt-2 text-2xl">{v.name}</h2>
-                  <p className="mt-3 min-h-12 text-xs text-muted-foreground">
-                    {v.story}
-                  </p>
-                  <Button
-                    variant="outline"
-                    className="mt-5"
-                    onClick={() => {
-                      setIntro(v);
-                      setRun((r) => r + 1);
-                      setOpen(true);
-                    }}
-                  >
-                    <Play />
-                    تشغيل بالحجم الكامل
-                  </Button>
-                </div>
-              </article>
-            ))}
-          </div>
+          <IntroGallery
+            onPreview={(id, trigger) => {
+              introTrigger.current = trigger;
+              setIntro(getIntro(id));
+              setRun((value) => value + 1);
+              setNotice("");
+              setOpen(true);
+            }}
+          />
         </TabsContent>
         <TabsContent value="header">
           <HeaderOptions />
@@ -212,6 +191,10 @@ export default function DesignLabPage() {
           showCloseButton={false}
           className="h-dvh gap-0 border-0 p-0"
           dir="rtl"
+          onCloseAutoFocus={(event) => {
+            event.preventDefault();
+            introTrigger.current?.focus();
+          }}
         >
           <SheetHeader className="sr-only">
             <SheetTitle>{intro.name}</SheetTitle>
@@ -222,17 +205,23 @@ export default function DesignLabPage() {
           </div>
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-ivory px-6 py-4">
             <span className="text-sm">{intro.name}</span>
-            <div className="flex gap-3">
-              <Button variant="outline" onClick={() => setRun((r) => r + 1)}>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                variant="outline"
+                className="min-h-11"
+                onClick={() => setRun((r) => r + 1)}
+              >
                 <Play />
                 إعادة التشغيل
               </Button>
-              <Button onClick={applyIntro}>
+              <Button className="min-h-11" onClick={applyIntro}>
                 <Check />
-                استخدمه في الموقع
+                جرّبه في هذا المتصفح
               </Button>
               <SheetClose asChild>
-                <Button variant="outline">إغلاق</Button>
+                <Button variant="outline" className="min-h-11">
+                  إغلاق
+                </Button>
               </SheetClose>
             </div>
             <p role="status" className="w-full text-xs text-muted-foreground">

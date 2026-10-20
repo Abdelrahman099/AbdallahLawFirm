@@ -1,5 +1,7 @@
 import { balanceVariants } from "./balance/variants";
+import { logoIntroVariants } from "./logo/variants";
 export const introVariants = [
+  ...logoIntroVariants,
   ...balanceVariants,
   {
     id: "draw",
@@ -39,5 +41,6 @@ export const introVariants = [
 ] as const;
 export type IntroId = (typeof introVariants)[number]["id"];
 export function getIntro(id: string | null) {
+  if (id === "balance-onyx") return logoIntroVariants[0];
   return introVariants.find((v) => v.id === id) || introVariants[0];
 }

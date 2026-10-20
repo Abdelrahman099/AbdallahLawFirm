@@ -49,7 +49,10 @@ const fs = require("node:fs");
       "boot screen hands over to animation",
     );
     assert(await page.locator("main").evaluate((e) => e.inert));
-    assert.equal(await page.locator(".balance-onyx").count(), 1);
+    assert.equal(
+      await page.locator('.preloader [data-logo-intro="logo-balance"]').count(),
+      1,
+    );
     await page.waitForTimeout(2200);
     await page.screenshot({
       path: `output/qa/preloader/animated-${width}.png`,
@@ -87,7 +90,7 @@ const fs = require("node:fs");
     await page.keyboard.press("Escape");
     await intro.waitFor({ state: "hidden" });
     await page.waitForFunction(() => !document.querySelector("main").inert);
-    await page.locator(".firm-hero-about a").click();
+    await page.getByRole("link", { name: "تعرّف على المكتب", exact: true }).click();
     await page.waitForURL("**/about");
     await page.locator(".home-page").waitFor({ state: "hidden" });
     assert.equal(await page.locator(".preloader").count(), 0);

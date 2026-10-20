@@ -112,7 +112,9 @@ The preferred consultation date remains a native browser/OS date input: a prefer
 
 `LegalImageSlider` owns Motion opacity crossfades and manual dot, swipe and arrow-key selection. No autoplay or play control. GSAP owns the stable photo-stage scale on scroll and the remaining service, office and FAQ entrances. Motion and GSAP do not animate the same node/property. Default SSR content remains visible without JavaScript; reduced-motion preferences disable movement and keep controls/content usable.
 
-The selected balance/sword intro still replays on home entry and refresh. It is an illustrative justice animation, not a replacement logo. An inline v4 brand cover precedes bundle loading; the page stays covered until the intro is mounted and primary assets are ready. Preserve skip, keyboard behavior, bounded recovery and inert background until exit completes.
+The selected balance intro now uses the approved v4 emblem. Its frame/scales settle as the existing quill descends into place, replacing the separate sword illustration. `getIntro("balance-onyx")` resolves to `logo-balance` so an old saved default does not keep the retired artwork. It still replays on home entry and refresh. An inline v4 brand cover precedes bundle loading; the page stays covered until the intro is mounted and primary assets are ready. Preserve skip, keyboard behavior, bounded recovery and inert background until exit completes.
+
+`src/features/intro/logo` owns five logo-based openings: balance/quill descent, ink outline-to-fill, part assembly, book-first construction and seal impression. Geometry is read from the approved SVG source and separated at its existing five contours, preserving the exact final emblem. GSAP owns the SVG sequence; Motion owns the caption on separate elements. Reduced motion shows the complete static identity. Gallery thumbnails are static, full-size previews replay on demand, and older explorations mount only when their archive is opened. Gallery selection applies only to the current browser.
 
 ## Do's and Don'ts
 
