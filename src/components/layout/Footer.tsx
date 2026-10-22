@@ -1,5 +1,6 @@
 import { Logo } from "@/components/Brand";
-import { office } from "@/data/site";
+import { office, whatsappUrl } from "@/data/site";
+import { localContactNumber } from "@/config/contact";
 import { serviceGroups } from "@/data/serviceGroups";
 import { Link } from "react-router-dom";
 
@@ -38,13 +39,22 @@ export function Footer() {
             <h2>زيارة المكتب</h2>
             <p>{office.address}</p>
             {office.phone ? (
-              <a href={"tel:" + office.phone} dir="ltr">
-                {office.phone}
+              <a href={"tel:" + office.phone}>
+                اتصال: <bdi>{localContactNumber(office.phone)}</bdi>
               </a>
             ) : (
               <span className="placeholder-text">
                 رقم التواصل — يُضاف قريبًا
               </span>
+            )}
+            {office.whatsapp && (
+              <a
+                href={whatsappUrl("مرحبًا، أرغب في الاستفسار عن خدمات المكتب.")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                واتساب: <bdi>{localContactNumber(office.whatsapp)}</bdi>
+              </a>
             )}
             {office.email ? (
               <a href={"mailto:" + office.email} dir="ltr">

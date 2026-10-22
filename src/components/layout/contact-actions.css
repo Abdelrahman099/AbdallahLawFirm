@@ -1,0 +1,114 @@
+.contact-actions {
+  position: fixed;
+  z-index: 30;
+  inset-inline: max(20px, env(safe-area-inset-right))
+    max(20px, env(safe-area-inset-left));
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  pointer-events: none;
+}
+.contact-actions a {
+  pointer-events: auto;
+  cursor: pointer;
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--deep) 20%, transparent);
+}
+.contact-actions .contact-call {
+  height: 56px;
+  padding-inline: 18px;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, var(--ivory) 30%, transparent);
+}
+.contact-call > span {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1.5;
+  align-items: flex-start;
+}
+.contact-call bdi {
+  font-size: 12px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.contact-whatsapp-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.contact-actions .contact-whatsapp {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--forest);
+  color: var(--ivory);
+  border: 1px solid color-mix(in srgb, var(--ivory) 35%, transparent);
+}
+.contact-actions .contact-whatsapp:hover {
+  background: var(--deep);
+}
+.contact-actions .contact-whatsapp svg {
+  width: 28px;
+  height: 28px;
+}
+.contact-whatsapp-label {
+  background: var(--card);
+  color: var(--forest);
+  border: 1px solid var(--line);
+  padding: 6px 12px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  visibility: hidden;
+  opacity: 0;
+}
+.contact-whatsapp-wrap:is(:hover, :focus-within) .contact-whatsapp-label {
+  visibility: visible;
+  opacity: 1;
+}
+.contact-actions a:focus-visible {
+  outline: 3px solid var(--bronze-text);
+  outline-offset: 4px;
+}
+.contact-actions-space {
+  height: calc(96px + env(safe-area-inset-bottom));
+  background: var(--deep);
+}
+html:has(.contact-actions) {
+  scroll-padding-bottom: calc(104px + env(safe-area-inset-bottom));
+}
+body.intro-open .contact-actions,
+body[data-scroll-locked] .contact-actions,
+body:has(
+    input:focus,
+    textarea:focus,
+    select:focus,
+    [contenteditable="true"]:focus
+  )
+  .contact-actions {
+  visibility: hidden;
+  pointer-events: none;
+}
+@media (min-width: 1024px) {
+  .contact-actions {
+    inset-inline: 28px;
+    bottom: 28px;
+  }
+}
+@media (max-width: 480px) {
+  .contact-actions {
+    inset-inline: 16px;
+    bottom: calc(14px + env(safe-area-inset-bottom));
+  }
+  .contact-whatsapp-label {
+    display: none;
+  }
+}
+@media print {
+  .contact-actions,
+  .contact-actions-space {
+    display: none;
+  }
+}

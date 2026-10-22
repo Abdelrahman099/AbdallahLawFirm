@@ -106,6 +106,10 @@ The homepage contains the hero, practice areas, office introduction, FAQ and a f
 
 `QuickConsultationForm` reuses the existing consultation schema, hook, review, transport and business Field owner. Audience and consultation method remain visible choices. Data remains editable before delivery. The receiving endpoint is not configured: review offers an encoded email draft addressed to the official office email. Opening a mail client is never reported as delivery or a confirmed booking. The existing API path still requires an acknowledged request ID before showing success. Email, WhatsApp, copied and downloaded summaries share one serializer that includes the client's optional email and topic.
 
+On 2026-10-22 the client supplied separate lines: calls only `0550282336`, WhatsApp `0550379331`. `office.phone` and `office.whatsapp` remain separate canonical owners; links normalize Saudi national numbers to international notation. The shared `ContactActions` adds a compact fixed call action on the physical right and a circular WhatsApp glyph on the physical left. Forest/beige styling inherits existing tokens. Keep 56px targets, safe-area offsets and bottom scroll clearance. Hide these actions during the intro, modal navigation and editable-field focus; exclude the design lab. Keep the existing header consultation action.
+
+The client clarified that consultation delivery uses prepared text messages without an API or attachment requirement. Review therefore presents both email and WhatsApp drafts with the same canonical summary. The visitor explicitly sends each draft in its application. Never open two applications automatically or claim that opening a draft delivered the request. No client consultation data is persisted to browser storage.
+
 The preferred consultation date remains a native browser/OS date input: a preference, not confirmed availability. This revision does not change the existing consultation receiving or date behavior.
 
 ### Motion
@@ -117,6 +121,8 @@ The selected balance intro now uses the approved v4 emblem. Its frame/scales set
 `src/features/intro/logo` owns five variations of the same causal sequence: opposed movement of the two pans, descending quill, contact, then a locked balance. The variations use a straight descent, ink reveal, opposing entrances with a curved quill approach, book-first support, or a decisive drop with one impression echo. A shared choreography profile owns timing and amplitude; pan counter-rotation keeps the bowls horizontal as their attachment points rise and fall. The book and lower diamond stay fixed.
 
 Geometry comes from the approved SVG source. The quill's outer contour and its negative-space contour must remain one even-odd path: drawing them separately fills the cutout and incorrectly makes the quill look like a flame. After contact, the animation hands off to the original complete compound path, unchanged; static previews and reduced motion also use that original path directly. GSAP owns the SVG sequence; Motion owns the caption on separate elements. Gallery thumbnails are static, full-size previews replay on demand, and older explorations mount only when their archive is opened. Gallery selection applies only to the current browser.
+
+The logo intro defers browser-specific reduced-motion markup until hydration, keeping the server and first browser SVG identical. Its GSAP timeline starts only after that preference is resolved; reduced motion retains the static approved emblem without a hydration recovery.
 
 The primary «ريشة الاتزان» uses a sword-like vertical quill strike. A temporary warm gold point (`#E8BF55`, motion accent only) sits at the original quill-tip anchor, source coordinates 486,716. The quill accelerates into that point over 420ms; contact locks both pans in 55ms. One small gold impact ring/glow then fades, and a single 680ms highlight sweeps across a clip of the original emblem. The highlight starts after the balance has locked. All effects disappear before the final hold, leaving the approved mark unchanged; static and reduced-motion views omit them entirely. Other four choreography choices retain their existing movements.
 
@@ -131,4 +137,4 @@ The primary «ريشة الاتزان» uses a sword-like vertical quill strike.
 
 ## Known Gaps
 
-The service-card reference screenshot was not included with the logo attachments. The three-category interpretation follows the written instruction and remains reviewable. Official phone, working hours and form receiving endpoint are still missing. The email and supplied exact map location are used consistently across the site. Production updates use the existing GitHub-to-Vercel deployment.
+The service-card reference screenshot was not included with the logo attachments. The three-category interpretation follows the written instruction and remains reviewable. Working hours and an automatic form receiving endpoint are still missing; current delivery intentionally uses visitor-sent email and WhatsApp drafts. The confirmed separate contact numbers, email and exact map location are used consistently across the site. Production updates use the existing GitHub-to-Vercel deployment.

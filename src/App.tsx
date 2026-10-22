@@ -4,6 +4,7 @@ import { RouteEffects } from "@/app/RouteEffects";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { Preloader } from "@/components/layout/Preloader";
+import { ContactActions } from "@/components/layout/ContactActions";
 import { Suspense } from "react";
 import { MotionConfig } from "motion/react";
 
@@ -28,6 +29,7 @@ export default function App({ pages }: { pages?: PageRegistry }) {
         </Suspense>
       </main>
       <Footer />
+      <ContactActions />
     </MotionConfig>
   );
 }

@@ -1,10 +1,15 @@
 import { motion, useReducedMotion } from "motion/react";
+import { useSyncExternalStore } from "react";
 import { BrandCaption } from "../BrandCaption";
 import { LogoEmblem } from "./LogoEmblem";
 import { useLogoTimeline } from "./useLogoTimeline";
 import { logoIntroVariants, type LogoIntroId } from "./variants";
 import "./logo-intro.css";
 import { logoChoreography } from "./choreography";
+
+const subscribe = () => () => {};
+const clientSnapshot = () => true;
+const serverSnapshot = () => false;
 
 export function LogoIntro({
   variant,
@@ -13,8 +18,14 @@ export function LogoIntro({
   variant: LogoIntroId;
   still?: boolean;
 }) {
-  const reduced = useReducedMotion();
-  const root = useLogoTimeline(variant, Boolean(still || reduced));
+  const prefersReduced = useReducedMotion();
+  const hydrated = useSyncExternalStore(
+    subscribe,
+    clientSnapshot,
+    serverSnapshot,
+  );
+  const reduced = hydrated && prefersReduced;
+  const root = useLogoTimeline(variant, Boolean(still || reduced || !hydrated));
   const light = logoIntroVariants.find((item) => item.id === variant)?.light;
   const staticScene = still || reduced;
   return (

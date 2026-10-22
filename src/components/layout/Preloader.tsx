@@ -84,7 +84,7 @@ function IntroOverlay({
   const closeButton = useRef<HTMLButtonElement>(null);
   useLayoutEffect(() => {
     const background = document.querySelectorAll<HTMLElement>(
-      ".site-header, main, .site-footer, .mobile-consult, .skip-link",
+      ".site-header, main, .site-footer, .contact-actions, .mobile-consult, .skip-link",
     );
     background.forEach((element) => {
       element.inert = true;

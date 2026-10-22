@@ -244,7 +244,7 @@ export function QuickConsultationForm() {
               <p className="max-w-64 text-xs leading-6 text-muted-foreground">
                 {office.endpoint
                   ? "راجع البيانات قبل إرسالها للمكتب."
-                  : "بعد المراجعة، أكمل الإرسال من تطبيق البريد لديك."}
+                  : "بعد المراجعة، افتح رسالتي البريد والواتساب وأكمل الإرسال."}
               </p>
             </div>
           </FieldGroup>

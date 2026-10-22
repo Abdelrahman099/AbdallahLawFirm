@@ -6,20 +6,15 @@ import {
   Download,
   LoaderCircle,
   CircleAlert,
-  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { office, whatsappUrl } from "@/config/office";
+import { office } from "@/config/office";
+import { RequestDeliveryLinks } from "./RequestDeliveryLinks";
 import { Arrow } from "@/components/brand/Arrow";
 import type { ConsultationValues } from "../schema";
 import { normalizePhone } from "../schema";
-import {
-  consultationSummary,
-  consultationEmailUrl,
-  downloadSummary,
-  serviceTitle,
-} from "../summary";
+import { consultationSummary, downloadSummary, serviceTitle } from "../summary";
 
 type Props = {
   values: ConsultationValues;
@@ -41,6 +36,7 @@ export function RequestReview({
   const rows = [
     ["الاسم", values.name],
     ["الجوال", normalizePhone(values.phone)],
+    ...(values.email ? [["البريد الإلكتروني", values.email]] : []),
     ["الخدمة", serviceTitle(values.service)],
     ["الطريقة", values.method === "remote" ? "عن بُعد" : "بالمكتب"],
     ...(values.date ? [["تاريخ مفضّل", values.date]] : []),
@@ -67,7 +63,7 @@ export function RequestReview({
           ? "سيتواصل معك المكتب لترتيب الموعد؛ الوقت المختار لا يصبح مؤكدًا إلا بعد التواصل."
           : office.endpoint
             ? "راجع بياناتك قبل إرسال الطلب للمكتب."
-            : "راجع بياناتك ثم أكمل الإرسال بوسيلة التواصل المتاحة. تجهيز الملخص لا يعني إرسال الطلب أو تأكيد الموعد."}
+            : "راجع بياناتك، ثم أرسل نفس الملخص النصي للبريد والواتساب بالأسفل. الموعد يُؤكد بعد التواصل مع المكتب."}
       </p>
       {requestId && (
         <p className="bg-secondary p-4 text-sm">
@@ -91,24 +87,10 @@ export function RequestReview({
           <AlertDescription>{error}</AlertDescription>
         </Alert>
       )}
+      {!requestId && !sending && (!office.endpoint || error) && (
+        <RequestDeliveryLinks values={values} onDraftOpen={setNotice} />
+      )}
       <div className="flex flex-wrap items-center gap-4">
-        {office.email &&
-          !requestId &&
-          !sending &&
-          (!office.endpoint || error) && (
-            <Button asChild className="h-12">
-              <a
-                href={consultationEmailUrl(values)}
-                onClick={() =>
-                  setNotice(
-                    "أكمل الإرسال من تطبيق البريد. فتح الرسالة لا يعني وصولها للمكتب.",
-                  )
-                }
-              >
-                <Mail /> افتح الطلب في البريد
-              </a>
-            </Button>
-          )}
         {office.endpoint && !requestId && (
           <Button
             disabled={sending}
@@ -125,17 +107,6 @@ export function RequestReview({
                 أرسل الطلب للمكتب <Arrow />
               </>
             )}
-          </Button>
-        )}
-        {office.phone && !requestId && (
-          <Button asChild className="h-12">
-            <a
-              href={whatsappUrl(consultationSummary(values))}
-              target="_blank"
-              rel="noreferrer"
-            >
-              أكمل الإرسال عبر واتساب <Arrow />
-            </a>
           </Button>
         )}
         {!requestId && (

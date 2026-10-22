@@ -2,15 +2,27 @@ import { Arrow, ConsultationBand, PageIntro } from "@/components/Brand";
 import { OfficeMap, officeMapLink } from "@/components/shared/OfficeMap";
 import { office, whatsappUrl } from "@/data/site";
 import { Clock3, Mail, MapPin, Phone } from "lucide-react";
+import { WhatsAppIcon } from "@/components/brand/WhatsAppIcon";
+import { localContactNumber } from "@/config/contact";
 
 export function Contact() {
   const cards = [
     {
       icon: Phone,
-      title: "الهاتف والواتساب",
-      value: office.phone || "رقم التواصل يُضاف قريبًا",
+      title: "الاتصال بالمكتب",
+      value: localContactNumber(office.phone) || "رقم التواصل يُضاف قريبًا",
       href: office.phone ? "tel:" + office.phone : "",
       placeholder: !office.phone,
+    },
+    {
+      icon: WhatsAppIcon,
+      title: "واتساب المكتب",
+      value: localContactNumber(office.whatsapp) || "رقم واتساب يُضاف قريبًا",
+      href: whatsappUrl(
+        "مرحبًا، أرغب في ترتيب استشارة مع مكتب عبد الله الشهري.",
+      ),
+      placeholder: !office.whatsapp,
+      external: true,
     },
     {
       icon: Mail,
@@ -47,11 +59,21 @@ export function Contact() {
           <div className="contact-methods">
             {cards.map((c) => (
               <div key={c.title} data-reveal>
-                <c.icon size={22} strokeWidth={1.3} />
+                <c.icon
+                  width={22}
+                  height={22}
+                  strokeWidth={1.3}
+                  aria-hidden="true"
+                />
                 <div>
                   <h3>{c.title}</h3>
                   {c.href ? (
-                    <a href={c.href} dir="ltr">
+                    <a
+                      href={c.href}
+                      dir="ltr"
+                      target={c.external ? "_blank" : undefined}
+                      rel={c.external ? "noopener noreferrer" : undefined}
+                    >
                       {c.value}
                     </a>
                   ) : (
@@ -63,18 +85,6 @@ export function Contact() {
               </div>
             ))}
           </div>
-          {office.phone && (
-            <a
-              href={whatsappUrl(
-                "مرحبًا، أرغب في ترتيب استشارة مع مكتب عبد الله الشهري.",
-              )}
-              target="_blank"
-              rel="noreferrer"
-              className="button"
-            >
-              تواصل عبر واتساب <Arrow />
-            </a>
-          )}
         </div>
         <OfficeMap>
           <h3>مقر المكتب في جدة</h3>

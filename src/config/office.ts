@@ -1,3 +1,5 @@
+import { contactNumber, contactWhatsAppUrl } from "./contact";
+
 const env = import.meta.env;
 export const office = {
   name: "عبد الله الشهري",
@@ -7,7 +9,8 @@ export const office = {
   city: "جدة",
   address:
     "8345 شارع عيسى العدوي، حي البغدادية الغربية، جدة 22231، المملكة العربية السعودية",
-  phone: String(env.VITE_PHONE || "").replace(/[^\d+]/g, ""),
+  phone: contactNumber(String(env.VITE_PHONE || "0550282336")),
+  whatsapp: contactNumber(String(env.VITE_WHATSAPP || "0550379331")),
   email: String(env.VITE_EMAIL || "at.sh.14360@gmail.com"),
   introduction:
     "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية، تأسس عام 2015. يقدم خدماته للشركات والمستثمرين والأفراد في التأسيس والعقود والتقاضي، من فهم الموضوع إلى تحديد الخطوة القانونية المناسبة.",
@@ -24,8 +27,5 @@ export const office = {
   indexable: env.VITE_ALLOW_INDEXING === "true",
 };
 export function whatsappUrl(message: string) {
-  const digits = office.phone.replace(/\D/g, "");
-  return digits
-    ? `https://wa.me/${digits}?text=${encodeURIComponent(message)}`
-    : "";
+  return contactWhatsAppUrl(office.whatsapp, message);
 }

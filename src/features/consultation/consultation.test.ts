@@ -7,7 +7,7 @@ import {
 } from "./schema";
 import { postConsultation } from "./api";
 import { consultationEmailUrl, consultationSummary } from "./summary";
-import { office } from "@/config/office";
+import { office, whatsappUrl } from "@/config/office";
 
 const valid = {
   ...defaultValues,
@@ -34,6 +34,11 @@ describe("email draft fallback", () => {
     expect(draft.searchParams.get("subject")).toBe(
       `طلب استشارة — ${office.name}`,
     );
+    const whatsapp = new URL(whatsappUrl(consultationSummary(request)));
+    expect(whatsapp.searchParams.get("text")).toBe(
+      draft.searchParams.get("body"),
+    );
+    expect(whatsapp.pathname).toBe(`/${office.whatsapp.slice(1)}`);
   });
 });
 describe("consultation validation", () => {
