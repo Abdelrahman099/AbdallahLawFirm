@@ -110,6 +110,8 @@ On 2026-10-22 the client supplied separate lines: calls only `0550282336`, Whats
 
 The client clarified that consultation delivery uses prepared text messages without an API or attachment requirement. Review therefore presents both email and WhatsApp drafts with the same canonical summary. The visitor explicitly sends each draft in its application. Never open two applications automatically or claim that opening a draft delivered the request. No client consultation data is persisted to browser storage.
 
+Footer contact links use the Arabic action labels «اتصل بنا»، «راسلنا عبر واتساب»، and «أرسل لنا بريدًا», with RTL alignment. Their destinations still come from the separate canonical office contacts; the footer does not display raw numbers or the email address. Contact-page details remain visible.
+
 The preferred consultation date remains a native browser/OS date input: a preference, not confirmed availability. This revision does not change the existing consultation receiving or date behavior.
 
 ### Motion
