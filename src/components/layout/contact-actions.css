@@ -15,25 +15,6 @@
   cursor: pointer;
   box-shadow: 0 4px 18px color-mix(in srgb, var(--deep) 20%, transparent);
 }
-.contact-actions .contact-call {
-  height: 56px;
-  padding-inline: 18px;
-  gap: 12px;
-  border: 1px solid color-mix(in srgb, var(--ivory) 30%, transparent);
-}
-.contact-call > span {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  line-height: 1.5;
-  align-items: flex-start;
-}
-.contact-call bdi {
-  font-size: 12px;
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.04em;
-}
 .contact-whatsapp-wrap {
   position: relative;
   display: flex;

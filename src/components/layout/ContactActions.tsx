@@ -1,10 +1,8 @@
-import { Phone } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { WhatsAppIcon } from "@/components/brand/WhatsAppIcon";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { office, whatsappUrl } from "@/config/office";
-import { localContactNumber } from "@/config/contact";
 import "./contact-actions.css";
 
 export function ContactActions() {
@@ -14,19 +12,6 @@ export function ContactActions() {
     <>
       <div className="contact-actions-space" aria-hidden="true" />
       <nav className="contact-actions" aria-label="تواصل مباشر مع المكتب">
-        {office.phone && (
-          <a
-            className={cn(buttonVariants({ size: "lg" }), "contact-call")}
-            href={`tel:${office.phone}`}
-            aria-label={`اتصل بالمكتب: ${localContactNumber(office.phone)}`}
-          >
-            <Phone data-icon="inline-start" aria-hidden="true" />
-            <span>
-              <span>اتصل بالمكتب</span>
-              <bdi>{localContactNumber(office.phone)}</bdi>
-            </span>
-          </a>
-        )}
         {office.whatsapp && (
           <div className="contact-whatsapp-wrap">
             <span className="contact-whatsapp-label" aria-hidden="true">

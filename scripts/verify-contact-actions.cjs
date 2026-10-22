@@ -85,11 +85,9 @@ async function verifyDrafts(page) {
       await page.goto(`${base}/contact`);
       const dock = page.locator(".contact-actions");
       await dock.waitFor({ state: "visible" });
-      assert.equal(
-        await dock
-          .getByRole("link", { name: /اتصل بالمكتب/ })
-          .getAttribute("href"),
-        "tel:+966550282336",
+      assert.equal(await dock.locator('a[href^="tel:"]').count(), 0);
+      assert(
+        (await page.locator('main a[href="tel:+966550282336"]').count()) > 0,
       );
       assert.equal(
         new URL(
@@ -108,10 +106,7 @@ async function verifyDrafts(page) {
           (p) => p.width >= 44 && p.height >= 44 && p.y + p.height <= height,
         ),
       );
-      assert(
-        positions[0].x > positions[1].x,
-        "call on right, WhatsApp on left",
-      );
+      assert.equal(positions.length, 1, "only WhatsApp remains fixed");
       assert.equal(
         await page.evaluate(
           () => document.documentElement.scrollWidth > innerWidth,
