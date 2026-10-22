@@ -6,7 +6,7 @@
   bottom: calc(20px + env(safe-area-inset-bottom));
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 16px;
   pointer-events: none;
 }
@@ -35,6 +35,7 @@
   letter-spacing: 0.04em;
 }
 .contact-whatsapp-wrap {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -55,6 +56,10 @@
   height: 28px;
 }
 .contact-whatsapp-label {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  inset-inline-end: 0;
+  white-space: nowrap;
   background: var(--card);
   color: var(--forest);
   border: 1px solid var(--line);

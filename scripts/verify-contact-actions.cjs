@@ -67,10 +67,11 @@ async function verifyDrafts(page) {
       "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe",
   });
   try {
-    for (const width of [320, 390, 1440]) {
+    for (const width of [320, 390, 1280, 1440]) {
+      const height = width === 1280 ? 720 : 900;
       const context = await browser.newContext({
-        viewport: { width, height: 900 },
-        reducedMotion: "reduce",
+        viewport: { width, height },
+        reducedMotion: width === 1280 ? "no-preference" : "reduce",
       });
       const page = await context.newPage();
       const errors = [];
@@ -104,7 +105,7 @@ async function verifyDrafts(page) {
       );
       assert(
         positions.every(
-          (p) => p.width >= 44 && p.height >= 44 && p.y + p.height <= 900,
+          (p) => p.width >= 44 && p.height >= 44 && p.y + p.height <= height,
         ),
       );
       assert(
@@ -146,6 +147,30 @@ async function verifyDrafts(page) {
       assert.equal(await dock.evaluate((el) => el.inert), true);
       await page.locator(".intro-skip").click();
       await dock.waitFor({ state: "visible" });
+      assert.equal(
+        await page.evaluate(() => {
+          const actions = Array.from(
+            document.querySelectorAll(".contact-actions a"),
+          );
+          const heroLinks = Array.from(
+            document.querySelectorAll(".practice-slider-actions a"),
+          );
+          return actions.some((action) => {
+            const a = action.getBoundingClientRect();
+            return heroLinks.some((link) => {
+              const b = link.getBoundingClientRect();
+              return (
+                a.left < b.right &&
+                a.right > b.left &&
+                a.top < b.bottom &&
+                a.bottom > b.top
+              );
+            });
+          });
+        }),
+        false,
+        "fixed contacts do not overlap hero booking actions",
+      );
       await page.locator("#home-name").fill("عميل معاينة");
       assert.equal(await dock.isVisible(), false, "dock hidden while editing");
       await page.locator("#home-phone").fill("0551234567");
