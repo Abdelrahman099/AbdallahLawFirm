@@ -85,17 +85,13 @@ async function verifyDrafts(page) {
       await page.goto(`${base}/contact`);
       const dock = page.locator(".contact-actions");
       await dock.waitFor({ state: "visible" });
+      const toggle = dock.getByRole("button");
       assert.equal(await dock.locator('a[href^="tel:"]').count(), 0);
       assert(
         (await page.locator('main a[href="tel:+966550282336"]').count()) > 0,
       );
-      assert.equal(
-        new URL(
-          await dock.getByRole("link", { name: /واتساب/ }).getAttribute("href"),
-        ).pathname,
-        "/966550379331",
-      );
-      const positions = await dock.locator("a").evaluateAll((links) =>
+      assert.equal(await toggle.getAttribute("aria-expanded"), "false");
+      const positions = await dock.locator("button").evaluateAll((links) =>
         links.map((link) => {
           const { x, y, width, height } = link.getBoundingClientRect();
           return { x, y, width, height };
@@ -106,7 +102,11 @@ async function verifyDrafts(page) {
           (p) => p.width >= 44 && p.height >= 44 && p.y + p.height <= height,
         ),
       );
-      assert.equal(positions.length, 1, "only WhatsApp remains fixed");
+      assert.equal(
+        positions.length,
+        1,
+        "one neutral contact trigger remains fixed",
+      );
       assert.equal(
         await page.evaluate(
           () => document.documentElement.scrollWidth > innerWidth,
@@ -120,6 +120,67 @@ async function verifyDrafts(page) {
         axe.violations.map((v) => v.id),
         [],
       );
+      await toggle.click();
+      const panel = page.getByRole("dialog", {
+        name: "تواصل مع المكتب",
+        exact: true,
+      });
+      await panel.waitFor({ state: "visible" });
+      assert.equal(await toggle.getAttribute("aria-expanded"), "true");
+      assert.equal(
+        await panel
+          .getByRole("link", { name: /اتصل بنا/ })
+          .getAttribute("href"),
+        "tel:+966550282336",
+      );
+      assert.equal(
+        new URL(
+          await panel
+            .getByRole("link", { name: /راسلنا عبر واتساب/ })
+            .getAttribute("href"),
+        ).pathname,
+        "/966550379331",
+      );
+      assert.equal(await panel.getByRole("link").count(), 2);
+      const bounds = await panel.boundingBox();
+      assert(
+        bounds.x >= 0 &&
+          bounds.y >= 0 &&
+          bounds.x + bounds.width <= width &&
+          bounds.y + bounds.height <= height,
+      );
+      const menuAxe = await new AxeBuilder({ page })
+        .include(".contact-options")
+        .analyze();
+      assert.deepEqual(
+        menuAxe.violations.map((v) => v.id),
+        [],
+      );
+      await page.screenshot({ path: `${output}/contact-options-${width}.png` });
+      await panel.press("Escape");
+      await panel.waitFor({ state: "detached" });
+      assert(
+        await toggle.evaluate((element) => element === document.activeElement),
+      );
+      await toggle.press("Enter");
+      await panel.waitFor({ state: "visible" });
+      await page.waitForFunction(() =>
+        document
+          .querySelector(".contact-options")
+          ?.contains(document.activeElement),
+      );
+      if (
+        await panel.evaluate((element) => element === document.activeElement)
+      ) {
+        await panel.press("Tab");
+      }
+      assert(
+        await panel
+          .getByRole("link", { name: /اتصل بنا/ })
+          .evaluate((element) => element === document.activeElement),
+      );
+      await page.locator("main h1").click();
+      await panel.waitFor({ state: "detached" });
       await page.screenshot({ path: `${output}/contact-${width}.png` });
       if (width < 1024) {
         await page
@@ -145,7 +206,7 @@ async function verifyDrafts(page) {
       assert.equal(
         await page.evaluate(() => {
           const actions = Array.from(
-            document.querySelectorAll(".contact-actions a"),
+            document.querySelectorAll(".contact-actions button"),
           );
           const heroLinks = Array.from(
             document.querySelectorAll(".practice-slider-actions a"),

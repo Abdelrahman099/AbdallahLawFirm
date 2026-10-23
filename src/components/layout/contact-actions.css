@@ -10,18 +10,12 @@
   gap: 16px;
   pointer-events: none;
 }
-.contact-actions a {
+.contact-actions button {
   pointer-events: auto;
   cursor: pointer;
   box-shadow: 0 4px 18px color-mix(in srgb, var(--deep) 20%, transparent);
 }
-.contact-whatsapp-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.contact-actions .contact-whatsapp {
+.contact-actions .contact-toggle {
   width: 56px;
   height: 56px;
   border-radius: 50%;
@@ -29,32 +23,54 @@
   color: var(--ivory);
   border: 1px solid color-mix(in srgb, var(--ivory) 35%, transparent);
 }
-.contact-actions .contact-whatsapp:hover {
+.contact-actions .contact-toggle:hover {
   background: var(--deep);
 }
-.contact-actions .contact-whatsapp svg {
-  width: 28px;
-  height: 28px;
+.contact-actions .contact-toggle svg {
+  width: 24px;
+  height: 24px;
 }
-.contact-whatsapp-label {
-  position: absolute;
-  bottom: calc(100% + 12px);
-  inset-inline-end: 0;
-  white-space: nowrap;
-  background: var(--card);
-  color: var(--forest);
-  border: 1px solid var(--line);
-  padding: 6px 12px;
-  border-radius: var(--radius);
+.contact-options {
+  width: min(280px, calc(100vw - 32px));
+}
+.contact-options h2 {
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.contact-option {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  align-items: center;
+  gap: 12px;
+  min-height: 64px;
+  padding: 12px 8px;
+  border-top: 1px solid var(--line);
+  cursor: pointer;
+}
+.contact-option > svg {
+  width: 22px;
+  height: 22px;
+}
+.contact-option > span:not(.sr-only) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 500;
+}
+.contact-option bdi {
   font-size: 12px;
-  visibility: hidden;
-  opacity: 0;
+  color: var(--muted);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
-.contact-whatsapp-wrap:is(:hover, :focus-within) .contact-whatsapp-label {
-  visibility: visible;
-  opacity: 1;
+.contact-option:hover {
+  background: var(--accent);
 }
-.contact-actions a:focus-visible {
+.contact-actions button:focus-visible,
+.contact-option:focus-visible {
   outline: 3px solid var(--bronze-text);
   outline-offset: 4px;
 }
@@ -65,15 +81,15 @@
 html:has(.contact-actions) {
   scroll-padding-bottom: calc(104px + env(safe-area-inset-bottom));
 }
-body.intro-open .contact-actions,
-body[data-scroll-locked] .contact-actions,
+body.intro-open :is(.contact-actions, .contact-options),
+body[data-scroll-locked] :is(.contact-actions, .contact-options),
 body:has(
     input:focus,
     textarea:focus,
     select:focus,
     [contenteditable="true"]:focus
   )
-  .contact-actions {
+  :is(.contact-actions, .contact-options) {
   visibility: hidden;
   pointer-events: none;
 }
@@ -88,13 +104,16 @@ body:has(
     inset-inline: 16px;
     bottom: calc(14px + env(safe-area-inset-bottom));
   }
-  .contact-whatsapp-label {
-    display: none;
-  }
 }
 @media print {
   .contact-actions,
+  .contact-options,
   .contact-actions-space {
     display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-options {
+    animation: none;
   }
 }
