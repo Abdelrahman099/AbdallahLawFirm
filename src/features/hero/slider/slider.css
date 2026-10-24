@@ -90,10 +90,11 @@
     gap: 35px;
     align-items: center;
     padding-bottom: 30px;
+    padding-inline-end: 72px;
   }
   .service-slide-tabs {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     flex: 1;
   }
   .service-slide-tabs button {

@@ -5,9 +5,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { CTA } from "@/components/shared/ConsultationCTA";
 import { SliderCopy } from "./SliderCopy";
-import { serviceSlides } from "./slides";
+import { heroSlides } from "./slides";
+import { WelcomeSlideVisual } from "./WelcomeSlide";
 import { useServiceSlider } from "./useServiceSlider";
-import "./slider.css";
 gsap.registerPlugin(useGSAP);
 export function ServiceHeroSlider({
   presentation: previewPresentation,
@@ -16,14 +16,22 @@ export function ServiceHeroSlider({
   const presentation = previewPresentation || savedPresentation;
   const host = useRef<HTMLElement>(null);
   const touch = useRef<{ x: number; y: number } | null>(null);
-  const slider = useServiceSlider(serviceSlides.length),
-    slide = serviceSlides[slider.index];
+  const slider = useServiceSlider(heroSlides.length),
+    slide = heroSlides[slider.index];
+  const welcome = slide.kind === "welcome";
   useGSAP(
     () => {
       if (slider.reduced) return;
+      const image = host.current?.querySelector(
+        welcome ? ".welcome-slide-mark" : ".service-slide-photo",
+      );
+      if (!image) return;
       gsap.fromTo(
-        ".service-slide-photo",
-        { scale: 1.12, clipPath: "inset(0 100% 0 0)" },
+        image,
+        {
+          scale: welcome ? 0.96 : 1.12,
+          clipPath: welcome ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+        },
         {
           scale: 1,
           clipPath: "inset(0 0% 0 0)",
@@ -34,16 +42,16 @@ export function ServiceHeroSlider({
     },
     {
       scope: host,
-      dependencies: [slider.index, slider.reduced],
+      dependencies: [slider.index, slider.reduced, welcome],
       revertOnUpdate: true,
     },
   );
   return (
     <section
       ref={host}
-      className={`hero-direction practice-slider slider-layout-${presentation.layout} slider-overlay-${presentation.overlay}`}
+      className={`hero-direction practice-slider slider-layout-${presentation.layout} slider-overlay-${presentation.overlay}${welcome ? " practice-slider-welcome" : ""}`}
       aria-roledescription="عرض شرائح"
-      aria-label="خدمات المكتب"
+      aria-label="المكتب وخدماته"
       onPointerDown={(e) => {
         if ((e.target as Element).closest("button, a")) return;
         touch.current = { x: e.clientX, y: e.clientY };
@@ -77,30 +85,37 @@ export function ServiceHeroSlider({
         <div className="practice-slider-copy">
           <SliderCopy key={slide.label} slide={slide} />
           <div className="practice-slider-actions">
-            <CTA light />
+            <CTA light>{welcome ? "احجز استشارتك" : "احجز استشارة"}</CTA>
             <Link className="text-link" to={slide.link}>
               {slide.cta}
             </Link>
           </div>
         </div>
         <div className="practice-slider-visual">
-          <img
-            key={slide.image}
-            className="service-slide-photo"
-            src={slide.image}
-            srcSet={`${slide.image.replace(".webp", "-mobile.webp")} 720w, ${slide.image} 1254w`}
-            sizes="(max-width: 700px) 100vw, 50vw"
-            alt={slide.alt}
-            width={1254}
-            height={1254}
-            fetchPriority="high"
-          />
-          <div className="service-slide-image-shade" />
+          {slide.kind === "welcome" ? (
+            <WelcomeSlideVisual />
+          ) : (
+            <>
+              <img
+                key={slide.image}
+                className="service-slide-photo"
+                src={slide.image}
+                srcSet={`${slide.image.replace(".webp", "-mobile.webp")} 720w, ${slide.image} 1254w`}
+                sizes="(max-width: 700px) 100vw, 50vw"
+                alt={slide.alt}
+                width={1254}
+                height={1254}
+                fetchPriority="high"
+                draggable={false}
+              />
+              <div className="service-slide-image-shade" />
+            </>
+          )}
         </div>
       </div>
       <div className="practice-slider-bottom site-container">
         <div className="service-slide-tabs" aria-label="اختيار الشريحة">
-          {serviceSlides.map((s, i) => (
+          {heroSlides.map((s, i) => (
             <button
               key={s.label}
               aria-label={`الشريحة ${i + 1}: ${s.label}`}
@@ -121,7 +136,7 @@ export function ServiceHeroSlider({
           ))}
         </div>
         <span className="sr-only" aria-live={slider.running ? "off" : "polite"}>
-          {slide.label}، الشريحة {slider.index + 1} من 3
+          {slide.label}، الشريحة {slider.index + 1} من {heroSlides.length}
         </span>
       </div>
     </section>

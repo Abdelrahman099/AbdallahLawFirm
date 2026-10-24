@@ -1,3 +1,5 @@
+import { office } from "@/config/office";
+
 export const serviceSlides = [
   {
     label: "الشركات والاستثمار",
@@ -30,3 +32,20 @@ export const serviceSlides = [
     link: "/services/litigation",
   },
 ] as const;
+
+export const welcomeSlide = {
+  kind: "welcome",
+  label: "أهلًا بكم",
+  title: office.name,
+  descriptor: office.descriptor,
+  description: "نستمع إليك، ونعتني بخطوتك القانونية.",
+  cta: "تعرّف على المكتب",
+  link: "/about",
+} as const;
+
+export const heroSlides = [
+  welcomeSlide,
+  ...serviceSlides.map((slide) => ({ ...slide, kind: "service" as const })),
+] as const;
+
+export type HeroSlide = (typeof heroSlides)[number];

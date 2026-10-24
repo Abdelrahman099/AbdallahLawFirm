@@ -90,7 +90,10 @@ const fs = require("node:fs");
     await page.keyboard.press("Escape");
     await intro.waitFor({ state: "hidden" });
     await page.waitForFunction(() => !document.querySelector("main").inert);
-    await page.getByRole("link", { name: "تعرّف على المكتب", exact: true }).click();
+    await page
+      .locator(".practice-slider")
+      .getByRole("link", { name: "تعرّف على المكتب", exact: true })
+      .click();
     await page.waitForURL("**/about");
     await page.locator(".home-page").waitFor({ state: "hidden" });
     assert.equal(await page.locator(".preloader").count(), 0);
@@ -139,16 +142,16 @@ const fs = require("node:fs");
   });
   const page = await slow.newPage();
   page.setDefaultTimeout(15000);
-  await page.route("**/images/brand-justice-v1*.webp", async (route) => {
-    await new Promise((resolve) => setTimeout(resolve, 4500));
+  await page.route("**/brand/v4/mark-beige.svg", async (route) => {
+    await new Promise((resolve) => setTimeout(resolve, 5200));
     await route.continue();
   });
   await page.goto(base, { waitUntil: "domcontentloaded" });
   await page.locator(".preloader").waitFor();
-  await page.waitForTimeout(3300);
+  await page.waitForTimeout(4500);
   assert(
     await page.locator(".preloader").isVisible(),
-    "loader stays while hero photo is still loading",
+    "loader stays while the welcome emblem is still loading",
   );
   await page.locator(".preloader").waitFor({ state: "hidden" });
   assert(

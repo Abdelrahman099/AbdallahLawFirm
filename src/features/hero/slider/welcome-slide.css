@@ -1,0 +1,61 @@
+@layer components {
+  .practice-slider.practice-slider-welcome {
+    min-height: calc(100svh - 94px);
+    padding-top: 0;
+  }
+  .welcome-slide-visual {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+    background: var(--forest);
+    padding: 48px;
+  }
+  .welcome-slide-mark {
+    width: min(100%, 420px);
+    height: auto;
+    object-fit: contain;
+  }
+  .practice-slider.practice-slider-welcome .hero-display {
+    font-size: clamp(38px, 4.1vw, 64px);
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+  .welcome-slide-descriptor {
+    margin-top: 14px;
+    color: var(--hero-accent);
+    font-size: clamp(17px, 1.5vw, 23px);
+    font-weight: 500;
+    line-height: 1.8;
+  }
+  .practice-slider-welcome .service-slide-description {
+    max-width: 32ch;
+  }
+  .slider-layout-immersive.practice-slider-welcome .practice-slider-visual {
+    width: 50%;
+  }
+  @media (max-width: 700px) {
+    .welcome-slide-visual {
+      padding: 24px;
+    }
+    .welcome-slide-mark {
+      width: min(100%, 235px);
+      max-height: 100%;
+    }
+    .practice-slider.practice-slider-welcome .hero-display {
+      font-size: clamp(30px, 7.8vw, 42px);
+    }
+    .slider-layout-immersive.practice-slider-welcome .practice-slider-visual {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: clamp(260px, 70vw, 420px);
+      order: -1;
+      z-index: 0;
+    }
+    .slider-layout-immersive.practice-slider-welcome .practice-slider-copy {
+      padding-block: 22px;
+      flex: 1;
+    }
+  }
+}

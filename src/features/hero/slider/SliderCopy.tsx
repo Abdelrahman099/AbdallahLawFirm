@@ -1,12 +1,9 @@
 import { useEffect } from "react";
 import { useAnimate, useReducedMotion } from "motion/react";
 import { HeroHeading } from "../HeroCopy";
-import type { serviceSlides } from "./slides";
-export function SliderCopy({
-  slide,
-}: {
-  slide: (typeof serviceSlides)[number];
-}) {
+import type { HeroSlide } from "./slides";
+import { WelcomeSlideCopy } from "./WelcomeSlide";
+export function SliderCopy({ slide }: { slide: HeroSlide }) {
   const [scope, animate] = useAnimate<HTMLDivElement>();
   const reduced = useReducedMotion();
   useEffect(() => {
@@ -20,12 +17,18 @@ export function SliderCopy({
   }, [animate, reduced, scope]);
   return (
     <div ref={scope}>
-      <p className="service-slide-label">{slide.label}</p>
-      <HeroHeading>
-        {slide.title}
-        <br />
-        <em>{slide.accent}</em>
-      </HeroHeading>
+      {slide.kind === "welcome" ? (
+        <WelcomeSlideCopy slide={slide} />
+      ) : (
+        <>
+          <p className="service-slide-label">{slide.label}</p>
+          <HeroHeading>
+            {slide.title}
+            <br />
+            <em>{slide.accent}</em>
+          </HeroHeading>
+        </>
+      )}
       <p className="service-slide-description">{slide.description}</p>
     </div>
   );

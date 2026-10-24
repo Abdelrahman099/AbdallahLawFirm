@@ -1,6 +1,8 @@
 @import "./styles/tokens.css";
 @import "./styles/base.css";
 @import "./styles/layout.css";
+@import "./features/hero/slider/slider.css";
+@import "./features/hero/slider/welcome-slide.css";
 @import "./pages/home/home.css";
 @import "./features/services/services.css";
 @import "./styles/content.css";

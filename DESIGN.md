@@ -74,7 +74,7 @@ Forest navigation, reversed beige logo and beige consultation action. Remove the
 
 ## Shapes
 
-Precise rectangular photography, square service cards, 2-4px control radii. No decorative arches or excessive arrows. Slider navigation uses three dots inside 44px targets; current selection is filled and exposed with aria-pressed.
+Precise rectangular photography, square service cards, 2-4px control radii. No decorative arches or excessive arrows. The homepage slider has four numbered selectors inside 44px targets, with descriptive labels on desktop; current selection is exposed with aria-pressed.
 
 ## Components
 
@@ -101,6 +101,8 @@ The comparison lives at `/design-lab?tab=identity&concept=<id>`, supports URL-ba
 The third category is now «العقود والتوثيق» and contains exactly «العقود التجارية»، «العقود العامة»، «توثيق الوكالات»، «الإفراغ والخدمات العقارية». Its stable group ID remains `agreements` to preserve existing links. New service routes have their own content and imagery mappings; older service URLs remain valid. The canonical group data drives home cards, desktop/mobile navigation, directory filters and new hero previews.
 
 ### Calls to action
+
+On 2026-10-25 the client added a welcome slide before the three existing service slides. `heroSlides` combines the new identity slide and the unchanged `serviceSlides` data, so the three-service identity concepts remain intact. The homepage starts with the approved beige v4 emblem on forest, the office name and official descriptor, a short welcome and «احجز استشارتك». The supporting link leads to About. The new slide uses a contained vector emblem instead of cropping it as a photograph; mobile stacks the emblem above the name. Its minimum height accounts for the existing 94px header so laptop screens retain the four selectors in view. Critical slider styles load from `src/styles.css` so the initial welcome remains legible without JavaScript. Service photographs, copy and destinations remain unchanged. Four manual selectors, swipe and arrow-key controls navigate the complete set, with a dynamic accessible total and no autoplay. The selector row reserves space for the existing contact trigger.
 
 The homepage contains the hero, practice areas, office introduction, FAQ and a functional contact section with the map and a compact consultation form. The client removed the preparation articles, post-request process section and generic closing consultation banner in full; these remain removed. Keep the header booking action available. No sticky mobile booking bar or footer booking repetition. Detailed service pages have one contextual booking action in addition to the header.
 
