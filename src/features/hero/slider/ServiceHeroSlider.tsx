@@ -8,10 +8,15 @@ import { SliderCopy } from "./SliderCopy";
 import { heroSlides } from "./slides";
 import { WelcomeSlideVisual } from "./WelcomeSlide";
 import { useServiceSlider } from "./useServiceSlider";
+import type { WelcomeDirection } from "./welcome-directions";
 gsap.registerPlugin(useGSAP);
 export function ServiceHeroSlider({
   presentation: previewPresentation,
-}: { presentation?: HeroPresentation } = {}) {
+  welcomeDirection = "silk",
+}: {
+  presentation?: HeroPresentation;
+  welcomeDirection?: WelcomeDirection;
+} = {}) {
   const savedPresentation = useHeroPresentation();
   const presentation = previewPresentation || savedPresentation;
   const host = useRef<HTMLElement>(null);
@@ -35,21 +40,21 @@ export function ServiceHeroSlider({
         {
           scale: 1,
           clipPath: "inset(0 0% 0 0)",
-          duration: 1.15,
-          ease: "power3.inOut",
+          duration: welcome ? 0.7 : 1.15,
+          ease: welcome ? "power2.out" : "power3.inOut",
         },
       );
     },
     {
       scope: host,
-      dependencies: [slider.index, slider.reduced, welcome],
+      dependencies: [slider.index, slider.reduced, welcome, welcomeDirection],
       revertOnUpdate: true,
     },
   );
   return (
     <section
       ref={host}
-      className={`hero-direction practice-slider slider-layout-${presentation.layout} slider-overlay-${presentation.overlay}${welcome ? " practice-slider-welcome" : ""}`}
+      className={`hero-direction practice-slider slider-layout-${presentation.layout} slider-overlay-${presentation.overlay}${welcome ? ` practice-slider-welcome welcome-direction-${welcomeDirection}` : ""}`}
       aria-roledescription="عرض شرائح"
       aria-label="المكتب وخدماته"
       onPointerDown={(e) => {
@@ -85,7 +90,9 @@ export function ServiceHeroSlider({
         <div className="practice-slider-copy">
           <SliderCopy key={slide.label} slide={slide} />
           <div className="practice-slider-actions">
-            <CTA light>{welcome ? "احجز استشارتك" : "احجز استشارة"}</CTA>
+            <CTA light={!welcome || welcomeDirection !== "letter"}>
+              {welcome ? "احجز استشارتك" : "احجز استشارة"}
+            </CTA>
             <Link className="text-link" to={slide.link}>
               {slide.cta}
             </Link>
@@ -93,7 +100,7 @@ export function ServiceHeroSlider({
         </div>
         <div className="practice-slider-visual">
           {slide.kind === "welcome" ? (
-            <WelcomeSlideVisual />
+            <WelcomeSlideVisual direction={welcomeDirection} />
           ) : (
             <>
               <img

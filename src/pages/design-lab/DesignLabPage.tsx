@@ -22,6 +22,7 @@ import { HeroPresentationLab } from "@/features/hero/slider/HeroPresentationLab"
 import { ServicesFilterLab } from "@/features/services/directory/ServicesFilterLab";
 import { useClientReady } from "@/lib/useClientReady";
 import { IdentityHeroLab } from "@/features/hero/identity/IdentityHeroLab";
+import { WelcomeDirectionLab } from "@/features/hero/slider/WelcomeDirectionLab";
 
 export default function DesignLabPage() {
   const [params, setParams] = useSearchParams();
@@ -31,9 +32,15 @@ export default function DesignLabPage() {
   const queryTab = ready ? params.get("tab") : null;
   const selectedTab =
     tabOverride ||
-    (["identity", "heroes", "slider", "intro", "header", "filters"].includes(
-      queryTab || "",
-    )
+    ([
+      "welcome",
+      "identity",
+      "heroes",
+      "slider",
+      "intro",
+      "header",
+      "filters",
+    ].includes(queryTab || "")
       ? queryTab!
       : "identity");
   const Hero = hero.component;
@@ -83,27 +90,54 @@ export default function DesignLabPage() {
         className="gap-0"
       >
         <div className="site-container">
-          <TabsList className="mb-5 h-auto min-h-12 max-w-full flex-wrap bg-secondary p-1">
-            <TabsTrigger value="identity" className="px-6">
+          <TabsList className="mb-5 h-auto min-h-12 max-w-full flex-wrap bg-secondary p-1 group-data-[orientation=horizontal]/tabs:h-auto">
+            <TabsTrigger
+              value="welcome"
+              className="h-auto min-h-11 flex-none px-4"
+            >
+              شريحة الترحيب · ٤ اتجاهات
+            </TabsTrigger>
+            <TabsTrigger
+              value="identity"
+              className="h-auto min-h-11 flex-none px-4"
+            >
               الشعار والهيرو · ١٠ جديدة
             </TabsTrigger>
-            <TabsTrigger value="slider" className="px-6">
+            <TabsTrigger
+              value="slider"
+              className="h-auto min-h-11 flex-none px-4"
+            >
               مقارنة السلايدر · 2
             </TabsTrigger>
-            <TabsTrigger value="heroes" className="px-6">
+            <TabsTrigger
+              value="heroes"
+              className="h-auto min-h-11 flex-none px-4"
+            >
               Hero Sections · 10
             </TabsTrigger>
-            <TabsTrigger value="intro" className="px-6">
+            <TabsTrigger
+              value="intro"
+              className="h-auto min-h-11 flex-none px-4"
+            >
               بريلودر الشعار · ٥
             </TabsTrigger>
-            <TabsTrigger value="header" className="px-6">
+            <TabsTrigger
+              value="header"
+              className="h-auto min-h-11 flex-none px-4"
+            >
               Header · 3
             </TabsTrigger>
-            <TabsTrigger value="filters" className="px-6">
+            <TabsTrigger
+              value="filters"
+              className="h-auto min-h-11 flex-none px-4"
+            >
               فلتر الخدمات · 5
             </TabsTrigger>
           </TabsList>
         </div>
+        <TabsContent value="welcome">
+          <WelcomeDirectionLab />
+        </TabsContent>
         <TabsContent value="identity">
           <IdentityHeroLab />
         </TabsContent>

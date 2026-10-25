@@ -2,60 +2,331 @@
   .practice-slider.practice-slider-welcome {
     min-height: calc(100svh - 94px);
     padding-top: 0;
+    background: var(--deep);
+    color: var(--ivory);
+  }
+  .practice-slider-welcome::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse at 22% 38%,
+      var(--forest),
+      transparent 66%
+    );
+  }
+  .practice-slider.practice-slider-welcome .practice-slider-grid {
+    padding-block: clamp(32px, 5svh, 72px);
+  }
+  .practice-slider.practice-slider-welcome .practice-slider-copy {
+    padding-block: 24px;
+  }
+  .practice-slider.practice-slider-welcome .practice-slider-visual {
+    width: 48%;
+    background: transparent;
   }
   .welcome-slide-visual {
     display: grid;
     place-items: center;
     width: 100%;
     height: 100%;
-    background: var(--forest);
-    padding: 48px;
+    padding: 56px 48px 100px;
+    animation: welcome-arrive 800ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .practice-slider.practice-slider-welcome .practice-slider-copy {
+    animation: welcome-arrive 700ms 100ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .intro-open .welcome-slide-visual,
+  .intro-open .practice-slider-welcome .practice-slider-copy {
+    animation-play-state: paused;
+  }
+  @keyframes welcome-arrive {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .welcome-slide-visual,
+    .practice-slider.practice-slider-welcome .practice-slider-copy {
+      animation: none;
+    }
   }
   .welcome-slide-mark {
-    width: min(100%, 420px);
+    width: min(70%, 300px);
     height: auto;
     object-fit: contain;
   }
-  .practice-slider.practice-slider-welcome .hero-display {
-    font-size: clamp(38px, 4.1vw, 64px);
+  .practice-slider.practice-slider.practice-slider-welcome .hero-display {
+    font-size: clamp(36px, 3.8vw, 58px);
     letter-spacing: 0;
+    line-height: 1.65;
     font-weight: 600;
   }
-  .welcome-slide-descriptor {
-    margin-top: 14px;
+  .practice-slider.practice-slider-welcome .service-slide-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
     color: var(--hero-accent);
-    font-size: clamp(17px, 1.5vw, 23px);
-    font-weight: 500;
+    font-size: 12px;
+  }
+  .practice-slider.practice-slider-welcome .service-slide-label::before {
+    content: "";
+    width: 28px;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.65;
+  }
+  .welcome-slide-descriptor {
+    margin-top: 6px;
+    color: var(--ivory);
+    font-size: clamp(16px, 1.4vw, 21px);
+    font-weight: 400;
     line-height: 1.8;
   }
-  .practice-slider-welcome .service-slide-description {
-    max-width: 32ch;
+  .practice-slider.practice-slider-welcome .service-slide-description {
+    margin-top: 28px;
+    font-size: 15px;
+    color: var(--ivory);
   }
-  .slider-layout-immersive.practice-slider-welcome .practice-slider-visual {
-    width: 50%;
+  .practice-slider.practice-slider-welcome .practice-slider-actions {
+    margin-top: 32px;
+    gap: 28px;
+  }
+  .practice-slider.practice-slider-welcome .service-slide-tabs button {
+    border-bottom: 1px solid color-mix(in srgb, var(--ivory) 18%, transparent);
+    padding-block: 20px;
+    transition:
+      color 200ms,
+      border-color 200ms;
+  }
+  .practice-slider.practice-slider-welcome .service-slide-tabs button:hover {
+    background: transparent;
+  }
+  .practice-slider.practice-slider-welcome
+    .service-slide-tabs
+    button[aria-pressed="true"] {
+    border-color: var(--hero-accent);
+    color: var(--hero-accent);
+  }
+  .practice-slider.practice-slider-welcome
+    .service-slide-tabs
+    button
+    > span:first-child {
+    opacity: 0.7;
+  }
+  .welcome-direction-letter.practice-slider-welcome {
+    background: var(--ivory);
+    color: var(--forest);
+  }
+  .welcome-direction-letter::before {
+    display: none;
+  }
+  .practice-slider.welcome-direction-letter .practice-slider-grid {
+    flex-direction: row-reverse;
+  }
+  .practice-slider.welcome-direction-letter .practice-slider-copy {
+    margin-inline-start: 0;
+    margin-inline-end: max(56px, calc((100vw - 1320px) / 2));
+  }
+  .practice-slider.welcome-direction-letter .practice-slider-visual {
+    left: auto;
+    right: 0;
+  }
+  .practice-slider.welcome-direction-letter .welcome-slide-descriptor,
+  .practice-slider.welcome-direction-letter .service-slide-description,
+  .practice-slider.welcome-direction-letter .service-slide-label,
+  .practice-slider.welcome-direction-letter .text-link,
+  .practice-slider.welcome-direction-letter .service-slide-tabs button {
+    color: var(--forest);
+  }
+  .practice-slider.welcome-direction-letter .service-slide-tabs button {
+    border-color: var(--border);
+  }
+  .practice-slider.welcome-direction-letter
+    .service-slide-tabs
+    button[aria-pressed="true"] {
+    color: var(--forest);
+    border-color: var(--forest);
+  }
+  .welcome-direction-letter a:focus-visible,
+  .welcome-direction-letter button:focus-visible {
+    outline-color: var(--forest);
+  }
+  .practice-slider.welcome-direction-seal .practice-slider-grid {
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+  }
+  .practice-slider.welcome-direction-seal .practice-slider-copy {
+    width: calc(100% - 48px);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    flex: 0;
+  }
+  .practice-slider.welcome-direction-seal .practice-slider-visual {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    order: -1;
+  }
+  .practice-slider.welcome-direction-seal .welcome-slide-visual {
+    padding: 0;
+  }
+  .practice-slider.welcome-direction-seal .welcome-slide-mark {
+    width: 165px;
+  }
+  .practice-slider.welcome-direction-seal .service-slide-label,
+  .practice-slider.welcome-direction-seal .practice-slider-actions {
+    justify-content: center;
+  }
+  .practice-slider.welcome-direction-seal .service-slide-label {
+    margin-bottom: 8px;
+  }
+  .practice-slider.welcome-direction-seal .service-slide-label::before {
+    display: none;
+  }
+  .practice-slider.welcome-direction-seal .service-slide-description {
+    max-width: none;
+    margin-top: 16px;
+  }
+  .practice-slider.welcome-direction-seal .practice-slider-actions {
+    margin-top: 24px;
+  }
+  .welcome-direction-gallery::before {
+    background:
+      linear-gradient(
+        270deg,
+        var(--deep) 18%,
+        rgb(11 36 27 / 92%) 43%,
+        rgb(11 36 27 / 12%)
+      ),
+      url("/images/brand-litigation-v2.webp") center 50% / cover;
+  }
+  .practice-slider.welcome-direction-gallery .practice-slider-grid {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 24px;
+  }
+  .practice-slider.welcome-direction-gallery .practice-slider-visual {
+    position: relative;
+    inset: auto;
+    width: min(580px, calc(50% - 70px));
+    height: auto;
+    margin-inline-start: max(56px, calc((100vw - 1320px) / 2));
+    order: -1;
+  }
+  .practice-slider.welcome-direction-gallery .welcome-slide-visual {
+    padding: 0;
+    justify-items: start;
+  }
+  .practice-slider.welcome-direction-gallery .welcome-slide-mark {
+    width: 105px;
+  }
+  .practice-slider.welcome-direction-gallery .practice-slider-copy {
+    padding: 0;
+  }
+  @media (max-width: 1023px) {
+    .practice-slider.welcome-direction-letter .practice-slider-copy {
+      margin-inline-end: 32px;
+    }
+    .practice-slider.welcome-direction-gallery .practice-slider-visual {
+      width: calc(50% - 48px);
+      margin-inline-start: 32px;
+    }
   }
   @media (max-width: 700px) {
-    .welcome-slide-visual {
-      padding: 24px;
+    .practice-slider.practice-slider-welcome .practice-slider-grid {
+      flex-direction: column;
+      justify-content: center;
+      gap: 26px;
+      padding: 38px 0 26px;
     }
-    .welcome-slide-mark {
-      width: min(100%, 235px);
-      max-height: 100%;
-    }
-    .practice-slider.practice-slider-welcome .hero-display {
-      font-size: clamp(30px, 7.8vw, 42px);
-    }
-    .slider-layout-immersive.practice-slider-welcome .practice-slider-visual {
+    .practice-slider.practice-slider-welcome .practice-slider-visual {
       position: relative;
       inset: auto;
       width: 100%;
-      height: clamp(260px, 70vw, 420px);
+      height: auto;
       order: -1;
       z-index: 0;
+      margin: 0;
     }
-    .slider-layout-immersive.practice-slider-welcome .practice-slider-copy {
-      padding-block: 22px;
-      flex: 1;
+    .welcome-slide-visual {
+      padding: 0 24px;
+    }
+    .welcome-slide-mark {
+      width: clamp(150px, 44vw, 195px);
+    }
+    .practice-slider.practice-slider-welcome .practice-slider-copy {
+      width: calc(100% - 48px);
+      margin-inline: 24px;
+      padding: 0;
+      flex: 0;
+      text-align: center;
+    }
+    .practice-slider.practice-slider.practice-slider-welcome .hero-display {
+      font-size: clamp(29px, 7.6vw, 39px);
+    }
+    .practice-slider.practice-slider-welcome .service-slide-label {
+      justify-content: center;
+      margin-bottom: 10px;
+      font-size: 11px;
+    }
+    .practice-slider.practice-slider-welcome .service-slide-label::before {
+      display: none;
+    }
+    .welcome-slide-descriptor {
+      font-size: 15px;
+      margin-top: 3px;
+    }
+    .practice-slider.practice-slider-welcome .service-slide-description {
+      font-size: 13px;
+      margin-top: 18px;
+      max-width: none;
+    }
+    .practice-slider.practice-slider-welcome .practice-slider-actions {
+      justify-content: center;
+      gap: 22px;
+      margin-top: 24px;
+    }
+    .practice-slider.practice-slider-welcome .service-slide-tabs button {
+      padding: 8px;
+    }
+    .practice-slider.welcome-direction-letter .practice-slider-grid {
+      flex-direction: column;
+    }
+    .practice-slider.welcome-direction-seal .welcome-slide-mark {
+      width: 150px;
+    }
+    .welcome-direction-gallery::before {
+      background:
+        linear-gradient(
+          0deg,
+          var(--deep) 5%,
+          rgb(11 36 27 / 95%) 50%,
+          rgb(11 36 27 / 36%)
+        ),
+        url("/images/brand-litigation-v2-mobile.webp") center top / cover;
+    }
+    .practice-slider.welcome-direction-gallery .practice-slider-grid {
+      justify-content: flex-end;
+      padding-top: 100px;
+    }
+    .practice-slider.welcome-direction-gallery .welcome-slide-visual {
+      justify-items: center;
+    }
+    .practice-slider.welcome-direction-gallery .welcome-slide-mark {
+      width: 110px;
     }
   }
 }

@@ -1,5 +1,6 @@
 import { HeroHeading } from "../HeroCopy";
 import type { welcomeSlide } from "./slides";
+import type { WelcomeDirection } from "./welcome-directions";
 
 export function WelcomeSlideCopy({ slide }: { slide: typeof welcomeSlide }) {
   return (
@@ -11,12 +12,16 @@ export function WelcomeSlideCopy({ slide }: { slide: typeof welcomeSlide }) {
   );
 }
 
-export function WelcomeSlideVisual() {
+export function WelcomeSlideVisual({
+  direction = "silk",
+}: {
+  direction?: WelcomeDirection;
+}) {
   return (
     <div className="welcome-slide-visual">
       <img
         className="welcome-slide-mark"
-        src="/brand/v4/mark-beige.svg"
+        src={`/brand/v4/mark-${direction === "letter" ? "primary" : "beige"}.svg`}
         alt="شعار مكتب عبد الله الشهري"
         width={1000}
         height={850}

@@ -179,9 +179,9 @@ async function ready(page) {
     assert(await staticPage.locator(".welcome-slide-mark").isVisible());
     assert.equal(
       await staticPage
-        .locator(".welcome-slide-visual")
+        .locator(".practice-slider-welcome")
         .evaluate((node) => getComputedStyle(node).backgroundColor),
-      "rgb(20, 62, 49)",
+      "rgb(11, 36, 27)",
     );
     assert.equal(
       await staticPage
@@ -191,6 +191,71 @@ async function ready(page) {
     );
     await staticContext.close();
     console.log("No-JavaScript welcome, logo and booking link passed");
+    for (const width of [390, 1440]) {
+      const context = await browser.newContext({
+        viewport: { width, height: 900 },
+        reducedMotion: "reduce",
+      });
+      const page = await context.newPage();
+      for (const direction of ["silk", "letter", "seal", "gallery"]) {
+        await page.goto(`${base}/design-lab?tab=welcome&welcome=${direction}`);
+        const hero = page.locator(
+          '[data-testid="welcome-comparison"] .practice-slider',
+        );
+        await hero
+          .locator(
+            `.welcome-slide-mark[src$='mark-${direction === "letter" ? "primary" : "beige"}.svg']`,
+          )
+          .waitFor();
+        await page.waitForFunction(
+          () => document.querySelector(".welcome-slide-mark")?.complete,
+        );
+        assert.equal(
+          await page.evaluate(
+            () => document.documentElement.scrollWidth > innerWidth,
+          ),
+          false,
+        );
+        assert.equal(await hero.locator("h2").innerText(), "عبد الله الشهري");
+        assert.equal(
+          await hero.locator(".service-slide-tabs button").count(),
+          4,
+        );
+        const copy = await hero.locator(".practice-slider-copy").boundingBox();
+        const mark = await hero.locator(".welcome-slide-mark").boundingBox();
+        assert(copy && mark);
+        assert(mark.x >= 0 && mark.x + mark.width <= width);
+        assert(copy.x >= 0 && copy.x + copy.width <= width);
+        assert(
+          mark.y + mark.height <= copy.y ||
+            copy.x + copy.width <= mark.x ||
+            mark.x + mark.width <= copy.x,
+          "logo and copy must not overlap",
+        );
+        assert.deepEqual(
+          (
+            await new AxeBuilder({ page })
+              .include('[data-testid="welcome-comparison"]')
+              .analyze()
+          ).violations.map((v) => v.id),
+          [],
+        );
+        await hero.screenshot({ path: `${output}/${direction}-${width}.png` });
+        await hero.locator(".service-slide-tabs button").nth(1).click();
+        await hero.locator(".service-slide-photo").waitFor();
+        assert((await hero.locator("h2").innerText()).includes(services[0][0]));
+      }
+      await page.getByText("ورق المراسلات", { exact: true }).click();
+      await page.waitForURL("**welcome=letter");
+      await page.reload();
+      await page
+        .locator(".welcome-direction-letter .welcome-slide-mark")
+        .waitFor();
+      console.log(
+        `${width}px: four distinct welcome concepts, service navigation, URL restoration and accessibility passed`,
+      );
+      await context.close();
+    }
   } finally {
     await browser.close();
   }
