@@ -35,6 +35,8 @@ export const serviceSlides = [
 
 export const welcomeSlide = {
   kind: "welcome",
+  image: "/images/brand-welcome-justice-v1.webp",
+  alt: "ميزان عدالة برونزي وكتب قانونية بألوان هوية المكتب، مشهد تصوري",
   label: "المكتب",
   title: office.name,
   descriptor: office.descriptor,

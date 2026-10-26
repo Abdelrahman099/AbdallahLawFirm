@@ -86,10 +86,6 @@
     color: var(--forest);
     border-color: var(--forest);
   }
-  .welcome-direction-letter .carousel-toggle {
-    background: var(--forest);
-    color: var(--ivory);
-  }
   .welcome-direction-letter button:focus-visible {
     outline-color: var(--forest);
   }
@@ -105,19 +101,6 @@
         rgb(11 36 27 / 60%)
       ),
       url("/images/brand-litigation-v2.webp") center / cover;
-  }
-  .carousel-toggle {
-    width: 44px;
-    height: 44px;
-    flex: 0 0 44px;
-    display: grid;
-    place-items: center;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-  }
-  .carousel-toggle svg {
-    width: 16px;
-    height: 16px;
   }
   .practice-slider-bottom {
     gap: 16px;

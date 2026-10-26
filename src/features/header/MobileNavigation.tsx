@@ -1,4 +1,3 @@
-import { LanguageSwitch } from "@/i18n/links";
 import { LocalizedNavLink as NavLink } from "@/i18n/links";
 import { useTranslate } from "@/i18n/useTranslate";
 import { Logo } from "@/components/brand/Logo";
@@ -82,9 +81,6 @@ export function MobileNavigation({
           <SheetDescription>
             {tx("اختر الخدمة، أو تعرّف على المكتب قبل حجز استشارتك.")}
           </SheetDescription>
-          <div className="mobile-language-choice">
-            <LanguageSwitch />
-          </div>
         </SheetHeader>
         <motion.figure
           className="mobile-navigation-photo"

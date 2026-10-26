@@ -861,5 +861,12 @@
   "serviceCount_many": "{{count}} services",
   "serviceCount_other": "{{count}} services",
   "لغة الموقع": "Website language",
-  "مرحبًا بكم": "Welcome"
+  "مرحبًا بكم": "Welcome",
+  "صورة العدالة": "Justice portrait",
+  "صورة قانونية بألوان الهوية، مع الاسم والشعار دون أزرار داخل الشريحة.": "Legal imagery in the brand palette, with the office name and emblem and no slide buttons.",
+  "ميزان عدالة برونزي وكتب قانونية بألوان هوية المكتب، مشهد تصوري": "Bronze scales of justice and legal books in the office brand colours, an illustrative scene",
+  "مسافة لإيقاف العرض أو استئنافه، وEscape لإيقافه.": "Space to pause or resume; Escape to stop the slideshow.",
+  "صورة العدالة وأرشيف بدائل الهوية.": "Justice portrait and archived identity directions.",
+  "«صورة العدالة» هي الشريحة الحالية. البدائل السابقة للمعاينة، وشرائح الخدمات الثلاثة موجودة كما هي.": "Justice portrait is the current introduction. Earlier directions remain as previews, alongside the three service slides.",
+  "صورة قانونية خلف ترحيب مختصر وشعار كبير في المنتصف، ثم اسم المكتب.": "Legal imagery behind a short welcome, a large centred emblem, and the office name beneath it."
 }

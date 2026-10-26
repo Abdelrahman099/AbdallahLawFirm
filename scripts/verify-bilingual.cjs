@@ -101,14 +101,46 @@ const out = "output/qa/bilingual";
           await hero.locator("h1").innerText(),
           prefix ? "Attorney Abdullah Al Shehri" : "المحامي عبد الله الشهري",
         );
+        assert.equal(await hero.locator("a").count(), 0);
+        assert.equal(await hero.locator(".carousel-toggle").count(), 0);
+        assert.equal(await hero.locator(".service-slide-photo").count(), 1);
+        assert.equal(await page.locator(".language-switch:visible").count(), 1);
         assert.equal(
-          await hero.locator(".welcome-greeting").innerText(),
+          await page.locator(".language-switch:visible").innerText(),
+          prefix ? "AR" : "EN",
+        );
+        assert.equal(await page.locator(".language-switch img").count(), 0);
+        if (width < 1024) {
+          const identity = await page.locator(".header-identity").boundingBox(),
+            header = await page.locator(".header-main").boundingBox();
+          assert(
+            Math.abs(
+              identity.x + identity.width / 2 - (header.x + header.width / 2),
+            ) < 1,
+            "header identity must be centered",
+          );
+          assert.equal(
+            await page.locator(".mobile-header-tools :is(button,a)").count(),
+            2,
+          );
+        }
+
+        const h = await hero.locator("h1").boundingBox(),
+          logo = await hero.locator(".welcome-signature-mark").boundingBox();
+        assert(logo.y + logo.height <= h.y);
+        const box = await hero.boundingBox();
+        assert(
+          Math.abs(logo.x + logo.width / 2 - (box.x + box.width / 2)) < 1,
+          "main emblem must be centred",
+        );
+        assert(
+          logo.width >= (width < 700 ? 240 : 400),
+          "main emblem must remain prominent",
+        );
+        assert.equal(
+          await hero.locator(".welcome-photo-greeting").innerText(),
           prefix ? "Welcome" : "مرحبًا بكم",
         );
-        assert.equal(await hero.locator(".welcome-slide-actions a").count(), 2);
-        const h = await hero.locator("h1").boundingBox(),
-          logo = await hero.locator(".welcome-slide-mark").boundingBox();
-        assert(logo.y >= h.y + h.height);
         const contacts = page.locator(".contact-actions a");
         assert.equal(await contacts.count(), 2);
         assert.equal(
@@ -187,13 +219,7 @@ const out = "output/qa/bilingual";
         await page.screenshot({
           path: `${out}/form-${prefix ? "en" : "ar"}-${width}.png`,
         });
-        if (width < 1024)
-          await page
-            .getByRole("button", {
-              name: prefix ? "Open menu" : "فتح القائمة",
-              exact: true,
-            })
-            .click();
+        await page.keyboard.press("Control+Home");
         await page.locator(".language-switch:visible").first().click();
         await page.waitForURL(base + (prefix ? "" : "/en") + "/consultation");
         await page.waitForFunction(
@@ -260,7 +286,8 @@ const out = "output/qa/bilingual";
       ) < 1,
       "autoplay must keep a stable hero height",
     );
-    await p.getByRole("button", { name: "Pause automatic slideshow" }).click();
+    assert.equal(await p.locator(".carousel-toggle").count(), 0);
+    await p.locator(".practice-slider").press("Space");
     const active = await p
       .locator(".service-slide-tabs button[aria-pressed=true]")
       .getAttribute("aria-label");

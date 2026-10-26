@@ -4,12 +4,10 @@ export function useServiceSlider(count: number) {
   const reduced = useReducedMotion();
   const [index, setIndex] = useState(0),
     [playing, setPlaying] = useState(true),
-    [hovered, setHovered] = useState(false),
     [focused, setFocused] = useState(false),
     [hidden, setHidden] = useState(false);
   const [intro, setIntro] = useState(true);
-  const running =
-    playing && !reduced && !hovered && !focused && !hidden && !intro;
+  const running = playing && !reduced && !focused && !hidden && !intro;
   useEffect(() => {
     const update = () =>
       setIntro(document.body.classList.contains("intro-open"));
@@ -39,7 +37,6 @@ export function useServiceSlider(count: number) {
     playing,
     running,
     setPlaying,
-    setHovered,
     setFocused,
   };
 }

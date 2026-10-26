@@ -18,7 +18,7 @@ export function WelcomeDirectionLab() {
   return (
     <>
       <div className="site-container flex flex-col gap-5 pb-8">
-        <h2 className="text-2xl">{tx("أربع طرق للترحيب بهوية المكتب.")}</h2>
+        <h2 className="text-2xl">{tx("صورة العدالة وأرشيف بدائل الهوية.")}</h2>
         <ToggleGroup
           aria-label={tx("اتجاه شريحة الترحيب")}
           value={choice.id}
@@ -35,21 +35,21 @@ export function WelcomeDirectionLab() {
           }}
         >
           {welcomeDirections.map((direction) => (
-              <ToggleGroupItem
-                key={direction.id}
-                value={direction.id}
-                className="scroll-mt-40"
-              >
-                {tx(direction.name)}
-              </ToggleGroupItem>
-            ))}
+            <ToggleGroupItem
+              key={direction.id}
+              value={direction.id}
+              className="scroll-mt-40"
+            >
+              {tx(direction.name)}
+            </ToggleGroupItem>
+          ))}
         </ToggleGroup>
         <p className="text-sm text-muted-foreground" role="status">
           {tx(choice.note)}
         </p>
         <p className="text-xs text-muted-foreground">
           {tx(
-            "البدائل للمعاينة. «التوقيع الهادئ» هو التصميم الحالي على الرئيسية. جرّب أيضًا التنقّل إلى شرائح الخدمات الثلاثة.",
+            "«صورة العدالة» هي الشريحة الحالية. البدائل السابقة للمعاينة، وشرائح الخدمات الثلاثة موجودة كما هي.",
           )}
         </p>
       </div>

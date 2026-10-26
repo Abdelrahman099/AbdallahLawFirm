@@ -4,7 +4,13 @@ import { useAnimate, useReducedMotion } from "motion/react";
 import { HeroHeading } from "../HeroCopy";
 import type { HeroSlide } from "./slides";
 import { WelcomeSlideCopy } from "./WelcomeSlide";
-export function SliderCopy({ slide }: { slide: HeroSlide }) {
+export function SliderCopy({
+  slide,
+  photoWelcome = false,
+}: {
+  slide: HeroSlide;
+  photoWelcome?: boolean;
+}) {
   const { tx } = useTranslate();
 
   const [scope, animate] = useAnimate<HTMLDivElement>();
@@ -21,7 +27,7 @@ export function SliderCopy({ slide }: { slide: HeroSlide }) {
   return (
     <div ref={scope}>
       {slide.kind === "welcome" ? (
-        <WelcomeSlideCopy />
+        <WelcomeSlideCopy photo={photoWelcome} />
       ) : (
         <>
           <p className="service-slide-label">{tx(slide.label)}</p>

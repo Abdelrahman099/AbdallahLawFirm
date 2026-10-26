@@ -79,11 +79,14 @@ export function Header() {
           light={theme === "forest"}
           className="mobile-header-cta h-11 w-full justify-center gap-0 px-2 text-[clamp(10px,2.8vw,12px)] [&_svg]:hidden lg:hidden"
         />
-        <MobileNavigation
-          open={open}
-          onOpenChange={setOpen}
-          inverse={theme === "forest"}
-        />
+        <div className="mobile-header-tools lg:hidden">
+          <MobileNavigation
+            open={open}
+            onOpenChange={setOpen}
+            inverse={theme === "forest"}
+          />
+          <LanguageSwitch />
+        </div>
       </div>
     </motion.header>
   );

@@ -11,3 +11,6 @@
 @import "./i18n/locale.css";
 
 @import "./i18n/roman-identity.css";
+
+@import "./i18n/language-switch.css";
+@import "./features/hero/slider/photo-welcome.css";

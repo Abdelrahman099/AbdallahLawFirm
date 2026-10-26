@@ -21,10 +21,12 @@ const assert = require("node:assert/strict");
         "المحامي عبد الله الشهري",
       );
       assert.equal(await tabs.count(), 4);
-      assert.equal(await hero.locator(".welcome-slide-actions a").count(), 2);
-      const mark = await hero.locator(".welcome-slide-mark").boundingBox(),
+      assert.equal(await hero.locator("a").count(), 0);
+      assert.equal(await hero.locator(".service-slide-photo").count(), 1);
+      assert.equal(await hero.locator(".carousel-toggle").count(), 0);
+      const mark = await hero.locator(".welcome-signature-mark").boundingBox(),
         heading = await hero.locator("h1").boundingBox();
-      assert(mark.y >= heading.y + heading.height);
+      assert(mark.y + mark.height <= heading.y);
       for (const [i, title] of [
         "لأعمالك رؤية.",
         "كل بند له أثر.",
@@ -50,7 +52,7 @@ const assert = require("node:assert/strict");
       await context.close();
       console.log(
         width +
-          "px: minimal identity, four slides, original services, keyboard and swipe passed",
+          "px: photographic identity, four slides, original services, keyboard and swipe passed",
       );
     }
   } finally {
