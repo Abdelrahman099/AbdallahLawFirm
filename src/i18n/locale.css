@@ -74,10 +74,6 @@
   }
 }
 @layer components {
-  html[dir="ltr"] .practice-slider-bottom {
-    padding-inline-start: 72px;
-    padding-inline-end: 0;
-  }
   @media (max-width: 700px) {
     html[lang="en"] .mobile-header-cta span {
       white-space: normal;
