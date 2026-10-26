@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useRef } from "react";
 import {
   motion,
@@ -8,6 +9,8 @@ import {
 import { HeroCopy } from "../HeroCopy";
 import { ModelStage } from "../ModelStage";
 export function ScrollSculpture() {
+  const { tx } = useTranslate();
+
   const host = useRef<HTMLElement>(null),
     reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -22,9 +25,9 @@ export function ScrollSculpture() {
         <HeroCopy
           title={
             <>
-              كل قرار.
+              {tx("كل قرار.")}
               <br />
-              <em>يستحق اتزانًا.</em>
+              <em>{tx("يستحق اتزانًا.")}</em>
             </>
           }
         />
@@ -37,14 +40,14 @@ export function ScrollSculpture() {
             <ModelStage />
           </motion.div>
           <div className="object-footer">
-            <span>اتزان الرؤية. وضوح الخطوة.</span>
-            <span>حرّك المؤشر · مرّر لأسفل</span>
+            <span>{tx("اتزان الرؤية. وضوح الخطوة.")}</span>
+            <span>{tx("حرّك المؤشر · مرّر لأسفل")}</span>
           </div>
         </div>
       </div>
       <div className="site-container direction-baseline">
-        <span>عبد الله الشهري · للمحاماة والاستشارات القانونية</span>
-        <span>جدة، منذ 2015</span>
+        <span>{tx("عبد الله الشهري · للمحاماة والاستشارات القانونية")}</span>
+        <span>{tx("جدة، منذ 2015")}</span>
       </div>
     </section>
   );

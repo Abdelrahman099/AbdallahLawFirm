@@ -1,18 +1,22 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { FAQ } from "@/features/faq/FAQAccordion";
-import { Link } from "react-router-dom";
+
 export function FAQSection() {
+  const { tx } = useTranslate();
+
   return (
     <section className="home-faq" aria-labelledby="home-faq-heading">
       <div className="site-container home-faq-grid">
         <div>
-          <p className="eyebrow">قبل الحجز</p>
+          <p className="eyebrow">{tx("قبل الحجز")}</p>
           <h2 id="home-faq-heading">
-            ثلاث إجابات
+            {tx("ثلاث إجابات")}
             <br />
-            لبداية أسهل.
+            {tx("لبداية أسهل.")}
           </h2>
           <Link to="/faq" className="text-link">
-            كل الأسئلة
+            {tx("كل الأسئلة")}
           </Link>
         </div>
         <FAQ limit={3} />

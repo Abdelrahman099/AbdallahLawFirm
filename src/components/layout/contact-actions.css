@@ -1,119 +1,60 @@
 .contact-actions {
   position: fixed;
   z-index: 30;
-  inset-inline: max(20px, env(safe-area-inset-right))
-    max(20px, env(safe-area-inset-left));
+  left: max(16px, env(safe-area-inset-left));
   bottom: calc(20px + env(safe-area-inset-bottom));
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-  pointer-events: none;
+  flex-direction: column;
+  gap: 10px;
 }
-.contact-actions button {
-  pointer-events: auto;
-  cursor: pointer;
-  box-shadow: 0 4px 18px color-mix(in srgb, var(--deep) 20%, transparent);
-}
-.contact-actions .contact-toggle {
-  width: 56px;
-  height: 56px;
+.contact-direct {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--ivory) 45%, transparent);
   border-radius: 50%;
-  background: var(--forest);
   color: var(--ivory);
-  border: 1px solid color-mix(in srgb, var(--ivory) 35%, transparent);
+  background: var(--forest);
+  box-shadow: 0 3px 12px rgb(11 36 27 / 14%);
+  transition: background 180ms;
 }
-.contact-actions .contact-toggle:hover {
+.contact-direct:hover {
   background: var(--deep);
 }
-.contact-actions .contact-toggle svg {
-  width: 24px;
-  height: 24px;
+.contact-direct svg {
+  width: 23px;
+  height: 23px;
 }
-.contact-options {
-  width: min(280px, calc(100vw - 32px));
-}
-.contact-options h2 {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-.contact-option {
-  display: grid;
-  grid-template-columns: 24px 1fr;
-  align-items: center;
-  gap: 12px;
-  min-height: 64px;
-  padding: 12px 8px;
-  border-top: 1px solid var(--line);
-  cursor: pointer;
-}
-.contact-option > svg {
-  width: 22px;
-  height: 22px;
-}
-.contact-option > span:not(.sr-only) {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.contact-option bdi {
-  font-size: 12px;
-  color: var(--muted);
-  font-weight: 400;
-  font-variant-numeric: tabular-nums;
-}
-.contact-option:hover {
-  background: var(--accent);
-}
-.contact-actions button:focus-visible,
-.contact-option:focus-visible {
-  outline: 3px solid var(--bronze-text);
-  outline-offset: 4px;
+.contact-direct:focus-visible {
+  outline: 3px solid var(--hero-accent);
+  outline-offset: 3px;
 }
 .contact-actions-space {
-  height: calc(96px + env(safe-area-inset-bottom));
+  height: calc(90px + env(safe-area-inset-bottom));
   background: var(--deep);
 }
-html:has(.contact-actions) {
-  scroll-padding-bottom: calc(104px + env(safe-area-inset-bottom));
-}
-body.intro-open :is(.contact-actions, .contact-options),
-body[data-scroll-locked] :is(.contact-actions, .contact-options),
+body.intro-open .contact-actions,
+body[data-scroll-locked] .contact-actions,
 body:has(
     input:focus,
     textarea:focus,
     select:focus,
     [contenteditable="true"]:focus
   )
-  :is(.contact-actions, .contact-options) {
+  .contact-actions {
   visibility: hidden;
   pointer-events: none;
 }
 @media (min-width: 1024px) {
   .contact-actions {
-    inset-inline: 28px;
-    bottom: 28px;
-  }
-}
-@media (max-width: 480px) {
-  .contact-actions {
-    inset-inline: 16px;
-    bottom: calc(14px + env(safe-area-inset-bottom));
+    left: 24px;
+    bottom: 24px;
   }
 }
 @media print {
   .contact-actions,
-  .contact-options,
   .contact-actions-space {
     display: none;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .contact-options {
-    animation: none;
   }
 }

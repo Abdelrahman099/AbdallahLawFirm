@@ -10,11 +10,17 @@ const normalize = (value: string) =>
     .trim()
     .toLowerCase();
 
-export function matchesQuery(service: Service, query: string) {
+export function matchesQuery(
+  service: Service,
+  query: string,
+  translate: (source: string) => string = (source) => source,
+) {
   const words = normalize(query).split(" ").filter(Boolean);
   if (!words.length) return true;
   const text = normalize(
-    [service.title, service.short, service.intro, service.forWhom].join(" "),
+    [service.title, service.short, service.intro, service.forWhom]
+      .map(translate)
+      .join(" "),
   );
   return words.every((word) => text.includes(word));
 }

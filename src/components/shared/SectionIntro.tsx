@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { Dots } from "@/components/brand/BrandDots";
 import type { ReactNode } from "react";
 export function SectionIntro({
@@ -11,17 +12,19 @@ export function SectionIntro({
   text?: string;
   children?: ReactNode;
 }) {
+  const { tx } = useTranslate();
+
   return (
     <div className="section-heading" data-reveal>
       <div>
         <p className="eyebrow">
           <Dots />
-          {tag}
+          {tx(tag)}
         </p>
-        <h2>{title}</h2>
-        {text && <p className="section-desc">{text}</p>}
+        <h2>{tx(title)}</h2>
+        {tx(text && <p className="section-desc">{tx(text)}</p>)}
       </div>
-      {children}
+      {tx(children)}
     </div>
   );
 }

@@ -8,3 +8,6 @@
 @import "./styles/content.css";
 @import "./components/brand/court-art.css";
 @import "./components/layout/preloader.css";
+@import "./i18n/locale.css";
+
+@import "./i18n/roman-identity.css";

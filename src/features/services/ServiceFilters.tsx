@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { ToggleGroup as Primitive } from "radix-ui";
 import { cn } from "@/lib/utils";
 import type { ComponentProps } from "react";
@@ -8,11 +9,13 @@ export function ToggleGroup(
     "type"
   >,
 ) {
+  const { dir } = useTranslate();
+
   return (
     <Primitive.Root
       {...props}
       type="single"
-      dir="rtl"
+      dir={dir}
       className="flex flex-wrap gap-2"
       onValueChange={(value) => {
         if (value) props.onValueChange?.(value);

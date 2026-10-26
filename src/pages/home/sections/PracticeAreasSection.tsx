@@ -1,6 +1,10 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { ServiceGroupGrid } from "@/features/services/ServiceGroupGrid";
-import { Link } from "react-router-dom";
+
 export function PracticeAreasSection() {
+  const { tx } = useTranslate();
+
   return (
     <section
       className="home-practice site-container"
@@ -8,12 +12,12 @@ export function PracticeAreasSection() {
     >
       <div className="home-section-heading">
         <div>
-          <p className="eyebrow">مجالات العمل</p>
-          <h2 id="practice-heading">خدماتنا القانونية</h2>
-          <p>ثلاثة مجالات تجمع خدمات المكتب للشركات والأفراد.</p>
+          <p className="eyebrow">{tx("مجالات العمل")}</p>
+          <h2 id="practice-heading">{tx("خدماتنا القانونية")}</h2>
+          <p>{tx("ثلاثة مجالات تجمع خدمات المكتب للشركات والأفراد.")}</p>
         </div>
         <Link className="text-link" to="/services">
-          دليل الخدمات
+          {tx("دليل الخدمات")}
         </Link>
       </div>
       <ServiceGroupGrid />

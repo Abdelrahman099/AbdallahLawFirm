@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { LineIntro } from "./LineIntro";
 import { PointsIntro } from "./PointsIntro";
 import { FolioIntro } from "./FolioIntro";
@@ -23,6 +24,8 @@ export function IntroArtwork({
   variant: IntroId;
   still?: boolean;
 }) {
+  const { tx } = useTranslate();
+
   if (isLogoIntro(variant) || variant === "balance-onyx") {
     return (
       <div className={`intro-artwork intro-artwork-${variant}`}>
@@ -37,7 +40,7 @@ export function IntroArtwork({
   const Design = balance ? null : designs[variant];
   return (
     <div className={`intro-artwork intro-artwork-${variant}`}>
-      {balance ? <BalanceIntro variant={variant} /> : Design && <Design />}
+      {tx(balance ? <BalanceIntro variant={variant} /> : Design && <Design />)}
     </div>
   );
 }

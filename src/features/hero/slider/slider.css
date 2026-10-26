@@ -1,10 +1,10 @@
 @layer components {
   .practice-slider {
     position: relative;
-    min-height: 100svh;
+    min-height: calc(100svh - 94px);
     display: flex;
     flex-direction: column;
-    padding-top: 128px;
+    padding-top: 0;
     background: var(--deep);
     color: var(--ivory);
     isolation: isolate;

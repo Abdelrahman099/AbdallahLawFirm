@@ -31,7 +31,11 @@ export function LineIntro() {
               strokeWidth={Number(w)}
               initial={{ pathLength: 0, opacity: 0 }}
               animate={{ pathLength: 1, opacity: 1 }}
-              transition={{ duration: 0.9, delay: i * 0.08, ease: "easeInOut" }}
+              transition={{
+                duration: 0.9,
+                delay: i * 0.08,
+                ease: "easeInOut",
+              }}
             />
           ))}
         </motion.g>

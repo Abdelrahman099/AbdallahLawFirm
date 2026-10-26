@@ -44,6 +44,18 @@ components:
 
 ## Overview
 
+### Current client revision — 2026-10-26
+
+The latest client instruction supersedes the older manual-slider, welcome-copy and contact-popover decisions below. The first slide contains «مرحبًا بكم», «المحامي عبد الله الشهري» (English: Attorney Abdullah Al Shehri), the unchanged approved emblem beneath the name, then booking and About links. The client explicitly restored the welcome and the two links later in the same revision. There is no long description or additional descriptor. The header booking action remains. Four slides advance every 6.5 seconds after the home intro finishes; a labelled pause/resume button is available, focus and background-tab states pause advancement, and reduced motion retains manual navigation. Swipe and keyboard controls remain available.
+
+ContactActions now displays two separate, vertically stacked 52px links on the physical left: phone above WhatsApp. Their canonical numbers remain separate. They are immediately available without opening a menu; intro, modal and keyboard-safe visibility rules remain.
+
+The public consultation journey is one shared SimpleConsultationForm on Home and Consultation: name, mobile, service (general by default), optional message, consent, then native WhatsApp and email draft links. There are no contact/topic/review steps, date or audience questions. Validation runs without clearing input. The same serializer produces both drafts, excluding unasked audience/method defaults. Values stay in memory, survive a language switch, and are never reported as sent merely because an app opens. The previous transport and review components remain available for the archived flow but do not own the public form. Privacy copy now reflects the actual fields, manual delivery and external map source.
+
+Arabic and English are complete first-class routes: Arabic remains at existing URLs; English uses /en and /en/<page>. i18next and react-i18next use exactly two maintained resource files at src/i18n/locales/ar.json and en.json. useTranslate owns reactive text, interpolation, direction and localized paths; localized Link/NavLink wrappers preserve the selected language without changing business IDs, slugs, filters or user-entered content. LanguageProvider creates an isolated synchronous i18next instance per locale/render so server requests cannot share mutable language state. The selected language is encoded in the URL rather than inferred from storage.
+
+All 30 public pages are prerendered in both languages with matching html lang/dir, localized metadata, alternate-language links and the existing approved startup gate. The English wordmark uses the same emblem with readable English lettering instead of an Arabic text asset. Header language switching uses two locally hosted Saudi/UK flag assets in a forest/beige/bronze selection group beside the desktop booking action. On mobile it appears only inside the menu, preserving the header symmetry. Current language is marked, both flags retain their real colours, and links have language names, titles and accessible labels. Portalled menus inherit the active direction; office-map labels and controls, service search, errors and prepared messages follow the locale. Resource parity, translated search, SSR, input preservation, responsive contact geometry, autoplay/pause and draft-link equivalence are project-owned checks.
+
 ### Current direction - 2026-10-15
 
 An Arabic legal office website for companies, investors and individuals. The client-supplied emblem combines a diamond frame, scales, open book and flowing quill. Version 4 cleans these source images and provides outlined lettering, vector marks and transparent exports. The full emblem leads; the standalone quill is a secondary device. Earlier identity and design decisions remain archived in `docs/archive/design-before-v4-2026-10-15.md`.
@@ -59,6 +71,8 @@ Forest #143E31 is the primary/action role; deep green #0B241B supports dark surf
 `src/styles/tokens.css` remains canonical. Its semantic variables map through `@theme inline` to Tailwind/shadcn utilities and shared components. This file mirrors accepted values. `src/styles/base.css` consumes variables instead of redefining a second palette. Brand export colors mirror the identity roles and are listed in `brand/v4/manifest.json`.
 
 ## Typography
+
+English uses locally hosted Marcellus for restrained classical Roman-style headings, the wordmark, navigation and consultation actions, paired with Source Serif 4 for readable body copy. Font files are WOFF2 with their OFL licences in public/fonts. The client requested heavier headings and office lettering: Marcellus uses a subtle 0.28px optical stroke on headings, 0.2px on the wordmark and 0.16px on the mobile name; body text stays unchanged. Arabic retains IBM Plex Sans Arabic unchanged. The controls and navigation have dedicated compact sizing at 1024–1200px; Book a Consultation is the exact English label. Sources: [Marcellus](https://fonts.google.com/specimen/Marcellus), [Source Serif 4](https://fonts.google.com/specimen/Source+Serif+4), [Flagpedia assets](https://flagpedia.net/download/api).
 
 Local IBM Plex Sans Arabic: Regular 400 for prose, Medium 500 for controls, SemiBold 600 for office name and headings. Navigation and service category headings are semibold. The SVG wordmark uses existing Arabic outlines, enlarged and thickened, so consumers do not need the font. No italic Arabic text or compressed letter spacing for the office name.
 

@@ -1,4 +1,7 @@
+import { useTranslate } from "@/i18n/useTranslate";
 export function MobileBrandLogo({ inverse = false }: { inverse?: boolean }) {
+  const { tx } = useTranslate();
+
   return (
     <span className="mobile-brand-lockup">
       <img
@@ -7,7 +10,7 @@ export function MobileBrandLogo({ inverse = false }: { inverse?: boolean }) {
         width={1000}
         height={850}
       />
-      <span>عبد الله الشهري</span>
+      <span>{tx("عبد الله الشهري")}</span>
     </span>
   );
 }

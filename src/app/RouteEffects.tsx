@@ -1,9 +1,12 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { office } from "@/data/site";
 import { useReducedMotion } from "motion/react";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 export function RouteEffects() {
+  const { t, tx } = useTranslate();
+
   const location = useLocation();
   const reduced = useReducedMotion();
   const first = useRef(true);
@@ -16,13 +19,17 @@ export function RouteEffects() {
     first.current = false;
     const heading =
       document.querySelector("main h1")?.textContent || office.name;
-    document.title =
-      location.pathname === "/"
-        ? `${office.name} ${office.descriptor} | جدة`
-        : `${heading} | ${office.name}`;
+    document.title = /^\/(?:en\/?)?$/.test(location.pathname)
+      ? t("{{v0}} {{v1}} | جدة", {
+          v0: tx(office.name),
+          v1: tx(office.descriptor),
+        })
+      : `${heading} | ${tx(office.name)}`;
     const description =
       document.querySelector(".intro-text, .hero-description")?.textContent ||
-      `${office.fullName} في جدة. خدمات للشركات والمستثمرين والأفراد.`;
+      t("{{v0}} في جدة. خدمات للشركات والمستثمرين والأفراد.", {
+        v0: tx(office.fullName),
+      });
     document
       .querySelector('meta[name="description"]')
       ?.setAttribute("content", description);
@@ -65,6 +72,6 @@ export function RouteEffects() {
       observer.disconnect();
       elements.forEach((el) => el.classList.remove("reveal-ready"));
     };
-  }, [location.pathname, reduced]);
+  }, [location.pathname, reduced, t, tx]);
   return null;
 }

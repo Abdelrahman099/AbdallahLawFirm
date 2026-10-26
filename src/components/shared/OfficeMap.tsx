@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { office } from "@/config/office";
 import "./office-map.css";
@@ -15,6 +16,8 @@ function supportsWebGL() {
 }
 
 export function OfficeMap({ children }: { children?: ReactNode }) {
+  const { tx, t, language } = useTranslate();
+
   const canvas = useRef<HTMLDivElement>(null);
   const card = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<"idle" | "ready" | "fallback">("idle");
@@ -50,7 +53,9 @@ export function OfficeMap({ children }: { children?: ReactNode }) {
               getComputedStyle(card.current).position === "absolute";
             cleanup = mountOfficeMap(el, {
               ...office.location,
-              name: "مكتب عبد الله الشهري",
+              name: t("مكتب عبد الله الشهري"),
+              language,
+              translate: t,
               href: officeMapLink,
               onUnavailable: fallback,
               insetRight: overlay ? card.current!.offsetWidth + 24 : 0,
@@ -72,50 +77,64 @@ export function OfficeMap({ children }: { children?: ReactNode }) {
       observer.disconnect();
       cleanup?.();
     };
-  }, []);
+  }, [language, t]);
 
   return (
     <div className="office-map" data-map-state={state} data-reveal>
       <div
         className="office-map-frame office-map-canvas"
         role="region"
-        aria-label="خريطة موقع المكتب"
+        aria-label={tx("خريطة موقع المكتب")}
         aria-busy={state === "idle"}
       >
-        {state !== "fallback" && <div ref={canvas} className="office-map-gl" />}
-        {state !== "ready" && (
-          <div className="office-map-status">
-            <img
-              src="/brand/v4/mark-primary.svg"
-              alt=""
-              width="80"
-              height="68"
-            />
-            <p role="status">
-              {state === "idle"
-                ? "جارٍ تحميل الخريطة"
-                : "الخريطة غير متاحة حاليًا"}
-            </p>
-            {state === "fallback" && (
-              <a
-                href={officeMapLink}
-                target="_blank"
-                rel="noreferrer"
-                className="text-link"
-              >
-                افتح العنوان في خرائط Google
-              </a>
-            )}
-          </div>
+        {tx(
+          state !== "fallback" && (
+            <div ref={canvas} className="office-map-gl" />
+          ),
         )}
-        {state === "ready" && (
-          <span className="office-map-approximate">موقع المكتب</span>
+        {tx(
+          state !== "ready" && (
+            <div className="office-map-status">
+              <img
+                src="/brand/v4/mark-primary.svg"
+                alt=""
+                width="80"
+                height="68"
+              />
+              <p role="status">
+                {tx(
+                  state === "idle"
+                    ? "جارٍ تحميل الخريطة"
+                    : "الخريطة غير متاحة حاليًا",
+                )}
+              </p>
+              {tx(
+                state === "fallback" && (
+                  <a
+                    href={officeMapLink}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-link"
+                  >
+                    {tx("افتح العنوان في خرائط Google")}
+                  </a>
+                ),
+              )}
+            </div>
+          ),
+        )}
+        {tx(
+          state === "ready" && (
+            <span className="office-map-approximate">{tx("موقع المكتب")}</span>
+          ),
         )}
       </div>
-      {children && (
-        <div ref={card} className="office-map-card">
-          {children}
-        </div>
+      {tx(
+        children && (
+          <div ref={card} className="office-map-card">
+            {tx(children)}
+          </div>
+        ),
       )}
     </div>
   );

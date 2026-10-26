@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { BrandImage, type BrandImageName } from "@/components/brand/BrandImage";
@@ -9,6 +10,8 @@ const slides: { asset: BrandImageName; label: string }[] = [
 ];
 
 export function LegalImageSlider({ children }: { children?: ReactNode }) {
+  const { tx, t } = useTranslate();
+
   const [index, setIndex] = useState(0);
   const reduced = useReducedMotion();
   const pointer = useRef<{ x: number; y: number } | null>(null);
@@ -17,8 +20,8 @@ export function LegalImageSlider({ children }: { children?: ReactNode }) {
   return (
     <figure
       className="firm-hero-visual"
-      aria-label="مجالات عمل المكتب"
-      aria-roledescription="عرض شرائح"
+      aria-label={tx("مجالات عمل المكتب")}
+      aria-roledescription={tx("عرض شرائح")}
       onPointerDown={(event) => {
         if ((event.target as Element).closest("button, a")) return;
         pointer.current = { x: event.clientX, y: event.clientY };
@@ -62,23 +65,28 @@ export function LegalImageSlider({ children }: { children?: ReactNode }) {
           </motion.div>
         </AnimatePresence>
       </div>
-      {children}
+      {tx(children)}
       <figcaption className="firm-slider-caption">
         <span aria-live="polite" aria-atomic="true">
-          {slides[index].label}
+          {tx(slides[index].label)}
         </span>
-        <div className="firm-slider-controls" aria-label="اختيار الصورة">
+        <div className="firm-slider-controls" aria-label={tx("اختيار الصورة")}>
           {slides.map((slide, slideIndex) => (
-            <button
-              type="button"
-              key={slide.asset}
-              aria-label={`الشريحة ${slideIndex + 1}: ${slide.label}`}
-              aria-pressed={index === slideIndex}
-              onClick={() => setIndex(slideIndex)}
-            >
-              <span aria-hidden="true" />
-            </button>
-          ))}
+              <button
+                type="button"
+                key={slide.asset}
+                aria-label={tx(
+                  t("الشريحة {{v0}}: {{v1}}", {
+                    v0: tx(slideIndex + 1),
+                    v1: tx(slide.label),
+                  }),
+                )}
+                aria-pressed={index === slideIndex}
+                onClick={() => setIndex(slideIndex)}
+              >
+                <span aria-hidden="true" />
+              </button>
+            ))}
         </div>
       </figcaption>
     </figure>

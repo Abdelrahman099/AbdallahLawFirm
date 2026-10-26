@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { Arrow, ConsultationBand, PageIntro } from "@/components/Brand";
 import { OfficeMap, officeMapLink } from "@/components/shared/OfficeMap";
 import { office, whatsappUrl } from "@/data/site";
@@ -6,6 +7,8 @@ import { WhatsAppIcon } from "@/components/brand/WhatsAppIcon";
 import { localContactNumber } from "@/config/contact";
 
 export function Contact() {
+  const { tx } = useTranslate();
+
   const cards = [
     {
       icon: Phone,
@@ -19,7 +22,7 @@ export function Contact() {
       title: "واتساب المكتب",
       value: localContactNumber(office.whatsapp) || "رقم واتساب يُضاف قريبًا",
       href: whatsappUrl(
-        "مرحبًا، أرغب في ترتيب استشارة مع مكتب عبد الله الشهري.",
+        tx("مرحبًا، أرغب في ترتيب استشارة مع مكتب عبد الله الشهري."),
       ),
       placeholder: !office.whatsapp,
       external: true,
@@ -42,18 +45,20 @@ export function Contact() {
   return (
     <>
       <PageIntro
-        tag="تواصل معنا"
-        title="قريبون من احتياجك."
-        text="مقرنا في جدة، ونقدّم الاستشارات عن بُعد لعملائنا خارج المدينة."
+        tag={tx("تواصل معنا")}
+        title={tx("قريبون من احتياجك.")}
+        text={tx(
+          "مقرنا في جدة، ونقدّم الاستشارات عن بُعد لعملائنا خارج المدينة.",
+        )}
       />
       <section className="site-container contact-layout">
         <div>
           <div className="address-block" data-reveal>
             <MapPin size={28} strokeWidth={1.3} />
-            <h2>تفضّل بزيارة المكتب.</h2>
-            <p>{office.address}</p>
+            <h2>{tx("تفضّل بزيارة المكتب.")}</h2>
+            <p>{tx(office.address)}</p>
             <p className="small-note">
-              تُرتّب الزيارة بعد تأكيد الموعد مع المكتب.
+              {tx("تُرتّب الزيارة بعد تأكيد الموعد مع المكتب.")}
             </p>
           </div>
           <div className="contact-methods">
@@ -66,20 +71,22 @@ export function Contact() {
                   aria-hidden="true"
                 />
                 <div>
-                  <h3>{c.title}</h3>
-                  {c.href ? (
-                    <a
-                      href={c.href}
-                      dir="ltr"
-                      target={c.external ? "_blank" : undefined}
-                      rel={c.external ? "noopener noreferrer" : undefined}
-                    >
-                      {c.value}
-                    </a>
-                  ) : (
-                    <p className={c.placeholder ? "placeholder-text" : ""}>
-                      {c.value}
-                    </p>
+                  <h3>{tx(c.title)}</h3>
+                  {tx(
+                    c.href ? (
+                      <a
+                        href={c.href}
+                        dir="ltr"
+                        target={c.external ? "_blank" : undefined}
+                        rel={c.external ? "noopener noreferrer" : undefined}
+                      >
+                        {tx(c.value)}
+                      </a>
+                    ) : (
+                      <p className={c.placeholder ? "placeholder-text" : ""}>
+                        {tx(c.value)}
+                      </p>
+                    ),
                   )}
                 </div>
               </div>
@@ -87,8 +94,8 @@ export function Contact() {
           </div>
         </div>
         <OfficeMap>
-          <h3>مقر المكتب في جدة</h3>
-          <p>{office.address}</p>
+          <h3>{tx("مقر المكتب في جدة")}</h3>
+          <p>{tx(office.address)}</p>
           <div className="office-map-links">
             <a
               className="text-link"
@@ -96,7 +103,8 @@ export function Contact() {
               target="_blank"
               rel="noreferrer"
             >
-              افتح في خرائط Google <Arrow />
+              {tx("افتح في خرائط Google")}
+              <Arrow />
             </a>
           </div>
         </OfficeMap>

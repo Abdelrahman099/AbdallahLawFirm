@@ -91,8 +91,8 @@ const fs = require("node:fs");
     await intro.waitFor({ state: "hidden" });
     await page.waitForFunction(() => !document.querySelector("main").inert);
     await page
-      .locator(".practice-slider")
-      .getByRole("link", { name: "تعرّف على المكتب", exact: true })
+      .locator(".site-footer")
+      .getByRole("link", { name: "عن المكتب", exact: true })
       .click();
     await page.waitForURL("**/about");
     await page.locator(".home-page").waitFor({ state: "hidden" });

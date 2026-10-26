@@ -1,16 +1,19 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { HeroCopy, HeroPhoto } from "../HeroCopy";
 export function OffsetGallery() {
+  const { tx } = useTranslate();
+
   return (
     <section className="hero-direction direction-offset site-container">
       <HeroCopy
         title={
           <>
-            لأعمالك.
+            {tx("لأعمالك.")}
             <br />
-            <em>رؤية قانونية أوسع.</em>
+            <em>{tx("رؤية قانونية أوسع.")}</em>
           </>
         }
-        tag="للشركات والمستثمرين والأفراد"
+        tag={tx("للشركات والمستثمرين والأفراد")}
       />
       <div className="offset-gallery">
         <div className="offset-photo offset-one">
@@ -20,9 +23,9 @@ export function OffsetGallery() {
           <HeroPhoto position="85% 50%" />
         </div>
         <span className="offset-label">
-          تفاصيل صغيرة.
+          {tx("تفاصيل صغيرة.")}
           <br />
-          حضور راسخ.
+          {tx("حضور راسخ.")}
         </span>
         <i className="offset-line" />
       </div>

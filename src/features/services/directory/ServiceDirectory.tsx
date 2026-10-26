@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useId, useRef, useState } from "react";
 import { Search, SlidersHorizontal, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -33,26 +34,28 @@ function SearchField({
   className,
   placeholder = "ابحث عن خدمة…",
 }: Props & { className: string; placeholder?: string }) {
+  const { tx } = useTranslate();
+
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
   return (
     <div className={className}>
       <Search aria-hidden="true" />
       <label htmlFor={id} className="sr-only">
-        ابحث عن خدمة
+        {tx("ابحث عن خدمة")}
       </label>
       <Input
         id={id}
         ref={input}
         type="search"
-        placeholder={placeholder}
+        placeholder={tx(placeholder)}
         value={dir.query}
         onChange={(e) => dir.set("q", e.target.value)}
       />
       {dir.query ? (
         <button
           type="button"
-          aria-label="مسح البحث"
+          aria-label={tx("مسح البحث")}
           onClick={() => {
             dir.set("q", "");
             input.current?.focus();
@@ -66,18 +69,21 @@ function SearchField({
 }
 
 function Results({ dir, summary = true }: Props & { summary?: boolean }) {
+  const { tx } = useTranslate();
+
   return (
     <>
       {summary ? (
         <div className="sd-summary">
           <p className="result-count" aria-live="polite">
-            {dir.group ? `${dir.group.title} · ` : ""}
-            {dir.items.length} من {dir.total} خدمة
+            {tx(dir.group ? `${dir.group.title} · ` : "")}
+            {dir.items.length} {tx(" من ")}
+            {tx("serviceCount", { count: dir.total })}
           </p>
           {dir.filtered ? (
             <button type="button" className="sd-reset" onClick={dir.reset}>
               <X aria-hidden="true" />
-              مسح الفلاتر
+              {tx("مسح الفلاتر")}
             </button>
           ) : null}
         </div>
@@ -86,10 +92,10 @@ function Results({ dir, summary = true }: Props & { summary?: boolean }) {
         <PracticeCardGrid items={dir.items} />
       ) : (
         <div className="empty-state">
-          <h2>لم نجد خدمة مطابقة.</h2>
-          <p>جرّب كلمة أخرى، أو اشرح احتياجك عند طلب الاستشارة.</p>
+          <h2>{tx("لم نجد خدمة مطابقة.")}</h2>
+          <p>{tx("جرّب كلمة أخرى، أو اشرح احتياجك عند طلب الاستشارة.")}</p>
           <Button variant="outline" className="h-12" onClick={dir.reset}>
-            عرض كل الخدمات
+            {tx("عرض كل الخدمات")}
           </Button>
         </div>
       )}
@@ -98,9 +104,11 @@ function Results({ dir, summary = true }: Props & { summary?: boolean }) {
 }
 
 function ClassicFilter({ dir }: Props) {
+  const { tx } = useTranslate();
+
   return (
     <>
-      <nav className="directory-group-nav" aria-label="مجالات الخدمات">
+      <nav className="directory-group-nav" aria-label={tx("مجالات الخدمات")}>
         {serviceGroups.map((item) => (
           <Button
             key={item.id}
@@ -112,7 +120,7 @@ function ClassicFilter({ dir }: Props) {
             }
           >
             <BrandImage asset={item.image} sizes="80px" alt="" />
-            <span>{item.title}</span>
+            <span>{tx(item.title)}</span>
           </Button>
         ))}
       </nav>
@@ -120,7 +128,7 @@ function ClassicFilter({ dir }: Props) {
         <ToggleGroup
           value={dir.audience}
           onValueChange={(value) => dir.set("audience", value)}
-          aria-label="تصفية حسب نوع العميل"
+          aria-label={tx("تصفية حسب نوع العميل")}
         >
           {[
             ["all", "جميع الخدمات"],
@@ -128,7 +136,7 @@ function ClassicFilter({ dir }: Props) {
             ["individual", "الأفراد"],
           ].map(([value, title]) => (
             <ToggleGroupItem value={value} key={value}>
-              {title}
+              {tx(title)}
             </ToggleGroupItem>
           ))}
         </ToggleGroup>
@@ -140,10 +148,12 @@ function ClassicFilter({ dir }: Props) {
 }
 
 function TabsFilter({ dir }: Props) {
+  const { tx } = useTranslate();
+
   return (
     <>
       <div className="sd-tabs">
-        <div className="sd-tabs-groups" role="group" aria-label="المجال">
+        <div className="sd-tabs-groups" role="group" aria-label={tx("المجال")}>
           {groupOptions.map((item) => (
             <button
               type="button"
@@ -151,14 +161,18 @@ function TabsFilter({ dir }: Props) {
               aria-pressed={(dir.group?.id ?? "all") === item.id}
               onClick={() => dir.set("group", item.id)}
             >
-              {item.title}
+              {tx(item.title)}
             </button>
           ))}
         </div>
         <SearchField dir={dir} className="sd-search sd-search-line" />
       </div>
       <div className="sd-tabs-meta">
-        <div className="sd-tabs-audience" role="group" aria-label="لمن الخدمة">
+        <div
+          className="sd-tabs-audience"
+          role="group"
+          aria-label={tx("لمن الخدمة")}
+        >
           {audiences.map((item) => (
             <button
               type="button"
@@ -166,15 +180,15 @@ function TabsFilter({ dir }: Props) {
               aria-pressed={dir.audience === item.id}
               onClick={() => dir.set("audience", item.id)}
             >
-              {audienceTabLabels[item.id]}
+              {tx(audienceTabLabels[item.id])}
             </button>
           ))}
         </div>
         <p className="result-count" aria-live="polite">
-          {dir.items.length} خدمة
+          {tx("serviceCount", { count: dir.items.length })}
           {dir.filtered ? (
             <button type="button" className="sd-reset" onClick={dir.reset}>
-              مسح
+              {tx("مسح")}
             </button>
           ) : null}
         </p>
@@ -185,9 +199,11 @@ function TabsFilter({ dir }: Props) {
 }
 
 function CardsFilter({ dir }: Props) {
+  const { tx } = useTranslate();
+
   return (
     <>
-      <nav className="sd-group-cards" aria-label="مجالات الخدمات">
+      <nav className="sd-group-cards" aria-label={tx("مجالات الخدمات")}>
         {serviceGroups.map((item) => {
           const active = dir.group?.id === item.id;
           return (
@@ -204,9 +220,11 @@ function CardsFilter({ dir }: Props) {
                 alt=""
               />
               <span className="sd-group-card-body">
-                <strong>{item.title}</strong>
-                <span>{item.summary}</span>
-                <small>{dir.groupCount(item.id)} خدمات</small>
+                <strong>{tx(item.title)}</strong>
+                <span>{tx(item.summary)}</span>
+                <small>
+                  {tx("serviceCount", { count: dir.groupCount(item.id) })}
+                </small>
               </span>
             </button>
           );
@@ -214,7 +232,11 @@ function CardsFilter({ dir }: Props) {
       </nav>
       <div className="sd-cards-bar">
         <SearchField dir={dir} className="sd-search sd-search-boxed" />
-        <div className="sd-segmented" role="group" aria-label="لمن الخدمة">
+        <div
+          className="sd-segmented"
+          role="group"
+          aria-label={tx("لمن الخدمة")}
+        >
           {audiences.map((item) => (
             <button
               type="button"
@@ -222,7 +244,7 @@ function CardsFilter({ dir }: Props) {
               aria-pressed={dir.audience === item.id}
               onClick={() => dir.set("audience", item.id)}
             >
-              {item.id === "all" ? "الكل" : item.title}
+              {tx(item.id === "all" ? "الكل" : item.title)}
             </button>
           ))}
         </div>
@@ -233,6 +255,8 @@ function CardsFilter({ dir }: Props) {
 }
 
 function FilterLists({ dir }: Props) {
+  const { tx } = useTranslate();
+
   const groupLabel = useId();
   const audienceLabel = useId();
   const list = (
@@ -244,7 +268,7 @@ function FilterLists({ dir }: Props) {
     count: (id: string) => number,
   ) => (
     <div className="sd-side-list">
-      <p id={labelId}>{label}</p>
+      <p id={labelId}>{tx(label)}</p>
       <div role="group" aria-labelledby={labelId}>
         {options.map((item) => (
           <button
@@ -253,7 +277,7 @@ function FilterLists({ dir }: Props) {
             aria-pressed={current === item.id}
             onClick={() => dir.set(key, item.id)}
           >
-            <span>{item.title}</span>
+            <span>{tx(item.title)}</span>
             <small>{count(item.id)}</small>
           </button>
         ))}
@@ -283,17 +307,19 @@ function FilterLists({ dir }: Props) {
 }
 
 function SidebarFilter({ dir }: Props) {
+  const { tx, dir: localeDir } = useTranslate();
+
   const [open, setOpen] = useState(false);
   const active = Number(Boolean(dir.group)) + Number(dir.audience !== "all");
   return (
     <div className="sd-sidebar">
-      <aside className="sd-side-panel" aria-label="تصفية الخدمات">
+      <aside className="sd-side-panel" aria-label={tx("تصفية الخدمات")}>
         <SearchField dir={dir} className="sd-search sd-search-boxed" />
         <FilterLists dir={dir} />
         {dir.filtered ? (
           <button type="button" className="sd-reset" onClick={dir.reset}>
             <X aria-hidden="true" />
-            مسح الفلاتر
+            {tx("مسح الفلاتر")}
           </button>
         ) : null}
       </aside>
@@ -306,18 +332,18 @@ function SidebarFilter({ dir }: Props) {
             onClick={() => setOpen(true)}
           >
             <SlidersHorizontal />
-            تصفية
+            {tx("تصفية")}
             {active ? <span>{active}</span> : null}
           </Button>
         </div>
         <Results dir={dir} />
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
-        <SheetContent side="bottom" className="sd-side-sheet" dir="rtl">
+        <SheetContent side="bottom" className="sd-side-sheet" dir={localeDir}>
           <SheetHeader>
-            <SheetTitle>تصفية الخدمات</SheetTitle>
+            <SheetTitle>{tx("تصفية الخدمات")}</SheetTitle>
             <SheetDescription className="sr-only">
-              اختر المجال ونوع العميل.
+              {tx("اختر المجال ونوع العميل.")}
             </SheetDescription>
           </SheetHeader>
           <div className="sd-side-sheet-body">
@@ -325,10 +351,13 @@ function SidebarFilter({ dir }: Props) {
           </div>
           <div className="sd-side-sheet-actions">
             <Button variant="outline" onClick={dir.reset}>
-              مسح
+              {tx("مسح")}
             </Button>
             <SheetClose asChild>
-              <Button>عرض {dir.items.length} خدمة</Button>
+              <Button>
+                {tx("عرض ")}
+                {tx("serviceCount", { count: dir.items.length })}
+              </Button>
             </SheetClose>
           </div>
         </SheetContent>
@@ -338,6 +367,8 @@ function SidebarFilter({ dir }: Props) {
 }
 
 function ChipsFilter({ dir }: Props) {
+  const { tx } = useTranslate();
+
   const row = (
     label: string,
     options: { id: string; title: string }[],
@@ -346,8 +377,8 @@ function ChipsFilter({ dir }: Props) {
     count: (id: string) => number,
   ) => (
     <div className="sd-chips-row">
-      <span className="sd-chips-label">{label}</span>
-      <div className="sd-chips" role="group" aria-label={label}>
+      <span className="sd-chips-label">{tx(label)}</span>
+      <div className="sd-chips" role="group" aria-label={tx(label)}>
         {options.map((item) => (
           <button
             type="button"
@@ -356,7 +387,7 @@ function ChipsFilter({ dir }: Props) {
             aria-pressed={current === item.id}
             onClick={() => dir.set(key, item.id)}
           >
-            {item.title}
+            {tx(item.title)}
             <span>{count(item.id)}</span>
           </button>
         ))}
@@ -369,7 +400,7 @@ function ChipsFilter({ dir }: Props) {
         <SearchField
           dir={dir}
           className="sd-search sd-search-large"
-          placeholder="ابحث عن خدمة، مثل: عقد أو تركة…"
+          placeholder={tx("ابحث عن خدمة، مثل: عقد أو تركة…")}
         />
         {row(
           "المجال",

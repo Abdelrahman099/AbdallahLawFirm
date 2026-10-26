@@ -1,14 +1,18 @@
-import { Link } from "react-router-dom";
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
+
 import { BrandImage } from "@/components/brand/BrandImage";
 export function AboutSection() {
+  const { tx } = useTranslate();
+
   return (
     <section className="home-office" aria-labelledby="office-heading">
       <div className="site-container home-office-composition">
         <div className="home-office-heading">
-          <p className="eyebrow">عن المكتب</p>
+          <p className="eyebrow">{tx("عن المكتب")}</p>
           <h2 id="office-heading">
-            <span className="office-title-line">فهمٌ أعمق.</span>
-            <span className="office-title-line">خطوة أوضح.</span>
+            <span className="office-title-line">{tx("فهمٌ أعمق.")}</span>
+            <span className="office-title-line">{tx("خطوة أوضح.")}</span>
           </h2>
           <span className="office-rule" aria-hidden="true" />
         </div>
@@ -18,21 +22,22 @@ export function AboutSection() {
         <div className="home-office-story">
           <div>
             <p>
-              مكتب عبد الله الشهري للمحاماة والاستشارات القانونية. نفهم موضوعك، ونوضح
-              نطاق الخدمة قبل الاتفاق على العمل.
+              {tx(
+                "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية. نفهم موضوعك، ونوضح نطاق الخدمة قبل الاتفاق على العمل.",
+              )}
             </p>
             <dl className="home-office-facts">
               <div>
-                <dt>منذ</dt>
+                <dt>{tx("منذ")}</dt>
                 <dd>2015</dd>
               </div>
               <div>
-                <dt>التواصل</dt>
-                <dd>بالمكتب وعن بُعد</dd>
+                <dt>{tx("التواصل")}</dt>
+                <dd>{tx("بالمكتب وعن بُعد")}</dd>
               </div>
             </dl>
             <Link to="/about" className="text-link">
-              تعرّف على المكتب
+              {tx("تعرّف على المكتب")}
             </Link>
           </div>
         </div>

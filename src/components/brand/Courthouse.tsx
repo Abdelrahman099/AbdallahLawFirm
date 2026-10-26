@@ -1,4 +1,7 @@
+import { useTranslate } from "@/i18n/useTranslate";
 export function Courthouse({ small = false }: { small?: boolean }) {
+  const { tx } = useTranslate();
+
   return (
     <div
       className={`court-art ${small ? "court-art-small" : ""}`}
@@ -23,9 +26,9 @@ export function Courthouse({ small = false }: { small?: boolean }) {
         <i />
         <i />
       </div>
-      <span className="court-coordinate">اتزان · وضوح · عناية</span>
+      <span className="court-coordinate">{tx("اتزان · وضوح · عناية")}</span>
       <span className="court-corner">
-        جدة
+        {tx("جدة")}
         <br />
         <b dir="ltr">2015</b>
       </span>

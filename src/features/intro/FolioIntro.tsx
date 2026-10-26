@@ -1,6 +1,9 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { motion } from "motion/react";
 import { BrandCaption } from "./BrandCaption";
 export function FolioIntro() {
+  const { tx } = useTranslate();
+
   return (
     <motion.div
       className="intro-folio-design"
@@ -11,7 +14,7 @@ export function FolioIntro() {
       <div className="intro-folio-content">
         <img src="/brand/v4/mark-primary.svg" alt="" />
         <BrandCaption />
-        <span>المسألة · الخيارات · الخطوة التالية</span>
+        <span>{tx("المسألة · الخيارات · الخطوة التالية")}</span>
       </div>
       <motion.div
         className="folio-leaf folio-right"
@@ -20,9 +23,9 @@ export function FolioIntro() {
         transition={{ duration: 1.3, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
       >
         <span>
-          عبد الله
+          {tx("عبد الله")}
           <br />
-          الشهري
+          {tx("الشهري")}
         </span>
       </motion.div>
       <motion.div

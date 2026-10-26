@@ -1,20 +1,23 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { HeroCopy } from "../HeroCopy";
 import { ModelStage } from "../ModelStage";
 export function OrbitSculpture() {
+  const { tx } = useTranslate();
+
   return (
     <section className="hero-direction direction-orbit site-container">
       <div className="orbit-tag">
-        علاقة مهنية.
+        {tx("علاقة مهنية.")}
         <br />
-        تبدأ بالثقة.
+        {tx("تبدأ بالثقة.")}
       </div>
       <div className="orbit-content">
         <HeroCopy
           title={
             <>
-              وضوح في الرؤية.
+              {tx("وضوح في الرؤية.")}
               <br />
-              <em>عناية في التعامل.</em>
+              <em>{tx("عناية في التعامل.")}</em>
             </>
           }
         />
@@ -25,8 +28,8 @@ export function OrbitSculpture() {
         </div>
       </div>
       <div className="orbit-bottom">
-        <span>المسألة. الخيارات. الخطوة التالية.</span>
-        <span>عبد الله الشهري</span>
+        <span>{tx("المسألة. الخيارات. الخطوة التالية.")}</span>
+        <span>{tx("عبد الله الشهري")}</span>
       </div>
     </section>
   );

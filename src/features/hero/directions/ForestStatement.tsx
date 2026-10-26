@@ -1,31 +1,34 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { HeroHeading } from "../HeroCopy";
 import { CTA } from "@/components/shared/ConsultationCTA";
 export function ForestStatement() {
+  const { tx } = useTranslate();
+
   return (
     <section className="hero-direction direction-statement">
       <div className="site-container">
         <div className="statement-top">
-          <span>مكتب المحامي عبد الله الشهري</span>
-          <span>جدة · المملكة العربية السعودية</span>
+          <span>{tx("مكتب المحامي عبد الله الشهري")}</span>
+          <span>{tx("جدة · المملكة العربية السعودية")}</span>
         </div>
         <HeroHeading>
-          نستمع.
+          {tx("نستمع.")}
           <br />
-          نفهم.
+          {tx("نفهم.")}
           <br />
-          <em>نوضّح.</em>
+          <em>{tx("نوضّح.")}</em>
         </HeroHeading>
         <div className="statement-bottom">
           <p>
-            مشورة قانونية تبدأ بفهم احتياجك.
+            {tx("مشورة قانونية تبدأ بفهم احتياجك.")}
             <br />
-            للشركات والمستثمرين والأفراد.
+            {tx("للشركات والمستثمرين والأفراد.")}
           </p>
           <CTA light />
           <span>
-            وضوح قانوني.
+            {tx("وضوح قانوني.")}
             <br />
-            قرار متزن.
+            {tx("قرار متزن.")}
           </span>
         </div>
       </div>

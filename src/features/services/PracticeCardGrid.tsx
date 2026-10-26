@@ -1,10 +1,14 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { services, type Service } from "@/data/services";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Link } from "react-router-dom";
+
 import { getPracticeVisual } from "./practiceVisuals";
 import "./practice.css";
 
 export function PracticeCardGrid({ items = services }: { items?: Service[] }) {
+  const { tx } = useTranslate();
+
   const reduced = useReducedMotion();
   return (
     <div className="practice-card-grid">
@@ -25,7 +29,7 @@ export function PracticeCardGrid({ items = services }: { items?: Service[] }) {
                   src={photo.src}
                   srcSet={`${photo.mobile} 720w, ${photo.src} 1254w`}
                   sizes="(max-width: 760px) 100vw, 25vw"
-                  alt={photo.alt}
+                  alt={tx(photo.alt)}
                   style={{ objectPosition: photo.position }}
                   width={1254}
                   height={1254}
@@ -33,15 +37,19 @@ export function PracticeCardGrid({ items = services }: { items?: Service[] }) {
                 />
                 <div>
                   <span className="practice-audience">
-                    {service.audience === "business"
-                      ? "للأعمال والاستثمار"
-                      : service.audience === "individual"
-                        ? "للأفراد"
-                        : "للأفراد والمنشآت"}
+                    {tx(
+                      service.audience === "business"
+                        ? "للأعمال والاستثمار"
+                        : service.audience === "individual"
+                          ? "للأفراد"
+                          : "للأفراد والمنشآت",
+                    )}
                   </span>
-                  <h2>{service.title}</h2>
-                  <p>{service.short}</p>
-                  <span className="practice-card-link">عرض تفاصيل الخدمة</span>
+                  <h2>{tx(service.title)}</h2>
+                  <p>{tx(service.short)}</p>
+                  <span className="practice-card-link">
+                    {tx("عرض تفاصيل الخدمة")}
+                  </span>
                 </div>
               </Link>
             </motion.article>

@@ -1,5 +1,7 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+
 import { useHeroPresentation, type HeroPresentation } from "./presentation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -9,6 +11,7 @@ import { heroSlides } from "./slides";
 import { WelcomeSlideVisual } from "./WelcomeSlide";
 import { useServiceSlider } from "./useServiceSlider";
 import type { WelcomeDirection } from "./welcome-directions";
+import { Pause, Play } from "lucide-react";
 gsap.registerPlugin(useGSAP);
 export function ServiceHeroSlider({
   presentation: previewPresentation,
@@ -17,6 +20,8 @@ export function ServiceHeroSlider({
   presentation?: HeroPresentation;
   welcomeDirection?: WelcomeDirection;
 } = {}) {
+  const { tx, t } = useTranslate();
+
   const savedPresentation = useHeroPresentation();
   const presentation = previewPresentation || savedPresentation;
   const host = useRef<HTMLElement>(null);
@@ -55,8 +60,8 @@ export function ServiceHeroSlider({
     <section
       ref={host}
       className={`hero-direction practice-slider slider-layout-${presentation.layout} slider-overlay-${presentation.overlay}${welcome ? ` practice-slider-welcome welcome-direction-${welcomeDirection}` : ""}`}
-      aria-roledescription="عرض شرائح"
-      aria-label="المكتب وخدماته"
+      aria-roledescription={tx("عرض شرائح")}
+      aria-label={tx("المكتب وخدماته")}
       onPointerDown={(e) => {
         if ((e.target as Element).closest("button, a")) return;
         touch.current = { x: e.clientX, y: e.clientY };
@@ -72,9 +77,13 @@ export function ServiceHeroSlider({
       onPointerCancel={() => {
         touch.current = null;
       }}
-      onMouseEnter={() => slider.setHovered(true)}
-      onMouseLeave={() => slider.setHovered(false)}
-      onFocusCapture={() => slider.setFocused(true)}
+      onFocusCapture={(e) =>
+        slider.setFocused(
+          !!(e.target as Element).closest(
+            "a, button:not([data-carousel-toggle])",
+          ),
+        )
+      }
       onBlurCapture={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget))
           slider.setFocused(false);
@@ -89,14 +98,16 @@ export function ServiceHeroSlider({
       <div className="practice-slider-grid">
         <div className="practice-slider-copy">
           <SliderCopy key={slide.label} slide={slide} />
-          <div className="practice-slider-actions">
-            <CTA light={!welcome || welcomeDirection !== "letter"}>
-              {welcome ? "احجز استشارتك" : "احجز استشارة"}
-            </CTA>
-            <Link className="text-link" to={slide.link}>
-              {slide.cta}
-            </Link>
-          </div>
+          {!welcome && (
+            <div className="practice-slider-actions">
+              <CTA light={!welcome || welcomeDirection !== "letter"}>
+                {tx(welcome ? "احجز استشارتك" : "احجز استشارة")}
+              </CTA>
+              <Link className="text-link" to={slide.link}>
+                {tx(slide.cta)}
+              </Link>
+            </div>
+          )}
         </div>
         <div className="practice-slider-visual">
           {slide.kind === "welcome" ? (
@@ -109,7 +120,7 @@ export function ServiceHeroSlider({
                 src={slide.image}
                 srcSet={`${slide.image.replace(".webp", "-mobile.webp")} 720w, ${slide.image} 1254w`}
                 sizes="(max-width: 700px) 100vw, 50vw"
-                alt={slide.alt}
+                alt={tx(slide.alt)}
                 width={1254}
                 height={1254}
                 fetchPriority="high"
@@ -121,16 +132,36 @@ export function ServiceHeroSlider({
         </div>
       </div>
       <div className="practice-slider-bottom site-container">
-        <div className="service-slide-tabs" aria-label="اختيار الشريحة">
+        <button
+          type="button"
+          data-carousel-toggle
+          className="carousel-toggle"
+          aria-label={tx(
+            slider.playing ? "إيقاف العرض التلقائي" : "تشغيل العرض التلقائي",
+          )}
+          onClick={() => slider.setPlaying(!slider.playing)}
+        >
+          {slider.playing ? (
+            <Pause aria-hidden="true" />
+          ) : (
+            <Play aria-hidden="true" />
+          )}
+        </button>
+        <div className="service-slide-tabs" aria-label={tx("اختيار الشريحة")}>
           {heroSlides.map((s, i) => (
             <button
               key={s.label}
-              aria-label={`الشريحة ${i + 1}: ${s.label}`}
+              aria-label={tx(
+                t("الشريحة {{v0}}: {{v1}}", {
+                  v0: i + 1,
+                  v1: tx(s.label),
+                }),
+              )}
               aria-pressed={i === slider.index}
               onClick={() => slider.go(i)}
             >
               <span dir="ltr">0{i + 1}</span>
-              <span>{s.label}</span>
+              <span>{tx(s.label)}</span>
               <i
                 className={
                   i === slider.index && slider.running
@@ -143,7 +174,10 @@ export function ServiceHeroSlider({
           ))}
         </div>
         <span className="sr-only" aria-live={slider.running ? "off" : "polite"}>
-          {slide.label}، الشريحة {slider.index + 1} من {heroSlides.length}
+          {tx(slide.label)}
+          {tx("، الشريحة ")}
+          {slider.index + 1} {tx(" من ")}
+          {heroSlides.length}
         </span>
       </div>
     </section>

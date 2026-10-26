@@ -1,3 +1,5 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { services } from "@/data/services";
 import {
   ToggleGroup,
@@ -6,9 +8,10 @@ import {
 import { getPracticeVisual } from "@/features/services/practiceVisuals";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 
 export function PracticeExplorer() {
+  const { tx } = useTranslate();
+
   const [audience, setAudience] = useState("business");
   const [slug, setSlug] = useState(services[0].slug);
   const reduced = useReducedMotion();
@@ -47,25 +50,25 @@ export function PracticeExplorer() {
         <ToggleGroup
           value={audience}
           onValueChange={changeAudience}
-          aria-label="اختر نوع احتياجك"
+          aria-label={tx("اختر نوع احتياجك")}
         >
           <ToggleGroupItem value="business">
-            للشركات والمستثمرين
+            {tx("للشركات والمستثمرين")}
           </ToggleGroupItem>
-          <ToggleGroupItem value="individual">للأفراد</ToggleGroupItem>
+          <ToggleGroupItem value="individual">{tx("للأفراد")}</ToggleGroupItem>
         </ToggleGroup>
         <div className="home-practice-options" ref={options}>
           <ToggleGroup
             value={selected.slug}
             onValueChange={setSlug}
-            aria-label="اختر مجال الاستشارة"
+            aria-label={tx("اختر مجال الاستشارة")}
           >
             {items.map((service) => (
-              <ToggleGroupItem key={service.slug} value={service.slug}>
-                <span>{service.title}</span>
-                <span className="practice-choice-dot" aria-hidden="true" />
-              </ToggleGroupItem>
-            ))}
+                <ToggleGroupItem key={service.slug} value={service.slug}>
+                  <span>{tx(service.title)}</span>
+                  <span className="practice-choice-dot" aria-hidden="true" />
+                </ToggleGroupItem>
+              ))}
           </ToggleGroup>
         </div>
       </div>
@@ -114,7 +117,7 @@ export function PracticeExplorer() {
                 src={visual.src}
                 srcSet={`${visual.mobile} 720w, ${visual.src} 1254w`}
                 sizes="(max-width: 700px) 100vw, 50vw"
-                alt={visual.alt}
+                alt={tx(visual.alt)}
                 style={{ objectPosition: visual.position }}
                 width={1254}
                 height={1254}
@@ -135,10 +138,10 @@ export function PracticeExplorer() {
                 },
               }}
             >
-              <h3>{selected.title}</h3>
-              <p>{selected.short}</p>
+              <h3>{tx(selected.title)}</h3>
+              <p>{tx(selected.short)}</p>
               <Link to={`/services/${selected.slug}`} className="text-link">
-                ما الذي تشملُه الخدمة؟
+                {tx("ما الذي تشملُه الخدمة؟")}
               </Link>
             </motion.div>
           </motion.div>

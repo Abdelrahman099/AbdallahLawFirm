@@ -1,5 +1,8 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { motion } from "motion/react";
 export function TypeIntro() {
+  const { tx } = useTranslate();
+
   return (
     <div className="intro-type-design">
       <div className="intro-type-curtains" aria-hidden="true">
@@ -16,14 +19,14 @@ export function TypeIntro() {
           />
         ))}
       </div>
-      <span className="intro-type-overline">مكتب المحامي</span>
+      <span className="intro-type-overline">{tx("مكتب المحامي")}</span>
       <div className="intro-type-line">
         <motion.h2
           initial={{ y: "110%" }}
           animate={{ y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
         >
-          عبد الله
+          {tx("عبد الله")}
         </motion.h2>
       </div>
       <div className="intro-type-line">
@@ -32,7 +35,8 @@ export function TypeIntro() {
           animate={{ y: 0 }}
           transition={{ duration: 1, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
         >
-          الشهري<span>.</span>
+          {tx("الشهري")}
+          <span>.</span>
         </motion.h2>
       </div>
       <motion.div
@@ -46,7 +50,7 @@ export function TypeIntro() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.7 }}
       >
-        للمحاماة والاستشارات القانونية
+        {tx("للمحاماة والاستشارات القانونية")}
       </motion.p>
     </div>
   );

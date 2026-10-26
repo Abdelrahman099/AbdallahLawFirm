@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import type { IdentityConceptId } from "./concepts";
 import {
   IdentityLockup,
@@ -14,11 +15,13 @@ export function EvolvedHero({
   onSelect,
   preview,
 }: IdentityLayoutProps & { concept: IdentityConceptId }) {
+  const { tx } = useTranslate();
+
   return (
     <div className={`ih-evolved ih-${concept.replace("identity-", "")}`}>
       <div className="ih-evolved-media" data-entrance>
         <IdentityPhoto slide={slide} />
-        <span className="ih-photo-credit">تصوّر بصري لمجال العمل</span>
+        <span className="ih-photo-credit">{tx("تصوّر بصري لمجال العمل")}</span>
       </div>
       <div className="ih-evolved-content">
         <IdentityLockup />

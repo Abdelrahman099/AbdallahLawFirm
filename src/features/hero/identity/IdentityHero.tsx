@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useId, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
@@ -23,6 +24,8 @@ export function IdentityHero({
   conceptId: IdentityConceptId;
   preview?: boolean;
 }) {
+  const { tx, t } = useTranslate();
+
   const concept = getIdentityConcept(conceptId);
   const [index, setIndex] = useState(0);
   const reduced = useReducedMotion();
@@ -57,9 +60,11 @@ export function IdentityHero({
       aria-labelledby={labelId}
     >
       <span id={labelId} className="sr-only">
-        {preview
-          ? `معاينة: ${concept.name}`
-          : "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية"}
+        {tx(
+          preview
+            ? t("معاينة: {{v0}}", { v0: tx(concept.name) })
+            : "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية",
+        )}
       </span>
       <div
         className={`identity-hero ${concept.family === "creative" ? "ih-creative" : ""}`}
@@ -113,7 +118,9 @@ export function IdentityHero({
       </div>
       {!["identity-cover", "identity-portals"].includes(concept.id) && (
         <p className="sr-only" aria-live="polite" aria-atomic="true">
-          {identitySlides[index].label}، {index + 1} من 3
+          {tx(identitySlides[index].label)}
+          {tx("، ")}
+          {index + 1} {tx("من 3")}
         </p>
       )}
     </section>

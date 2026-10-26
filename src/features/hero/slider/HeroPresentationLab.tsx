@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +16,8 @@ import {
 import "./presentation-lab.css";
 
 export function HeroPresentationLab() {
+  const { tx } = useTranslate();
+
   const [choice, setChoice] = useState<HeroPresentation>(defaultPresentation);
   const [notice, setNotice] = useState("");
   const change = (value: Partial<HeroPresentation>) => {
@@ -25,33 +28,41 @@ export function HeroPresentationLab() {
     <>
       <div className="site-container slider-comparison-controls">
         <div>
-          <h2>الصورة جزء من التكوين، أو خلفية كاملة.</h2>
-          <p>نفس المحتوى والصور، بتوزيع مختلف على الموبايل واللابتوب.</p>
+          <h2>{tx("الصورة جزء من التكوين، أو خلفية كاملة.")}</h2>
+          <p>
+            {tx("نفس المحتوى والصور، بتوزيع مختلف على الموبايل واللابتوب.")}
+          </p>
         </div>
         <ToggleGroup
           value={choice.layout}
           onValueChange={(layout) =>
             change({ layout: layout as HeroPresentation["layout"] })
           }
-          aria-label="تكوين الهيرو"
+          aria-label={tx("تكوين الهيرو")}
         >
-          <ToggleGroupItem value="split">صورة ونص منفصلان</ToggleGroupItem>
-          <ToggleGroupItem value="immersive">صورة كاملة</ToggleGroupItem>
+          <ToggleGroupItem value="split">
+            {tx("صورة ونص منفصلان")}
+          </ToggleGroupItem>
+          <ToggleGroupItem value="immersive">
+            {tx("صورة كاملة")}
+          </ToggleGroupItem>
         </ToggleGroup>
-        {choice.layout === "immersive" && (
-          <ToggleGroup
-            value={choice.overlay}
-            onValueChange={(overlay) =>
-              change({ overlay: overlay as HeroPresentation["overlay"] })
-            }
-            aria-label="تظليل الصورة"
-          >
-            {overlayOptions.map((option) => (
-              <ToggleGroupItem key={option.id} value={option.id}>
-                {option.name}
-              </ToggleGroupItem>
-            ))}
-          </ToggleGroup>
+        {tx(
+          choice.layout === "immersive" && (
+            <ToggleGroup
+              value={choice.overlay}
+              onValueChange={(overlay) =>
+                change({ overlay: overlay as HeroPresentation["overlay"] })
+              }
+              aria-label={tx("تظليل الصورة")}
+            >
+              {overlayOptions.map((option) => (
+                  <ToggleGroupItem key={option.id} value={option.id}>
+                    {tx(option.name)}
+                  </ToggleGroupItem>
+                ))}
+            </ToggleGroup>
+          ),
         )}
         <Button
           onClick={() => {
@@ -63,10 +74,10 @@ export function HeroPresentationLab() {
             }
           }}
         >
-          طبّق على الرئيسية
+          {tx("طبّق على الرئيسية")}
         </Button>
         <p role="status">
-          {notice || "اختر التكوين وشاهد المعاينة بالحجم الحقيقي أدناه."}
+          {tx(notice || "اختر التكوين وشاهد المعاينة بالحجم الحقيقي أدناه.")}
         </p>
       </div>
       <div

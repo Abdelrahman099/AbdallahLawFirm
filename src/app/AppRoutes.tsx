@@ -1,5 +1,5 @@
 import type { ComponentType } from "react";
-import { lazy } from "react";
+import { lazy, Fragment } from "react";
 import { Route, Routes } from "react-router-dom";
 
 export type PageRegistry = Record<
@@ -70,20 +70,33 @@ const clientPages: PageRegistry = {
 export function AppRoutes({ pages = clientPages }: { pages?: PageRegistry }) {
   return (
     <Routes>
-      <Route path="/" element={<pages.Home />} />
-      <Route path="/about" element={<pages.About />} />
-      <Route path="/services" element={<pages.Services />} />
-      <Route path="/services/:slug" element={<pages.ServiceDetail />} />
-      <Route path="/consultation" element={<pages.Consultation />} />
-      <Route path="/faq" element={<pages.FAQPage />} />
-      <Route path="/contact" element={<pages.Contact />} />
-      <Route path="/insights" element={<pages.Insights />} />
-      <Route path="/insights/:slug" element={<pages.Article />} />
-      <Route path="/privacy" element={<pages.Privacy />} />
-      <Route path="/terms" element={<pages.Terms />} />
-      <Route path="/approach" element={<pages.Approach />} />
-      <Route path="/design-lab" element={<pages.DesignLab />} />
-      <Route path="*" element={<pages.NotFound />} />
+      {["", "/en"].map((prefix) => (
+        <Fragment key={prefix}>
+          <Route path={prefix || "/"} element={<pages.Home />} />
+          <Route path={prefix + "/about"} element={<pages.About />} />
+          <Route path={prefix + "/services"} element={<pages.Services />} />
+          <Route
+            path={prefix + "/services/:slug"}
+            element={<pages.ServiceDetail />}
+          />
+          <Route
+            path={prefix + "/consultation"}
+            element={<pages.Consultation />}
+          />
+          <Route path={prefix + "/faq"} element={<pages.FAQPage />} />
+          <Route path={prefix + "/contact"} element={<pages.Contact />} />
+          <Route path={prefix + "/insights"} element={<pages.Insights />} />
+          <Route
+            path={prefix + "/insights/:slug"}
+            element={<pages.Article />}
+          />
+          <Route path={prefix + "/privacy"} element={<pages.Privacy />} />
+          <Route path={prefix + "/terms"} element={<pages.Terms />} />
+          <Route path={prefix + "/approach"} element={<pages.Approach />} />
+          <Route path={prefix + "/design-lab"} element={<pages.DesignLab />} />
+          <Route path={prefix + "/*"} element={<pages.NotFound />} />
+        </Fragment>
+      ))}
     </Routes>
   );
 }

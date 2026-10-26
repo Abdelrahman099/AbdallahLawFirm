@@ -1,15 +1,18 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { motion } from "motion/react";
 import { HeroCopy, HeroPhoto } from "../HeroCopy";
 export function PhotoCurtain() {
+  const { tx } = useTranslate();
+
   return (
     <section className="hero-direction direction-curtain">
       <div className="curtain-copy">
         <HeroCopy
           title={
             <>
-              حضور راسخ.
+              {tx("حضور راسخ.")}
               <br />
-              <em>مشورة أقرب.</em>
+              <em>{tx("مشورة أقرب.")}</em>
             </>
           }
         />
@@ -20,7 +23,7 @@ export function PhotoCurtain() {
         transition={{ duration: 0.8 }}
       >
         <HeroPhoto position="62% 50%" />
-        <figcaption>من جدة إلى أعمالك في المملكة</figcaption>
+        <figcaption>{tx("من جدة إلى أعمالك في المملكة")}</figcaption>
       </motion.figure>
     </section>
   );

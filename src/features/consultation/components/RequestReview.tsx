@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useState } from "react";
 import {
   CalendarDays,
@@ -32,6 +33,8 @@ export function RequestReview({
   send,
   edit,
 }: Props) {
+  const { tx } = useTranslate();
+
   const [notice, setNotice] = useState("");
   const rows = [
     ["الاسم", values.name],
@@ -53,83 +56,99 @@ export function RequestReview({
   return (
     <div className="request-review space-y-5">
       <div className="grid size-13 place-items-center rounded-full border border-border">
-        {requestId ? <Check /> : <CalendarDays />}
+        {tx(requestId ? <Check /> : <CalendarDays />)}
       </div>
       <h2 className="text-3xl">
-        {requestId ? "وصل طلبك للمكتب." : "طلبك جاهز للمراجعة."}
+        {tx(requestId ? "وصل طلبك للمكتب." : "طلبك جاهز للمراجعة.")}
       </h2>
       <p className="text-sm text-muted-foreground">
-        {requestId
-          ? "سيتواصل معك المكتب لترتيب الموعد؛ الوقت المختار لا يصبح مؤكدًا إلا بعد التواصل."
-          : office.endpoint
-            ? "راجع بياناتك قبل إرسال الطلب للمكتب."
-            : "راجع بياناتك، ثم أرسل نفس الملخص النصي للبريد والواتساب بالأسفل. الموعد يُؤكد بعد التواصل مع المكتب."}
+        {tx(
+          requestId
+            ? "سيتواصل معك المكتب لترتيب الموعد؛ الوقت المختار لا يصبح مؤكدًا إلا بعد التواصل."
+            : office.endpoint
+              ? "راجع بياناتك قبل إرسال الطلب للمكتب."
+              : "راجع بياناتك، ثم أرسل نفس الملخص النصي للبريد والواتساب بالأسفل. الموعد يُؤكد بعد التواصل مع المكتب.",
+        )}
       </p>
-      {requestId && (
-        <p className="bg-secondary p-4 text-sm">
-          رقم الطلب: <b dir="ltr">{requestId}</b>
-        </p>
+      {tx(
+        requestId && (
+          <p className="bg-secondary p-4 text-sm">
+            {tx("رقم الطلب:")}
+            <b dir="ltr">{tx(requestId)}</b>
+          </p>
+        ),
       )}
       <dl>
         {rows.map(([label, value]) => (
-          <div
-            key={label}
-            className="grid grid-cols-[90px_1fr] gap-5 border-b border-border py-4 text-sm"
-          >
-            <dt className="text-muted-foreground">{label}</dt>
-            <dd className="m-0 break-words">{value}</dd>
-          </div>
-        ))}
+            <div
+              key={label}
+              className="grid grid-cols-[90px_1fr] gap-5 border-b border-border py-4 text-sm"
+            >
+              <dt className="text-muted-foreground">{tx(label)}</dt>
+              <dd className="m-0 break-words">{tx(value)}</dd>
+            </div>
+          ))}
       </dl>
-      {error && (
-        <Alert variant="destructive">
-          <CircleAlert />
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
+      {tx(
+        error && (
+          <Alert variant="destructive">
+            <CircleAlert />
+            <AlertDescription>{tx(error)}</AlertDescription>
+          </Alert>
+        ),
       )}
-      {!requestId && !sending && (!office.endpoint || error) && (
-        <RequestDeliveryLinks values={values} onDraftOpen={setNotice} />
+      {tx(
+        !requestId && !sending && (!office.endpoint || error) && (
+          <RequestDeliveryLinks values={values} onDraftOpen={setNotice} />
+        ),
       )}
       <div className="flex flex-wrap items-center gap-4">
-        {office.endpoint && !requestId && (
-          <Button
-            disabled={sending}
-            onClick={() => void send()}
-            className="h-12 gap-4 px-5"
-          >
-            {sending ? (
-              <>
-                <LoaderCircle className="animate-spin" />
-                جارٍ الإرسال
-              </>
-            ) : (
-              <>
-                أرسل الطلب للمكتب <Arrow />
-              </>
-            )}
-          </Button>
+        {tx(
+          office.endpoint && !requestId && (
+            <Button
+              disabled={sending}
+              onClick={() => void send()}
+              className="h-12 gap-4 px-5"
+            >
+              {tx(
+                sending ? (
+                  <>
+                    <LoaderCircle className="animate-spin" />
+                    {tx("جارٍ الإرسال")}
+                  </>
+                ) : (
+                  <>
+                    {tx("أرسل الطلب للمكتب")}
+                    <Arrow />
+                  </>
+                ),
+              )}
+            </Button>
+          ),
         )}
-        {!requestId && (
-          <Button
-            variant="outline"
-            onClick={edit}
-            disabled={sending}
-            className="h-12"
-          >
-            تعديل البيانات
-          </Button>
+        {tx(
+          !requestId && (
+            <Button
+              variant="outline"
+              onClick={edit}
+              disabled={sending}
+              className="h-12"
+            >
+              {tx("تعديل البيانات")}
+            </Button>
+          ),
         )}
         <Button variant="link" onClick={() => void copy()}>
           <Copy />
-          نسخ الملخص
+          {tx("نسخ الملخص")}
         </Button>
         <Button variant="link" onClick={() => downloadSummary(values)}>
           <Download />
-          تنزيل الملخص
+          {tx("تنزيل الملخص")}
         </Button>
       </div>
       <p className="text-xs text-muted-foreground" aria-live="polite">
-        {notice}
+        {tx(notice)}
       </p>
     </div>
   );

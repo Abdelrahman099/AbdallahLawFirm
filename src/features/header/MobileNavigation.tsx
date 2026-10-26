@@ -1,3 +1,6 @@
+import { LanguageSwitch } from "@/i18n/links";
+import { LocalizedNavLink as NavLink } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/button";
 import {
@@ -20,7 +23,7 @@ import { serviceGroups } from "@/data/serviceGroups";
 import { office } from "@/config/office";
 import { MapPin, Menu, X } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
-import { NavLink } from "react-router-dom";
+
 import { navigation } from "./navigation";
 import "./navigation.css";
 import { BrandImage } from "@/components/brand/BrandImage";
@@ -35,6 +38,8 @@ export function MobileNavigation({
   onOpenChange: (open: boolean) => void;
   inverse?: boolean;
 }) {
+  const { tx, dir } = useTranslate();
+
   const reduced = useReducedMotion();
   return (
     <Sheet open={open} onOpenChange={onOpenChange}>
@@ -47,7 +52,7 @@ export function MobileNavigation({
             inverse &&
               "border-white/25 text-ivory hover:bg-white/5 hover:text-ivory",
           )}
-          aria-label="فتح القائمة"
+          aria-label={tx("فتح القائمة")}
         >
           <Menu className="size-5" />
         </Button>
@@ -56,23 +61,30 @@ export function MobileNavigation({
         side="left"
         className="mobile-navigation"
         showCloseButton={false}
-        dir="rtl"
+        dir={dir}
       >
         <SheetHeader className="mobile-navigation-heading">
           <div className="mobile-navigation-top">
             <Logo />
             <SheetClose asChild>
-              <Button variant="outline" size="icon" aria-label="إغلاق القائمة">
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label={tx("إغلاق القائمة")}
+              >
                 <X />
               </Button>
             </SheetClose>
           </div>
           <SheetTitle className="mobile-navigation-title">
-            كيف نقدر نساعدك؟
+            {tx("كيف نقدر نساعدك؟")}
           </SheetTitle>
           <SheetDescription>
-            اختر الخدمة، أو تعرّف على المكتب قبل حجز استشارتك.
+            {tx("اختر الخدمة، أو تعرّف على المكتب قبل حجز استشارتك.")}
           </SheetDescription>
+          <div className="mobile-language-choice">
+            <LanguageSwitch />
+          </div>
         </SheetHeader>
         <motion.figure
           className="mobile-navigation-photo"
@@ -82,24 +94,27 @@ export function MobileNavigation({
         >
           <BrandImage asset="contracts" loading="eager" />
         </motion.figure>
-        <nav aria-label="قائمة الموبايل" className="mobile-navigation-links">
+        <nav
+          aria-label={tx("قائمة الموبايل")}
+          className="mobile-navigation-links"
+        >
           <Accordion type="single" collapsible className="mobile-services-menu">
             <AccordionItem value="services">
-              <AccordionTrigger>الخدمات القانونية</AccordionTrigger>
+              <AccordionTrigger>{tx("الخدمات القانونية")}</AccordionTrigger>
               <AccordionContent>
                 <div className="mobile-services-links">
                   {serviceGroups.map((group) => (
                     <div className="mobile-service-group" key={group.id}>
-                      <h3>{group.title}</h3>
+                      <h3>{tx(group.title)}</h3>
                       {group.slugs.map((slug) => (
                         <SheetClose asChild key={slug}>
                           <NavLink to={`/services/${slug}`}>
                             <span>
-                              {
+                              {tx(
                                 services.find(
                                   (service) => service.slug === slug,
-                                )!.title
-                              }
+                                )!.title,
+                              )}
                             </span>
                           </NavLink>
                         </SheetClose>
@@ -108,7 +123,7 @@ export function MobileNavigation({
                   ))}
                   <SheetClose asChild>
                     <NavLink to="/services" className="mobile-services-all">
-                      دليل الخدمات بالكامل
+                      {tx("دليل الخدمات بالكامل")}
                     </NavLink>
                   </SheetClose>
                 </div>
@@ -122,7 +137,7 @@ export function MobileNavigation({
             ].map(([to, text]) => (
               <SheetClose asChild key={to}>
                 <NavLink to={to} end={to === "/"}>
-                  <span>{text}</span>
+                  <span>{tx(text)}</span>
                 </NavLink>
               </SheetClose>
             ))}
@@ -130,11 +145,11 @@ export function MobileNavigation({
         </nav>
         <div className="mobile-navigation-action">
           <a className="text-link" href={`mailto:${office.email}`} dir="ltr">
-            {office.email}
+            {tx(office.email)}
           </a>
           <p>
             <MapPin aria-hidden="true" />
-            بالمكتب أو عن بُعد · الاستشارة الأولى مجانية
+            {tx("بالمكتب أو عن بُعد · الاستشارة الأولى مجانية")}
           </p>
         </div>
       </SheetContent>

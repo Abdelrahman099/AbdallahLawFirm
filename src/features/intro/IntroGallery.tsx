@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useState } from "react";
 import { Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +11,8 @@ export function IntroGallery({
 }: {
   onPreview: (id: IntroId, trigger: HTMLButtonElement) => void;
 }) {
+  const { tx } = useTranslate();
+
   const [archive, setArchive] = useState(false);
   const previous = introVariants.filter(
     (item) => !item.id.startsWith("logo-") && item.id !== "balance-onyx",
@@ -25,9 +28,9 @@ export function IntroGallery({
           <IntroArtwork variant={item.id} still={still} />
         </div>
         <div className="flex flex-col items-start gap-3 p-5">
-          <h3 className="text-2xl">{item.name}</h3>
+          <h3 className="text-2xl">{tx(item.name)}</h3>
           <p className="min-h-14 text-sm leading-7 text-muted-foreground">
-            {item.story}
+            {tx(item.story)}
           </p>
           <Button
             variant="outline"
@@ -35,7 +38,7 @@ export function IntroGallery({
             className="mt-2 min-h-11"
           >
             <Play />
-            شاهد الحركة بالحجم الكامل
+            {tx("شاهد الحركة بالحجم الكامل")}
           </Button>
         </div>
       </article>
@@ -44,15 +47,15 @@ export function IntroGallery({
   return (
     <div className="flex flex-col gap-8">
       <div className="max-w-3xl">
-        <h2 className="mb-3 text-3xl">الشعار هو الحركة.</h2>
+        <h2 className="mb-3 text-3xl">{tx("الشعار هو الحركة.")}</h2>
         <p className="text-sm leading-8 text-muted-foreground">
-          ٥ حركات لفكرة واحدة: كفّة ترتفع وأخرى تنخفض، ثم تنزل الريشة إلى موضعها
-          ويتوقف الميزان. لكل اتجاه إيقاع ودخول مختلفان، والنهاية هي الشعار
-          المعتمد بتفاصيله الأصلية.
+          {tx(
+            "٥ حركات لفكرة واحدة: كفّة ترتفع وأخرى تنخفض، ثم تنزل الريشة إلى موضعها ويتوقف الميزان. لكل اتجاه إيقاع ودخول مختلفان، والنهاية هي الشعار المعتمد بتفاصيله الأصلية.",
+          )}
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {logoIntroVariants.map((item) => card(item, true))}
+        {tx(logoIntroVariants.map((item) => card(item, true)))}
       </div>
       <div className="border-t border-border pt-8">
         <Button
@@ -61,14 +64,14 @@ export function IntroGallery({
           aria-controls="intro-archive"
           onClick={() => setArchive((value) => !value)}
         >
-          {archive ? "إخفاء التصميمات السابقة" : "قارن بالتصميمات السابقة"}
+          {tx(archive ? "إخفاء التصميمات السابقة" : "قارن بالتصميمات السابقة")}
         </Button>
         <div
           id="intro-archive"
           hidden={!archive}
           className="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3"
         >
-          {archive && previous.map((item) => card(item, false))}
+          {tx(archive && previous.map((item) => card(item, false)))}
         </div>
       </div>
     </div>

@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { BrandCaption } from "../BrandCaption";
 import { BalanceScales } from "./BalanceScales";
 import { useBalanceTimeline } from "./useBalanceTimeline";
@@ -5,6 +6,8 @@ import type { BalanceIntroId } from "./variants";
 import "./balance.css";
 
 export function BalanceIntro({ variant }: { variant: BalanceIntroId }) {
+  const { tx } = useTranslate();
+
   const root = useBalanceTimeline(variant);
   return (
     <div
@@ -46,7 +49,9 @@ export function BalanceIntro({ variant }: { variant: BalanceIntroId }) {
       </div>
       <div className="balance-caption">
         <BrandCaption />
-        <span className="balance-message">من الوضوح، يبدأ الاتزان.</span>
+        <span className="balance-message">
+          {tx("من الوضوح، يبدأ الاتزان.")}
+        </span>
       </div>
     </div>
   );

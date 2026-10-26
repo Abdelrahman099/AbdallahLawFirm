@@ -47,10 +47,13 @@ export function installIntroStartupGate() {
       )
         return;
       const url = new URL(link.href, location.href);
-      if (url.origin === location.origin && url.pathname === "/") {
+      if (
+        url.origin === location.origin &&
+        /^\/(?:en\/?)?$/.test(url.pathname)
+      ) {
         show();
         // A same-page link may keep the current route mounted.
-        if (location.pathname === "/") {
+        if (/^\/(?:en\/?)?$/.test(location.pathname)) {
           window.dispatchEvent(new Event(homeIntroReplayEvent));
         }
       }
@@ -58,10 +61,10 @@ export function installIntroStartupGate() {
     { capture: true },
   );
   window.addEventListener("popstate", () => {
-    if (location.pathname === "/") show();
+    if (/^\/(?:en\/?)?$/.test(location.pathname)) show();
     else releaseIntroStartupCover();
   });
   window.addEventListener("pageshow", (event) => {
-    if (event.persisted && location.pathname === "/") show();
+    if (event.persisted && /^\/(?:en\/?)?$/.test(location.pathname)) show();
   });
 }

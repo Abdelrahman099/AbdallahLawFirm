@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import type { PageRegistry } from "@/app/AppRoutes";
 import { AppRoutes } from "@/app/AppRoutes";
 import { RouteEffects } from "@/app/RouteEffects";
@@ -7,12 +8,22 @@ import { Preloader } from "@/components/layout/Preloader";
 import { ContactActions } from "@/components/layout/ContactActions";
 import { Suspense } from "react";
 import { MotionConfig } from "motion/react";
+import { LanguageProvider } from "@/i18n/LanguageProvider";
 
 export default function App({ pages }: { pages?: PageRegistry }) {
   return (
+    <LanguageProvider>
+      <AppContent pages={pages} />
+    </LanguageProvider>
+  );
+}
+function AppContent({ pages }: { pages?: PageRegistry }) {
+  const { tx } = useTranslate();
+
+  return (
     <MotionConfig reducedMotion="user">
       <a className="skip-link" href="#main-content">
-        انتقل إلى المحتوى
+        {tx("انتقل إلى المحتوى")}
       </a>
       <Preloader />
       <Header />
@@ -20,7 +31,7 @@ export default function App({ pages }: { pages?: PageRegistry }) {
         <Suspense
           fallback={
             <div className="site-container min-h-[65vh] py-20" role="status">
-              جارٍ تجهيز الصفحة…
+              {tx("جارٍ تجهيز الصفحة…")}
             </div>
           }
         >

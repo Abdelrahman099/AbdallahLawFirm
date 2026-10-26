@@ -1,5 +1,7 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Play, Check, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -25,6 +27,8 @@ import { IdentityHeroLab } from "@/features/hero/identity/IdentityHeroLab";
 import { WelcomeDirectionLab } from "@/features/hero/slider/WelcomeDirectionLab";
 
 export default function DesignLabPage() {
+  const { t: translateText, tx, dir } = useTranslate();
+
   const [params, setParams] = useSearchParams();
   const ready = useClientReady();
   const hero = getHero(ready ? params.get("hero") : null);
@@ -53,7 +57,11 @@ export default function DesignLabPage() {
     try {
       localStorage.setItem("shehri-hero", hero.id);
       window.dispatchEvent(new Event("hero-selection"));
-      setNotice("تم تطبيق «" + hero.name + "» على الرئيسية.");
+      setNotice(
+        translateText("تم تطبيق «{{name}}» على الرئيسية.", {
+          name: tx(hero.name),
+        }),
+      );
     } catch {
       setNotice("تعذّر حفظ الاختيار في المتصفح.");
     }
@@ -63,7 +71,10 @@ export default function DesignLabPage() {
       localStorage.setItem("shehri-intro", intro.id);
       sessionStorage.removeItem("shehri-intro-v2");
       setNotice(
-        "تم اختيار «" + intro.name + "» للافتتاحية التالية في هذا المتصفح.",
+        translateText(
+          "تم اختيار «{{name}}» للافتتاحية التالية في هذا المتصفح.",
+          { name: tx(intro.name) },
+        ),
       );
     } catch {
       setNotice("تعذّر حفظ الاختيار في المتصفح.");
@@ -73,20 +84,21 @@ export default function DesignLabPage() {
     <>
       <div className="site-container py-10">
         <p className="mb-3 text-xs text-muted-foreground">
-          مساحة مقارنة التصميم
+          {tx("مساحة مقارنة التصميم")}
         </p>
         <h1 className="text-3xl md:text-5xl" tabIndex={-1}>
-          معرض تصميمات المكتب.
+          {tx("معرض تصميمات المكتب.")}
         </h1>
         <p className="mt-4 max-w-2xl text-sm text-muted-foreground">
-          قارن التكوينات بالحجم الحقيقي على اللابتوب والموبايل، وجرّب التفاعل
-          قبل اختيار التصميم.
+          {tx(
+            "قارن التكوينات بالحجم الحقيقي على اللابتوب والموبايل، وجرّب التفاعل قبل اختيار التصميم.",
+          )}
         </p>
       </div>
       <Tabs
         value={selectedTab}
         onValueChange={setTabOverride}
-        dir="rtl"
+        dir={dir}
         className="gap-0"
       >
         <div className="site-container">
@@ -95,19 +107,19 @@ export default function DesignLabPage() {
               value="welcome"
               className="h-auto min-h-11 flex-none px-4"
             >
-              شريحة الترحيب · ٤ اتجاهات
+              {tx("شريحة الترحيب · ٤ اتجاهات")}
             </TabsTrigger>
             <TabsTrigger
               value="identity"
               className="h-auto min-h-11 flex-none px-4"
             >
-              الشعار والهيرو · ١٠ جديدة
+              {tx("الشعار والهيرو · ١٠ جديدة")}
             </TabsTrigger>
             <TabsTrigger
               value="slider"
               className="h-auto min-h-11 flex-none px-4"
             >
-              مقارنة السلايدر · 2
+              {tx("مقارنة السلايدر · 2")}
             </TabsTrigger>
             <TabsTrigger
               value="heroes"
@@ -119,7 +131,7 @@ export default function DesignLabPage() {
               value="intro"
               className="h-auto min-h-11 flex-none px-4"
             >
-              بريلودر الشعار · ٥
+              {tx("بريلودر الشعار · ٥")}
             </TabsTrigger>
             <TabsTrigger
               value="header"
@@ -131,7 +143,7 @@ export default function DesignLabPage() {
               value="filters"
               className="h-auto min-h-11 flex-none px-4"
             >
-              فلتر الخدمات · 5
+              {tx("فلتر الخدمات · 5")}
             </TabsTrigger>
           </TabsList>
         </div>
@@ -157,28 +169,29 @@ export default function DesignLabPage() {
                 className="min-h-19 border border-border p-3 text-right transition-colors hover:bg-secondary aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-ivory"
               >
                 <span className="mb-1 block text-[10px] opacity-80">
-                  {String(i + 1).padStart(2, "0")}
+                  {tx(String(i + 1).padStart(2, "0"))}
                 </span>
-                <span className="text-sm">{h.name}</span>
+                <span className="text-sm">{tx(h.name)}</span>
               </button>
             ))}
           </div>
           <div className="border-y border-border bg-secondary">
             <div className="site-container flex flex-wrap items-center justify-between gap-4 py-5">
               <div>
-                <h2 className="text-xl">{hero.name}</h2>
+                <h2 className="text-xl">{tx(hero.name)}</h2>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  {hero.note}
+                  {tx(hero.note)}
                 </p>
               </div>
               <div className="flex gap-3">
                 <Button onClick={applyHero}>
                   <Check />
-                  استخدمه في الموقع
+                  {tx("استخدمه في الموقع")}
                 </Button>
                 <Button variant="outline" asChild>
                   <Link to="/">
-                    شاهد الرئيسية <ArrowUpRight />
+                    {tx("شاهد الرئيسية")}
+                    <ArrowUpRight />
                   </Link>
                 </Button>
               </div>
@@ -197,8 +210,10 @@ export default function DesignLabPage() {
             className="site-container py-5 text-xs text-muted-foreground"
             role="status"
           >
-            {notice ||
-              "جرّب التمرير والمؤشر في الاتجاهات ثلاثية الأبعاد، أو أسهم التنقّل في الاتجاه السادس."}
+            {tx(
+              notice ||
+                "جرّب التمرير والمؤشر في الاتجاهات ثلاثية الأبعاد، أو أسهم التنقّل في الاتجاه السادس.",
+            )}
           </p>
         </TabsContent>
         <TabsContent value="intro" className="site-container pb-12">
@@ -224,21 +239,24 @@ export default function DesignLabPage() {
           side="bottom"
           showCloseButton={false}
           className="h-dvh gap-0 border-0 p-0"
-          dir="rtl"
+          dir={dir}
           onCloseAutoFocus={(event) => {
             event.preventDefault();
             introTrigger.current?.focus();
           }}
         >
           <SheetHeader className="sr-only">
-            <SheetTitle>{intro.name}</SheetTitle>
-            <SheetDescription>معاينة افتتاحية {intro.name}</SheetDescription>
+            <SheetTitle>{tx(intro.name)}</SheetTitle>
+            <SheetDescription>
+              {tx("معاينة افتتاحية ")}
+              {tx(intro.name)}
+            </SheetDescription>
           </SheetHeader>
           <div className="relative min-h-0 flex-1">
             <IntroArtwork key={run} variant={intro.id} />
           </div>
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-ivory px-6 py-4">
-            <span className="text-sm">{intro.name}</span>
+            <span className="text-sm">{tx(intro.name)}</span>
             <div className="flex flex-wrap gap-2">
               <Button
                 variant="outline"
@@ -246,20 +264,20 @@ export default function DesignLabPage() {
                 onClick={() => setRun((r) => r + 1)}
               >
                 <Play />
-                إعادة التشغيل
+                {tx("إعادة التشغيل")}
               </Button>
               <Button className="min-h-11" onClick={applyIntro}>
                 <Check />
-                جرّبه في هذا المتصفح
+                {tx("جرّبه في هذا المتصفح")}
               </Button>
               <SheetClose asChild>
                 <Button variant="outline" className="min-h-11">
-                  إغلاق
+                  {tx("إغلاق")}
                 </Button>
               </SheetClose>
             </div>
             <p role="status" className="w-full text-xs text-muted-foreground">
-              {notice}
+              {tx(notice)}
             </p>
           </div>
         </SheetContent>

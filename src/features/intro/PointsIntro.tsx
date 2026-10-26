@@ -1,6 +1,9 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { motion } from "motion/react";
 import { BrandCaption } from "./BrandCaption";
 export function PointsIntro() {
+  const { tx } = useTranslate();
+
   return (
     <div className="intro-points-design">
       <motion.div
@@ -47,7 +50,7 @@ export function PointsIntro() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.9 }}
       >
-        فهم. وضوح. خطوة تالية.
+        {tx("فهم. وضوح. خطوة تالية.")}
       </motion.p>
     </div>
   );

@@ -26,6 +26,6 @@ export const office = {
     : "",
   indexable: env.VITE_ALLOW_INDEXING === "true",
 };
-export function whatsappUrl(message: string) {
+export function whatsappUrl(message: string = "") {
   return contactWhatsAppUrl(office.whatsapp, message);
 }

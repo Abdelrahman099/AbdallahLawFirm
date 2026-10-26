@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Scale, Columns3, Link2 } from "lucide-react";
@@ -6,6 +7,8 @@ import { chapters } from "./chapters";
 import "./showcase.css";
 const Scene = lazy(() => import("./SculpturalScene"));
 export function HeroShowcase() {
+  const { tx } = useTranslate();
+
   const [index, setIndex] = useState(0),
     [enabled, setEnabled] = useState(false),
     [loaded, setLoaded] = useState(false);
@@ -41,16 +44,16 @@ export function HeroShowcase() {
     <div
       className="hero-showcase"
       role="region"
-      aria-label="قيم المكتب"
-      aria-roledescription="عرض شرائح"
+      aria-label={tx("قيم المكتب")}
+      aria-roledescription={tx("عرض شرائح")}
     >
       <div className="showcase-stage" data-chapter={chapter.id}>
         <div className="showcase-top">
-          <span>منهجنا في العمل</span>
+          <span>{tx("منهجنا في العمل")}</span>
           <span dir="ltr">0{index + 1} / 03</span>
         </div>
         <span className="showcase-word" aria-hidden="true">
-          {chapter.word}
+          {tx(chapter.word)}
         </span>
         <div className="showcase-model" aria-hidden="true">
           <div
@@ -77,8 +80,8 @@ export function HeroShowcase() {
             transition={{ duration: 0.25 }}
             aria-live="polite"
           >
-            <h2>{chapter.title}</h2>
-            <p>{chapter.text}</p>
+            <h2>{tx(chapter.title)}</h2>
+            <p>{tx(chapter.text)}</p>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -89,19 +92,19 @@ export function HeroShowcase() {
               key={c.id}
               onClick={() => setIndex(i)}
               aria-pressed={index === i}
-              aria-label={"عرض " + c.label}
+              aria-label={tx("عرض " + c.label)}
             >
               <span>0{i + 1}</span>
               <i />
-              {c.label}
+              {tx(c.label)}
             </button>
           ))}
         </div>
         <div className="showcase-arrows">
-          <button aria-label="الشريحة السابقة" onClick={() => next(-1)}>
+          <button aria-label={tx("الشريحة السابقة")} onClick={() => next(-1)}>
             <ArrowRight size={18} />
           </button>
-          <button aria-label="الشريحة التالية" onClick={() => next(1)}>
+          <button aria-label={tx("الشريحة التالية")} onClick={() => next(1)}>
             <ArrowLeft size={18} />
           </button>
         </div>

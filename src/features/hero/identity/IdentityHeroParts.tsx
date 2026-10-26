@@ -1,3 +1,5 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import {
   AnimatePresence,
   motion,
@@ -5,7 +7,7 @@ import {
   useReducedMotion,
 } from "motion/react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import { BrandImage, type BrandImageName } from "@/components/brand/BrandImage";
 import { office } from "@/config/office";
 import { serviceGroups } from "@/data/serviceGroups";
@@ -27,19 +29,21 @@ export function IdentityLockup({
   light?: boolean;
   markOnly?: boolean;
 }) {
+  const { tx } = useTranslate();
+
   return (
     <div className="ih-identity" data-entrance>
       <img
         className="ih-emblem"
         src={`/brand/v4/mark-${light ? "beige" : "primary"}.svg`}
-        alt={markOnly ? office.fullName : ""}
+        alt={tx(markOnly ? office.fullName : "")}
         width="120"
         height="102"
       />
       {!markOnly && (
         <div className="ih-wordmark">
-          <p>{office.name}</p>
-          <span>{office.descriptor}</span>
+          <p>{tx(office.name)}</p>
+          <span>{tx(office.descriptor)}</span>
         </div>
       )}
     </div>
@@ -53,6 +57,8 @@ export function IdentityMessage({
   slide: IdentitySlide;
   preview?: boolean;
 }) {
+  const { tx } = useTranslate();
+
   const Heading = preview ? "h2" : "h1";
   const reduced = useReducedMotion();
   const [scope, animate] = useAnimate<HTMLDivElement>();
@@ -68,14 +74,14 @@ export function IdentityMessage({
   return (
     <div className="ih-message" data-entrance>
       <div ref={scope} key={slide.asset}>
-        <p className="ih-eyebrow">{slide.label}</p>
+        <p className="ih-eyebrow">{tx(slide.label)}</p>
         <Heading>
-          {slide.title}
-          <span>{slide.accent}</span>
+          {tx(slide.title)}
+          <span>{tx(slide.accent)}</span>
         </Heading>
-        <p className="ih-description">{slide.description}</p>
+        <p className="ih-description">{tx(slide.description)}</p>
         <Link className="ih-link" to={slide.link}>
-          {slide.cta}
+          {tx(slide.cta)}
           <span className="ih-link-line" aria-hidden="true" />
         </Link>
       </div>
@@ -123,18 +129,20 @@ export function IdentitySlideControls({
   onSelect: (index: number) => void;
   chapters?: boolean;
 }) {
+  const { tx, t } = useTranslate();
+
   return (
     <div
       className={`ih-slide-controls ${chapters ? "ih-chapter-controls" : ""}`}
       role="group"
-      aria-label="اختيار مجال العمل"
+      aria-label={tx("اختيار مجال العمل")}
     >
       {identitySlides.map((slide, i) => (
         <button
           key={slide.asset}
           type="button"
           aria-pressed={i === index}
-          aria-label={`عرض ${slide.label}`}
+          aria-label={tx(t("عرض {{v0}}", { v0: tx(slide.label) }))}
           onClick={() => onSelect(i)}
         >
           {chapters ? (
@@ -142,7 +150,7 @@ export function IdentitySlideControls({
               <span className="ih-chapter-number" aria-hidden="true">
                 0{i + 1}
               </span>
-              <span>{slide.label}</span>
+              <span>{tx(slide.label)}</span>
             </>
           ) : (
             <span className="ih-dot" aria-hidden="true" />

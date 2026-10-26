@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import type { ReactNode } from "react";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
@@ -9,7 +10,11 @@ export function FieldGroup({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={cn("flex flex-col gap-5", className)}>{children}</div>;
+  const { tx } = useTranslate();
+
+  return (
+    <div className={cn("flex flex-col gap-5", className)}>{tx(children)}</div>
+  );
 }
 
 export function Field({
@@ -25,21 +30,33 @@ export function Field({
   error?: string;
   children: ReactNode;
 }) {
+  const { tx } = useTranslate();
+
   return (
     <div className="flex flex-col gap-2" data-invalid={!!error || undefined}>
       <Label htmlFor={id} className="text-sm font-medium leading-6">
-        {label}
-        {required ? (
-          " *"
-        ) : (
-          <span className="text-xs text-muted-foreground">اختياري</span>
+        {tx(label)}
+        {tx(
+          required ? (
+            " *"
+          ) : (
+            <span className="text-xs text-muted-foreground">
+              {tx("اختياري")}
+            </span>
+          ),
         )}
       </Label>
-      {children}
-      {error && (
-        <p id={id + "-error"} className="text-xs text-destructive" role="alert">
-          {error}
-        </p>
+      {tx(children)}
+      {tx(
+        error && (
+          <p
+            id={id + "-error"}
+            className="text-xs text-destructive"
+            role="alert"
+          >
+            {tx(error)}
+          </p>
+        ),
       )}
     </div>
   );

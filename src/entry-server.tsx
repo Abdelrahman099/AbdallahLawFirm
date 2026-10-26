@@ -44,3 +44,5 @@ export function render(path: string) {
     </StaticRouter>,
   );
 }
+
+export { createLanguage, languageFromPath, stripLanguage } from "./i18n/config";

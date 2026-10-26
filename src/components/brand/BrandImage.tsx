@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import type { ComponentProps } from "react";
 
 export const brandImagery = {
@@ -76,13 +77,15 @@ export function BrandImage({
   sizes = "(max-width: 700px) 100vw, 50vw",
   ...props
 }: ComponentProps<"img"> & { asset: BrandImageName }) {
+  const { tx } = useTranslate();
+
   const photo = brandVisual(asset);
   return (
     <img
       src={photo.src}
       srcSet={`${photo.mobile} 720w, ${photo.src} 1254w`}
       sizes={sizes}
-      alt={photo.alt}
+      alt={tx(photo.alt)}
       width={1254}
       height={1254}
       loading="lazy"

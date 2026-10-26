@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { IntroArtwork } from "@/features/intro/IntroArtwork";
 import { getIntro } from "@/features/intro/variants";
 import { useLocation } from "react-router-dom";
@@ -30,12 +31,14 @@ export function Preloader() {
       window.removeEventListener(homeIntroReplayEvent, requestReplay);
     };
   }, []);
-  return location.pathname === "/" ? (
+  return /^\/(?:en\/?)?$/.test(location.pathname) ? (
     <HomeIntro key={`${location.key}-${restore}`} />
   ) : null;
 }
 
 function HomeIntro() {
+  const { tx } = useTranslate();
+
   const reduced = useReducedMotion();
   const [variant, setVariant] = useState(getIntro(null));
   const [visible, setVisible] = useState(true);
@@ -65,8 +68,10 @@ function HomeIntro() {
   }, [variant, reduced, close]);
   return (
     <AnimatePresence>
-      {visible && (
-        <IntroOverlay variant={variant} reduced={reduced} onDismiss={close} />
+      {tx(
+        visible && (
+          <IntroOverlay variant={variant} reduced={reduced} onDismiss={close} />
+        ),
       )}
     </AnimatePresence>
   );
@@ -81,6 +86,8 @@ function IntroOverlay({
   reduced: boolean | null;
   onDismiss: () => void;
 }) {
+  const { tx } = useTranslate();
+
   const closeButton = useRef<HTMLButtonElement>(null);
   useLayoutEffect(() => {
     const background = document.querySelectorAll<HTMLElement>(
@@ -107,7 +114,7 @@ function IntroOverlay({
       className="preloader"
       role="dialog"
       aria-modal="true"
-      aria-label="افتتاحية المكتب"
+      aria-label={tx("افتتاحية المكتب")}
       initial={false}
       exit={reduced ? { opacity: 0 } : { y: "-100%" }}
       transition={{ duration: reduced ? 0.1 : 0.55, ease: [0.76, 0, 0.24, 1] }}
@@ -125,7 +132,7 @@ function IntroOverlay({
         className={`intro-skip ${variant.light ? "intro-skip-light" : ""}`}
         onClick={onDismiss}
       >
-        تخطي الافتتاحية
+        {tx("تخطي الافتتاحية")}
       </button>
     </motion.div>
   );

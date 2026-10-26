@@ -1,6 +1,8 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { Controller } from "react-hook-form";
 import type { UseFormReturn } from "react-hook-form";
-import { Link } from "react-router-dom";
+
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import {
   Select,
@@ -26,6 +28,8 @@ export function RequestStep({
   form: UseFormReturn<ConsultationValues>;
   back: () => void;
 }) {
+  const { tx, dir } = useTranslate();
+
   const {
     control,
     register,
@@ -36,7 +40,7 @@ export function RequestStep({
     <div className="space-y-6">
       <Field
         id="service"
-        label="مجال الاستشارة"
+        label={tx("مجال الاستشارة")}
         required
         error={errors.service?.message}
       >
@@ -45,7 +49,7 @@ export function RequestStep({
           control={control}
           render={({ field }) => (
             <Select
-              dir="rtl"
+              dir={dir}
               value={field.value}
               onValueChange={field.onChange}
             >
@@ -56,15 +60,17 @@ export function RequestStep({
                 aria-invalid={!!errors.service}
                 aria-describedby={errors.service ? "service-error" : undefined}
               >
-                <SelectValue placeholder="اختر الخدمة" />
+                <SelectValue placeholder={tx("اختر الخدمة")} />
               </SelectTrigger>
               <SelectContent>
                 {services.map((s) => (
-                  <SelectItem key={s.slug} value={s.slug}>
-                    {s.title}
-                  </SelectItem>
-                ))}
-                <SelectItem value="general">استشارة عامة / مجال آخر</SelectItem>
+                    <SelectItem key={s.slug} value={s.slug}>
+                      {tx(s.title)}
+                    </SelectItem>
+                  ))}
+                <SelectItem value="general">
+                  {tx("استشارة عامة / مجال آخر")}
+                </SelectItem>
               </SelectContent>
             </Select>
           )}
@@ -72,13 +78,13 @@ export function RequestStep({
       </Field>
       <div className="grid gap-6 md:grid-cols-2">
         <div className="space-y-2">
-          <Label htmlFor="method">الطريقة المفضلة</Label>
+          <Label htmlFor="method">{tx("الطريقة المفضلة")}</Label>
           <Controller
             name="method"
             control={control}
             render={({ field }) => (
               <Select
-                dir="rtl"
+                dir={dir}
                 value={field.value}
                 onValueChange={field.onChange}
               >
@@ -86,14 +92,14 @@ export function RequestStep({
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="remote">عن بُعد</SelectItem>
-                  <SelectItem value="office">بالمكتب في جدة</SelectItem>
+                  <SelectItem value="remote">{tx("عن بُعد")}</SelectItem>
+                  <SelectItem value="office">{tx("بالمكتب في جدة")}</SelectItem>
                 </SelectContent>
               </Select>
             )}
           />
         </div>
-        <Field id="date" label="تاريخ مفضّل" error={errors.date?.message}>
+        <Field id="date" label={tx("تاريخ مفضّل")} error={errors.date?.message}>
           <Input
             id="date"
             type="date"
@@ -106,17 +112,17 @@ export function RequestStep({
           />
         </Field>
       </div>
-      <Field id="summary" label="ملخص الموضوع">
+      <Field id="summary" label={tx("ملخص الموضوع")}>
         <Textarea
           id="summary"
-          placeholder="مثال: أرغب في استشارة بشأن تأسيس شركة جديدة."
+          placeholder={tx("مثال: أرغب في استشارة بشأن تأسيس شركة جديدة.")}
           rows={4}
           maxLength={500}
           className="min-h-32 resize-y bg-card text-base"
           {...register("summary")}
         />
         <p className="text-left text-xs text-muted-foreground">
-          {watch("summary").length} / 500
+          {tx(watch("summary").length)} / 500
         </p>
       </Field>
       <div className="flex items-start gap-3">
@@ -139,37 +145,46 @@ export function RequestStep({
           htmlFor="consent"
           className="block text-xs font-normal leading-7"
         >
-          اطلعت على{" "}
+          {tx("اطلعت على")}
+          {tx(" ")}
           <Link
             to="/privacy"
             target="_blank"
             className="underline underline-offset-4"
           >
-            الخصوصية
-          </Link>{" "}
-          و
+            {tx("الخصوصية")}
+          </Link>
+          {tx(" ")}
+          {tx("و")}
           <Link
             to="/terms"
             target="_blank"
             className="underline underline-offset-4"
           >
-            شروط الاستخدام
+            {tx("شروط الاستخدام")}
           </Link>
-          ، وأوافق على التواصل بشأن طلبي. *
+          {tx("، وأوافق على التواصل بشأن طلبي. *")}
         </Label>
       </div>
-      {errors.consent && (
-        <p id="consent-error" className="text-xs text-destructive" role="alert">
-          {errors.consent.message}
-        </p>
+      {tx(
+        errors.consent && (
+          <p
+            id="consent-error"
+            className="text-xs text-destructive"
+            role="alert"
+          >
+            {tx(errors.consent.message)}
+          </p>
+        ),
       )}
       <div className="flex items-center gap-6">
         <Button type="submit" className="h-13 gap-7 rounded-xs px-6">
-          راجع الطلب <ArrowLeft />
+          {tx("راجع الطلب")}
+          <ArrowLeft />
         </Button>
         <Button type="button" variant="link" onClick={back}>
           <ArrowRight />
-          رجوع
+          {tx("رجوع")}
         </Button>
       </div>
     </div>

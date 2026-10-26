@@ -1,5 +1,7 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   ToggleGroup,
@@ -12,6 +14,8 @@ import { getIdentityConcept, identityConcepts } from "./concepts";
 import "./identity-lab.css";
 
 export function IdentityHeroLab() {
+  const { t, tx } = useTranslate();
+
   const [params, setParams] = useSearchParams();
   const ready = useClientReady();
   const choice = getIdentityConcept(ready ? params.get("concept") : null);
@@ -33,7 +37,10 @@ export function IdentityHeroLab() {
       setNotice(
         id === defaultHeroId
           ? "تمت استعادة الهيرو الحالي في هذا المتصفح."
-          : `يمكنك مشاهدة «${choice.name}» على الرئيسية الآن. اختيار تجريبي في هذا المتصفح فقط.`,
+          : t(
+              "يمكنك مشاهدة «{{v0}}» على الرئيسية الآن. اختيار تجريبي في هذا المتصفح فقط.",
+              { v0: tx(choice.name) },
+            ),
       );
     } catch {
       setNotice("تعذّر حفظ الاختيار؛ المعاينة والمقارنة ما زالتا متاحتين.");
@@ -44,10 +51,11 @@ export function IdentityHeroLab() {
       <div className="site-container ih-lab-controls">
         <div className="ih-lab-families">
           <div>
-            <h2>الشعار جزء من المشهد.</h2>
+            <h2>{tx("الشعار جزء من المشهد.")}</h2>
             <p>
-              ٥ تطويرات لنفس الهيرو، و٥ تكوينات جديدة. الصور تصوّر مجالات العمل،
-              وليست صورًا للمكتب.
+              {tx(
+                "٥ تطويرات لنفس الهيرو، و٥ تكوينات جديدة. الصور تصوّر مجالات العمل، وليست صورًا للمكتب.",
+              )}
             </p>
           </div>
           <ToggleGroup
@@ -58,51 +66,61 @@ export function IdentityHeroLab() {
                 family === "evolved" ? "identity-signature" : "identity-cover",
               )
             }
-            aria-label="نوع التصميم"
+            aria-label={tx("نوع التصميم")}
           >
-            <ToggleGroupItem value="evolved">نفس التكوين · ٥</ToggleGroupItem>
-            <ToggleGroupItem value="creative">أفكار جديدة · ٥</ToggleGroupItem>
+            <ToggleGroupItem value="evolved">
+              {tx("نفس التكوين · ٥")}
+            </ToggleGroupItem>
+            <ToggleGroupItem value="creative">
+              {tx("أفكار جديدة · ٥")}
+            </ToggleGroupItem>
           </ToggleGroup>
         </div>
         <ToggleGroup
           value={choice.id}
           onValueChange={(id) => update("concept", id)}
-          aria-label="اختيار تصميم الهيرو"
+          aria-label={tx("اختيار تصميم الهيرو")}
         >
           {identityConcepts
-            .filter((concept) => concept.family === choice.family)
-            .map((concept) => (
-              <ToggleGroupItem
-                key={concept.id}
-                value={concept.id}
-                data-concept={concept.id}
-              >
-                <span className="ih-lab-number">
-                  {String(identityConcepts.indexOf(concept) + 1).padStart(
-                    2,
-                    "0",
-                  )}
-                </span>
-                {concept.name}
-              </ToggleGroupItem>
-            ))}
+              .filter((concept) => concept.family === choice.family)
+              .map((concept) => (
+                <ToggleGroupItem
+                  key={concept.id}
+                  value={concept.id}
+                  data-concept={concept.id}
+                >
+                  <span className="ih-lab-number">
+                    {tx(
+                      String(identityConcepts.indexOf(concept) + 1).padStart(
+                        2,
+                        "0",
+                      ),
+                    )}
+                  </span>
+                  {tx(concept.name)}
+                </ToggleGroupItem>
+              ))}
         </ToggleGroup>
         <div className="ih-lab-details">
           <div>
             <h3>
-              <span dir="ltr">{String(number).padStart(2, "0")}</span> ·{" "}
-              {choice.name}
+              <span dir="ltr">{tx(String(number).padStart(2, "0"))}</span> ·
+              {tx(" ")}
+              {tx(choice.name)}
             </h3>
-            <p>{choice.idea}</p>
-            <p className="ih-lab-motion">الحركة: {choice.motion}</p>
+            <p>{tx(choice.idea)}</p>
+            <p className="ih-lab-motion">
+              {tx("الحركة: ")}
+              {tx(choice.motion)}
+            </p>
           </div>
           <ToggleGroup
             value={view}
             onValueChange={(value) => update("view", value)}
-            aria-label="حجم المعاينة"
+            aria-label={tx("حجم المعاينة")}
           >
-            <ToggleGroupItem value="desktop">لابتوب</ToggleGroupItem>
-            <ToggleGroupItem value="mobile">موبايل 390</ToggleGroupItem>
+            <ToggleGroupItem value="desktop">{tx("لابتوب")}</ToggleGroupItem>
+            <ToggleGroupItem value="mobile">{tx("موبايل 390")}</ToggleGroupItem>
           </ToggleGroup>
         </div>
       </div>
@@ -116,20 +134,24 @@ export function IdentityHeroLab() {
         </div>
       </div>
       <div className="site-container ih-lab-actions">
-        <Button onClick={() => apply(choice.id)}>جرّبه على الرئيسية</Button>
+        <Button onClick={() => apply(choice.id)}>
+          {tx("جرّبه على الرئيسية")}
+        </Button>
         <Button asChild variant="outline">
-          <Link to="/">شاهد الرئيسية</Link>
+          <Link to="/">{tx("شاهد الرئيسية")}</Link>
         </Button>
         <Button variant="ghost" onClick={() => apply(defaultHeroId)}>
-          استعادة الهيرو الحالي
+          {tx("استعادة الهيرو الحالي")}
         </Button>
         <p role="status">
-          {notice ||
-            "اختيارات المعرض لا تغيّر التصميم الأساسي للجميع. جرّب الخدمات باللمس أو الأزرار، والملف بالمؤشر."}
+          {tx(
+            notice ||
+              "اختيارات المعرض لا تغيّر التصميم الأساسي للجميع. جرّب الخدمات باللمس أو الأزرار، والملف بالمؤشر.",
+          )}
         </p>
       </div>
       <div className="site-container ih-lab-references">
-        <span>مراجع الاتجاه:</span>
+        <span>{tx("مراجع الاتجاه:")}</span>
         <a
           href="https://reactbits.dev/components/tilted-card"
           target="_blank"
@@ -149,11 +171,12 @@ export function IdentityHeroLab() {
           target="_blank"
           rel="noreferrer"
         >
-          JCP · الهوية داخل التجربة
+          {tx("JCP · الهوية داخل التجربة")}
         </a>
         <p>
-          التنفيذ مخصص لهوية المكتب باستخدام Motion وGSAP؛ استلهام للحركة
-          والتكوين، مع الحفاظ على الشعار المعتمد.
+          {tx(
+            "التنفيذ مخصص لهوية المكتب باستخدام Motion وGSAP؛ استلهام للحركة والتكوين، مع الحفاظ على الشعار المعتمد.",
+          )}
         </p>
       </div>
     </div>

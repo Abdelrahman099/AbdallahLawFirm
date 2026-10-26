@@ -35,7 +35,7 @@ export const serviceSlides = [
 
 export const welcomeSlide = {
   kind: "welcome",
-  label: "أهلًا بكم",
+  label: "المكتب",
   title: office.name,
   descriptor: office.descriptor,
   description: "نستمع إليك، ونعتني بخطوتك القانونية.",

@@ -11,14 +11,14 @@ function ensureRtlText() {
     });
 }
 
-function officeMarker(name: string, href: string) {
+function officeMarker(name: string, href: string, label: string) {
   const el = document.createElement("a");
   el.className = "office-map-marker";
   el.href = href;
   el.target = "_blank";
   el.rel = "noreferrer";
   el.setAttribute("role", "link");
-  el.setAttribute("aria-label", `افتح عنوان ${name} في خرائط Google`);
+  el.setAttribute("aria-label", label);
   el.innerHTML = `
     <span class="office-map-pulse" aria-hidden="true"></span>
     <span class="office-map-pin">
@@ -36,6 +36,8 @@ export function mountOfficeMap(
     lat: number;
     name: string;
     href: string;
+    language: "ar" | "en";
+    translate: (source: string) => string;
     insetRight?: number;
     onReady: () => void;
     onUnavailable: () => void;
@@ -45,7 +47,14 @@ export function mountOfficeMap(
   const center: [number, number] = [options.lng, options.lat];
   const map = new maplibregl.Map({
     container,
-    style: officeMapStyle,
+    style:
+      options.language === "en"
+        ? JSON.parse(
+            JSON.stringify(officeMapStyle, (_key, value) =>
+              value === "name:ar" ? "name:en" : value,
+            ),
+          )
+        : officeMapStyle,
     center,
     zoom: 15.4,
     minZoom: 11,
@@ -55,14 +64,17 @@ export function mountOfficeMap(
     dragRotate: false,
     pitchWithRotate: false,
     locale: {
-      "CooperativeGesturesHandler.WindowsHelpText":
+      "CooperativeGesturesHandler.WindowsHelpText": options.translate(
         "استخدم Ctrl مع التمرير لتكبير الخريطة",
-      "CooperativeGesturesHandler.MacHelpText":
+      ),
+      "CooperativeGesturesHandler.MacHelpText": options.translate(
         "استخدم ⌘ مع التمرير لتكبير الخريطة",
-      "CooperativeGesturesHandler.MobileHelpText":
+      ),
+      "CooperativeGesturesHandler.MobileHelpText": options.translate(
         "استخدم إصبعين لتحريك الخريطة",
-      "NavigationControl.ZoomIn": "تكبير",
-      "NavigationControl.ZoomOut": "تصغير",
+      ),
+      "NavigationControl.ZoomIn": options.translate("تكبير"),
+      "NavigationControl.ZoomOut": options.translate("تصغير"),
     },
   });
   let loaded = false;
@@ -91,7 +103,11 @@ export function mountOfficeMap(
     options.onReady();
   });
   new maplibregl.Marker({
-    element: officeMarker(options.name, options.href),
+    element: officeMarker(
+      options.name,
+      options.href,
+      options.name + " — " + options.translate("افتح في خرائط Google"),
+    ),
     anchor: "bottom",
   })
     .setLngLat(center)

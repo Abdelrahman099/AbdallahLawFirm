@@ -1,7 +1,9 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { ComponentProps, ReactNode } from "react";
-import { Link } from "react-router-dom";
+
 export function CTA({
   children = "احجز استشارة",
   to = "/consultation",
@@ -16,6 +18,8 @@ export function CTA({
   light?: boolean;
   className?: string;
 }) {
+  const { tx } = useTranslate();
+
   return (
     <Button
       asChild
@@ -27,7 +31,7 @@ export function CTA({
       )}
     >
       <Link {...linkProps} to={to}>
-        <span>{children}</span>
+        <span>{tx(children)}</span>
       </Link>
     </Button>
   );

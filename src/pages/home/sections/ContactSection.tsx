@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { MapPin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { OfficeMap, officeMapLink } from "@/components/shared/OfficeMap";
@@ -6,6 +7,8 @@ import { QuickConsultationForm } from "@/features/consultation/QuickConsultation
 import "./contact-section.css";
 
 export function ContactSection() {
+  const { tx } = useTranslate();
+
   return (
     <section
       id="home-contact"
@@ -14,9 +17,9 @@ export function ContactSection() {
     >
       <div className="site-container">
         <div className="home-contact-heading">
-          <p className="eyebrow">على تواصل</p>
-          <h2 id="home-contact-heading">تواصل مع المكتب.</h2>
-          <p>نستقبلك في مكتبنا، أو نرتب معك استشارة عن بُعد.</p>
+          <p className="eyebrow">{tx("على تواصل")}</p>
+          <h2 id="home-contact-heading">{tx("تواصل مع المكتب.")}</h2>
+          <p>{tx("نستقبلك في مكتبنا، أو نرتب معك استشارة عن بُعد.")}</p>
         </div>
         <div className="home-contact-grid">
           <QuickConsultationForm />
@@ -25,12 +28,12 @@ export function ContactSection() {
             <div className="home-contact-address">
               <div>
                 <MapPin aria-hidden="true" size={21} />
-                <h3>مقر المكتب</h3>
+                <h3>{tx("مقر المكتب")}</h3>
               </div>
-              <address>{office.address}</address>
+              <address>{tx(office.address)}</address>
               <a href={`mailto:${office.email}`} className="home-contact-email">
                 <Mail size={17} aria-hidden="true" />
-                <span dir="ltr">{office.email}</span>
+                <span dir="ltr">{tx(office.email)}</span>
               </a>
               <Button
                 variant="outline"
@@ -38,7 +41,7 @@ export function ContactSection() {
                 className="h-12 bg-transparent text-inherit hover:bg-white/10 hover:text-inherit"
               >
                 <a href={officeMapLink} target="_blank" rel="noreferrer">
-                  افتح الموقع في خرائط Google
+                  {tx("افتح الموقع في خرائط Google")}
                 </a>
               </Button>
             </div>

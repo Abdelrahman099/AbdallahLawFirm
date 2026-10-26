@@ -1,6 +1,9 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { motion } from "motion/react";
 import { BrandCaption } from "./BrandCaption";
 export function SealIntro() {
+  const { tx } = useTranslate();
+
   return (
     <div className="intro-seal-design">
       {[0, 1, 2].map((i) => (
@@ -51,7 +54,7 @@ export function SealIntro() {
       >
         <BrandCaption />
       </motion.div>
-      <span className="intro-seal-meta">جدة · منذ 2015</span>
+      <span className="intro-seal-meta">{tx("جدة · منذ 2015")}</span>
     </div>
   );
 }

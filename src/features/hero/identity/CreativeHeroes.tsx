@@ -1,5 +1,7 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+
 import {
   motion,
   useMotionValue,
@@ -20,50 +22,56 @@ import {
 } from "./IdentityHeroParts";
 
 export function CoverHero({ slide, preview }: IdentityLayoutProps) {
+  const { tx } = useTranslate();
+
   const Heading = preview ? "h2" : "h1";
   return (
     <div className="ih-cover">
       <div className="ih-cover-top">
         <IdentityLockup light={false} />
         <p data-entrance>
-          مشورة واضحة.
+          {tx("مشورة واضحة.")}
           <br />
-          وعناية بالتفاصيل.
+          {tx("وعناية بالتفاصيل.")}
         </p>
       </div>
       <div className="ih-cover-title" data-entrance>
         <Heading>
-          خطوتك القادمة.
+          {tx("خطوتك القادمة.")}
           <br />
-          <span>برؤية قانونية.</span>
+          <span>{tx("برؤية قانونية.")}</span>
         </Heading>
         <Link to="/about" className="ih-link">
-          تعرّف على المكتب
+          {tx("تعرّف على المكتب")}
           <span className="ih-link-line" aria-hidden="true" />
         </Link>
       </div>
       <div className="ih-cover-image" data-entrance>
         <IdentityPhoto slide={slide} />
-        <span>{slide.label}</span>
+        <span>{tx(slide.label)}</span>
       </div>
     </div>
   );
 }
 
 export function PortalsHero({ preview }: IdentityLayoutProps) {
+  const { tx } = useTranslate();
+
   const Heading = preview ? "h2" : "h1";
   return (
     <div className="ih-portals">
       <div className="ih-portals-copy">
         <IdentityLockup />
         <div data-entrance>
-          <p className="ih-eyebrow">مجالات الممارسة</p>
+          <p className="ih-eyebrow">{tx("مجالات الممارسة")}</p>
           <Heading>
-            لكل موضوع.
+            {tx("لكل موضوع.")}
             <br />
-            <span>بابه الصحيح.</span>
+            <span>{tx("بابه الصحيح.")}</span>
           </Heading>
-          <p className="ih-description">ابدأ بالمجال الأقرب لاحتياجك.</p>
+          <p className="ih-description">
+            {tx("ابدأ بالمجال الأقرب لاحتياجك.")}
+          </p>
         </div>
       </div>
       <div className="ih-portal-grid">
@@ -77,8 +85,8 @@ export function PortalsHero({ preview }: IdentityLayoutProps) {
             <BrandImage asset={slide.asset} loading="eager" />
             <span className="ih-portal-copy">
               <span aria-hidden="true">0{i + 1}</span>
-              <strong>{slide.label}</strong>
-              <span className="ih-portal-action">استكشف المجال</span>
+              <strong>{tx(slide.label)}</strong>
+              <span className="ih-portal-action">{tx("استكشف المجال")}</span>
             </span>
           </Link>
         ))}
@@ -93,6 +101,8 @@ export function DossierHero({
   onSelect,
   preview,
 }: IdentityLayoutProps) {
+  const { tx } = useTranslate();
+
   const reduced = useReducedMotion();
   const x = useMotionValue(0),
     y = useMotionValue(0);
@@ -137,13 +147,13 @@ export function DossierHero({
                 height="50"
               />
               <span>
-                {office.name}
-                <small>{office.descriptor}</small>
+                {tx(office.name)}
+                <small>{tx(office.descriptor)}</small>
               </span>
             </div>
             <IdentityPhoto slide={slide} />
             <p>
-              {slide.label}
+              {tx(slide.label)}
               <span>0{index + 1} — 03</span>
             </p>
           </div>
@@ -159,6 +169,8 @@ export function PanoramaHero({
   onSelect,
   preview,
 }: IdentityLayoutProps) {
+  const { tx } = useTranslate();
+
   const target = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -183,9 +195,9 @@ export function PanoramaHero({
       <div className="ih-panorama-signature">
         <IdentityLockup light={false} />
         <p>
-          فهمٌ للموضوع.
+          {tx("فهمٌ للموضوع.")}
           <br />
-          <span>ثم خطوة مدروسة.</span>
+          <span>{tx("ثم خطوة مدروسة.")}</span>
         </p>
       </div>
     </div>
@@ -198,21 +210,23 @@ export function IndexHero({
   onSelect,
   preview,
 }: IdentityLayoutProps) {
+  const { tx } = useTranslate();
+
   const Heading = preview ? "h2" : "h1";
   return (
     <div className="ih-index">
       <div className="ih-index-heading">
         <IdentityLockup />
         <div data-entrance>
-          <Heading>ما موضوعك؟</Heading>
-          <p>اختر مجالًا. نبدأ من هنا.</p>
+          <Heading>{tx("ما موضوعك؟")}</Heading>
+          <p>{tx("اختر مجالًا. نبدأ من هنا.")}</p>
         </div>
       </div>
       <div className="ih-index-grid">
         <div
           className="ih-index-rows"
           role="group"
-          aria-label="معاينة مجالات العمل"
+          aria-label={tx("معاينة مجالات العمل")}
         >
           {identitySlides.map((item, i) => (
             <button
@@ -229,9 +243,9 @@ export function IndexHero({
               <span className="ih-index-number" aria-hidden="true">
                 0{i + 1}
               </span>
-              <span>{item.label}</span>
+              <span>{tx(item.label)}</span>
               <span className="ih-index-indicator" aria-hidden="true">
-                {i === index ? "●" : "+"}
+                {tx(i === index ? "●" : "+")}
               </span>
             </button>
           ))}
@@ -239,13 +253,14 @@ export function IndexHero({
             to={`/services?group=${slide.group.id}`}
             className="ih-index-destination"
           >
-            استعرض خدمات {slide.label}
+            {tx("استعرض خدمات")}
+            {tx(slide.label)}
             <span className="ih-link-line" aria-hidden="true" />
           </Link>
         </div>
         <div className="ih-index-photo" data-entrance>
           <IdentityPhoto slide={slide} />
-          <span>{slide.description}</span>
+          <span>{tx(slide.description)}</span>
         </div>
       </div>
     </div>

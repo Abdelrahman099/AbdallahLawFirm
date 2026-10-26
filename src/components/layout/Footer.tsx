@@ -1,9 +1,12 @@
+import { LocalizedLink as Link } from "@/i18n/links";
+import { useTranslate } from "@/i18n/useTranslate";
 import { Logo } from "@/components/Brand";
 import { office, whatsappUrl } from "@/data/site";
 import { serviceGroups } from "@/data/serviceGroups";
-import { Link } from "react-router-dom";
 
 export function Footer() {
+  const { tx } = useTranslate();
+
   return (
     <>
       <footer className="site-footer">
@@ -13,67 +16,73 @@ export function Footer() {
               <Logo inverse />
             </Link>
             <p>
-              مكتب عبد الله الشهري للمحاماة والاستشارات القانونية. خدمات قانونية
-              للشركات والمستثمرين والأفراد.
+              {tx(
+                "مكتب عبد الله الشهري للمحاماة والاستشارات القانونية. خدمات قانونية للشركات والمستثمرين والأفراد.",
+              )}
             </p>
-            <span>جدة · المملكة العربية السعودية</span>
+            <span>{tx("جدة · المملكة العربية السعودية")}</span>
           </div>
           <div>
-            <h2>استكشف المكتب</h2>
-            <Link to="/about">عن المكتب</Link>
-            <Link to="/approach">كيف نعمل معك</Link>
-            <Link to="/services">الخدمات القانونية</Link>
-            <Link to="/insights">إرشادات قبل الاستشارة</Link>
-            <Link to="/faq">الأسئلة الشائعة</Link>
+            <h2>{tx("استكشف المكتب")}</h2>
+            <Link to="/about">{tx("عن المكتب")}</Link>
+            <Link to="/approach">{tx("كيف نعمل معك")}</Link>
+            <Link to="/services">{tx("الخدمات القانونية")}</Link>
+            <Link to="/insights">{tx("إرشادات قبل الاستشارة")}</Link>
+            <Link to="/faq">{tx("الأسئلة الشائعة")}</Link>
           </div>
           <div>
-            <h2>مجالات العمل</h2>
+            <h2>{tx("مجالات العمل")}</h2>
             {serviceGroups.map((group) => (
               <Link key={group.id} to={`/services?group=${group.id}`}>
-                {group.title}
+                {tx(group.title)}
               </Link>
             ))}
           </div>
           <div>
-            <h2>زيارة المكتب</h2>
-            <p>{office.address}</p>
-            {office.phone ? (
-              <a href={"tel:" + office.phone}>
-                اتصل بنا
-              </a>
-            ) : (
-              <span className="placeholder-text">
-                رقم التواصل — يُضاف قريبًا
-              </span>
+            <h2>{tx("زيارة المكتب")}</h2>
+            <p>{tx(office.address)}</p>
+            {tx(
+              office.phone ? (
+                <a href={"tel:" + office.phone}>{tx("اتصل بنا")}</a>
+              ) : (
+                <span className="placeholder-text">
+                  {tx("رقم التواصل — يُضاف قريبًا")}
+                </span>
+              ),
             )}
-            {office.whatsapp && (
-              <a
-                href={whatsappUrl("مرحبًا، أرغب في الاستفسار عن خدمات المكتب.")}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                راسلنا عبر واتساب
-              </a>
+            {tx(
+              office.whatsapp && (
+                <a
+                  href={whatsappUrl(
+                    tx("مرحبًا، أرغب في الاستفسار عن خدمات المكتب."),
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {tx("راسلنا عبر واتساب")}
+                </a>
+              ),
             )}
-            {office.email ? (
-              <a href={"mailto:" + office.email}>
-                أرسل لنا بريدًا
-              </a>
-            ) : (
-              <span className="placeholder-text">
-                البريد الرسمي — يُضاف قريبًا
-              </span>
+            {tx(
+              office.email ? (
+                <a href={"mailto:" + office.email}>{tx("أرسل لنا بريدًا")}</a>
+              ) : (
+                <span className="placeholder-text">
+                  {tx("البريد الرسمي — يُضاف قريبًا")}
+                </span>
+              ),
             )}
           </div>
         </div>
         <div className="site-container footer-bottom">
           <p>
-            © {new Date().getFullYear()} {office.name}. جميع الحقوق محفوظة.
+            © {tx(new Date().getFullYear())} {tx(office.name)}
+            {tx(". جميع الحقوق محفوظة.")}
           </p>
           <div>
-            <Link to="/privacy">الخصوصية</Link>
-            <Link to="/terms">شروط الاستخدام</Link>
-            <Link to="/contact">تواصل معنا</Link>
+            <Link to="/privacy">{tx("الخصوصية")}</Link>
+            <Link to="/terms">{tx("شروط الاستخدام")}</Link>
+            <Link to="/contact">{tx("تواصل معنا")}</Link>
           </div>
         </div>
       </footer>

@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useState } from "react";
 import { services } from "@/data/site";
 import type { Service } from "@/data/services";
@@ -60,6 +61,7 @@ const forAudience = (service: Service, audience: string) =>
   service.audience === "both";
 
 export function useServiceDirectory(source: FilterSource) {
+  const { t } = useTranslate();
   const { values } = source;
   const audience = ["business", "individual"].includes(values.audience)
     ? values.audience
@@ -79,7 +81,7 @@ export function useServiceDirectory(source: FilterSource) {
       (s) =>
         forAudience(s, audienceId) &&
         inGroup(s, groupId) &&
-        matchesQuery(s, query),
+        matchesQuery(s, query, t),
     ).length;
   return {
     ...source,
@@ -88,7 +90,8 @@ export function useServiceDirectory(source: FilterSource) {
     query,
     total: services.length,
     items: orderedServices.filter(
-      (s) => forAudience(s, audience) && inGroup(s) && matchesQuery(s, query),
+      (s) =>
+        forAudience(s, audience) && inGroup(s) && matchesQuery(s, query, t),
     ),
     groupCount: (id: string) => count(id === "all" ? undefined : id, audience),
     audienceCount: (id: string) => count(group?.id, id),

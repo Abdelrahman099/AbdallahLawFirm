@@ -1,9 +1,12 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { useEffect } from "react";
 import { useAnimate, useReducedMotion } from "motion/react";
 import { HeroHeading } from "../HeroCopy";
 import type { HeroSlide } from "./slides";
 import { WelcomeSlideCopy } from "./WelcomeSlide";
 export function SliderCopy({ slide }: { slide: HeroSlide }) {
+  const { tx } = useTranslate();
+
   const [scope, animate] = useAnimate<HTMLDivElement>();
   const reduced = useReducedMotion();
   useEffect(() => {
@@ -18,18 +21,20 @@ export function SliderCopy({ slide }: { slide: HeroSlide }) {
   return (
     <div ref={scope}>
       {slide.kind === "welcome" ? (
-        <WelcomeSlideCopy slide={slide} />
+        <WelcomeSlideCopy />
       ) : (
         <>
-          <p className="service-slide-label">{slide.label}</p>
+          <p className="service-slide-label">{tx(slide.label)}</p>
           <HeroHeading>
-            {slide.title}
+            {tx(slide.title)}
             <br />
-            <em>{slide.accent}</em>
+            <em>{tx(slide.accent)}</em>
           </HeroHeading>
         </>
       )}
-      <p className="service-slide-description">{slide.description}</p>
+      {slide.kind !== "welcome" && (
+        <p className="service-slide-description">{tx(slide.description)}</p>
+      )}
     </div>
   );
 }

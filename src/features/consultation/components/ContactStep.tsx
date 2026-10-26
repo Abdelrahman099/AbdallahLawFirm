@@ -1,3 +1,4 @@
+import { useTranslate } from "@/i18n/useTranslate";
 import { Controller } from "react-hook-form";
 import type { UseFormReturn } from "react-hook-form";
 import { Input } from "@/components/ui/input";
@@ -13,6 +14,8 @@ export function ContactStep({
 }: {
   form: UseFormReturn<ConsultationValues>;
 }) {
+  const { tx, dir } = useTranslate();
+
   const {
     register,
     control,
@@ -22,14 +25,14 @@ export function ContactStep({
     <div className="space-y-6">
       <Field
         id="name"
-        label="الاسم الكامل"
+        label={tx("الاسم الكامل")}
         required
         error={errors.name?.message}
       >
         <Input
           id="name"
           autoComplete="name"
-          placeholder="اكتب اسمك"
+          placeholder={tx("اكتب اسمك")}
           maxLength={100}
           className="h-13 bg-card"
           {...register("name")}
@@ -40,7 +43,7 @@ export function ContactStep({
       <div className="grid gap-6 md:grid-cols-2">
         <Field
           id="phone"
-          label="رقم الجوال"
+          label={tx("رقم الجوال")}
           required
           error={errors.phone?.message}
         >
@@ -59,7 +62,7 @@ export function ContactStep({
         </Field>
         <Field
           id="email"
-          label="البريد الإلكتروني"
+          label={tx("البريد الإلكتروني")}
           error={errors.email?.message}
         >
           <Input
@@ -76,36 +79,37 @@ export function ContactStep({
         </Field>
       </div>
       <fieldset>
-        <legend className="mb-3 text-sm">أطلب الاستشارة بصفتي</legend>
+        <legend className="mb-3 text-sm">{tx("أطلب الاستشارة بصفتي")}</legend>
         <Controller
           name="audience"
           control={control}
           render={({ field }) => (
             <RadioGroup
-              dir="rtl"
+              dir={dir}
               value={field.value}
               onValueChange={field.onChange}
               className="grid grid-cols-2 gap-3"
             >
               {[
-                ["business", "شركة / مستثمر"],
-                ["individual", "فرد"],
-              ].map(([value, title]) => (
-                <Label
-                  key={value}
-                  htmlFor={"audience-" + value}
-                  className="flex min-h-13 cursor-pointer items-center gap-3 border border-input p-4 has-[[data-state=checked]]:bg-secondary"
-                >
-                  <RadioGroupItem id={"audience-" + value} value={value} />
-                  {title}
-                </Label>
-              ))}
+                  ["business", "شركة / مستثمر"],
+                  ["individual", "فرد"],
+                ].map(([value, title]) => (
+                  <Label
+                    key={value}
+                    htmlFor={"audience-" + value}
+                    className="flex min-h-13 cursor-pointer items-center gap-3 border border-input p-4 has-[[data-state=checked]]:bg-secondary"
+                  >
+                    <RadioGroupItem id={"audience-" + value} value={value} />
+                    {tx(title)}
+                  </Label>
+                ))}
             </RadioGroup>
           )}
         />
       </fieldset>
       <Button type="submit" className="h-13 gap-7 rounded-xs px-6">
-        الخطوة التالية <ArrowLeft />
+        {tx("الخطوة التالية")}
+        <ArrowLeft />
       </Button>
     </div>
   );
