@@ -28,6 +28,11 @@
       rgba(11, 36, 27, 0.78)
     );
   }
+  @media (min-width: 1024px) {
+    .practice-slider-photo-welcome .service-slide-photo {
+      object-position: 25% center;
+    }
+  }
   .welcome-photo-greeting {
     margin: 0 0 16px;
     color: var(--hero-accent);
