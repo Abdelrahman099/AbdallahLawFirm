@@ -96,6 +96,10 @@ Precise rectangular photography, square service cards, 2-4px control radii. No d
 
 ## Components
 
+### About-page identification
+
+The office does not use a personal founder photograph. `OfficeIdentityPanel` replaces the former portrait placeholder with a permanent letterhead-inspired composition: the approved beige emblem on deep green, a fine inset frame and bronze leading edge, city/founding-year metadata, and the founder name and office descriptor below. This is an identity panel rather than a photograph or a missing-content notice. Geometry and colours come from the v4 emblem and existing semantic tokens. It stacks before the office biography on mobile, mirrors naturally with the route direction, and uses the existing reduced-motion-aware route reveal without continuous animation. Do not add a substitute person's portrait or claim the panel depicts the premises.
+
 ### Identity and contact
 
 `Logo` and `MobileBrandLogo` consume `public/brand/v4`; footer, consultation, favicon and startup cover follow the same version. Official descriptor everywhere: «للمحاماة والاستشارات القانونية». Email: at.sh.14360@gmail.com. Missing phone, map and opening times remain honest placeholders. Address and founding year come from the client Word.

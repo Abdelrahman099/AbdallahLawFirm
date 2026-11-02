@@ -25,38 +25,6 @@
     gap: 100px;
     padding-block: 70px;
   }
-  .founder-placeholder {
-    border: 1px solid var(--line);
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    min-height: 420px;
-    position: relative;
-  }
-  .founder-placeholder img {
-    width: 110px;
-    margin-bottom: 35px;
-  }
-  .founder-placeholder h2 {
-    font-size: 28px;
-  }
-  .founder-placeholder > p {
-    font-size: 14px;
-    color: var(--muted);
-    margin-top: 9px;
-  }
-  .placeholder-label {
-    position: absolute;
-    bottom: 20px;
-    font-size: 11px;
-    color: var(--muted);
-    border-top: 1px solid var(--line);
-    padding-top: 12px;
-    max-width: 90%;
-    text-align: center;
-  }
   .prose h2 {
     font-size: 32px;
     line-height: 1.6;
@@ -258,19 +226,6 @@
       grid-template-columns: 1fr;
       gap: 35px;
       padding-block: 35px 0;
-    }
-    .founder-placeholder {
-      min-height: 320px;
-      max-width: 480px;
-      width: 100%;
-      margin-inline: auto;
-    }
-    .founder-placeholder img {
-      width: 85px;
-      margin-bottom: 23px;
-    }
-    .founder-placeholder h2 {
-      font-size: 26px;
     }
     .prose h2 {
       font-size: 29px;

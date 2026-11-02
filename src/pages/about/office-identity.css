@@ -1,0 +1,101 @@
+@layer components {
+  .office-identity-panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    margin: 0;
+    padding: 32px;
+    color: var(--ivory);
+    background: var(--deep);
+    border-inline-start: 3px solid var(--bronze);
+  }
+
+  .office-identity-panel::before {
+    content: "";
+    position: absolute;
+    inset: 14px;
+    border: 1px solid color-mix(in srgb, var(--ivory) 18%, transparent);
+    pointer-events: none;
+  }
+
+  .office-identity-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 20px;
+    font-size: 12px;
+    color: var(--hero-accent);
+    border-bottom: 1px solid color-mix(in srgb, var(--ivory) 18%, transparent);
+  }
+
+  .office-identity-emblem {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    min-height: 250px;
+    padding-block: 36px;
+  }
+
+  .office-identity-emblem img {
+    width: min(100%, 240px);
+    height: auto;
+    display: block;
+  }
+
+  .office-identity-signature {
+    padding-block: 22px 10px;
+    text-align: center;
+    border-top: 1px solid color-mix(in srgb, var(--ivory) 18%, transparent);
+  }
+
+  .office-identity-role {
+    font-size: 12px;
+    color: var(--hero-accent);
+    margin-bottom: 9px;
+  }
+
+  .office-identity-signature h2 {
+    font-size: clamp(25px, 2.5vw, 34px);
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+
+  .office-identity-descriptor {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 760px) {
+    .office-identity-panel {
+      width: 100%;
+      max-width: 480px;
+      margin-inline: auto;
+      padding: 28px;
+    }
+
+    .office-identity-panel::before {
+      inset: 11px;
+    }
+
+    .office-identity-meta {
+      padding-bottom: 16px;
+      font-size: 11px;
+    }
+
+    .office-identity-emblem {
+      min-height: 210px;
+      padding-block: 30px;
+    }
+
+    .office-identity-emblem img {
+      width: min(70%, 190px);
+    }
+
+    .office-identity-signature {
+      padding-block: 18px 6px;
+    }
+  }
+}

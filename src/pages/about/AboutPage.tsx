@@ -9,6 +9,7 @@ import {
 import { OfficeMap, officeMapLink } from "@/components/shared/OfficeMap";
 import { office } from "@/data/site";
 import { MapPin } from "lucide-react";
+import { OfficeIdentityPanel } from "./OfficeIdentityPanel";
 
 export function About() {
   const { tx } = useTranslate();
@@ -23,19 +24,7 @@ export function About() {
         )}
       />
       <section className="site-container about-detail">
-        <div className="founder-placeholder" data-reveal>
-          <img
-            src="/brand/v4/mark-primary.svg"
-            alt=""
-            width="240"
-            height="204"
-          />
-          <h2>{tx(office.name)}</h2>
-          <p>{tx("المحامي المؤسس")}</p>
-          <span className="placeholder-label">
-            {tx("صورة المحامي تُضاف بعد توفيرها")}
-          </span>
-        </div>
+        <OfficeIdentityPanel />
         <div className="prose" data-reveal>
           <p className="eyebrow">{tx("منذ 2015")}</p>
           <h2>{tx("اسمٌ يرتبط بالمسؤولية.")}</h2>
