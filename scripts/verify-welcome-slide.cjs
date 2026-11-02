@@ -28,9 +28,9 @@ const assert = require("node:assert/strict");
         heading = await hero.locator("h1").boundingBox();
       assert(mark.y + mark.height <= heading.y);
       for (const [i, title] of [
-        "لأعمالك رؤية.",
-        "كل بند له أثر.",
+        "إصدار تراخيص",
         "نفهم موقفك.",
+        "كل بند له أثر.",
       ].entries()) {
         await tabs.nth(i + 1).click();
         assert((await hero.locator("h1").innerText()).includes(title));
