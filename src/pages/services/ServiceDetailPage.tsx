@@ -77,13 +77,6 @@ export function ServiceDetail() {
             <h2>{tx(service.question)}</h2>
             <p>{tx(service.answer)}</p>
           </div>
-          <div className="service-note">
-            <p>
-              {tx(
-                "يتحدد نطاق العمل والأتعاب بعد دراسة موضوعك والاتفاق مع المكتب. الاستشارة أو التمثيل لا يتضمنان ضمان نتيجة.",
-              )}
-            </p>
-          </div>
         </div>
         <aside className="prepare-card practice-prepare">
           <span className="eyebrow">{tx("قبل الاستشارة")}</span>

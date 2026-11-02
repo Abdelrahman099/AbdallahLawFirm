@@ -12,11 +12,11 @@ export type ServiceGroup = {
 export const serviceGroups: ServiceGroup[] = [
   {
     id: "business",
-    title: "الشركات والاستثمار",
+    title: "الشركات والاستثمار الأجنبي",
     summary: "تأسيس الأعمال وتنظيم علاقاتها القانونية.",
     image: "company",
     icon: "building",
-    slugs: ["company-formation", "contracts", "foreign-investment"],
+    slugs: ["foreign-investment", "company-formation", "contracts"],
   },
   {
     id: "litigation",

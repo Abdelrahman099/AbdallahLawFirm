@@ -8,18 +8,15 @@ import {
 } from "motion/react";
 import { useEffect } from "react";
 
-import { BrandImage, type BrandImageName } from "@/components/brand/BrandImage";
+import { BrandImage } from "@/components/brand/BrandImage";
 import { office } from "@/config/office";
 import { serviceGroups } from "@/data/serviceGroups";
 import { serviceSlides } from "../slider/slides";
 
-export const identitySlides = serviceSlides.map((slide, index) => ({
-  ...slide,
-  asset: (["company", "contractReview", "litigation"] as BrandImageName[])[
-    index
-  ],
-  group: serviceGroups.find((group) => group.title === slide.label)!,
-}));
+export const identitySlides = serviceSlides.map((slide) => {
+  const group = serviceGroups.find((group) => group.title === slide.label)!;
+  return { ...slide, asset: group.image, group };
+});
 export type IdentitySlide = (typeof identitySlides)[number];
 
 export function IdentityLockup({
