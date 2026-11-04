@@ -30,7 +30,7 @@ export function CoverHero({ slide, preview }: IdentityLayoutProps) {
       <div className="ih-cover-top">
         <IdentityLockup light={false} />
         <p data-entrance>
-          {tx("مشورة واضحة.")}
+          {tx("استشارات واضحة.")}
           <br />
           {tx("وعناية بالتفاصيل.")}
         </p>

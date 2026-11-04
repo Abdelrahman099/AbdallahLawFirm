@@ -23,7 +23,7 @@ export const articles = [
     slug: "business-consultation",
     category: "لأصحاب الأعمال",
     title: "قرار أعمال جديد؟ ابدأ بسؤال واضح.",
-    excerpt: "كيف تعرض احتياج شركتك عند طلب المشورة القانونية.",
+    excerpt: "كيف تعرض احتياج شركتك عند طلب الاستشارات القانونية.",
     sections: [
       {
         title: "اشرح طبيعة النشاط",

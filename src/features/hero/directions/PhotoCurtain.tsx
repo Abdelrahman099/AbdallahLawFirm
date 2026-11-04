@@ -12,7 +12,7 @@ export function PhotoCurtain() {
             <>
               {tx("حضور راسخ.")}
               <br />
-              <em>{tx("مشورة أقرب.")}</em>
+              <em>{tx("استشارات أقرب.")}</em>
             </>
           }
         />

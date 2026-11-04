@@ -20,7 +20,7 @@ export function ForestStatement() {
         </HeroHeading>
         <div className="statement-bottom">
           <p>
-            {tx("مشورة قانونية تبدأ بفهم احتياجك.")}
+            {tx("استشارات قانونية تبدأ بفهم احتياجك.")}
             <br />
             {tx("للشركات والمستثمرين والأفراد.")}
           </p>

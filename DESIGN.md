@@ -156,6 +156,7 @@ The primary «ريشة الاتزان» uses a sword-like vertical quill strike.
 
 ## Do's and Don'ts
 
+- Use «الاستشارات» as the legal consultation terminology throughout public Arabic copy, with the corresponding consultation wording in English. Apply this consistently to biography, services, articles and public design previews.
 - Use the full mark for office identification and the quill as a supporting device.
 - Use forest on beige, beige on forest; never stretch, shadow or bevel the logo.
 - Keep all service links and category filters usable with keyboard and touch.
