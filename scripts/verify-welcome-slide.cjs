@@ -29,8 +29,8 @@ const assert = require("node:assert/strict");
       assert(mark.y + mark.height <= heading.y);
       for (const [i, title] of [
         "إصدار تراخيص",
-        "نفهم موقفك.",
-        "كل بند له أثر.",
+        "التقاضي",
+        "العقود",
       ].entries()) {
         await tabs.nth(i + 1).click();
         assert((await hero.locator("h1").innerText()).includes(title));

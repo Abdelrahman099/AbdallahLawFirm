@@ -11,9 +11,7 @@ export function FAQSection() {
         <div>
           <p className="eyebrow">{tx("قبل الحجز")}</p>
           <h2 id="home-faq-heading">
-            {tx("ثلاث إجابات")}
-            <br />
-            {tx("لبداية أسهل.")}
+            <span>{tx("ثلاث إجابات")}</span> <span>{tx("لبداية أسهل.")}</span>
           </h2>
           <Link to="/faq" className="text-link">
             {tx("كل الأسئلة")}

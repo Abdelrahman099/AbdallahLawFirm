@@ -11,13 +11,16 @@ import {
   useState,
 } from "react";
 import { waitForHomeReady } from "./homeReadiness";
+import { useClientReady } from "@/lib/useClientReady";
 import {
   homeIntroReplayEvent,
   releaseIntroStartupCover,
+  shouldShowHomeIntro,
 } from "./introStartupGate";
 
 export function Preloader() {
   const location = useLocation();
+  const ready = useClientReady();
   const [restore, setRestore] = useState(0);
   useEffect(() => {
     const requestReplay = () => setRestore((value) => value + 1);
@@ -31,9 +34,19 @@ export function Preloader() {
       window.removeEventListener(homeIntroReplayEvent, requestReplay);
     };
   }, []);
-  return /^\/(?:en\/?)?$/.test(location.pathname) ? (
-    <HomeIntro key={`${location.key}-${restore}`} />
+  return ready && /^\/(?:en\/?)?$/.test(location.pathname) ? (
+    <SessionHomeIntro key={`${location.key}-${restore}`} />
   ) : null;
+}
+
+function SessionHomeIntro() {
+  // Latch the decision for this entry so recording the visit cannot cut off
+  // the animation on a subsequent parent render.
+  const [eligible] = useState(shouldShowHomeIntro);
+  useLayoutEffect(() => {
+    if (!eligible) releaseIntroStartupCover();
+  }, [eligible]);
+  return eligible ? <HomeIntro /> : null;
 }
 
 function HomeIntro() {
@@ -90,6 +103,7 @@ function IntroOverlay({
 
   const closeButton = useRef<HTMLButtonElement>(null);
   useLayoutEffect(() => {
+    window.shehriIntroSession?.markShown();
     const background = document.querySelectorAll<HTMLElement>(
       ".site-header, main, .site-footer, .contact-actions, .mobile-consult, .skip-link",
     );

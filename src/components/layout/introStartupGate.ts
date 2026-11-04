@@ -1,10 +1,18 @@
 declare global {
   interface Window {
     shehriIntroBootTimer?: number;
+    shehriIntroSession?: {
+      shouldShow(): boolean;
+      markShown(): void;
+    };
   }
 }
 
 export const homeIntroReplayEvent = "shehri-home-intro-replay";
+
+export function shouldShowHomeIntro() {
+  return window.shehriIntroSession?.shouldShow() ?? true;
+}
 
 export function releaseIntroStartupCover() {
   clearTimeout(window.shehriIntroBootTimer);
@@ -16,6 +24,10 @@ export function releaseIntroStartupCover() {
 
 export function installIntroStartupGate() {
   const show = () => {
+    if (!shouldShowHomeIntro()) {
+      releaseIntroStartupCover();
+      return false;
+    }
     clearTimeout(window.shehriIntroBootTimer);
     document.documentElement.classList.remove("intro-load-failed");
     document.documentElement.classList.add("intro-booting");
@@ -24,6 +36,7 @@ export function installIntroStartupGate() {
       document.documentElement.classList.remove("intro-booting");
       document.documentElement.classList.add("intro-load-failed");
     }, 10000);
+    return true;
   };
   document.addEventListener(
     "click",
@@ -51,9 +64,9 @@ export function installIntroStartupGate() {
         url.origin === location.origin &&
         /^\/(?:en\/?)?$/.test(url.pathname)
       ) {
-        show();
+        const showing = show();
         // A same-page link may keep the current route mounted.
-        if (/^\/(?:en\/?)?$/.test(location.pathname)) {
+        if (showing && /^\/(?:en\/?)?$/.test(location.pathname)) {
           window.dispatchEvent(new Event(homeIntroReplayEvent));
         }
       }

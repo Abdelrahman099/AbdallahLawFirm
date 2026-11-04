@@ -209,6 +209,10 @@
 }
 .home-faq h2 {
   font-size: clamp(27px, 3vw, 37px);
+  line-height: 1.6;
+}
+.home-faq h2 > span {
+  display: block;
 }
 .home-faq .eyebrow {
   margin-bottom: 12px;
@@ -326,9 +330,6 @@
   }
   .home-faq {
     padding-block: 76px;
-  }
-  .home-faq h2 br {
-    display: none;
   }
   .home-faq .text-link {
     margin-top: 12px;

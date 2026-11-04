@@ -51,7 +51,45 @@
       }
     </style>
     <script>
-      if (/^\/(?:en\/?)?$/.test(location.pathname)) {
+      // Shared by the first-paint cover and React, before any page is painted.
+      (function () {
+        var key = "shehri-intro-session-v1";
+        var cooldown = 30 * 60 * 1000;
+        var memoryShownAt = 0;
+        var memoryOnly = false;
+        window.shehriIntroSession = {
+          shouldShow: function () {
+            var shownAt = memoryShownAt;
+            if (!memoryOnly) {
+              try {
+                shownAt = Number(sessionStorage.getItem(key));
+              } catch (_) {
+                memoryOnly = true;
+              }
+            }
+            var age = Date.now() - shownAt;
+            return (
+              !Number.isFinite(shownAt) ||
+              shownAt <= 0 ||
+              age < 0 ||
+              age >= cooldown
+            );
+          },
+          markShown: function () {
+            memoryShownAt = Date.now();
+            try {
+              sessionStorage.setItem(key, String(memoryShownAt));
+            } catch (_) {
+              // Storage is optional; it must never prevent access to the site.
+              memoryOnly = true;
+            }
+          },
+        };
+      })();
+      if (
+        /^\/(?:en\/?)?$/.test(location.pathname) &&
+        window.shehriIntroSession.shouldShow()
+      ) {
         document.documentElement.classList.add("intro-booting");
         window.shehriIntroBootTimer = setTimeout(function () {
           if (document.documentElement.classList.contains("intro-booting")) {

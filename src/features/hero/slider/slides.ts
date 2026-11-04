@@ -13,8 +13,8 @@ export const serviceSlides = [
   },
   {
     label: "التقاضي والتمثيل القانوني",
-    title: "نفهم موقفك.",
-    accent: "ونرتّب خطوتك.",
+    title: "التقاضي",
+    accent: "والتمثيل القانوني",
     description: "دراسة موضوعك وتمثيلك أمام الجهات المختصة.",
     image: "/images/brand-litigation-v2.webp",
     alt: "قاعة قضائية تصورية بألوان الهوية",
@@ -23,9 +23,9 @@ export const serviceSlides = [
   },
   {
     label: "العقود والتوثيق",
-    title: "كل بند له أثر.",
-    accent: "نعتني بالتفاصيل.",
-    description: "عقود واضحة، وتوثيق يعتني بتفاصيل تعاملاتك.",
+    title: "العقود",
+    accent: "والتوثيق",
+    description: "صياغة ومراجعة العقود، وتوثيق الوكالات والخدمات العقارية.",
     image: "/images/brand-contracts-v2.webp",
     alt: "عقد داخل ملف قانوني وقلم للمراجعة",
     cta: "استكشف خدمة العقود",

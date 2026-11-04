@@ -30,10 +30,11 @@ export function SliderCopy({
         <WelcomeSlideCopy photo={photoWelcome} />
       ) : (
         <>
-          <p className="service-slide-label">{tx(slide.label)}</p>
+          {`${slide.title} ${slide.accent}` !== slide.label && (
+            <p className="service-slide-label">{tx(slide.label)}</p>
+          )}
           <HeroHeading>
-            {tx(slide.title)}
-            <br />
+            {tx(slide.title)} <br />
             <em>{tx(slide.accent)}</em>
           </HeroHeading>
         </>
